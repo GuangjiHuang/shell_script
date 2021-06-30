@@ -1,5 +1,5 @@
 #!/bin/bash
-record_path=/opt/MyScript/record_path.txt
+record_path=/opt/myscript/p-script/record_path.txt
 num_lines=$(sed -n '1p' $record_path)
 #echo "the numlines is : ${num_lines}"
 if [ $# -lt 1 ]
