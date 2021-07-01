@@ -9,6 +9,7 @@ if [ ! -d "${today_path}" ]; then
     touch ${today_path}/plan.txt
     touch ${today_path}/learn.txt
     touch ${today_path}/question.txt
+    touch ${today_path}/temp.txt
 fi
 
 # check the argumet and then open the corresponding file
@@ -22,8 +23,11 @@ case "$1" in
     "question")
         vim ${today_path}/question.txt
         ;;
+    "temp")
+        vim ${today_path}/temp.txt
+        ;;
     *)
-        echo -e "-> ${RED}ERROR:${NOCOLOR} Wrong input! You can just input the following option:\n-> ${GREEN}OPTION:${NOCOLOR} plan, learn, questiion"
+        echo -e "-> ${RED}ERROR:${NOCOLOR} Wrong input! You can just input the following option:\n-> ${GREEN}OPTION:${NOCOLOR} plan, learn, questiion, temp"
         ;;
 
 
