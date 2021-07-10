@@ -16,10 +16,10 @@ today_path=~/mygithub/everyday_record/${dir_name}
 if [ ! -d "${today_path}" ]; then
     mkdir -p ${today_path}
     echo "creat the ${today_path} successfully!"
-    touch ${today_path}/plan.txt
-    touch ${today_path}/learn.txt
-    touch ${today_path}/question.txt
-    touch ${today_path}/temp.txt
+    touch ${today_path}/plan.txt && echo $(datef) > ${today_path}/plan.txt
+    touch ${today_path}/learn.txt && echo $(datef) > ${today_path}/learn.txt
+    touch ${today_path}/question.txt && echo $(datef) > ${today_path}/question.txt
+    touch ${today_path}/temp.txt && echo $(datef) > ${today_path}/temp.txt
 fi
 
 # check the argumet and then open the corresponding file
