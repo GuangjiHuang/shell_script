@@ -11,15 +11,25 @@ if [ "$2" == "-p" ]; then
         echo -e "->${RDD}ERROR:${NOCOLOR}the dir_name is empty! Please key ctrl+c to stop!"
         read
     fi
+elif [ "$2" == "-z" ]; then
+    dir_name="compress"
 fi
 today_path=~/mygithub/everyday_record/${dir_name}
 if [ ! -d "${today_path}" ]; then
     mkdir -p ${today_path}
     echo "creat the ${today_path} successfully!"
-    touch ${today_path}/plan.txt && echo $(datef) > ${today_path}/plan.txt
-    touch ${today_path}/learn.txt && echo $(datef) > ${today_path}/learn.txt
-    touch ${today_path}/question.txt && echo $(datef) > ${today_path}/question.txt
-    touch ${today_path}/temp.txt && echo $(datef) > ${today_path}/temp.txt
+
+    if [ "$2" == "-z" ]; then
+        touch ${today_path}/learn_a.txt 
+        touch ${today_path}/question_a.txt
+        touch ${today_path}/review_a.txt
+    else
+        touch ${today_path}/plan.txt && echo $(datef) > ${today_path}/plan.txt
+        touch ${today_path}/learn.txt && echo $(datef) > ${today_path}/learn.txt
+        touch ${today_path}/question.txt && echo $(datef) > ${today_path}/question.txt
+        touch ${today_path}/temp.txt && echo $(datef) > ${today_path}/temp.txt
+    fi
+
 fi
 
 # check the argumet and then open the corresponding file
@@ -28,13 +38,26 @@ case "$1" in
         vim ${today_path}/plan.txt
         ;;
     "learn")
-        vim ${today_path}/learn.txt
+        if [ "$2" == "-z" ]; then
+            vim ${today_path}/learn_a.txt
+        else
+            vim ${today_path}/learn.txt
+        fi
         ;;
     "question")
-        vim ${today_path}/question.txt
+        if [ "$2" == "-z" ]; then
+            vim ${today_path}/question_a.txt
+        else
+            vim ${today_path}/question.txt
+        fi
         ;;
     "temp")
         vim ${today_path}/temp.txt
+        ;;
+    "review")
+        if [ "$2" == "-z" ]; then
+            vim ${today_path}/review_a.txt
+        fi
         ;;
     "pointer-check")
         echo -e "Point to -> $(cat /opt/myscript/wr-script/date-pointer.txt)"
@@ -59,8 +82,20 @@ case "$1" in
         echo ": pointer year-month-day-> to set the pointer"
         echo ": pointer-check-> to show the pointer"
         ;;
+    "go-e")
+        # go to the everyday_record path
+        e_dest=~/mygithub/everyday_record/
+        cd $e_dest
+        echo "->: $e_dest"
+        ;;
+    "go-wr")
+        # go to the everyday_record path
+        wr_dest=~/mygithub/shell_script/wr-script/
+        cd $wr_dest
+        echo "->: $wr_dest"
+        ;;
     *)
-        echo -e "-> ${RED}ERROR:${NOCOLOR} Wrong input! You can just input the following option:\n-> ${GREEN}OPTION:${NOCOLOR} plan, learn, question, temp, help, pointer %Y-%m-%d, pointer-check"
+        echo -e "-> ${RED}ERROR:${NOCOLOR} Wrong input! You can just input the following option:\n-> ${GREEN}OPTION:${NOCOLOR} plan, learn, question, temp, help, pointer %Y-%m-%d, pointer-check, go-e, go-wr, review"
         ;;
 
 
