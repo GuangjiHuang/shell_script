@@ -24,10 +24,11 @@ if [ ! -d "${today_path}" ]; then
         touch ${today_path}/question_a.txt
         touch ${today_path}/review_a.txt
     else
-        touch ${today_path}/plan.txt && echo $(datef) > ${today_path}/plan.txt
-        touch ${today_path}/learn.txt && echo $(datef) > ${today_path}/learn.txt
-        touch ${today_path}/question.txt && echo $(datef) > ${today_path}/question.txt
-        touch ${today_path}/temp.txt && echo $(datef) > ${today_path}/temp.txt
+        separate_sign="=================================="
+        touch ${today_path}/plan.txt && echo -e  "${separate_sign}\n$(datef)\n${separate_sign}\n" > ${today_path}/plan.txt
+        touch ${today_path}/learn.txt && echo -e "${separate_sign}\n$(datef)\n${separate_sign}\n" > ${today_path}/learn.txt
+        touch ${today_path}/question.txt && echo -e "${separate_sign}\n$(datef)\n${separate_sign}\n" > ${today_path}/question.txt
+        touch ${today_path}/temp.txt && echo -e "${separate_sign}\n$(datef)\n${separate_sign}\n" > ${today_path}/temp.txt
     fi
 
 fi
@@ -84,7 +85,7 @@ case "$1" in
         ;;
     "go-e")
         # go to the everyday_record path
-        e_dest=~/mygithub/everyday_record/
+        e_dest=~/mygithub/everyday_record/compress/
         cd $e_dest
         echo "->: $e_dest"
         ;;
@@ -93,6 +94,13 @@ case "$1" in
         wr_dest=~/mygithub/shell_script/wr-script/
         cd $wr_dest
         echo "->: $wr_dest"
+        ;;
+    "merge")
+        cat ${today_path}/question.txt >> ~/mygithub/everyday_record/compress/question_a.txt
+        cat ${today_path}/learn.txt >> ~/mygithub/everyday_record/compress/learn_a.txt
+        ;;
+    "all")
+        vim ~/mygithub/everyday_record/compress/
         ;;
     *)
         echo -e "-> ${RED}ERROR:${NOCOLOR} Wrong input! You can just input the following option:\n-> ${GREEN}OPTION:${NOCOLOR} plan, learn, question, temp, help, pointer %Y-%m-%d, pointer-check, go-e, go-wr, review"
