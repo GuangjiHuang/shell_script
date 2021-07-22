@@ -2,7 +2,9 @@
 
 #check if there are the directory
 dir_name=$(date "+%Y-%m")/$(date "+%m-%d")
-
+# when you use the command: wr, it will creat the environment varialbe that records the path 
+# of the today_record path, so you can easily to open it inside the vim using the :e $p_today
+export p_today=~/mygithub/everyday_record/${dir_name}/
 #if you want to use the date-pointer's path, you have to specify the -p as the $2
 if [ "$2" == "-p" ]; then
     dir_name=$(cat /opt/myscript/wr-script/date-pointer.txt)
@@ -74,15 +76,6 @@ case "$1" in
             echo -e "->${RED}ERROR${NOCOLOR}: ${dir_name} not exist! Fail!"
         fi
         ;;
-    "help")
-        echo -e "->${GREEN}OPTION:${NOCOLOR}"
-        echo ": learn-> go to the learn.txt"
-        echo ": temp-> go the temp.txt"
-        echo ": question-> go the question.txt"
-        echo ": help-> get the help"
-        echo ": pointer year-month-day-> to set the pointer"
-        echo ": pointer-check-> to show the pointer"
-        ;;
     "go-e")
         # go to the everyday_record path
         e_dest=~/mygithub/everyday_record/compress/
@@ -102,9 +95,20 @@ case "$1" in
     "all")
         vim ~/mygithub/everyday_record/compress/
         ;;
+    "help")
+        echo -e "->${GREEN}OPTION:${NOCOLOR}"
+        echo ": learn->: go to the learn.txt"
+        echo ": temp->: go the temp.txt"
+        echo ": question->: go the question.txt"
+        echo ": help->: get the help"
+        echo ": pointer->: year-month-day-> to set the pointer"
+        echo ": pointer-check->: to show the pointer"
+        echo ": go-e->: cd to the everyday_record"
+        echo ": go-wr->: cd to the write-scritp.sh"
+        echo ": merge->: merge the today's question, plan to the compress's directory"
+        echo ": all->: use .../compress/, you can edit the compress's file"
+        ;;
     *)
         echo -e "-> ${RED}ERROR:${NOCOLOR} Wrong input! You can just input the following option:\n-> ${GREEN}OPTION:${NOCOLOR} plan, learn, question, temp, help, pointer %Y-%m-%d, pointer-check, go-e, go-wr, review"
         ;;
-
-
 esac
