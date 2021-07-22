@@ -14,6 +14,10 @@ install_path=/usr/bin
 if [ -d "/opt/myscript/wr-script" ]; then
     rm -r /opt/myscript/wr-script
 fi
+# change the date-pointer to today that you are installing the wr-script
+day_pointer=$(date "+%Y-%m/%m-%d")
+echo $day_pointer > date-pointer.txt
+
 cp -r $(pwd) /opt/myscript/ && echo "Has been copied the directory to the: /opt/myscript"
 
 # use the ln command to creat the link
