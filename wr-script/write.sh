@@ -37,6 +37,9 @@ fi
 
 # check the argumet and then open the corresponding file
 case "$1" in
+    "love")
+        . /opt/myscript/wr-script/my_sq/my_sp.sh
+        ;;
     "plan")
         vim ${today_path}/plan.txt
         ;;
@@ -97,6 +100,7 @@ case "$1" in
         ;;
     "help")
         echo -e "->${GREEN}OPTION:${NOCOLOR}"
+        echo ": love->: my dear sq"
         echo ": learn->: go to the learn.txt"
         echo ": temp->: go the temp.txt"
         echo ": question->: go the question.txt"
