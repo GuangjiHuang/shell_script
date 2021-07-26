@@ -6,7 +6,7 @@ do
     for i in $file
     do
         file_name=${i##*/}
-        if [ ${file_name:0:3} == "sq_" ]; then
+        if [ ${file_name:0:5} == "moyu_" ]; then
             cat $i && echo $(datef) 
             sleep 1
             clear

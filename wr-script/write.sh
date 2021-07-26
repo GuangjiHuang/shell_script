@@ -101,6 +101,9 @@ case "$1" in
     "rest")
         . /opt/myscript/wr-script/my_sq/rest.sh
         ;;
+    "moyu")
+        . /opt/myscript/wr-script/my_sq/moyu.sh
+        ;;
     "help")
         echo -e "->${GREEN}OPTION:${NOCOLOR}"
         echo ": love->: my dear sq"
@@ -115,6 +118,7 @@ case "$1" in
         echo ": merge->: merge the today's question, plan to the compress's directory"
         echo ": all->: use .../compress/, you can edit the compress's file"
         echo ": rest->: show the rest as the screen"
+        echo ": moyu->: show the moyu as the screen"
         ;;
     *)
         echo -e "-> ${RED}ERROR:${NOCOLOR} Wrong input! You can just input the following option:\n-> ${GREEN}OPTION:${NOCOLOR} love, plan, learn, question, temp, help, pointer %Y-%m-%d, pointer-check, go-e, go-wr, review, all, rest"
