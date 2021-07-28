@@ -94,6 +94,7 @@ case "$1" in
     "merge")
         cat ${today_path}/question.txt >> ~/mygithub/everyday_record/compress/question_a.txt
         cat ${today_path}/learn.txt >> ~/mygithub/everyday_record/compress/learn_a.txt
+        echo "Good job! Has been merging xxx.txt to xxx_a.txt! Successfully!"
         ;;
     "all")
         vim ~/mygithub/everyday_record/compress/
@@ -103,6 +104,11 @@ case "$1" in
         ;;
     "moyu")
         . /opt/myscript/wr-script/my_sq/moyu.sh
+        ;;
+    "xiaban")
+        cd ~/mygithub/everyday_record/
+        . ~/mygithub/everyday_record/xiaban.sh
+        wr merge
         ;;
     "help")
         echo -e "->${GREEN}OPTION:${NOCOLOR}"
@@ -119,6 +125,7 @@ case "$1" in
         echo ": all->: use .../compress/, you can edit the compress's file"
         echo ": rest->: show the rest as the screen"
         echo ": moyu->: show the moyu as the screen"
+        echo ": xiaban->: off duty"
         ;;
     *)
         echo -e "-> ${RED}ERROR:${NOCOLOR} Wrong input! You can just input the following option:\n-> ${GREEN}OPTION:${NOCOLOR} love, plan, learn, question, temp, help, pointer %Y-%m-%d, pointer-check, go-e, go-wr, review, all, rest"
