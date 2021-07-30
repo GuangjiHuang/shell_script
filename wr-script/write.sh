@@ -106,9 +106,9 @@ case "$1" in
         . /opt/myscript/wr-script/my_sq/moyu.sh
         ;;
     "xiaban")
+        wr merge
         cd ~/mygithub/everyday_record/
         . ~/mygithub/everyday_record/xiaban.sh
-        wr merge
         ;;
     "help")
         echo -e "->${GREEN}OPTION:${NOCOLOR}"
