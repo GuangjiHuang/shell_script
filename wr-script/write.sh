@@ -31,6 +31,11 @@ if [ ! -d "${today_path}" ]; then
         touch ${today_path}/learn.txt && echo -e "${separate_sign}\n$(datef)\n${separate_sign}\n" > ${today_path}/learn.txt
         touch ${today_path}/question.txt && echo -e "${separate_sign}\n$(datef)\n${separate_sign}\n" > ${today_path}/question.txt
         touch ${today_path}/temp.txt && echo -e "${separate_sign}\n$(datef)\n${separate_sign}\n" > ${today_path}/temp.txt
+        # add the todolist.txt (copy the template to it );
+        separate_sign_2="--------------------------------------"
+        touch ${today_path}/todolist.txt && echo -e "${separate_sign_2}\n------ $(datef) -------\n${separate_sign_2}" > ${today_path}/todolist.txt
+        cat /opt/myscript/wr-script/todolist/todolist.template >> ${today_path}/todolist.txt
+        echo "${today_path}/todolist.txt" > /opt/myscript/wr-script/todolist/date-path.txt
     fi
 
 fi
@@ -81,7 +86,8 @@ case "$1" in
         ;;
     "go-e")
         # go to the everyday_record path
-        e_dest=~/mygithub/everyday_record/compress/
+        #e_dest=~/mygithub/everyday_record/compress/
+        e_dest=${today_path}/
         cd $e_dest
         echo "->: $e_dest"
         ;;
@@ -90,6 +96,12 @@ case "$1" in
         wr_dest=~/mygithub/shell_script/wr-script/
         cd $wr_dest
         echo "->: $wr_dest"
+        ;;
+    "go-install")
+        # go to the /opt/myscript/wr-script/
+        install_dest=/opt/myscript/wr-script/
+        cd $install_dest
+        echo "->: $install_dest"
         ;;
     "merge")
         cat ${today_path}/question.txt >> ~/mygithub/everyday_record/compress/question_a.txt
@@ -110,6 +122,22 @@ case "$1" in
         cd ~/mygithub/everyday_record/
         . ~/mygithub/everyday_record/xiaban.sh
         ;;
+    "todo")
+        vim ${today_path}/todolist.txt
+        ;;
+    "todo-cfg")
+        cd /opt/myscript/wr-script/todolist/
+        vim .
+        ;;
+    "todo-exe")
+        cd /opt/myscript/wr-script/todolist/
+        ./r_c_w.exe && echo ">>>>>> Execute the program successfully! <<<<<<"
+        cd -
+        wr todo
+        ;;
+    "wr")
+        vim ~/mygithub/shell_script/wr-script/write.sh
+        ;;
     "help")
         echo -e "->${GREEN}OPTION:${NOCOLOR}"
         echo ": love->: my dear sq"
@@ -126,8 +154,11 @@ case "$1" in
         echo ": rest->: show the rest as the screen"
         echo ": moyu->: show the moyu as the screen"
         echo ": xiaban->: off duty"
+        echo ": todo->: edit the todolist.txt"
+        echo ": todo-cfg->: modify the todo configuration"
+        echo ": todo-exe->: execute the prgrom to read, count, and then write"
         ;;
     *)
-        echo -e "-> ${RED}ERROR:${NOCOLOR} Wrong input! You can just input the following option:\n-> ${GREEN}OPTION:${NOCOLOR} love, plan, learn, question, temp, help, pointer %Y-%m-%d, pointer-check, go-e, go-wr, review, all, rest"
+        echo -e "-> ${RED}ERROR:${NOCOLOR} Wrong input! You can just input the following option:\n-> ${GREEN}OPTION:${NOCOLOR} love, plan, learn, question, temp, help, pointer %Y-%m-%d, pointer-check, go-e, go-wr, review, all, rest, todo, todo-cfg, todo-exe"
         ;;
 esac
