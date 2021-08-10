@@ -31,7 +31,7 @@ h)
     echo -e "${GREEN}OPTION${NOCOLOR}"
     echo "======================================"
 
-    echo -e ":l->list the path you record;\nw->write the path to the rocord list;\n:c->clear all the record path;\nh->help, to show the command's option;\n:m->manmually changed the record file opened using vim;\n:[1-9]->chose the path you want to go."
+    echo -e ":l->list the path you record;\n:w->write the path to the rocord list;\n:c->clear all the record path;\n:h->help, to show the command's option;\n:m->manmually changed the record file opened using vim;\n:[1-9]->chose the path you want to go."
     ;;
 [1-9])
 let lines=$1+1
