@@ -1,4 +1,68 @@
 #! /bin/bash
+# define the function
+func_goal()
+{
+    arg1=$1
+    arg2=$2
+    arg3=$3
+    # deal with the directories
+    # check if exists the ~/mygithub/goal/
+    goal_dir=~/mygithub/goal/
+    goal_info_path=~/mygithub/shell_script/wr-script/goal_info
+    if [ ! -d "${goal_dir}" ]; then
+        mkdir -p ${goal_dir}
+        # copy the goal.list to the directory
+        cp ${goal_info_path}/goal.list ${goal_dir}
+        # mkdir that in the goal.list
+        cd ${goal_dir}
+        for line in $(cat "${goal_dir}/goal.list")
+        do
+            if [ ${line:0:2} == "./" ]; then
+                mkdir ${line}
+            fi
+        done
+    fi
+    # the $2 can be the 
+    # list -> list all the goal
+    # the specification goal, such as the code, English, reading and so on. and then jump to it;
+    case ${arg2} in 
+        "list")
+            # list all the goal
+            echo -e "${YELLOW}------ GOALS ------${NOCOLOR}"
+            for line in $(cat "${goal_dir}/goal.list")
+            do
+                if [ ${line:0:2} == "./" ]; then
+                    line_rid_left=${line#*/}
+                    line_rid_left_right=${line_rid_left%/}
+                    # show the goal
+                    echo -e "-> ${GREEN}${line_rid_left_right}${NOCOLOR}"
+                fi
+            done
+            echo -e "${YELLOW}-------------------${NOCOLOR}"
+            ;;
+        "create")
+            mkdir -p ${goal_dir}${arg3}
+            echo "Create the goal: ${arg3} successfully!" 
+            ;;
+        "help")
+            echo -e "${GREEN}------ HELP INFORMATION ------${NOCOLOR}"
+            echo ": list->: list the all goal"
+            echo ": create->: create the new goal"
+            echo ": help->: show the command information"
+            echo ": xxx(the goal)->: show the specification goal"
+            ;;
+        *)
+            if [ -d ${goal_dir}${arg2} ]; then
+                cd ${goal_dir}${arg2}
+                vim ${goal_dir}${arg2}
+            else
+                echo -e "${RED}Warming, ${arg2} not exist!${NOCOLOR}"
+                echo "Note: you can use the ${GREEN}< wr goal creat xxx >${NOCOLOR} to create the goal directory"
+            fi
+            ;;
+    esac
+
+}
 
 #check if there are the directory
 dir_name=$(date "+%Y-%m")/$(date "+%m-%d")
@@ -138,6 +202,9 @@ case "$1" in
     "wr")
         vim ~/mygithub/shell_script/wr-script/write.sh
         ;;
+    "goal")
+        func_goal $1 $2 $3
+        ;;
     "help")
         echo -e "->${GREEN}OPTION:${NOCOLOR}"
         echo ": love->: my dear sq"
@@ -157,6 +224,7 @@ case "$1" in
         echo ": todo->: edit the todolist.txt"
         echo ": todo-cfg->: modify the todo configuration"
         echo ": todo-exe->: execute the prgrom to read, count, and then write"
+        echo ": goal xxx: about the goal, you can use the command < wr goal help > for more information"
         ;;
     *)
         echo -e "-> ${RED}ERROR:${NOCOLOR} Wrong input! You can just input the following option:\n-> ${GREEN}OPTION:${NOCOLOR} love, plan, learn, question, temp, help, pointer %Y-%m-%d, pointer-check, go-e, go-wr, review, all, rest, todo, todo-cfg, todo-exe"

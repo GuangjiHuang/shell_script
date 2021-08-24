@@ -7,6 +7,7 @@
 #include<cctype>
 #include<memory>
 #include "util.h"
+#define USE_RATE
 
 using namespace std;
 int get_int_from_line(string &s)
@@ -42,6 +43,7 @@ int get_int_from_line(string &s)
 int sum_scores(const vector<char>& states, const vector<int>& scores)
 {/*{{{*/
     int total_scores = 0;
+    int get_scores = 0;
     for (size_t i=0; i<states.size(); i++)
     {
         int state_to_int;
@@ -52,11 +54,17 @@ int sum_scores(const vector<char>& states, const vector<int>& scores)
         else
         {
             //throw "The state is not the y or the x";
-            cout << "the state is not the y or the x";
+            //cout << "ERROR in " << __FILE__ << ":" << __LINE__ << endl;
+            //cout << "the state is not the y or the x";
+            state_to_int = 0;
         }
-        total_scores += state_to_int * scores[i];
+        get_scores += state_to_int * scores[i];
+        total_scores += scores[i];
     }
-    return total_scores;
+#ifdef USE_RATE
+        get_scores = (double)get_scores / total_scores * 100;
+#endif
+    return get_scores;
 }/*}}}*/
 
 void deal_modify_todo_list(const string &path, vector<char> &states, int total_scores)
@@ -141,6 +149,7 @@ string itos(int x, int base)
     // check the number of the digit
     if (digit_num > 8)
     {
+        cout << "ERROR in " << __FILE__ << ":" << __LINE__ << endl;
         cout << "Error: digit number too long!" << endl;
         return "";
     }

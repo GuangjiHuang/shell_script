@@ -65,9 +65,9 @@ int main()
     if (states.size() != scores.size())
     {
         //throw "Error: the size of the scores and the states not equal! Please check the file!";
+        cout << "ERROR in " << __FILE__ << ":" << __LINE__ << endl;
         cout << "the states size is: " << states.size() << endl;
         cout << "the scores size is: " << scores.size() << endl;
-        ;
     }
     else
     {
