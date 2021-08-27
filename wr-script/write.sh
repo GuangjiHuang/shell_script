@@ -8,7 +8,7 @@ func_goal()
     # deal with the directories
     # check if exists the ~/mygithub/goal/
     goal_dir=~/mygithub/goal/
-    goal_info_path=~/mygithub/shell_script/wr-script/goal_info
+    goal_info_path=/opt/myscript/wr-script/goal_info
     if [ ! -d "${goal_dir}" ]; then
         mkdir -p ${goal_dir}
         # copy the goal.list to the directory
@@ -42,6 +42,8 @@ func_goal()
             ;;
         "create")
             mkdir -p ${goal_dir}${arg3}
+            # and then add the goal to the goal.list
+            echo "./${arg3}/" >> "${goal_dir}/goal.list"
             echo "Create the goal: ${arg3} successfully!" 
             ;;
         "help")
@@ -57,7 +59,7 @@ func_goal()
                 vim ${goal_dir}${arg2}
             else
                 echo -e "${RED}Warming, ${arg2} not exist!${NOCOLOR}"
-                echo "Note: you can use the ${GREEN}< wr goal creat xxx >${NOCOLOR} to create the goal directory"
+                echo -e "Note: you can use the ${GREEN}< wr goal creat xxx >${NOCOLOR} to create the goal directory"
             fi
             ;;
     esac
@@ -167,6 +169,12 @@ case "$1" in
         cd $install_dest
         echo "->: $install_dest"
         ;;
+    "go-goal")
+        # go to the /mygithub/goal/
+        goal_dst=~/mygithub/goal/
+        cd ${goal_dst}
+        echo "->: ${goal_dst}"
+        ;;
     "merge")
         cat ${today_path}/question.txt >> ~/mygithub/everyday_record/compress/question_a.txt
         cat ${today_path}/learn.txt >> ~/mygithub/everyday_record/compress/learn_a.txt
@@ -216,6 +224,7 @@ case "$1" in
         echo ": pointer-check->: to show the pointer"
         echo ": go-e->: cd to the everyday_record"
         echo ": go-wr->: cd to the write-scritp.sh"
+        echo ": go-goal->: cd to the goal directroy"
         echo ": merge->: merge the today's question, plan to the compress's directory"
         echo ": all->: use .../compress/, you can edit the compress's file"
         echo ": rest->: show the rest as the screen"
@@ -227,6 +236,7 @@ case "$1" in
         echo ": goal xxx: about the goal, you can use the command < wr goal help > for more information"
         ;;
     *)
-        echo -e "-> ${RED}ERROR:${NOCOLOR} Wrong input! You can just input the following option:\n-> ${GREEN}OPTION:${NOCOLOR} love, plan, learn, question, temp, help, pointer %Y-%m-%d, pointer-check, go-e, go-wr, review, all, rest, todo, todo-cfg, todo-exe"
+        echo -e "-> ${RED}ERROR:${NOCOLOR} Wrong input! You can just input the following option:\n-> ${GREEN}OPTION:${NOCOLOR} love, plan, learn, question, temp, help, pointer %Y-%m-%d, pointer-check, go-e, go-wr, review, all, rest, todo, todo-cfg, todo-exe, ... and so on "
+        echo -e "${GREEN}You can use the wr help for more information!${NOCOLOR}"
         ;;
 esac
