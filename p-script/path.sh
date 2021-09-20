@@ -4,36 +4,58 @@ num_lines=$(sed -n '1p' $record_path)
 #echo "the numlines is : ${num_lines}"
 if [ $# -lt 1 ]
 then
-echo "Please add the args!"
-return
+    echo "Please add the args!"
+    return
 fi
 case "$1" in
 l)
-# list the path in the $record_path
-cat $record_path
-;;
+    # list the path in the $record_path
+    cat $record_path
+    ;;
 w)
-# add the path to the record_path.txt
-let num_lines=$num_lines+1
-echo "${num_lines}. $(pwd)" >> $record_path
-echo "${num_lines}. $(pwd) >> $record_path"
-# renew the num_lines
-sed -i "1c${num_lines}" $record_path
-;;
+    # add the path to the record_path.txt
+    let num_lines=$num_lines+1
+    echo "${num_lines}. $(pwd)" >> $record_path
+    echo "${num_lines}. $(pwd) >> $record_path"
+    # renew the num_lines
+    sed -i "1c${num_lines}" $record_path
+    ;;
 c)
-echo "0" > $record_path
-;;
+    read -p "Are you sure to clear all the record path? (y/n): " key_input
+    if [ $key_input == "y" ]; then
+        echo "0" > $record_path 
+    else
+        echo "Cancel to clear the record path!"
+    fi
+    ;;
 m)
     vim ${record_path}
     ;;
-h)
-    echo -e "${GREEN} --> OPTION <-- ${NOCOLOR}"
-    echo "======================================"
+p)
+    p go-p
+    vim path.sh
+    ;;
+help)
+    echo -e "${YELLOW}-------------------------------> OPTION <---------------------------------------${NOCOLOR}"
 
-    echo -e ": l->list the path you record;\n: w->write the path to the rocord list;\n: c->clear all the record path;\n: h->help, to show the command's option;\n: m->manmually changed the record file opened using vim;\n: [1-9]->chose the path you want to go."
-    echo ": [1-9] q -> the quite mode, use to copy file to it"
-    echo ": go-q -> go the path.sh to edit"
-    echo "======================================"
+    echo -e "${GREEN}: c->clear${NOCOLOR} all the record path;"
+    echo
+    echo -e "${GREEN}: go-p${NOCOLOR} -> go the path.sh's directory"
+    echo 
+    echo -e "${GREEN}: help->help${NOCOLOR} to show the command's option;"
+    echo
+    echo -e "${GREEN}: l->list${NOCOLOR} the path you record;"
+    echo
+    echo -e "${GREEN}: m->manmually${NOCOLOR} changed the record file opened using vim;"
+    echo
+    echo -e "${GREEN}: p${NOCOLOR} -> vim path.sh"
+    echo
+    echo -e "${GREEN}: w->write${NOCOLOR} the path to the rocord list;"
+    echo
+    echo -e "${GREEN}: [1-9]->chose${NOCOLOR} the path you want to go." 
+    echo
+    echo -e "${GREEN}: [1-9] q->cd with quiet mode${NOCOLOR} the quite mode, use to copy file to it"
+    echo -e "${YELLOW}--------------------------------------------------------------------------------${NOCOLOR}"
     ;;
 [1-9])
     let lines=$1+1
@@ -42,10 +64,10 @@ h)
     #export PATH=$PATH:${cd_path}
     export cd_path
     if [ "$2" == "q" ]; then
-    echo ${cd_path}
-    else
-    echo "-> ${cd_path}"
-    cd ${cd_path}
+        echo ${cd_path}
+        else
+        echo "-> ${cd_path}"
+        cd ${cd_path}
     fi
     ;;
 "go-p")
