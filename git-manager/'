@@ -1,0 +1,82 @@
+#! /bin/bash
+
+#---------- the var----------  
+# the reposities
+reposities=("linux_basic_cfg"\
+            "shell_script"\
+            "program_language_test"\
+            "goal"\
+            "everyday_record")
+
+# the path
+source_dir="~/mygithub/shell_sript/git-manager/"
+source_path="~/mygithub/shell_sript/git-manager/git_manager.sh"
+install_path="/opt/myscript/git-manager/"
+
+# checkout the path
+flag_source_exist=0
+flag_install_exist=0
+if [ -f $source_path ];then
+    flag_source_exist=1
+fi
+if [ -f $source_path ];then
+    flag_install_exist=1
+fi
+#------------------------------
+
+#---------- the command----------  
+# the git list
+case $1 in
+    "list")
+        echo "----------- reposities ---------------"
+        echo ${reposities[@]}
+        echo
+        ;;
+# the git clone
+    "clone")
+    # loop the arguments
+    for reposity in $@
+    do
+        # skip the $1 argument
+        if [ $1 == "clone" ]; then
+            continue
+        fi
+        flag="not"
+        echo ${reposities[@]} | grep -wq "$reposity" && flag="is"
+        if [ $flag == "is" ];then
+            echo "------------- git the ${reposity} ---------------"
+            git clone git://github.com/GuangjiHuang/${reposity}.git
+            if [ $? -eq 0 ];then
+                echo "Successfully!"
+            else
+                echo "Fail!"
+            fi
+        else
+            echo "Note:---------------------"
+            echo "$reposity not found!"
+            echo "Please refer to the follow: "
+            echo ${reposities[@]}
+        fi
+    done
+    ;;
+# the git add_reposity
+    "add_reposity")
+    # just vim the this file
+    vim $source_path
+    ;;
+
+# the help
+    "help")
+    clear
+    echo -e "${YELLOW}-------------------------------> OPTION <---------------------------------------${NOCOLOR}"
+    echo -e "${GREEN}: add->:${NOCOLOR} manually to edit the source file to add the reposities"
+    echo
+    echo -e "${GREEN}: clone x y ...->:${NOCOLOR} to clone the reposities(x, y ... is the reposity)"
+    echo
+    echo -e "${GREEN}: list->:${NOCOLOR} list all the reposities"
+    echo 
+    echo -e "${GREEN}: help->:${NOCOLOR} show the help information"
+    echo
+    echo -e "${YELLOW}-------------------------------> OPTION <---------------------------------------${NOCOLOR}"
+    ;;
+esac
