@@ -104,17 +104,13 @@ case $1 in
     "push")
         # get the commit content
         if [ -n "$2" ]; then
-            commit_content=$2
+            commit_content="$2"
         else
-            commit_content=$(date "+%Y-%m-%d %a %X")
+            commit_content="update->$(date "+%Y-%m-%d %a %X")"
         fi
         # the git command
-        echo "--------------------"
-        echo "the commit_content is the: " 
-        echo ${commit_content}
-        echo "--------------------"
         echo "------ try to git push  ------"
-        # remember to add the double quote to the ${commit_content}
+        # remember to add the double quote to the ${commit_content}, otherwise it will make error
         git add . && git commit -m "${commit_content}" && git push
         # check if the command succeed
         if [ $? ]; then
