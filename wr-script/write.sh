@@ -1,4 +1,5 @@
 #! /bin/bash
+#! /usr/bin/python
 # define the function
 func_goal()
 {
@@ -242,11 +243,92 @@ case "$1" in
              echo -e "Error: no the command: \" wr type $2 \""
         fi
         ;;
+    "pretend")
+        # execute the program
+        /opt/myscript/wr-script/c++_interesting_program/pretend_to_do_something.exe $2 $3 $4
+        ;;
+
+    "reinstall")
+        # to install the file again to cover the original file
+        wr go-wr
+        ./install.sh && echo "----------------- reinstall successfully --------------------"
+        ;;
+
+    "-")
+        # go to the important place that you want
+        vim $HOME/mygithub/goal/paper/determine_title_report.ddl
+        ;;
+    "-c")
+        pwd | tr -d "\n" > /dev/clipboard
+        ;;
+    "-v")
+        # if the $3 exist and equal to the "go", then jump to the path
+        if [ "$3" == "go" ];then
+            cd $(cat /dev/clipboard)
+            echo "->:$(pwd)"
+        else
+            cat /dev/clipboard
+            echo  # output the new line 
+        fi
+        ;;
+    "preview_md_exe")
+        # >>>>>>> the window's when-change.exe <<<<<<<<
+        # the variables and the arguments
+        typora_dir=/cygdrive/d/Typora
+        when_changed_option=$3
+        document_name=$2
+        document_path=$(pwd)/$2
+        
+        # check the $2 argument
+        echo "the document's name is the: ${document_name}" 
+        if [ -n "${document_name}" ]; then
+            # the command
+            cd $typora_dir # to the directory first
+            # for the window, you can not use the ./ as the prefix
+            when-changed.exe ${when_changed_option} "${document_path}" Typora.exe "${document_path}"
+        else
+            echo "Lack the document, fail to run!"
+        fi
+        echo "Finish to run!"
+        ;;
+
+    "preview_md")
+        # >>>>>>>>>> fail to execute: 
+        # N) no matter what the when-changed is(the window or the unix), it will use the window's
+        # python(python3.7 not the python3.8);
+        # <<<<<<<<< 
+
+        # >>>>>>> the cygwin's when-change <<<<<<<<
+        # the variables and the arguments
+        typora_path=/cygdrive/d/Typora/Typora.exe
+        when_changed_option=$3
+        document_name=$2
+        # cygwin_path -> window path
+        document_path_cygwin=$(pwd)/$2
+        document_path_window=$(cygpath -w "$(pwd)/$2")
+        
+        # check the $2 argument
+        echo "the document's name is the: ${document_path_cygwin}" 
+        if [ -n "${document_name}" ]; then
+            # the command
+            #cd $typora_dir # to the directory first
+            # in the unix, just to use the full path is ok to execute the typora
+            # the typora is the window's program, it just recognize the window's path
+            /usr/local/bin/when-changed ${when_changed_option} "${document_path_cygwin}" ${typora_path} "${document_path_window}" 
+            #/usr/local/bin/when-changed ${when_changed_option} "${document_path_cygwin}" echo "execute"
+        else
+            echo "Lack the document, fail to run!"
+        fi
+        echo "Finish to run!"
+        ;;
+
     "help")
         clear
         echo -e "${YELLOW}-------------------------------> OPTION <---------------------------------------${NOCOLOR}"
         #echo -e "--------------------${GREEN}OPTION${NOCOLOR}--------------------"
 
+        echo -e "${GREEN}: -->:${NOCOLOR} go to the direct place!"
+        echo
         echo -e "${GREEN}: all->:${NOCOLOR} use .../compress/, you can edit the compress's file"
         echo
         echo -e "${GREEN}: go-e->${NOCOLOR}: cd to the everyday_record"
@@ -271,7 +353,11 @@ case "$1" in
         echo 
         echo -e "${GREEN}: pointer->${NOCOLOR}: year-month-day-> to set the pointer"
         echo 
+        echo -e "${GREEN}: pretend->${NOCOLOR}: run the fake program in the terminal to pretend to do something!"
+        echo 
         echo -e "${GREEN}: question->${NOCOLOR}: go the question.txt"
+        echo 
+        echo -e "${GREEN}: reinstall->${NOCOLOR}: reinstall the file, to cover the original file"
         echo 
         echo -e "${GREEN}: rest->${NOCOLOR}: show the rest as the screen"
         echo 
@@ -290,6 +376,10 @@ case "$1" in
         echo -e "${GREEN}: xiaban->${NOCOLOR}: Upload the file to the github reposity, and then off duty"
         echo 
         echo -e "${GREEN}: wr->${NOCOLOR}:modify the write.sh"
+        echo 
+        echo -e "${GREEN}: -c->${NOCOLOR}:copy the current path to the /dev/clipboard"
+        echo 
+        echo -e "${GREEN}: -v->${NOCOLOR}:past the /dev/clipboard's content to the bash"
         echo 
         echo -e "${YELLOW}--------------------------------------------------------------------------------${NOCOLOR}"
         ;;
