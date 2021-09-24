@@ -49,9 +49,13 @@ func_goal()
             ;;
         "help")
             echo -e "${GREEN}------ HELP INFORMATION ------${NOCOLOR}"
+            echo 
             echo -e "${GREEN}: list->${NOCOLOR}: list the all goal"
+            echo 
             echo -e "${GREEN}: create->${NOCOLOR}: create the new goal"
+            echo 
             echo -e "${GREEN}: help->${NOCOLOR}: show the command information"
+            echo 
             echo -e "${GREEN}: xxx(the goal)->${NOCOLOR}: show the specification goal"
             ;;
         *)
@@ -65,6 +69,118 @@ func_goal()
             ;;
     esac
 
+}
+
+copy_sth()
+{
+    # the var
+    file_dir=/opt/myscript/wr-script/register-clipboard
+    middle_station=/dev/clipboard
+
+    if [ -z "$2" ];then
+        # no the second argument, just to copy to the /dev/clipboard or the middle_station
+        pwd | tr -d "\n" > $middle_station
+    else
+        case "$2" in
+            "help")
+                echo -e "${GREEN}------ wr -c help information ------${NOCOLOR}"
+                echo -e "${GREEN}: (no argumetn)->${NOCOLOR}: copy the path to the middle_station."
+                echo -e "${GREEN}: hlep->${NOCOLOR}: give the help information of the < wr -v xxx>."
+                echo -e "${GREEN}: [a-z] ->${NOCOLOR}: copy the path to the register [a-z]."
+                echo -e "${GREEN}: [a-z] - ->${NOCOLOR}: copy, register[a-z] -> middle_station."
+                echo -e "${GREEN}: [a-z] [a-z] ->${NOCOLOR}: copy, register[a-z] -> register[a-z]."
+                ;;
+
+                *)
+                file_path=$file_dir/$2 # this is the file name
+                if [ -f $file_path ]; then
+                    # if the $3 exist, the register -> to the middle station
+                    if [ -z "$3" ]; then
+                        pwd | tr -d "\n" > $file_path # exist
+                    elif [ "$3" == "-" ];then
+                        # a...z -> middle_station, for example: a -> /dev/clipboard
+                        cat $file_path > $middle_station
+                    else
+                        # copy to the other register <a-z>
+                        # need to check if your input is the register
+                        to_file_path=$file_dir/$3
+                        if [ -f $to_file_path ]; then
+                            cat $file_path > $to_file_path # exist
+                        else
+                            echo "Note: for the argument 3 you should input \"-\"or the <a-z>, instead of the $3!"
+                        fi
+                    fi
+                    # and then renew the whole_path_information.list
+                else
+                    echo "\$2 must be the <a-z>, your input $2 is wrong!"
+                fi
+                ;;
+        esac
+    fi
+}
+
+past_sth()
+{
+    # the var
+    file_dir=/opt/myscript/wr-script/register-clipboard
+    middle_station=/dev/clipboard
+
+    if [ -z "$2" ]; then
+        # no the second argument, show the middle_sation
+        cat $middle_station
+        echo # output the new line
+    else
+        case "$2" in
+            "go")
+                cd $(cat $middle_station)
+                echo "->$(pwd)"
+                ;;
+            "list")
+                # loop and then show all the file and the file's content
+                for i in $file_dir/*
+                do
+                    content_path=$(cat $i)
+                    if [ -z "$content_path" ];then
+                        continue
+                    else
+                        echo "${i##*/}: $content_path"
+                    fi
+                done
+                ;;
+            "help")
+                echo -e "${GREEN}------ wr -v help information ------${NOCOLOR}"
+                echo 
+                echo -e "${GREEN}: (no argument)->${NOCOLOR}: show the middle_station's path."
+                echo 
+                echo -e "${GREEN}: list->${NOCOLOR}: list all the regsiter content, reg<a-z>."
+                echo 
+                echo -e "${GREEN}: go->${NOCOLOR}: cd to the middle_station, for example cd cat$(/dev/clipboard)."
+                echo 
+                echo -e "${GREEN}: hlep->${NOCOLOR}: give the help information of the < wr -v xxx>."
+                echo 
+                echo -e "${GREEN}: [a-z] ->${NOCOLOR}: show the [a-z] register's content."
+                echo 
+                echo -e "${GREEN}: [a-z] go ->${NOCOLOR}: cd to the register [a-z] path."
+                ;;
+
+                *)
+                # check the file path
+                file_path=$file_dir/$2
+                if [ -f $file_path ]; then
+                    # do something
+                    if [ -z "$3" ]; then
+                        # just show the path
+                        echo "${file_path##*/}: $(cat $file_path)"
+                    elif [ "$3" == "go" ];then
+                        cd $(cat $file_path)
+                        echo "->$file_path"
+                    fi
+                else
+                    echo "\$2 must be the <a-z>, your inpout $2 is wrong!"
+                fi
+                ;;
+        esac
+    fi
 }
 
 #check if there are the directory
@@ -259,17 +375,24 @@ case "$1" in
         vim $HOME/mygithub/goal/paper/determine_title_report.ddl
         ;;
     "-c")
-        pwd | tr -d "\n" > /dev/clipboard
+
+        # pwd | tr -d "\n" > /dev/clipboard
+        # call  the copy_sth()
+        copy_sth $1 $2 $3
         ;;
     "-v")
-        # if the $3 exist and equal to the "go", then jump to the path
-        if [ "$3" == "go" ];then
-            cd $(cat /dev/clipboard)
-            echo "->:$(pwd)"
-        else
-            cat /dev/clipboard
-            echo  # output the new line 
-        fi
+        # >>>>>>>>>>>>>  obsolete <<<<<<<<<<<<<<<<<<<<<<
+        ## if the $3 exist and equal to the "go", then jump to the path
+        #if [ "$3" == "go" ];then
+        #    cd $(cat /dev/clipboard)
+        #    echo "->:$(pwd)"
+        #else
+        #    cat /dev/clipboard
+        #    echo  # output the new line 
+        #fi
+        # >>>>>>>>>>>>>>>>>>>>> <<<<<<<<<<<<<<<<<<<<<<
+        # call the past_sth() 
+        past_sth $1 $2 $3
         ;;
     "preview_md_exe")
         # >>>>>>> the window's when-change.exe <<<<<<<<
@@ -355,6 +478,10 @@ case "$1" in
         echo 
         echo -e "${GREEN}: pretend->${NOCOLOR}: run the fake program in the terminal to pretend to do something!"
         echo 
+        echo -e "${GREEN}: preview_md->${NOCOLOR}:(the cygwin mode)use the when-changed command, when you write the markdwon in the vim, save it, show in the typora immediately"
+        echo 
+        echo -e "${GREEN}: preview_md_exe->${NOCOLOR}:(the window mode)use the when-changed command, when you write the markdwon in the vim, save it, show in the typora immediately"
+        echo 
         echo -e "${GREEN}: question->${NOCOLOR}: go the question.txt"
         echo 
         echo -e "${GREEN}: reinstall->${NOCOLOR}: reinstall the file, to cover the original file"
@@ -377,9 +504,9 @@ case "$1" in
         echo 
         echo -e "${GREEN}: wr->${NOCOLOR}:modify the write.sh"
         echo 
-        echo -e "${GREEN}: -c->${NOCOLOR}:copy the current path to the /dev/clipboard"
+        echo -e "${GREEN}: -c->${NOCOLOR}:copy something! Type <wr -c help> for more information!"
         echo 
-        echo -e "${GREEN}: -v->${NOCOLOR}:past the /dev/clipboard's content to the bash"
+        echo -e "${GREEN}: -v->${NOCOLOR}:past something! Type <wr -v help> for more information!"
         echo 
         echo -e "${YELLOW}--------------------------------------------------------------------------------${NOCOLOR}"
         ;;
