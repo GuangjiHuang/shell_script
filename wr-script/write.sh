@@ -48,6 +48,7 @@ func_goal()
             echo "Create the goal: ${arg3} successfully!" 
             ;;
         "help")
+            clear
             echo -e "${GREEN}------ HELP INFORMATION ------${NOCOLOR}"
             echo 
             echo -e "${GREEN}: list->${NOCOLOR}: list the all goal"
@@ -75,7 +76,12 @@ copy_sth()
 {
     # the var
     file_dir=/opt/myscript/wr-script/register-clipboard
-    middle_station=/dev/clipboard
+    # cygwin -> /dev/clipboard; others -> /opt/myscript/wr-script/middle_station.clipboard
+    if [ "$(uname -o)" == "Cygwin" ];then
+        middle_station=/dev/clipboard
+    else
+        middle_station=/opt/myscript/wr-script/middle_station.clipboard
+    fi
 
     if [ -z "$2" ];then
         # no the second argument, just to copy to the /dev/clipboard or the middle_station
@@ -83,6 +89,7 @@ copy_sth()
     else
         case "$2" in
             "help")
+                clear
                 echo -e "${GREEN}------ wr -c help information ------${NOCOLOR}"
                 echo -e "${GREEN}: (no argumetn)->${NOCOLOR}: copy the path to the middle_station."
                 echo -e "${GREEN}: hlep->${NOCOLOR}: give the help information of the < wr -v xxx>."
@@ -123,7 +130,12 @@ past_sth()
 {
     # the var
     file_dir=/opt/myscript/wr-script/register-clipboard
-    middle_station=/dev/clipboard
+    # cygwin -> /dev/clipboard; others -> /opt/myscript/wr-script/middle_station.clipboard
+    if [ "$(uname -o)" == "Cygwin" ];then
+        middle_station=/dev/clipboard
+    else
+        middle_station=/opt/myscript/wr-script/middle_station.clipboard
+    fi
 
     if [ -z "$2" ]; then
         # no the second argument, show the middle_sation
@@ -140,14 +152,16 @@ past_sth()
                 for i in $file_dir/*
                 do
                     content_path=$(cat $i)
-                    if [ -z "$content_path" ];then
-                        continue
+                    # if the $3 is the all, then show all the register even it is empty
+                    if [ -z "$content_path" ]  && [ "$3" != "all" ];then
+                            continue
                     else
                         echo "${i##*/}: $content_path"
                     fi
                 done
                 ;;
             "help")
+                clear
                 echo -e "${GREEN}------ wr -v help information ------${NOCOLOR}"
                 echo 
                 echo -e "${GREEN}: (no argument)->${NOCOLOR}: show the middle_station's path."
