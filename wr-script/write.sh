@@ -459,6 +459,15 @@ case "$1" in
         echo "Finish to run!"
         ;;
 
+    "fish")
+        # execute the asciiquarium
+        if [ "$(uname -o)" == "Cygwin" ];then
+            echo "------ No Fish --------"
+        else
+            asciiquarium
+        fi
+        ;;
+
     "help")
         clear
         echo -e "${YELLOW}-------------------------------> OPTION <---------------------------------------${NOCOLOR}"
@@ -467,6 +476,8 @@ case "$1" in
         echo -e "${GREEN}: -->:${NOCOLOR} go to the direct place!"
         echo
         echo -e "${GREEN}: all->:${NOCOLOR} use .../compress/, you can edit the compress's file"
+        echo
+        echo -e "${GREEN}: fish->:${NOCOLOR} execute the command < asciiquarium > in the linux system"
         echo
         echo -e "${GREEN}: go-e->${NOCOLOR}: cd to the everyday_record"
         echo 
