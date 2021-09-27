@@ -349,8 +349,8 @@ case "$1" in
         func_goal $1 $2 $3
         ;;
     "type")
-        if [ -z $2 ]; then
-             #open the type.pratice
+        if [ -z $2 ] || [ "$2" == "-p" ]; then
+            #open the type.pratice, the -p option is for the previous path depending on the date of the $(wr pointer-check)
              vim ${today_path}/type.pratice
         elif [ "$2" == "m" ]; then
              #open the type.template

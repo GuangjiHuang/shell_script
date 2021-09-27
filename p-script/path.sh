@@ -18,7 +18,7 @@ w)
     echo "${num_lines}. $(pwd)" >> $record_path
     echo "${num_lines}. $(pwd) >> $record_path"
     # renew the num_lines
-    sed -i "1c${num_lines}" $record_path
+    sed -i "1c${num_lines}" $record_path # sed command, -i is the option; 1 is the adress, c is the command, ${num_lines} is the text";
     ;;
 c)
     read -p "Are you sure to clear all the record path? (y/n): " key_input
