@@ -1,6 +1,7 @@
 #! /bin/bash
 #! /usr/bin/python
-# define the function
+
+# define the functi{{2}
 func_goal()
 {
     arg1=$1
@@ -41,12 +42,14 @@ func_goal()
             done
             echo -e "${YELLOW}-------------------${NOCOLOR}"
             ;;
+
         "create")
             mkdir -p ${goal_dir}${arg3}
             # and then add the goal to the goal.list
             echo "./${arg3}/" >> "${goal_dir}/goal.list"
             echo "Create the goal: ${arg3} successfully!" 
             ;;
+
         "help")
             clear
             echo -e "${GREEN}------ HELP INFORMATION ------${NOCOLOR}"
@@ -59,6 +62,7 @@ func_goal()
             echo 
             echo -e "${GREEN}: xxx(the goal)->${NOCOLOR}: show the specification goal"
             ;;
+
         *)
             if [ -d ${goal_dir}${arg2} ]; then
                 cd ${goal_dir}${arg2}
@@ -68,6 +72,7 @@ func_goal()
                 echo -e "Note: you can use the ${GREEN}< wr goal creat xxx >${NOCOLOR} to create the goal directory"
             fi
             ;;
+
     esac
 
 }
@@ -76,6 +81,7 @@ copy_sth()
 {
     # the var
     file_dir=/opt/myscript/wr-script/register-clipboard
+    file_dir_source=$HOME/mygithub/shell_script/wr-script/register-clipboard
     # cygwin -> /dev/clipboard; others -> /opt/myscript/wr-script/middle_station.clipboard
     if [ "$(uname -o)" == "Cygwin" ];then
         middle_station=/dev/clipboard
@@ -100,10 +106,16 @@ copy_sth()
 
                 *)
                 file_path=$file_dir/$2 # this is the file name
+                file_path_source=$file_dir_source/$2 # this is the souce file name
                 if [ -f $file_path ]; then
                     # if the $3 exist, the register -> to the middle station
                     if [ -z "$3" ]; then
                         pwd | tr -d "\n" > $file_path # exist
+                        # if exists the source directory, means that you have not deleted the source
+                        if [ -f $file_path_source ]; then
+                            pwd | tr -d "\n" > $file_path_source # exist
+                        fi
+
                     elif [ "$3" == "-" ];then
                         # a...z -> middle_station, for example: a -> /dev/clipboard
                         cat $file_path > $middle_station
@@ -122,6 +134,7 @@ copy_sth()
                     echo "\$2 must be the <a-z>, your input $2 is wrong!"
                 fi
                 ;;
+
         esac
     fi
 }
@@ -144,9 +157,11 @@ past_sth()
     else
         case "$2" in
             "go")
-                cd $(cat $middle_station)
-                echo "->$(pwd)"
+                dst_go=$(cat $middle_station)
+                cd $dst_go
+                echo "->$dst_go"
                 ;;
+
             "list")
                 # loop and then show all the file and the file's content
                 for i in $file_dir/*
@@ -160,6 +175,7 @@ past_sth()
                     fi
                 done
                 ;;
+
             "help")
                 clear
                 echo -e "${GREEN}------ wr -v help information ------${NOCOLOR}"
@@ -187,12 +203,13 @@ past_sth()
                         echo "${file_path##*/}: $(cat $file_path)"
                     elif [ "$3" == "go" ];then
                         cd $(cat $file_path)
-                        echo "->$file_path"
+                        echo "->$(pwd)"
                     fi
                 else
                     echo "\$2 must be the <a-z>, your inpout $2 is wrong!"
                 fi
                 ;;
+
         esac
     fi
 }
@@ -246,9 +263,11 @@ case "$1" in
     "love")
         . /opt/myscript/wr-script/my_sq/my_sp.sh
         ;;
+
     "plan")
         vim ${today_path}/plan.txt
         ;;
+
     "learn")
         if [ "$2" == "-z" ]; then
             vim ${today_path}/learn_a.txt
@@ -256,6 +275,7 @@ case "$1" in
             vim ${today_path}/learn.txt
         fi
         ;;
+
     "question")
         if [ "$2" == "-z" ]; then
             vim ${today_path}/question_a.txt
@@ -263,17 +283,21 @@ case "$1" in
             vim ${today_path}/question.txt
         fi
         ;;
+
     "temp")
         vim ${today_path}/temp.txt
         ;;
+
     "review")
         if [ "$2" == "-z" ]; then
             vim ${today_path}/review_a.txt
         fi
         ;;
+
     "pointer-check")
         echo -e "Point to -> $(cat /opt/myscript/wr-script/date-pointer.txt)"
         ;;
+
     "pointer")
         dir_name=$2-$3/$3-$4
         pointer_path=~/mygithub/everyday_record/${dir_name}
@@ -285,6 +309,7 @@ case "$1" in
             echo -e "->${RED}ERROR${NOCOLOR}: ${dir_name} not exist! Fail!"
         fi
         ;;
+
     "go-e")
         # go to the everyday_record path
         #e_dest=~/mygithub/everyday_record/compress/
@@ -292,62 +317,76 @@ case "$1" in
         cd $e_dest
         echo "->: $e_dest"
         ;;
+
     "go-wr")
         # go to the everyday_record path
         wr_dest=~/mygithub/shell_script/wr-script/
         cd $wr_dest
         echo "->: $wr_dest"
         ;;
+
     "go-install")
         # go to the /opt/myscript/wr-script/
         install_dest=/opt/myscript/wr-script/
         cd $install_dest
         echo "->: $install_dest"
         ;;
+
     "go-goal")
         # go to the /mygithub/goal/
         goal_dst=~/mygithub/goal/
         cd ${goal_dst}
         echo "->: ${goal_dst}"
         ;;
+
     "merge")
         cat ${today_path}/question.txt >> ~/mygithub/everyday_record/compress/question_a.txt
         cat ${today_path}/learn.txt >> ~/mygithub/everyday_record/compress/learn_a.txt
         echo "Good job! Has been merging xxx.txt to xxx_a.txt! Successfully!"
         ;;
+
     "all")
         vim ~/mygithub/everyday_record/compress/
         ;;
+
     "rest")
         . /opt/myscript/wr-script/my_sq/rest.sh
         ;;
+
     "moyu")
         . /opt/myscript/wr-script/my_sq/moyu.sh
         ;;
+
     "xiaban")
         wr merge
         cd ~/mygithub/everyday_record/
         . ~/mygithub/everyday_record/xiaban.sh
         ;;
+
     "todo")
         vim ${today_path}/todolist.txt
         ;;
+
     "todo-cfg")
         cd /opt/myscript/wr-script/todolist/
         vim .
         ;;
+
     "todo-exe")
         cd /opt/myscript/wr-script/todolist/
         ./r_c_w.exe && echo ">>>>>> Execute the program successfully! <<<<<<"
         cd -
         wr todo
         ;;
+
     "wr")
         vim ~/mygithub/shell_script/wr-script/write.sh
         ;;
+
     "goal")
         func_goal $1 $2 $3
         ;;
+
     "type")
         if [ -z $2 ] || [ "$2" == "-p" ]; then
             #open the type.pratice, the -p option is for the previous path depending on the date of the $(wr pointer-check)
@@ -373,6 +412,7 @@ case "$1" in
              echo -e "Error: no the command: \" wr type $2 \""
         fi
         ;;
+
     "pretend")
         # execute the program
         /opt/myscript/wr-script/c++_interesting_program/pretend_to_do_something.exe $2 $3 $4
@@ -388,12 +428,14 @@ case "$1" in
         # go to the important place that you want
         vim $HOME/mygithub/goal/paper/determine_title_report.ddl
         ;;
+
     "-c")
 
         # pwd | tr -d "\n" > /dev/clipboard
         # call  the copy_sth()
         copy_sth $1 $2 $3
         ;;
+
     "-v")
         # >>>>>>>>>>>>>  obsolete <<<<<<<<<<<<<<<<<<<<<<
         ## if the $3 exist and equal to the "go", then jump to the path
@@ -408,6 +450,7 @@ case "$1" in
         # call the past_sth() 
         past_sth $1 $2 $3
         ;;
+
     "preview_md_exe")
         # >>>>>>> the window's when-change.exe <<<<<<<<
         # the variables and the arguments
@@ -468,6 +511,45 @@ case "$1" in
         fi
         ;;
 
+    "weather")
+        duration=$2
+        last_counter=$3
+        if [ -z "$duration" ];then
+            duration=10
+        fi
+        if [ -z "$last_counter" ];then
+            last_counter=10
+        fi
+        for ((i=1; i<$last_counter; i++))
+        do
+            clear
+            # show the weather and the date and the time
+            exe_path=/opt/myscript/wr-script/weather/show_weather.sh
+            bash ${exe_path}
+            sleep $duration
+        done
+        ;;
+
+    "rain")
+        select_mode=$2
+        case "$select_mode" in
+            "1")
+                unimatrix -n -s 96 -l "q"
+                ;;
+            "2")
+                unimatrix -n -c blue -l "q"
+                ;;
+            "3")
+                unimatrix -c yellow -l "e"
+                ;;
+            *)
+                #unimatrix -n -s 96 -l "o"
+                unimatrix -n -c blue -s 66 -l "o"
+                #unimatrix -n -c blue -s 10 -u "123689abcedfghijklmnopqrstuvwxyz!@#$%^&*"
+                ;;
+        esac
+        ;;
+
     "help")
         clear
         echo -e "${YELLOW}-------------------------------> OPTION <---------------------------------------${NOCOLOR}"
@@ -509,6 +591,8 @@ case "$1" in
         echo 
         echo -e "${GREEN}: question->${NOCOLOR}: go the question.txt"
         echo 
+        echo -e "${GREEN}: rain mode->${NOCOLOR}: emulate the rain in the screen"
+        echo 
         echo -e "${GREEN}: reinstall->${NOCOLOR}: reinstall the file, to cover the original file"
         echo 
         echo -e "${GREEN}: rest->${NOCOLOR}: show the rest as the screen"
@@ -527,6 +611,8 @@ case "$1" in
         echo 
         echo -e "${GREEN}: xiaban->${NOCOLOR}: Upload the file to the github reposity, and then off duty"
         echo 
+        echo -e "${GREEN}: weather->${NOCOLOR}: show the weather and the other information"
+        echo 
         echo -e "${GREEN}: wr->${NOCOLOR}:modify the write.sh"
         echo 
         echo -e "${GREEN}: -c->${NOCOLOR}:copy something! Type <wr -c help> for more information!"
@@ -535,8 +621,10 @@ case "$1" in
         echo 
         echo -e "${YELLOW}--------------------------------------------------------------------------------${NOCOLOR}"
         ;;
+
     *)
         echo -e "-> ${RED}ERROR:${NOCOLOR} Wrong input! You can just input the following option:\n-> ${GREEN}OPTION:${NOCOLOR} love, plan, learn, question, temp, help, pointer %Y-%m-%d, pointer-check, go-e, go-wr, review, all, rest, todo, todo-cfg, todo-exe, type x... and so on "
         echo -e "${GREEN}You can use the wr help for more information!${NOCOLOR}"
         ;;
+
 esac
