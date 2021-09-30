@@ -292,7 +292,7 @@ case "$1" in
         echo
         echo -e "${GREEN}: love->:${NOCOLOR} edit the tmux-manager.sh"
         echo
-        echo -e "${GREEN}: ls->:${NOCOLOR} list all the existent sessions"
+        echo -e "${GREEN}: ls [all]->:${NOCOLOR} list all the existent sessions, is with the all argument, show all"
         echo
         echo -e "${GREEN}: help->:${NOCOLOR} show the help information"
         echo
