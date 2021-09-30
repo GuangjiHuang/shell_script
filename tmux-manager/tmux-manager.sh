@@ -78,6 +78,7 @@ tmux_vim()
     resize-pane -t 1 -x100% \; \
     send-keys -t 0 'wr rain' C-m\; \
     send-keys -t 2 'wr rain' C-m\; \
+    send-keys -t 1 'v- v go;clear' C-m\; \
     select-pane -t 1\;
 }
 
@@ -217,14 +218,29 @@ case "$1" in
 
     "ls")
         # list all the existent sessions
-        tmux ls > $install_dir/temp.txt 2>&1
-        if [ "$?" == 0 ];then
+        has_or_not=0
+        mark_task_has_or_not="-"
+        tmux ls > $install_dir/temp.txt 2>&1 && has_or_not=1
+        if [ -z "$2" ] && [ "$has_or_not" == 1 ]; then
             while read -r line
             do
                 echo ${line%%:*}
             done < $install_dir/temp.txt
-        else
+        elif [ -z "$2" ] && [ "$has_or_not" == 0 ]; then
             echo "No tmux sessions!"
+        elif [ "$2" == "all" ];then
+            # check the task has or not
+            for task in ${sessions_list[@]}
+            do
+                grep -qw $task $install_dir/temp.txt
+                if [ "$?" == 0 ]; then
+                    echo -e " (+) ${GREEN}$task${NOCOLOR}"
+                else
+                    echo -e " (-) $task"
+                fi
+            done
+        else
+            echo "I don't know what are you doing?"
         fi
         ;;
 
