@@ -338,6 +338,11 @@ case "$1" in
         cd ${goal_dst}
         echo "->: ${goal_dst}"
         ;;
+    "go-linux_basic_cfg")
+        # go to the ~/mygithub/shell_script/linux_basic_cfg/
+        linux_basic_cfg_path=~/mygithub/linux_basic_cfg/files.cfg
+        cd $linux_basic_cfg_path
+        ;;
 
     "merge")
         cat ${today_path}/question.txt >> ~/mygithub/everyday_record/compress/question_a.txt
@@ -566,6 +571,8 @@ case "$1" in
         echo -e "${GREEN}: go-wr->${NOCOLOR}: cd to the write-scritp.sh"
         echo 
         echo -e "${GREEN}: go-goal->${NOCOLOR}: cd to the goal directroy"
+        echo 
+        echo -e "${GREEN}: go-linux_basic_cfg->${NOCOLOR}: cd to the linux_basic_cfg"
         echo 
         echo -e "${GREEN}: goal xxx.txt${NOCOLOR}: about the goal, you can use the command < wr goal help > for more information"
         echo 
