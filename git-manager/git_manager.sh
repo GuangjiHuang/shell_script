@@ -50,7 +50,8 @@ case $1 in
             echo ${reposities[@]} | grep -wq "$reposity" && flag="is"
             if [ $flag == "is" ];then
                 echo "------------- git the ${reposity} ---------------"
-                git clone git://github.com/GuangjiHuang/${reposity}.git >/dev/null
+                #git clone git://github.com/GuangjiHuang/${reposity}.git >/dev/null
+                git clone git@github.com:GuangjiHuang/${reposity}.git >/dev/null
                 if [ $? -eq 0 ];then
                     echo "------------- Successfully ---------------"
                 else

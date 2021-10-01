@@ -121,6 +121,7 @@ tmux_action="create"
 source_dir=~/mygithub/shell_script/tmux-manager
 source_name="${source_dir}/tmux-manager.sh"
 install_dir=/opt/myscript/tmux-manager
+mode_control_path=/opt/myscript/tmux-manager/mode_control.sh
 # just check the session_list's argument
 echo "${sessions_list[@]}" | grep -wq "$1" >/dev/null
 if [ "$?" == 0 ];then
@@ -137,6 +138,8 @@ fi
 
 case "$1" in
     "c++")
+        # set the environment variable
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -146,6 +149,8 @@ case "$1" in
 
         ;;
     "python")
+        # set the environment variable
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -155,6 +160,8 @@ case "$1" in
         ;;
 
     "vim")
+        # set the environment variable
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -164,6 +171,8 @@ case "$1" in
         ;;
 
     "shell")
+        # set the environment variable
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -173,6 +182,8 @@ case "$1" in
         ;;
 
     "markdown")
+        # set the environment variable
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -182,6 +193,8 @@ case "$1" in
         ;;
 
     "project")
+        # set the environment variable
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -191,6 +204,8 @@ case "$1" in
         ;;
 
     "paper")
+        # set the environment variable
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -200,6 +215,8 @@ case "$1" in
         ;;
 
     "entertainment")
+        # set the environment variable
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -265,6 +282,23 @@ case "$1" in
         ./install.sh && echo "----------------- reinstall successfully --------------------"
         ;;
 
+    "mode")
+        # show the mode
+        echo "mode ->: $mode"
+        ;;
+
+    "mode-select")
+        # select mode
+        # check the $2, if the valid mode
+        echo ${sessions_list[@]} | grep -qw "$2"
+        if [ "$?" == 0 ]; then
+            echo "mode ->: $2"
+            export mode=$2
+        else
+            echo "Note: Invalid mode <$2>"
+        fi
+        ;;
+
     "help")
         clear
         echo -e "${YELLOW}-------------------------------> OPTION <---------------------------------------${NOCOLOR}"
@@ -293,6 +327,8 @@ case "$1" in
         echo -e "${GREEN}: love->:${NOCOLOR} edit the tmux-manager.sh"
         echo
         echo -e "${GREEN}: ls [all]->:${NOCOLOR} list all the existent sessions, is with the all argument, show all"
+        echo
+        echo -e "${GREEN}: mode->:${NOCOLOR} show the mode, for example the c++, vim..."
         echo
         echo -e "${GREEN}: help->:${NOCOLOR} show the help information"
         echo
