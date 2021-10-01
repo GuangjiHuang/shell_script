@@ -6,7 +6,8 @@ reposities=("linux_basic_cfg"\
             "shell_script"\
             "program_language_test"\
             "goal"\
-            "everyday_record") # note: there may has the private reposity
+            "everyday_record"\
+            "_station_") # note: there may has the private reposity
 
 # the path
 source_dir="${HOME}/mygithub/shell_script/git-manager/"
