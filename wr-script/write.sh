@@ -105,9 +105,13 @@ copy_sth()
                 ;;
 
                 *)
-                file_path=$file_dir/$2 # this is the file name
+                if [ "$2" == "-" ]; then
+                    file_path=$middle_station
+                else
+                    file_path=$file_dir/$2 # this is the file name
+                fi
                 file_path_source=$file_dir_source/$2 # this is the souce file name
-                if [ -f $file_path ]; then
+                if [ -f $file_path ] || [ "$2" == "-" ]; then
                     # if the $3 exist, the register -> to the middle station
                     if [ -z "$3" ]; then
                         pwd | tr -d "\n" > $file_path # exist
