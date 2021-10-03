@@ -7,7 +7,8 @@ reposities=("linux_basic_cfg"\
             "program_language_test"\
             "goal"\
             "everyday_record"\
-            "_station_") # note: there may has the private reposity
+            "_station_"
+            "tmux_treasure") # note: there may has the private reposity
 
 # the path
 source_dir="${HOME}/mygithub/shell_script/git-manager/"
