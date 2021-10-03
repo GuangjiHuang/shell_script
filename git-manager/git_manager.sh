@@ -7,7 +7,7 @@ reposities=("linux_basic_cfg"\
             "program_language_test"\
             "goal"\
             "everyday_record"\
-            "_station_"
+            "_station_" \
             "tmux_treasure") # note: there may has the private reposity
 
 # the path
