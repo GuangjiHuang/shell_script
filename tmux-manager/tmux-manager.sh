@@ -44,6 +44,7 @@ mode_control_path=/opt/myscript/tmux-manager/mode_control.sh
 goal_list_dir=~/mygithub/tmux_treasure/${mode}/goal-list
 goal_all_dir=~/mygithub/tmux_treasure/${mode}/goal-all
 counter_path=$goal_list_dir/../counter
+goal_index_dir=~/mygithub/tmux_treasure/${mode}/goal-index
 # get the full name of the action
 #}}}
 
@@ -78,6 +79,7 @@ tmux_template_3panes()
     send-keys -t 0 'wr rain' C-m\; \
     send-keys -t 2 'wr rain' C-m\; \
     send-keys -t 1 'v- v go;clear' C-m\; \
+    send-keys -t 1 'love you' C-m\; \
     select-pane -t 1\;
 
 }
@@ -116,6 +118,7 @@ tmux_template_2panes()
     send-keys -t 1 "v- c go;clear" C-m\; \
     send-keys -t 1 'wr rain' C-m\; \
     send-keys -t 0 "v- c go;clear" C-m\; \
+    send-keys -t 0 "love you" C-m\; \
     select-pane -t 0\;
 
 }
@@ -182,7 +185,30 @@ tmux_chore()
     echo "this is the chore's tmux"
 }
 #}}}
-
+# >>>>>>>>>>>>>>>> the ulity funciton <<<<<<<<<<<<<<<<<<<<<
+#{{{
+action_status_show()
+{
+    # the parameters:
+    # $1: mode
+    # $2: goal_index
+    # $3: action_full_name
+    # $4: concrete_action_full_name
+    echo -e "--------------> ${RED}$1${NOCOLOR} | ${GREEN}goal $2${NOCOLOR} | ${CYAN}$3${NOCOLOR}-> ${CYAN}$4${NOCOLOR}<--------------"
+}
+create_mode_dir()
+{
+    # the paramters:
+    # $1: mode
+    # the parameters: no 
+    mode_path=~/mygithub/tmux_treasure/$1
+    if [ ! -d ${mode_path} ];then
+        mkdir -p $mode_path
+        # copy the template to it
+        cp -r $source_dir/mode/* $mode_path
+    fi
+}
+#}}}
 # >>>>>>>>>>>>>>>> the action function <<<<<<<<<<<<<<<<<<<<<
 #{{{
 action()
@@ -197,7 +223,7 @@ action()
     action_array=("goal" "action" "question" "task" "conclusion" "progess")
     # the path of the goal or the goal_list
     goal_path=$goal_all_dir/$3.goal # this is may be exsitent, have to check!
-    goal_list_path=$goal_list_dir/goal_$3.txt # have to be specified!
+    goal_list_path=$goal_list_dir/goal_$2.txt # have to be specified!
     counter_path=$goal_list_dir/../counter
     # get the full name of the action
     for i in ${action_array[@]}
@@ -215,25 +241,86 @@ action()
     fi
     # output the goals information and the action
     # --------------> Vim | Goal 12 | question; <--------------
-    echo -e "--------------> ${RED}$mode${NOCOLOR} | ${GREEN}goal $goal_index${NOCOLOR} | ${CYAN}$action_full_name${NOCOLOR} <--------------"
+    #echo -e "--------------> ${RED}$mode${NOCOLOR} | ${GREEN}goal $goal_index${NOCOLOR} | ${CYAN}$action_full_name${NOCOLOR} <--------------"
     case "$1" in
         "gs") # goal show
         #{{{
             #
             # show all the goals, finished goals, not finished goals
             case "$2" in
+                #
                 "a" | "y" | "n" | "d" | "w" | "m")
-                # show all the goals
-                vim $goal_list_path
-                #cat $goal_list_path
+                    # action_status_show
+                    action_status_show $mode $goal_index $action_full_name "show goals(cat)"
+                    # show all the goals
+                    #vim $goal_list_path
+                    cat $goal_list_path
                     ;;
                 "a-" | "y-" | "n-" | "d-" | "w-" | "m-")
-                # show all the goals
-                goal_list_path=$goal_list_dir/goal_${3%%-*}.txt # delete the -
-                cat $goal_list_path
-                #vim $goal_list_path
+                    # action_status_show
+                    action_status_show $mode $goal_index $action_full_name "show goals(vim)"
+                    # show all the goals
+                    goal_list_path=$goal_list_dir/goal_${2:0:1}.txt # delete the -
+                    #cat $goal_list_path
+                    vim $goal_list_path
+                    ;;
+                "d+" | "w+" | "m+")
+                    # action_status_show
+                    action_status_show $mode $goal_index $action_full_name "set index(d/w/m)"
+                    # the var: goal_index_path
+                    goal_index_path=$goal_index_dir/goal_${2:0:1}.index
+                    goal_list_path=$goal_list_dir/goal_${2:0:1}.txt
+                    # add the index for it
+                    # generate the time
+                    case "$2" in # there is no wrong with the $2!
+                        "d+")
+                            time_part=$(date "+%Y/%m/%d")
+                            ;;
+                        "w+")
+                            if [ "$(date "+%w")" == "0" ]; then
+                                # renew the time
+                                time_part=$(date "+%Y/%m/%d")-$(date -d "7 days" +%Y/%m/%d)
+                            else
+                                off_day_left=$(date "+%w") # get the weekday based on the Sunday=0
+                                let off_day_right=6-off_day_left
+                                time_part=$(date -d "${off_day_left} days ago" +%Y/%m/%d)-$(date -d "${off_day_right} days" +%Y/%m/%d)
+                            fi
+                            ;;
+                        "m+")
+                            time_part=$(date "+%Y/%m")
+                            ;;
+                    esac
+                    # append the content to the file
+                    read -p "->Add goals index: " index_part
+                    #
+                    # make sure append or the new, so you can check the time
+                    origin_line=$(grep "$time_part" $goal_index_path)
+                    if [ "$?" == 0 ];then
+                        # append, so to substitude
+                        all_part="$origin_line $index_part"
+                        sed -i '$d' $goal_index_path
+                        echo $all_part >> $goal_index_path
+                    else
+                        # new add, so >>
+                        all_part="$time_part $index_part"
+                        echo $all_part >> $goal_index_path
+                    fi
+                    # show the content you add
+                    echo "->:"
+                    echo "$all_part"
+                    # renew the goal_list_path
+                    array_line=($all_part)
+                    for index in ${array_line[@]}
+                    do
+                        if [ ${#index} -le 3 ]; then
+                            # read the gaol through the index
+                            sed -n "/^${index}\./,/^$/p" $goal_list_dir/goal_a.txt >> $goal_list_path
+                        fi
+                    done
                     ;;
                 "help")
+                    # action_status_show
+                    action_status_show $mode $goal_index $action_full_name "show goals help"
                     echo " --------------------------------- help option ---------------------------------" 
                     echo "a/y/n/d/w/m ->: all/yes/not/day/week/month's goals, vim xxx"
                     echo
@@ -245,6 +332,7 @@ action()
                     echo
                     echo " -------------------------------------------------------------------------------" 
                     ;;
+
                 *)
                 # check if the goal index, right-> show the goal, not-> make the error
                     if [ -f $goal_path ]; then
@@ -259,6 +347,9 @@ action()
         #}}}       
         "gc") # goal create 
         #{{{
+            # action_status_show
+            action_status_show $mode $goal_index $action_full_name "create"
+
             # create the new goal
             ## read the counter first
             counter_line_1=$(head -1 $counter_path)
@@ -274,18 +365,22 @@ action()
             if [ ! "$goal_number_new_check" == "$goal_number_new" ];then
                 echo "The goals number may be wrong! For counter: $goal_number_new_check, but the index: $goal_number_new"
             fi
-            sed -i "/^1/s/${goal_number}/${goal_number_new_check}/g" $counter_path
+            sed -i "/^1/s/:${goal_number}/:${goal_number_new_check}/g" $counter_path
             ;;
         #}}}
         # show the action/quesion/task/conclusion/progress
         "a" | "q" | "t" | "c" | "p") # action
-        #{{{
+        #{{{   
+            # action_status_show
+            action_status_show $mode $goal_index $action_full_name "show"
             sed -n "/^>>$1/,/^<<$1/p" $goal_path # use the ">>$1 and the <<$1" as the anchor
                 ;;
         #}}}
         # add the action/quesion/task/conclusion/progress
         "aa" | "qa" | "ta" | "ca" | "pa") # action
         #{{{
+            # action_status_show
+            action_status_show $mode $goal_index $action_full_name "add"
             # get the number of them
             number_line=$(sed -n "/^-> .*${action_full_name}.*:.*[0-9].*$/p" $goal_path)
             x_number=${number_line##*:}
@@ -307,6 +402,9 @@ action()
             ;;
         #}}}
         "aa+") # add the time to the action
+        #{{{
+            # action_status_show
+            action_status_show $mode $goal_index $action_full_name "end action"
             echo "---> Done!"
             time_end=$(date "+%X")
             sed -i "s/xxx/${time_end}/g" $goal_path
@@ -319,9 +417,12 @@ action()
             let end_before_line_number=end_line_number-1
             sed -n "/([$number_line]).*:.*:.*/,${end_before_line_number}p" $goal_path
             ;;
+        #}}}
 
         "help")
         #{{{
+            # action_status_show
+            action_status_show $mode $goal_index $action_full_name "help"
             echo " --------------------------------- help option ---------------------------------" 
             echo "gs xxx ->: show the goals"
             echo
@@ -417,6 +518,8 @@ case "$1" in
         else
             # create the tmux layout
             tmux_c++ 
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
         fi
         ;;
     #}}}
@@ -430,6 +533,8 @@ case "$1" in
         else
             # create the tmux layout
             tmux_python
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
         fi
         ;;
     #}}}
@@ -443,6 +548,8 @@ case "$1" in
         else
             # create the tmux layout
             tmux_vim
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
         fi
         ;;
     #}}}
@@ -456,6 +563,8 @@ case "$1" in
         else
             # create the tmux layout
             tmux_shell
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
         fi
         ;;
     #}}}
@@ -469,6 +578,8 @@ case "$1" in
         else
             # create the tmux layout
             tmux_markdown
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
         fi
         ;;
     #}}}
@@ -482,6 +593,8 @@ case "$1" in
         else
          # create the tmux layout
             tmux_project
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
         fi
         ;;
     #}}}
@@ -495,6 +608,8 @@ case "$1" in
         else
             # create the tmux layout
             tmux_paper
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
         fi
         ;;
     #}}}
@@ -508,6 +623,8 @@ case "$1" in
         else
             # create the tmux layout
             tmux_entertainment
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
         fi
         ;;
     #}}}
@@ -521,6 +638,8 @@ case "$1" in
         else
             # create the tmux layout
             tmux_English
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
         fi
         ;;
     #}}}
@@ -534,6 +653,8 @@ case "$1" in
         else
             # create the tmux layout
             tmux_type
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
         fi
         ;;
     #}}}
@@ -547,6 +668,8 @@ case "$1" in
         else
             # create the tmux layout
             tmux_chore
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
         fi
         ;;
     #}}}
@@ -639,10 +762,27 @@ case "$1" in
 
     "you")
     #{{{
+        clear
         # show the important message, the mode, your day goal, your progress
+        # read the index of the today
+        today_date=$(date "+%Y/%m/%d")
+        today_goal_index=$(grep "$today_date" $goal_index_dir/goal_d.index 2>/dev/null)
+        if [ -z "$today_goal_index" ];then
+            today_goal_promote="Not set"
+        else
+            today_goal_promote=${today_goal_index#* }
+        fi
         # the message stored in the file
-
+        echo -e "|-------------------------------------------------------------------------------"
+        echo -e "|                      ${PURPLE} Good luck, guy!${NOCOLOR}"
         # use the sed to read the message and then show the message
+        echo -e "|-------------------------------------------------------------------------------"
+        echo -e "|  ${YELLOW}Mode${NOCOLOR}: ${RED}$mode${NOCOLOR}"
+        echo -e "|"  
+        echo -e "|  ${YELLOW}Today Goal${NOCOLOR}: $today_goal_promote"
+        echo -e "|" 
+        echo -e "|  ${YELLOW}Tips${NOCOLOR}: "
+        echo -e "|-------------------------------------------------------------------------------"
         ;;
     #}}}
 
@@ -706,6 +846,10 @@ case "$1" in
             fi
         done
         let num_finished=num_all-num_not_finished
+        # renew the counter
+        sed -i "/^2/s/:.*/:${num_finished}/g" $counter_path
+        sed -i "/^3/s/:.*/:${num_not_finished}/g" $counter_path
+        #
         echo -e "----------------- ${RED}$mode${NOCOLOR} | ${YELLOW}Goal information${NOCOLOR} -----------------"
         echo -e "(*) ${CYAN}ALL${NOCOLOR}: $num_all "
         echo

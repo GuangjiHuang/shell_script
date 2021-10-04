@@ -1,0 +1,13 @@
+1. Goal: this is the goal test for the goal 1
+
+10. Goal: figure out how to show the space, tab, newline and others blank character in the vim!
+
+11. Goal: figure out the representation of the ex command's range of the lines.
+2. Goal: Goal figure out the read command, see the document :help read. And use that to insert the content.
+3. Goal: figure out the difference between the "let" and the "set". Make clear the option and the variable. How to get the value of the option and the variable!
+4. Goal: figure out the keyboard value of the vim! How to represent a key? Ctrl, alt, ...
+5. Goal: How to insert the another line and don't leave the cursor's position.
+6. Goal: change the two words. this is.
+7. Goal: How to copy, delete the select pattern in the vim.
+8. Goal: figure out how the vim insert the another file to this file.
+9. Goal: when make the table, how to write the right border quickly.
