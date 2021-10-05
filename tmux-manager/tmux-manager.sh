@@ -194,7 +194,17 @@ action_status_show()
     # $2: goal_index
     # $3: action_full_name
     # $4: concrete_action_full_name
-    echo -e "--------------> ${RED}$1${NOCOLOR} | ${GREEN}goal $2${NOCOLOR} | ${CYAN}$3${NOCOLOR}-> ${CYAN}$4${NOCOLOR}<--------------"
+    # get the goal_index to check
+    show_arg_2=$2
+    show_arg_3=$3
+    show_arg_4=$4
+    goal_index=$(cat $goal_index_dir/goal_current.index)
+    if [ -z "$2" ]; then
+        show_arg_2=x
+        show_arg_3=$2
+        show_arg_4=$3
+    fi
+    echo -e "--------------> ${RED}$1${NOCOLOR} | ${GREEN}goal $show_arg_2${NOCOLOR} | ${CYAN}$show_arg_3${NOCOLOR}-> ${CYAN}$show_arg_4${NOCOLOR}<--------------"
 }
 create_mode_dir()
 {
@@ -218,7 +228,7 @@ action()
     goal_list_dir=~/mygithub/tmux_treasure/${mode}/goal-list
     goal_all_dir=~/mygithub/tmux_treasure/${mode}/goal-all
     # the goal index
-    goal_index=1
+    goal_index=$(cat $goal_index_dir/goal_current.index)
     # the actions array
     action_array=("goal" "action" "question" "task" "conclusion" "progess")
     # the path of the goal or the goal_list
@@ -264,9 +274,15 @@ action()
                     #cat $goal_list_path
                     vim $goal_list_path
                     ;;
-                "d+" | "w+" | "m+")
+
+                "c+")
+                    # set the current index
                     # action_status_show
-                    action_status_show $mode $goal_index $action_full_name "set index(d/w/m)"
+                    action_status_show $mode $goal_index $action_full_name "set current index"
+                    read -p "-> Set current goal index: " current_index
+                    echo $current_index > $goal_index_dir/goal_current.index
+                    ;;
+                "d+" | "w+" | "m+")
                     # the var: goal_index_path
                     goal_index_path=$goal_index_dir/goal_${2:0:1}.index
                     goal_list_path=$goal_list_dir/goal_${2:0:1}.txt
@@ -274,9 +290,13 @@ action()
                     # generate the time
                     case "$2" in # there is no wrong with the $2!
                         "d+")
+                            # action_status_show
+                            action_status_show $mode $goal_index $action_full_name "set today index"
                             time_part=$(date "+%Y/%m/%d")
                             ;;
                         "w+")
+                            # action_status_show
+                            action_status_show $mode $goal_index $action_full_name "set week index"
                             if [ "$(date "+%w")" == "0" ]; then
                                 # renew the time
                                 time_part=$(date "+%Y/%m/%d")-$(date -d "7 days" +%Y/%m/%d)
@@ -287,6 +307,8 @@ action()
                             fi
                             ;;
                         "m+")
+                            # action_status_show
+                            action_status_show $mode $goal_index $action_full_name "set month index"
                             time_part=$(date "+%Y/%m")
                             ;;
                     esac
@@ -398,6 +420,7 @@ action()
             # add the number oder to the append_content
             append_content="($x_number_new) $append_content"
             sed -i "/^<<${1:0:1}/i${append_content}" $goal_path # insert above the last line fo the action
+            sed -i "/^<<${1:0:1}/{x;p;x}" $goal_path # insert the newline 
             sed -n "/^>>${1:0:1}/,/^<<${1:0:1}/p" $goal_path # use the ">>$1 and the <<$1" as the anchor
             ;;
         #}}}
@@ -413,8 +436,7 @@ action()
             x_number=${number_line##*:}
             #sed -n "/^($x_number)/,/^<<a/p" $goal_path
             end_line=$(sed -n '/^<<a/{=;p}' $goal_path)
-            let end_line_number=${end_before_line%%\<*}
-            let end_before_line_number=end_line_number-1
+            let end_before_line_number=end_line-1
             sed -n "/([$number_line]).*:.*:.*/,${end_before_line_number}p" $goal_path
             ;;
         #}}}
@@ -439,7 +461,9 @@ action()
         #}}}
         *)
         #{{{
-            echo "Error: no command < $2 >, please use the <help> to get more information!"
+            # action_status_show
+            action_status_show $mode $goal_index $action_full_name "Hello, world"
+            #echo "Error: no command < $2 >, please use the <help> to get more information!"
             ;;
         #}}}
     esac
@@ -772,6 +796,8 @@ case "$1" in
         else
             today_goal_promote=${today_goal_index#* }
         fi
+        # get the current goal promote
+        current_goal_promote=$(cat $goal_index_dir/goal_current.index)
         # the message stored in the file
         echo -e "|-------------------------------------------------------------------------------"
         echo -e "|                      ${PURPLE} Good luck, guy!${NOCOLOR}"
@@ -781,8 +807,19 @@ case "$1" in
         echo -e "|"  
         echo -e "|  ${YELLOW}Today Goal${NOCOLOR}: $today_goal_promote"
         echo -e "|" 
+        echo -e "|  ${YELLOW}Current Goal${NOCOLOR}: $current_goal_promote"
+        echo -e "|" 
         echo -e "|  ${YELLOW}Tips${NOCOLOR}: "
         echo -e "|-------------------------------------------------------------------------------"
+        # show the goal through the goal index
+        echo "the today's goal is the $today_goal_promote"
+        goal_index_list=($today_goal_promote)
+        for index in ${goal_index_list[@]}
+        do
+            # read the goal from the goal_list_dir/goal_a.txt
+            echo $index
+
+        done
         ;;
     #}}}
 
