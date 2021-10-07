@@ -33,7 +33,8 @@ sessions_list=("c++" \
     "entertainment" \
     "chore" \
     "English" \
-    "type")
+    "type" \
+    "tmux")
 tmux_action="create"
 source_dir=~/mygithub/shell_script/tmux-manager
 source_name="${source_dir}/tmux-manager.sh"
@@ -71,16 +72,15 @@ tmux_template_3panes()
     #|-----------------------------------------
     
     # the parameters
-    # $1 ->: the session's name
-    tmux new-session -x 220  -y 55 -s "$1" \; \
+    # $1 ->: the session's name <note: the follow lines cannot be split with the comment line>
+    tmux new-session -s "$1" \; \
     split-window -h \; \
     split-window -h \; \
-    resize-pane -t 1 -x100% \; \
+    resize-pane -t 1 -x95% \; \
     send-keys -t 0 'wr rain' C-m\; \
     send-keys -t 2 'wr rain' C-m\; \
-    send-keys -t 1 'v- v go;clear' C-m\; \
     send-keys -t 1 'love you' C-m\; \
-    select-pane -t 1\;
+    select-pane -t 1
 
 }
 
@@ -108,18 +108,17 @@ tmux_template_2panes()
     # $1: sessioin name
     # $2: left part big or the right part big
     if [ "$2" == "left_big" ];then
-        part_percent=20%
+        part_percent=40%
     else
-        part_percent=80%
+        part_percent=60%
     fi
-    tmux new-session -x 220  -y 55 -s "$1" \; \
+    tmux new-session -s "$1" \; \
     split-window -h \; \
     resize-pane -t 0 -x$part_percent \; \
-    send-keys -t 1 "v- c go;clear" C-m\; \
-    send-keys -t 1 'wr rain' C-m\; \
-    send-keys -t 0 "v- c go;clear" C-m\; \
-    send-keys -t 0 "love you" C-m\; \
-    select-pane -t 0\;
+    send-keys -t 1 'love go-goal;clear' C-m\; \
+    send-keys -t 0 'love go-goal;clear' C-m\; \
+    send-keys -t 0 'love you' C-m\; \
+    select-pane -t 0
 
 }
 
@@ -184,6 +183,11 @@ tmux_chore()
     tmux_template_2panes "chore"
     echo "this is the chore's tmux"
 }
+tmux_tmux()
+{
+    tmux_template_2panes "tmux"
+    echo "this is the tmux's tmux"
+}
 #}}}
 # >>>>>>>>>>>>>>>> the ulity funciton <<<<<<<<<<<<<<<<<<<<<
 #{{{
@@ -198,7 +202,7 @@ action_status_show()
     show_arg_2=$2
     show_arg_3=$3
     show_arg_4=$4
-    goal_index=$(cat $goal_index_dir/goal_current.index)
+    goal_index=$(cat $goal_index_dir/goal_current.index 2>/dev/null)
     if [ -z "$2" ]; then
         show_arg_2=x
         show_arg_3=$2
@@ -228,7 +232,7 @@ action()
     goal_list_dir=~/mygithub/tmux_treasure/${mode}/goal-list
     goal_all_dir=~/mygithub/tmux_treasure/${mode}/goal-all
     # the goal index
-    goal_index=$(cat $goal_index_dir/goal_current.index)
+    goal_index=$(cat $goal_index_dir/goal_current.index 2>/dev/null)
     # the actions array
     action_array=("goal" "action" "question" "task" "conclusion" "progess")
     # the path of the goal or the goal_list
@@ -264,7 +268,7 @@ action()
                     action_status_show $mode $goal_index $action_full_name "show goals(cat)"
                     # show all the goals
                     #vim $goal_list_path
-                    cat $goal_list_path
+                    cat $goal_list_path 2>/dev/null
                     ;;
                 "a-" | "y-" | "n-" | "d-" | "w-" | "m-")
                     # action_status_show
@@ -388,6 +392,9 @@ action()
                 echo "The goals number may be wrong! For counter: $goal_number_new_check, but the index: $goal_number_new"
             fi
             sed -i "/^1/s/:${goal_number}/:${goal_number_new_check}/g" $counter_path
+
+            # after ceate the goal, run the < love -> command to renew the goal of all!
+            love -
             ;;
         #}}}
         # show the action/quesion/task/conclusion/progress
@@ -441,6 +448,25 @@ action()
             ;;
         #}}}
 
+        "note") # use the temp, for each goal
+            # goal_note_dir
+            goal_index=$(cat $goal_index_dir/goal_current.index 2>/dev/null)
+            if [ -z "$goal_index" ];then
+                echo "No goal index, please set the goal index first, uset the command < * gs c+>"
+            else
+                goal_note_dir=~/mygithub/tmux_treasure/${mode}/miscellaneous/goal_${goal_index}
+                goal_note_path=$goal_note_dir/note.txt
+                if [ ! -d $goal_note_dir ];then
+                    mkdir $goal_note_dir
+                fi
+                if [ ! -f $goal_note_path ]; then
+                    touch $goal_note_path
+                fi
+            fi
+            cd $goal_note_dir
+            vim $goal_note_path
+            ;;
+        
         "help")
         #{{{
             # action_status_show
@@ -698,6 +724,21 @@ case "$1" in
         ;;
     #}}}
 
+    "tmux")
+    #{{{
+        # set the environment variable
+        echo "export mode=$1" > $mode_control_path
+        if [ "$tmux_action" == "into" ]; then
+            tmux attach -t $1
+        else
+            # create the tmux layout
+            tmux_tmux
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
+        fi
+        ;;
+    #}}}
+
     "kill-all")
     #{{{
         tmux kill-server >/dev/null 2>&1
@@ -797,10 +838,13 @@ case "$1" in
             today_goal_promote=${today_goal_index#* }
         fi
         # get the current goal promote
-        current_goal_promote=$(cat $goal_index_dir/goal_current.index)
+        current_goal_promote=$(cat $goal_index_dir/goal_current.index 2>/dev/null)
+        if [ -z "$current_goal_promote" ];then
+            current_goal_promote="Not set"
+        fi
         # the message stored in the file
         echo -e "|-------------------------------------------------------------------------------"
-        echo -e "|                      ${PURPLE} Good luck, guy!${NOCOLOR}"
+        echo -e "|                        ${PURPLE} Good luck, guy!${NOCOLOR}               ($(date "+%Y/%m/%d %a %X"))"
         # use the sed to read the message and then show the message
         echo -e "|-------------------------------------------------------------------------------"
         echo -e "|  ${YELLOW}Mode${NOCOLOR}: ${RED}$mode${NOCOLOR}"
@@ -812,14 +856,47 @@ case "$1" in
         echo -e "|  ${YELLOW}Tips${NOCOLOR}: "
         echo -e "|-------------------------------------------------------------------------------"
         # show the goal through the goal index
-        echo "the today's goal is the $today_goal_promote"
-        goal_index_list=($today_goal_promote)
-        for index in ${goal_index_list[@]}
-        do
-            # read the goal from the goal_list_dir/goal_a.txt
-            echo $index
-
-        done
+        # the current goal show
+        echo -e "|< ${GREEN}Current Goal${NOCOLOR} >"
+        if [ "$current_goal_promote" == "Not set" ];then
+            echo "| Note: current goal index not set!"
+        else
+            # read the goal's progress first in the goal_all_dir/$index.goal
+            goal_progress_line=$(sed -n "/^->.*progress.*:/p" $goal_all_dir/${current_goal_promote}.goal)
+            goal_progress=${goal_progress_line//[^0-9\/]/}
+            goal_progress=${goal_progress/\//\\/}
+            # index + progress
+            show_goal_prefix="${current_goal_promote}. [${goal_progress}]"
+            sed -n "/^${current_goal_promote}/,/^$/s/^${current_goal_promote}.*Goal.*:/| ${show_goal_prefix} /p" $goal_list_dir/goal_a.txt
+        fi
+        echo "|"
+        # today goal show
+        echo -e "|< ${GREEN}Today Goal${NOCOLOR} >"
+        if [ -z "$today_goal_index" ]; then
+            echo "| Note: today goal index not set!"
+        else
+            goal_index_list=($today_goal_promote)
+            for index in ${goal_index_list[@]}
+            do
+                # read the goal's progress first in the goal_all_dir/$index.goal
+                goal_progress_line=$(sed -n "/^->.*progress.*:/p" $goal_all_dir/${index}.goal)
+                goal_progress=${goal_progress_line//[^0-9\/]/}
+                goal_progress=${goal_progress/\//\\/}
+                # read the goal from the goal_list_dir/goal_a.txt
+                #echo $index
+                sed -n "/^${index}/,/^$/s/^${index}.*Goal.*:/| ${index}\. [${goal_progress}] /p" $goal_list_dir/goal_a.txt
+            done
+        fi
+        # show the current action
+        echo "|"
+        echo -e "|< ${GREEN}Current Goal${NOCOLOR} >"
+        action_flag=$(sed -n '/^([0-9].*:.*:.*xxx/p' $goal_all_dir/${current_goal_promote}.goal)
+        if [ -z "$action_flag" ];then
+            echo "| Note: no action now!"
+        else
+            sed -n '/^([0-9].*:.*:.*xxx/,/^$/s/^/| /p' $goal_all_dir/${current_goal_promote}.goal
+        fi
+        echo -e "|-------------------------------------------------------------------------------"
         ;;
     #}}}
 
@@ -937,7 +1014,61 @@ case "$1" in
         echo -e "${YELLOW}--------------------------------------------------------------------------------${NOCOLOR}"
         ;;
     #}}}
-        
+
+    "@")
+    #{{{
+    # the var
+    goal_all_mode_dir=~/mygithub/tmux_treasure/ALL
+    goal_all_mode_path=~/mygithub/tmux_treasure/ALL/goal_all_mode.txt
+    goal_all_format_path=~/mygithub/tmux_treasure/ALL/goal_all_format.txt
+    # test if the file exeists
+    if [ ! -f $goal_all_mode_path ];then
+        touch $goal_all_mode_path
+    fi
+    #
+    if [ "$2" == "@" ];then
+        #echo "" > $goal_all_mode_path
+        echo "========== ALL GOAL (renew time: $(date "+%Y/%m/%d %X"))==========" > $goal_all_mode_path
+        # scan the whole file of the .../goal_a.txt again
+        for i in $(find $goal_all_mode_dir/../ -name "goal_a.txt")
+        do
+            mode_name=${i#*../}
+            mode_name=${mode_name%%/*}
+            if [ -f $goal_all_format_path ];then
+                cat $goal_all_format_path >> $goal_all_mode_path 2>/dev/null
+            else
+                echo "------------> $mode_name <------------" >> $goal_all_mode_path
+            fi
+            echo "#{{{" >> $goal_all_mode_path
+            cat $i >> $goal_all_mode_path 2>/dev/null
+            echo "#}}}" >> $goal_all_mode_path
+            # replace the mode to the real mode name
+            sed -i "/---.*mode.*---/s/mode/${mode_name}/" $goal_all_mode_path
+        done
+    fi
+    # show the file of the goal_all_mode
+    vim $goal_all_mode_path
+    ;;
+    #}}}
+
+    "more")
+    #{{{
+        # represent that there are more than one mode to open
+        let args_index=1
+        for arg in $@
+        do
+            if [ $args_index -lt 2 ];then
+                let args_index+=1
+                continue
+            else
+                love $arg
+                #tmux detach
+                #tmux send-keys 'tmux detach'
+            fi
+        done
+        ;;
+    #}}}
+    
     *)
     #{{{
         echo "Error: No such tmux task!"
