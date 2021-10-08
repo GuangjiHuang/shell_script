@@ -122,7 +122,7 @@ tmux_template_2panes()
 
 }
 
-tmux_c++()
+tmux_cpp()
 {
     tmux_template_2panes "c++"
 }
@@ -567,7 +567,7 @@ case "$1" in
             tmux attach -t $1
         else
             # create the tmux layout
-            tmux_c++ 
+            tmux_cpp 
             # check the file if exists, if not touch the files
             create_mode_dir $1
         fi
@@ -889,7 +889,7 @@ case "$1" in
         fi
         # show the current action
         echo "|"
-        echo -e "|< ${GREEN}Current Goal${NOCOLOR} >"
+        echo -e "|< ${GREEN}Current Action${NOCOLOR} >"
         action_flag=$(sed -n '/^([0-9].*:.*:.*xxx/p' $goal_all_dir/${current_goal_promote}.goal)
         if [ -z "$action_flag" ];then
             echo "| Note: no action now!"
