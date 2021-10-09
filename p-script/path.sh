@@ -57,17 +57,22 @@ help)
     echo -e "${GREEN}: [1-9] q->cd with quiet mode${NOCOLOR} the quite mode, use to copy file to it"
     echo -e "${YELLOW}--------------------------------------------------------------------------------${NOCOLOR}"
     ;;
-[1-9])
-    let lines=$1+1
-    s_path=$(sed -n "${lines}p" $record_path)
-    cd_path=${s_path: 3}
-    #export PATH=$PATH:${cd_path}
-    export cd_path
-    if [ "$2" == "q" ]; then
-        echo ${cd_path}
-        else
-        echo "-> ${cd_path}"
-        cd ${cd_path}
+[1-9]*)
+    if [[ $1 =~ ^[1-9][0-9]{0,1}$ ]];then # the regular expression matching
+        let lines=$1+1
+        s_path=$(sed -n "${lines}p" $record_path)
+        #cd_path=${s_path: 3}
+        cd_path=${s_path#* }
+        #export PATH=$PATH:${cd_path}
+        export cd_path
+        if [ "$2" == "q" ]; then
+            echo ${cd_path}
+            else
+            echo "-> ${cd_path}"
+            cd ${cd_path}
+        fi
+    else
+        echo "Error: you can use the command <p help> to get more information"
     fi
     ;;
 "go-p")
@@ -85,6 +90,6 @@ help)
     fi
     ;;
 *)
-    echo "Error: you can use the command <p h> to get more information"
+    echo "Error: you can use the command <p help> to get more information"
     ;;
 esac

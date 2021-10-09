@@ -34,7 +34,8 @@ sessions_list=("c++" \
     "chore" \
     "English" \
     "type" \
-    "tmux")
+    "tmux" \
+    "cmake")
 tmux_action="create"
 source_dir=~/mygithub/shell_script/tmux-manager
 source_name="${source_dir}/tmux-manager.sh"
@@ -187,6 +188,11 @@ tmux_tmux()
 {
     tmux_template_2panes "tmux"
     echo "this is the tmux's tmux"
+}
+tmux_cmake()
+{
+    tmux_template_2panes "cmake"
+    echo "this is the cmake's tmux"
 }
 #}}}
 # >>>>>>>>>>>>>>>> the ulity funciton <<<<<<<<<<<<<<<<<<<<<
@@ -525,11 +531,18 @@ action()
 
         "English")
             case "$1" in
-                "show")
-                    # show the goal, show the enhancement
+                "w-e")
+                    # the word enchancment
+                    English_word_enhancement_path=~/mygithub/tmux_treasure/English/word_enhancement.txt
+                    vim $English_word_enhancement_path
                     ;;
-                "write")
+
+                "s-e")
+                    # the sentence enchancement
+                    English_sentence_enhancement_path=~/mygithub/tmux_treasure/$mode/sentence_enhancement.txt
+                    vim $English_sentence_enhancement_path
                     ;;
+
                 "help")
                     ;;
             esac
@@ -733,6 +746,21 @@ case "$1" in
         else
             # create the tmux layout
             tmux_tmux
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
+        fi
+        ;;
+    #}}}
+
+    "cmake")
+    #{{{
+        # set the environment variable
+        echo "export mode=$1" > $mode_control_path
+        if [ "$tmux_action" == "into" ]; then
+            tmux attach -t $1
+        else
+            # create the tmux layout
+            tmux_cmake
             # check the file if exists, if not touch the files
             create_mode_dir $1
         fi
