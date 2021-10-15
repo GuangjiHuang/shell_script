@@ -559,6 +559,13 @@ case "$1" in
         esac
         ;;
 
+    "gpu")
+        # show the gpu's usage
+        gpu_usage=$(ssh $2 nvidia-smi | grep -io [0-9][0-9]*%)
+        gpu_usage=${gpu_usage##* }
+        echo "$2's usage is the $gpu_usage"
+        ;;
+
     "help")
         clear
         echo -e "${YELLOW}-------------------------------> OPTION <---------------------------------------${NOCOLOR}"
@@ -579,6 +586,8 @@ case "$1" in
         echo -e "${GREEN}: go-linux_basic_cfg->${NOCOLOR}: cd to the linux_basic_cfg"
         echo 
         echo -e "${GREEN}: goal xxx.txt${NOCOLOR}: about the goal, you can use the command < wr goal help > for more information"
+        echo 
+        echo -e "${GREEN}: gpu computer_name${NOCOLOR}: show the computer's gpu's usage"
         echo 
         echo -e "${GREEN}: help->${NOCOLOR}: get the help"
         echo 
