@@ -35,7 +35,8 @@ sessions_list=("c++" \
     "English" \
     "type" \
     "tmux" \
-    "cmake")
+    "cmake" \
+    "clock")
 tmux_action="create"
 source_dir=~/mygithub/shell_script/tmux-manager
 source_name="${source_dir}/tmux-manager.sh"
@@ -194,6 +195,29 @@ tmux_cmake()
     tmux_template_2panes "cmake"
     echo "this is the cmake's tmux"
 }
+tmux_clock()
+{
+    shell_script_path=$install_dir/love_clock_switch_rain_clock.sh
+    shell_script_command=". $shell_script_path"
+    #echo "the command is the: $shell_script_command"
+    tmux new-session -s "clock" \; \
+    setw status off \; \
+    clock \;
+    #send-keys "while [ 1 ];do;" C-m
+    #send-keys "$shell_script_command" C-m
+    #clock \; \
+
+    #tmux send-keys 'q' C-m
+    #while [ 1 ]
+    #do
+    #    tmux send-keys 'q' C-m
+    #    tmux clock
+    #    sleep 5
+    #    tmux send-keys 'q' C-m
+    #    tmux send-keys 'wr rain' C-m
+    #done
+}
+
 #}}}
 # >>>>>>>>>>>>>>>> the ulity funciton <<<<<<<<<<<<<<<<<<<<<
 #{{{
@@ -763,6 +787,19 @@ case "$1" in
             tmux_cmake
             # check the file if exists, if not touch the files
             create_mode_dir $1
+        fi
+        ;;
+    #}}}
+
+    "clock")
+    #{{{
+        # set the environment variable
+        echo "export mode=$1" > $mode_control_path
+        if [ "$tmux_action" == "into" ]; then
+            tmux attach -t $1\; clock # into the mode, and then show the clock
+        else
+            # create the tmux layout
+            tmux_clock
         fi
         ;;
     #}}}
