@@ -1,0 +1,40 @@
+#! /bin/bash
+clear
+file_name=${1%.*}
+file_type=${1#*.}
+#print the message
+echo "------------------file information----------------------"
+echo "->the file_type: ${file_type}"
+echo "->the file_name: ${file_name}"
+case $file_type in
+    "cpp")
+    compiler_type="g++"
+    ;;
+    "c")
+    compiler_type="gcc"
+    ;;
+    *)
+    echo -e "${RED}Error->${NOCOLOR}"
+    echo ":the file is not the c/cpp file! Exit"
+    exit
+    ;;
+esac
+
+# compile
+echo
+echo "-----------------compile information--------------------"
+echo
+#$($compiler_type $1 -o ${file_name}.exe -std=c++11) -lboost_system
+$compiler_type $1 -o ${file_name}.exe -lboost_system
+flag=$?
+
+# show the compiler result and then run the result
+if [ $flag -eq 0 ]; then
+    echo "Complier successfully!"
+    echo "-----------------running information--------------------"
+    ./${file_name}.exe
+
+else
+    echo -e "${RED}==========Complier fail!===============${NOCOLOR}"
+
+fi

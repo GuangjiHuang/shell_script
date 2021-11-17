@@ -1,0 +1,49 @@
+#! /bin/bash
+
+# deal with the path
+cpp_file_name=$1
+cpp_file_name_WE=${1%%.*}
+
+# change the cmake's source file's name
+new_sentence="set(source_file src/${cpp_file_name})"
+sed -i "1c${new_sentence}" ../CMakeLists.txt
+
+# run the cmake 
+clear
+. ~/.bash_config_add/.bash_color
+# record the current path
+current_path=$(pwd)
+cd ../build
+#rm -r *
+cmake .. > /dev/null
+if [ "$?" == "0" ];then
+    echo -e "${GREEN}( √ ) Cmake successfully!${NOCOLOR}"
+    echo
+else
+    echo -e "${RED}( X ) Cmake fail${NOCOLOR}"
+    echo
+    cd $current_path
+    read
+fi
+
+# run the make
+#make 1>/dev/null
+make 
+if [ "$?" == "0" ];then
+    echo -e "${GREEN}( √ ) Make successfully!${NOCOLOR}"
+    echo
+else
+    echo -e "${RED}( X ) Make fail!${NOCOLOR}"
+    cd $current_path
+    read
+    exit 1
+fi
+
+# run the bin
+echo -e "${YELLOW} ---------------- running information ---------------- ${NOCOLOR}"
+echo 
+../bin/$cpp_file_name_WE
+echo
+echo -e "${YELLOW} ----------------   running endding   ---------------- ${NOCOLOR}"
+cd $current_path
+
