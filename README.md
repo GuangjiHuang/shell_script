@@ -19,5 +19,6 @@
 
 ## usage
 -> Has prepared all for you, just type the command ./install-all.sh to install all the script!
+
 -> Type the ./uninstall-all.sh to remove the script.
 
