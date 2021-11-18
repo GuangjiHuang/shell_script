@@ -16,7 +16,7 @@
 # <<< design thinking
 
 # the gobal var
-source_dir=~/mygithub/shell_script/new-code-env
+source_dir=~/mygithub/shell-script/new-code-env
 install_dir=/opt/myscript/new-code-env
 cwd=$(pwd)
 for_simple_c_dir=${install_dir}/for_simple_c

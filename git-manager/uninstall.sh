@@ -5,7 +5,7 @@ command_name=mygit
 link_dir=/usr/bin
 
 # the path to deal with
-source_name="git_manage.sh"
+source_name="git-manage.sh"
 source_dir=$(pwd)
 source_path=$(pwd)/$source_name
 install_dir=/opt/myscript/git-manager

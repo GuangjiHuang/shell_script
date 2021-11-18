@@ -3,16 +3,16 @@
 #---------- the var----------  
 # the reposities
 reposities=("linux_basic_cfg"\
-            "shell_script"\
+            "shell-script"\
             "program_language_test"\
             "goal"\
-            "everyday_record"\
+            "everyday-record"\
             "_station_" \
             "tmux_treasure") # note: there may has the private reposity
 
 # the path
-source_dir="${HOME}/mygithub/shell_script/git-manager/"
-source_path="${HOME}/mygithub/shell_script/git-manager/git_manager.sh"
+source_dir="${HOME}/mygithub/shell-script/git-manager/"
+source_path="${HOME}/mygithub/shell-script/git-manager/git_manager.sh"
 install_dir="/opt/myscript/git-manager/"
 
 # checkout the path

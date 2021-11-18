@@ -1,5 +1,5 @@
 #! /bin/bash
-file="/opt/myscript/wr-script/my_sq/*"
+file="/opt/myscript/wr-script/my-sq/*"
 ctr_command=""
 while [ ! $ctr_command ]
 do

@@ -3,9 +3,9 @@
 # remove the link in the install_path
 rm /usr/bin/p
 
-# backup the record_path.txt
-if [ -f "/opt/myscript/p-script/record_path.txt" ]; then
-    cp /opt/myscript/p-script/record_path.txt /opt/myscript/backup/
+# backup the record-path.txt
+if [ -f "/opt/myscript/p-script/record-path.txt" ]; then
+    cp /opt/myscript/p-script/record-path.txt /opt/myscript/backup/
 fi
 
 # remove the /opt/myscript/p-script

@@ -38,10 +38,10 @@ sessions_list=("c++" \
     "cmake" \
     "clock")
 tmux_action="create"
-source_dir=~/mygithub/shell_script/tmux-manager
+source_dir=~/mygithub/shell-script/tmux-manager
 source_name="${source_dir}/tmux-manager.sh"
 install_dir=/opt/myscript/tmux-manager
-mode_control_path=/opt/myscript/tmux-manager/mode_control.sh
+mode-control_path=/opt/myscript/tmux-manager/mode-control.sh
 # the path of the goals inside the mode
 # the file directories
 goal_list_dir=~/mygithub/tmux_treasure/${mode}/goal-list
@@ -197,7 +197,7 @@ tmux_cmake()
 }
 tmux_clock()
 {
-    shell_script_path=$install_dir/love_clock_switch_rain_clock.sh
+    shell_script_path=$install_dir/love-clock-switch-rain-clock.sh
     shell_script_command=". $shell_script_path"
     #echo "the command is the: $shell_script_command"
     tmux new-session -s "clock" \; \
@@ -370,7 +370,7 @@ action()
                     do
                         if [ ${#index} -le 3 ]; then
                             # read the gaol through the index
-                            sed -n "/^${index}\./,/^$/p" $goal_list_dir/goal_a.txt >> $goal_list_path
+                            sed -n "/^${index}\./,/^$/p" $goal_list_dir/goal-a.txt >> $goal_list_path
                         fi
                     done
                     ;;
@@ -413,7 +413,7 @@ action()
             ### vim open the file
             let goal_number_new=goal_number+1
             create_goal_path=$goal_all_dir/$goal_number_new.goal
-            cp $goal_list_dir/goal_template.txt $create_goal_path
+            cp $goal_list_dir/goal-template.txt $create_goal_path
             sed -i "/^\*/s/\*/${goal_number_new}/g" $create_goal_path
             vim $create_goal_path
             # check the number of the goals
@@ -599,7 +599,7 @@ case "$1" in
     "c++")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode_control_path
+        echo "export mode=$1" > $mode-control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -614,7 +614,7 @@ case "$1" in
     "python")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode_control_path
+        echo "export mode=$1" > $mode-control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -629,7 +629,7 @@ case "$1" in
     "vim")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode_control_path
+        echo "export mode=$1" > $mode-control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -644,7 +644,7 @@ case "$1" in
     "shell")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode_control_path
+        echo "export mode=$1" > $mode-control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -659,7 +659,7 @@ case "$1" in
     "markdown")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode_control_path
+        echo "export mode=$1" > $mode-control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -674,7 +674,7 @@ case "$1" in
     "project")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode_control_path
+        echo "export mode=$1" > $mode-control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -689,7 +689,7 @@ case "$1" in
     "paper")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode_control_path
+        echo "export mode=$1" > $mode-control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -704,7 +704,7 @@ case "$1" in
     "entertainment")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode_control_path
+        echo "export mode=$1" > $mode-control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -719,7 +719,7 @@ case "$1" in
     "English")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode_control_path
+        echo "export mode=$1" > $mode-control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -734,7 +734,7 @@ case "$1" in
     "type")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode_control_path
+        echo "export mode=$1" > $mode-control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -749,7 +749,7 @@ case "$1" in
     "chore")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode_control_path
+        echo "export mode=$1" > $mode-control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -764,7 +764,7 @@ case "$1" in
     "tmux")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode_control_path
+        echo "export mode=$1" > $mode-control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -779,7 +779,7 @@ case "$1" in
     "cmake")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode_control_path
+        echo "export mode=$1" > $mode-control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -794,7 +794,7 @@ case "$1" in
     "clock")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode_control_path
+        echo "export mode=$1" > $mode-control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1\; clock # into the mode, and then show the clock
         else
@@ -896,7 +896,7 @@ case "$1" in
         # show the important message, the mode, your day goal, your progress
         # read the index of the today
         today_date=$(date "+%Y/%m/%d")
-        today_goal_index=$(grep "$today_date" $goal_index_dir/goal_d.index 2>/dev/null)
+        today_goal_index=$(grep "$today_date" $goal_index_dir/goal-d.index 2>/dev/null)
         if [ -z "$today_goal_index" ];then
             today_goal_promote="Not set"
         else
@@ -932,7 +932,7 @@ case "$1" in
             goal_progress=${goal_progress/\//\\/}
             # index + progress
             show_goal_prefix="${current_goal_promote}. [${goal_progress}]"
-            sed -n "/^${current_goal_promote}/,/^$/s/^${current_goal_promote}.*Goal.*:/| ${show_goal_prefix} /p" $goal_list_dir/goal_a.txt
+            sed -n "/^${current_goal_promote}/,/^$/s/^${current_goal_promote}.*Goal.*:/| ${show_goal_prefix} /p" $goal_list_dir/goal-a.txt
         fi
         echo "|"
         # today goal show
@@ -947,9 +947,9 @@ case "$1" in
                 goal_progress_line=$(sed -n "/^->.*progress.*:/p" $goal_all_dir/${index}.goal)
                 goal_progress=${goal_progress_line//[^0-9\/]/}
                 goal_progress=${goal_progress/\//\\/}
-                # read the goal from the goal_list_dir/goal_a.txt
+                # read the goal from the goal_list_dir/goal-a.txt
                 #echo $index
-                sed -n "/^${index}/,/^$/s/^${index}.*Goal.*:/| ${index}\. [${goal_progress}] /p" $goal_list_dir/goal_a.txt
+                sed -n "/^${index}/,/^$/s/^${index}.*Goal.*:/| ${index}\. [${goal_progress}] /p" $goal_list_dir/goal-a.txt
             done
         fi
         # show the current action
@@ -994,9 +994,9 @@ case "$1" in
         num_finished=0
         num_not_finished=0
         # the goal_list_x path
-        goal_alllist_path=$goal_list_dir/goal_a.txt
-        goal_finished_path=$goal_list_dir/goal_y.txt
-        goal_notfinished_path=$goal_list_dir/goal_n.txt
+        goal_alllist_path=$goal_list_dir/goal-a.txt
+        goal_finished_path=$goal_list_dir/goal-y.txt
+        goal_notfinished_path=$goal_list_dir/goal-n.txt
         # empty the file
         echo "" > $goal_alllist_path
         echo "" > $goal_finished_path
@@ -1011,17 +1011,17 @@ case "$1" in
             progress_value=$(sed -n '/^->.*progress.*/s/[^0-9/]//gp' $i) # locate the line and then delete the other character
             #echo $progress_value
             # then read the goals and store it as the string
-            #goal_info=$(sed -n '1,/^$/p' $i)
-            #echo -e $goal_info >> $goal_alllist_path
+            #goal-info=$(sed -n '1,/^$/p' $i)
+            #echo -e $goal-info >> $goal_alllist_path
             sed -n '1,/^$/p' $i >> $goal_alllist_path
             #
             if [ ! "$progress_value" == "10/10" ]; then
                let num_not_finished+=1
                sed -n '1,/^$/p' $i >> $goal_notfinished_path
-               #echo -e $goal_info >> $goal_notfinished_path # add the goal to the not finished
+               #echo -e $goal-info >> $goal_notfinished_path # add the goal to the not finished
            else
                sed -n '1,/^$/p' $i >> $goal_finished_path
-               #echo -e $goal_info >> $goal_finished_path # add the goal to the finished
+               #echo -e $goal-info >> $goal_finished_path # add the goal to the finished
             fi
         done
         let num_finished=num_all-num_not_finished
@@ -1062,7 +1062,7 @@ case "$1" in
         echo
         echo -e "${GREEN}: kill-all->:${NOCOLOR} the same as the <tmux kill-server>, to kill all the sessions"
         echo
-        echo -e "${GREEN}: go-love->:${NOCOLOR} go to the source dir: ~/mygithub/shell_script/..."
+        echo -e "${GREEN}: go-love->:${NOCOLOR} go to the source dir: ~/mygithub/shell-script/..."
         echo
         echo -e "${GREEN}: go-install->:${NOCOLOR} go to the install dir: /opt/.../..."
         echo
@@ -1094,8 +1094,8 @@ case "$1" in
     if [ "$2" == "@" ];then
         #echo "" > $goal_all_mode_path
         echo "========== ALL GOAL (renew time: $(date "+%Y/%m/%d %X"))==========" > $goal_all_mode_path
-        # scan the whole file of the .../goal_a.txt again
-        for i in $(find $goal_all_mode_dir/../ -name "goal_a.txt")
+        # scan the whole file of the .../goal-a.txt again
+        for i in $(find $goal_all_mode_dir/../ -name "goal-a.txt")
         do
             mode_name=${i#*../}
             mode_name=${mode_name%%/*}

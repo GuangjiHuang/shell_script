@@ -10,11 +10,11 @@ func_goal()
     # deal with the directories
     # check if exists the ~/mygithub/goal/
     goal_dir=~/mygithub/goal/
-    goal_info_path=/opt/myscript/wr-script/goal_info
+    goal-info_path=/opt/myscript/wr-script/goal-info
     if [ ! -d "${goal_dir}" ]; then
         mkdir -p ${goal_dir}
         # copy the goal.list to the directory
-        cp ${goal_info_path}/goal.list ${goal_dir}
+        cp ${goal-info_path}/goal.list ${goal_dir}
         # mkdir that in the goal.list
         cd ${goal_dir}
         for line in $(cat "${goal_dir}/goal.list")
@@ -81,7 +81,7 @@ copy_sth()
 {
     # the var
     file_dir=/opt/myscript/wr-script/register-clipboard
-    file_dir_source=$HOME/mygithub/shell_script/wr-script/register-clipboard
+    file_dir_source=$HOME/mygithub/shell-script/wr-script/register-clipboard
     # cygwin -> /dev/clipboard; others -> /opt/myscript/wr-script/middle_station.clipboard
     if [ "$(uname -o)" == "Cygwin" ];then
         middle_station=/dev/clipboard
@@ -222,7 +222,7 @@ past_sth()
 dir_name=$(date "+%Y-%m")/$(date "+%m-%d")
 # when you use the command: wr, it will creat the environment varialbe that records the path 
 # of the today_record path, so you can easily to open it inside the vim using the :e $p_today
-export p_today=~/mygithub/everyday_record/${dir_name}/
+export p_today=~/mygithub/everyday-record/${dir_name}/
 #if you want to use the date-pointer's path, you have to specify the -p as the $2
 if [ "$2" == "-p" ]; then
     dir_name=$(cat /opt/myscript/wr-script/date-pointer.txt)
@@ -234,15 +234,15 @@ if [ "$2" == "-p" ]; then
 elif [ "$2" == "-z" ]; then
     dir_name="compress"
 fi
-today_path=~/mygithub/everyday_record/${dir_name}
+today_path=~/mygithub/everyday-record/${dir_name}
 if [ ! -d "${today_path}" ]; then
     mkdir -p ${today_path}
     echo "creat the ${today_path} successfully!"
 
     if [ "$2" == "-z" ]; then
-        touch ${today_path}/learn_a.txt 
-        touch ${today_path}/question_a.txt
-        touch ${today_path}/review_a.txt
+        touch ${today_path}/learn-a.txt 
+        touch ${today_path}/question-a.txt
+        touch ${today_path}/review-a.txt
     else
         separate_sign="=================================="
         touch ${today_path}/plan.txt && echo -e  "${separate_sign}\n$(datef)\n${separate_sign}\n" > ${today_path}/plan.txt
@@ -265,7 +265,7 @@ fi
 # check the argumet and then open the corresponding file
 case "$1" in
     "love")
-        . /opt/myscript/wr-script/my_sq/my_sp.sh
+        . /opt/myscript/wr-script/my-sq/my-sq.sh
         ;;
 
     "plan")
@@ -274,7 +274,7 @@ case "$1" in
 
     "learn")
         if [ "$2" == "-z" ]; then
-            vim ${today_path}/learn_a.txt
+            vim ${today_path}/learn-a.txt
         else
             vim ${today_path}/learn.txt
         fi
@@ -282,7 +282,7 @@ case "$1" in
 
     "question")
         if [ "$2" == "-z" ]; then
-            vim ${today_path}/question_a.txt
+            vim ${today_path}/question-a.txt
         else
             vim ${today_path}/question.txt
         fi
@@ -294,7 +294,7 @@ case "$1" in
 
     "review")
         if [ "$2" == "-z" ]; then
-            vim ${today_path}/review_a.txt
+            vim ${today_path}/review-a.txt
         fi
         ;;
 
@@ -304,7 +304,7 @@ case "$1" in
 
     "pointer")
         dir_name=$2-$3/$3-$4
-        pointer_path=~/mygithub/everyday_record/${dir_name}
+        pointer_path=~/mygithub/everyday-record/${dir_name}
         # check if the path exists?
         if [ -d "${pointer_path}" ]; then
             echo ${dir_name} > /opt/myscript/wr-script/date-pointer.txt
@@ -315,16 +315,16 @@ case "$1" in
         ;;
 
     "go-e")
-        # go to the everyday_record path
-        #e_dest=~/mygithub/everyday_record/compress/
+        # go to the everyday-record path
+        #e_dest=~/mygithub/everyday-record/compress/
         e_dest=${today_path}/
         cd $e_dest
         echo "->: $e_dest"
         ;;
 
     "go-wr")
-        # go to the everyday_record path
-        wr_dest=~/mygithub/shell_script/wr-script/
+        # go to the everyday-record path
+        wr_dest=~/mygithub/shell-script/wr-script/
         cd $wr_dest
         echo "->: $wr_dest"
         ;;
@@ -343,33 +343,33 @@ case "$1" in
         echo "->: ${goal_dst}"
         ;;
     "go-linux_basic_cfg")
-        # go to the ~/mygithub/shell_script/linux_basic_cfg/
+        # go to the ~/mygithub/shell-script/linux-basic-cfg/
         linux_basic_cfg_path=~/mygithub/linux_basic_cfg/files.cfg
         cd $linux_basic_cfg_path
         ;;
 
     "merge")
-        cat ${today_path}/question.txt >> ~/mygithub/everyday_record/compress/question_a.txt
-        cat ${today_path}/learn.txt >> ~/mygithub/everyday_record/compress/learn_a.txt
-        echo "Good job! Has been merging xxx.txt to xxx_a.txt! Successfully!"
+        cat ${today_path}/question.txt >> ~/mygithub/everyday-record/compress/question-a.txt
+        cat ${today_path}/learn.txt >> ~/mygithub/everyday-record/compress/learn-a.txt
+        echo "Good job! Has been merging xxx.txt to xxx-a.txt! Successfully!"
         ;;
 
     "all")
-        vim ~/mygithub/everyday_record/compress/
+        vim ~/mygithub/everyday-record/compress/
         ;;
 
     "rest")
-        . /opt/myscript/wr-script/my_sq/rest.sh
+        . /opt/myscript/wr-script/my-sq/rest.sh
         ;;
 
     "moyu")
-        . /opt/myscript/wr-script/my_sq/moyu.sh
+        . /opt/myscript/wr-script/my-sq/moyu.sh
         ;;
 
     "xiaban")
         wr merge
-        cd ~/mygithub/everyday_record/
-        . ~/mygithub/everyday_record/xiaban.sh
+        cd ~/mygithub/everyday-record/
+        . ~/mygithub/everyday-record/xiaban.sh
         ;;
 
     "todo")
@@ -389,7 +389,7 @@ case "$1" in
         ;;
 
     "wr")
-        vim ~/mygithub/shell_script/wr-script/write.sh
+        vim ~/mygithub/shell-script/wr-script/write.sh
         ;;
 
     "goal")
@@ -404,8 +404,8 @@ case "$1" in
              #open the type.template
              vim /opt/myscript/wr-script/type.template
         elif [ "$2" == "c" ]; then
-             # copy the /opt/myscirpt/wr-script/type.template to the ~/mygithub/shell_script/wr-script/type.tempate
-             cp /opt/myscript/wr-script/type.template ~/mygithub/shell_script/wr-script/type.template
+             # copy the /opt/myscirpt/wr-script/type.template to the ~/mygithub/shell-script/wr-script/type.tempate
+             cp /opt/myscript/wr-script/type.template ~/mygithub/shell-script/wr-script/type.template
              echo ":->Successfully renew the type.template!"
          elif [ "$2" == "renew" ]; then
              # copy the type.template to the type.pratice, because the type.tempate has been renew
@@ -424,7 +424,7 @@ case "$1" in
 
     "pretend")
         # execute the program
-        /opt/myscript/wr-script/c++_interesting_program/pretend_to_do_something.exe $2 $3 $4
+        /opt/myscript/wr-script/c++-interesting-program/pretend-to-do-something.exe $2 $3 $4
         ;;
 
     "reinstall")
@@ -533,7 +533,7 @@ case "$1" in
         do
             clear
             # show the weather and the date and the time
-            exe_path=/opt/myscript/wr-script/weather/show_weather.sh
+            exe_path=/opt/myscript/wr-script/weather/show-weather.sh
             bash ${exe_path}
             sleep $duration
         done
@@ -577,7 +577,7 @@ case "$1" in
         echo
         echo -e "${GREEN}: fish->:${NOCOLOR} execute the command < asciiquarium > in the linux system"
         echo
-        echo -e "${GREEN}: go-e->${NOCOLOR}: cd to the everyday_record"
+        echo -e "${GREEN}: go-e->${NOCOLOR}: cd to the everyday-record"
         echo 
         echo -e "${GREEN}: go-wr->${NOCOLOR}: cd to the write-scritp.sh"
         echo 
