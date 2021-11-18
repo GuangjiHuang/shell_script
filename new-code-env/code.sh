@@ -87,6 +87,8 @@ case $1 in
             vim $new_file
         else
             echo "Fail to touch the new_file!"
+            # if fail, delte the touch_file.py
+            rm ./touch_file.py
         fi
         ;;
 esac
