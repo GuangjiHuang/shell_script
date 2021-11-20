@@ -41,7 +41,7 @@ tmux_action="create"
 source_dir=~/mygithub/shell-script/tmux-manager
 source_name="${source_dir}/tmux-manager.sh"
 install_dir=/opt/myscript/tmux-manager
-mode-control_path=/opt/myscript/tmux-manager/mode-control.sh
+mode_control_path=/opt/myscript/tmux-manager/mode-control.sh
 # the path of the goals inside the mode
 # the file directories
 goal_list_dir=~/mygithub/tmux_treasure/${mode}/goal-list
@@ -599,7 +599,7 @@ case "$1" in
     "c++")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode-control_path
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -614,7 +614,7 @@ case "$1" in
     "python")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode-control_path
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -629,7 +629,7 @@ case "$1" in
     "vim")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode-control_path
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -644,7 +644,7 @@ case "$1" in
     "shell")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode-control_path
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -659,7 +659,7 @@ case "$1" in
     "markdown")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode-control_path
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -674,7 +674,7 @@ case "$1" in
     "project")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode-control_path
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -689,7 +689,7 @@ case "$1" in
     "paper")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode-control_path
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -704,7 +704,7 @@ case "$1" in
     "entertainment")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode-control_path
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -719,7 +719,7 @@ case "$1" in
     "English")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode-control_path
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -734,7 +734,7 @@ case "$1" in
     "type")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode-control_path
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -749,7 +749,7 @@ case "$1" in
     "chore")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode-control_path
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -764,7 +764,7 @@ case "$1" in
     "tmux")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode-control_path
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -779,7 +779,7 @@ case "$1" in
     "cmake")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode-control_path
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1
         else
@@ -794,7 +794,7 @@ case "$1" in
     "clock")
     #{{{
         # set the environment variable
-        echo "export mode=$1" > $mode-control_path
+        echo "export mode=$1" > $mode_control_path
         if [ "$tmux_action" == "into" ]; then
             tmux attach -t $1\; clock # into the mode, and then show the clock
         else
