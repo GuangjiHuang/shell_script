@@ -560,8 +560,11 @@ case "$1" in
         ;;
 
     "gpu")
+        # source the .bash_aliases file to get the aliases 
+        . ~/.bashrc
         # show the gpu's usage
-        gpu_usage=$(ssh $2 nvidia-smi | grep -io [0-9][0-9]*%)
+        #gpu_usage=$(ssh $2 nvidia-smi | grep -io [0-9][0-9]*%)
+        gpu_usage=$(c-$2 nvidia-smi | grep -io [0-9][0-9]*%)
         gpu_usage=${gpu_usage##* }
         echo "$2's usage is the $gpu_usage"
         ;;
