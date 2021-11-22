@@ -17,6 +17,12 @@
 ### new-code-env
 -> to achieve the goal that write, compiler, run the code even left the vim! Very nice shell!
 
+### shell-vim-cfg-manager
+-> use to manager the vim, bash, tmux, input configuration.
+
+### gpu-detector
+-> to detect the gpu, once the gpu in the free state, let it do something!
+
 ## usage
 -> Has prepared all for you, just type the command ./install-all.sh to install all the script!
 
