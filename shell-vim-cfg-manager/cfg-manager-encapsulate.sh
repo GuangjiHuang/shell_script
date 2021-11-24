@@ -44,6 +44,7 @@ objOperation(){
             echo "----- Install: "
             # for the ~/.vim/hgj-vim-config
             if [ "$1" == "vim" ] && [ -d $1/$file_or_dir ];then
+                rm -r $vim_install_path/$file_or_dir
                 cp -r $1/$file_or_dir $vim_install_path/$file_or_dir
                 echo "$1/$file_or_dir -> $vim_install_path/$file_or_dir"
                 continue

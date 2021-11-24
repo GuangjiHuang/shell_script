@@ -112,7 +112,7 @@ tmux_template_2panes()
     if [ "$2" == "left_big" ];then
         part_percent=40%
     else
-        part_percent=60%
+        part_percent=50%
     fi
     tmux new-session -s "$1" \; \
     split-window -h \; \
@@ -131,12 +131,14 @@ tmux_cpp()
 
 tmux_python()
 {
-    tmux_template_2panes "python" "left_big"
+    #tmux_template_2panes "python" "left_big"
+    tmux_template_2panes "python"
 }
 
 tmux_vim()
 {
-    tmux_template_3panes "vim"
+    #tmux_template_3panes "vim"
+    tmux_template_2panes "vim"
 }
 
 tmux_shell()
