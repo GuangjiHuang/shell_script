@@ -172,14 +172,28 @@ tmux_entertainment()
 
 tmux_English()
 {
-    tmux_template_3panes "English"
-    echo "this is the English's tmux"
+    # rewrite the layout
+    #tmux_template_2panes "type"
+    python_main_dir=/home/hgj/mygithub/shell-script/tmux-manager/English-code
+    tmux new-session -s "English" \; \
+    split-window -h \; \
+    send-keys -t 1 'wr temp' C-m\; \
+    send-keys -t 0 "python ${python_main_dir}/main.py -workspace $python_main_dir" C-m\; \
+    select-pane -t 1
+    #echo "this is the type's tmux"
 }
 
 tmux_type()
 {
-    tmux_template_3panes "type"
-    echo "this is the type's tmux"
+    # rewrite the layout
+    #tmux_template_2panes "type"
+    python_main_dir=/home/hgj/mygithub/shell-script/tmux-manager/type-code
+    tmux new-session -s "type" \; \
+    split-window -h \; \
+    send-keys -t 1 'wr type' C-m\; \
+    send-keys -t 0 "python ${python_main_dir}/main.py -workspace $python_main_dir" C-m\; \
+    select-pane -t 1
+    #echo "this is the type's tmux"
 }
 
 tmux_chore()

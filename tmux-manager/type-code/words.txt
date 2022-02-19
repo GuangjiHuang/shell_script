@@ -1,0 +1,664 @@
+  1.	the                12
+  2.	your               10
+  3.	you                5
+  4.	this               5
+  5.	people             5
+  6.	dream              5
+  7.	I                  5
+  8.	like               4
+  9.	home               4
+ 10.	ever               4
+ 11.	become             4
+ 12.	The                4
+ 13.	.                  4
+ 14.	,                  4
+ 15.	things             3
+ 16.	student            3
+ 17.	saw                3
+ 18.	remember           3
+ 19.	here               3
+ 20.	had                3
+ 21.	fingers            3
+ 22.	eyes               3
+ 23.	every              3
+ 24.	don't              3
+ 25.	doesn't            3
+ 26.	because            3
+ 27.	became             3
+ 28.	be                 3
+ 29.	are                3
+ 30.	always             3
+ 31.	about              3
+ 32.	a                  3
+ 33.	Your               3
+ 34.	We                 3
+ 35.	This               3
+ 36.	Student            3
+ 37.	But                3
+ 38.	?                  3
+ 39.	you've             2
+ 40.	would              2
+ 41.	world              2
+ 42.	won't              2
+ 43.	without            2
+ 44.	with               2
+ 45.	whether            2
+ 46.	where              2
+ 47.	when               2
+ 48.	what               2
+ 49.	we'll              2
+ 50.	we                 2
+ 51.	way                2
+ 52.	was                2
+ 53.	use                2
+ 54.	up                 2
+ 55.	turn               2
+ 56.	trying             2
+ 57.	together           2
+ 58.	to                 2
+ 59.	time               2
+ 60.	through            2
+ 61.	thought            2
+ 62.	think              2
+ 63.	thing              2
+ 64.	there's            2
+ 65.	there              2
+ 66.	them               2
+ 67.	that               2
+ 68.	take               2
+ 69.	study              2
+ 70.	stroke             2
+ 71.	strength           2
+ 72.	strangers          2
+ 73.	stranger           2
+ 74.	story              2
+ 75.	still              2
+ 76.	sort               2
+ 77.	somewhere          2
+ 78.	someone            2
+ 79.	some               2
+ 80.	signature          2
+ 81.	sharp              2
+ 82.	right              2
+ 83.	reported           2
+ 84.	remains            2
+ 85.	reduce             2
+ 86.	recipe             2
+ 87.	realize            2
+ 88.	product            2
+ 89.	previous           2
+ 90.	photographer       2
+ 91.	past               2
+ 92.	passed             2
+ 93.	part               2
+ 94.	page               2
+ 95.	our                2
+ 96.	now                2
+ 97.	nothing            2
+ 98.	not                2
+ 99.	none               2
+100.	no                 2
+101.	myself             2
+102.	my                 2
+103.	music              2
+104.	moments            2
+105.	moisture           2
+106.	might              2
+107.	mean               2
+108.	me                 2
+109.	manages            2
+110.	make               2
+111.	made               2
+112.	long               2
+113.	little             2
+114.	liquid             2
+115.	letters            2
+116.	lemon              2
+117.	large              2
+118.	knows              2
+119.	it's               2
+120.	it                 2
+121.	inside             2
+122.	in                 2
+123.	if                 2
+124.	himself            2
+125.	he                 2
+126.	have               2
+127.	has                2
+128.	ha                 2
+129.	got                2
+130.	going              2
+131.	go                 2
+132.	get                2
+133.	from               2
+134.	for                2
+135.	finding            2
+136.	feel               2
+137.	everyone           2
+138.	enough             2
+139.	else's             2
+140.	each               2
+141.	down               2
+142.	do                 2
+143.	disappear          2
+144.	direction          2
+145.	did                2
+146.	country            2
+147.	constructor        2
+148.	compelling         2
+149.	coming             2
+150.	come               2
+151.	clear              2
+152.	chariot            2
+153.	chance             2
+154.	century            2
+155.	can't              2
+156.	but                2
+157.	beneath            2
+158.	at                 2
+159.	as                 2
+160.	around             2
+161.	and                2
+162.	all                2
+163.	You                2
+164.	Times              2
+165.	How                2
+166.	Don't              2
+167.	At                 2
+168.	-                  2
+169.	yourself           1
+170.	you.               1
+171.	you're             1
+172.	yeah               1
+173.	written            1
+174.	wouldn't           1
+175.	words              1
+176.	word               1
+177.	wonder             1
+178.	wind               1
+179.	will               1
+180.	wield              1
+181.	while              1
+182.	which              1
+183.	what's             1
+184.	western            1
+185.	weight             1
+186.	weighed            1
+187.	weeping            1
+188.	wear,              1
+189.	weapon             1
+190.	wealth             1
+191.	we've              1
+192.	we're              1
+193.	ways               1
+194.	waves              1
+195.	waters             1
+196.	watch              1
+197.	waste              1
+198.	warning            1
+199.	victor             1
+200.	vices              1
+201.	vengeance          1
+202.	ususally           1
+203.	usual              1
+204.	us                 1
+205.	until              1
+206.	uncle              1
+207.	unattainable       1
+208.	typing             1
+209.	typewriter         1
+210.	turmoil            1
+211.	tumbling           1
+212.	tumble             1
+213.	trigger            1
+214.	trick              1
+215.	transmit           1
+216.	transmission       1
+217.	town               1
+218.	torn               1
+219.	too                1
+220.	toeses             1
+221.	times              1
+222.	tickets            1
+223.	thunder            1
+224.	threatening        1
+225.	thoughts           1
+226.	those              1
+227.	thihnkerinker      1
+228.	they               1
+229.	therefore          1
+230.	thenb              1
+231.	then               1
+232.	thema              1
+233.	their              1
+234.	that's             1
+235.	than               1
+236.	th                 1
+237.	term               1
+238.	tender             1
+239.	ten                1
+240.	tempered           1
+241.	tea                1
+242.	tasty              1
+243.	task               1
+244.	tail               1
+245.	swing              1
+246.	swim               1
+247.	sweet              1
+248.	swear              1
+249.	survive            1
+250.	sunset             1
+251.	summers            1
+252.	sufficient         1
+253.	successful         1
+254.	success            1
+255.	subduing           1
+256.	stupid             1
+257.	stuff              1
+258.	stuck              1
+259.	strike             1
+260.	street             1
+261.	strange            1
+262.	storms             1
+263.	storm              1
+264.	steal              1
+265.	starred            1
+266.	standing           1
+267.	sound              1
+268.	somebody's         1
+269.	solve              1
+270.	society            1
+271.	sloved             1
+272.	skirts             1
+273.	skills             1
+274.	sitting            1
+275.	silent             1
+276.	shunshine          1
+277.	showering          1
+278.	should             1
+279.	shot               1
+280.	shop               1
+281.	shoes              1
+282.	shadows            1
+283.	several            1
+284.	sensible           1
+285.	seems              1
+286.	secretaries        1
+287.	secret             1
+288.	second             1
+289.	search             1
+290.	screwed            1
+291.	science            1
+292.	school             1
+293.	say                1
+294.	satellite          1
+295.	same               1
+296.	sadly              1
+297.	sad                1
+298.	roses              1
+299.	roll               1
+300.	rock               1
+301.	rewarded           1
+302.	revolutionary      1
+303.	reulstsults        1
+304.	return             1
+305.	result             1
+306.	resemble           1
+307.	requires           1
+308.	repeat;            1
+309.	remain             1
+310.	regardless         1
+311.	reconsider         1
+312.	realizes           1
+313.	realized           1
+314.	real               1
+315.	reached            1
+316.	rather             1
+317.	quick              1
+318.	put                1
+319.	pursue             1
+320.	purpose            1
+321.	progress           1
+322.	programs           1
+323.	programmed         1
+324.	problems           1
+325.	problem            1
+326.	probably           1
+327.	preconceptions     1
+328.	prayers            1
+329.	practiaclly        1
+330.	pouring            1
+331.	potential          1
+332.	possible           1
+333.	pockets            1
+334.	pleasure           1
+335.	pictures           1
+336.	patio              1
+337.	partly             1
+338.	pain               1
+339.	packets            1
+340.	overflow           1
+341.	over               1
+342.	out                1
+343.	ought              1
+344.	others             1
+345.	other's            1
+346.	orders             1
+347.	or                 1
+348.	opportunity        1
+349.	one                1
+350.	once               1
+351.	older              1
+352.	office             1
+353.	offer              1
+354.	objects            1
+355.	number             1
+356.	nubmer             1
+357.	nine               1
+358.	never              1
+359.	network            1
+360.	neighbors          1
+361.	necessary          1
+362.	nags               1
+363.	must               1
+364.	much               1
+365.	movie              1
+366.	mouth              1
+367.	mountain           1
+368.	motionless         1
+369.	mother             1
+370.	more               1
+371.	moon               1
+372.	mom                1
+373.	mistakes           1
+374.	minute             1
+375.	mine               1
+376.	mind               1
+377.	miles              1
+378.	mended             1
+379.	memory             1
+380.	meet               1
+381.	meaningless        1
+382.	meander            1
+383.	meadows            1
+384.	marrow             1
+385.	manual             1
+386.	man                1
+387.	luck               1
+388.	low                1
+389.	love               1
+390.	lot                1
+391.	lost               1
+392.	looks              1
+393.	looking            1
+394.	looked             1
+395.	look               1
+396.	living             1
+397.	lived              1
+398.	limits             1
+399.	lifetime           1
+400.	life,              1
+401.	life               1
+402.	letter             1
+403.	let's              1
+404.	let                1
+405.	leave              1
+406.	least              1
+407.	lazy               1
+408.	laughter           1
+409.	landslide          1
+410.	labyrinths         1
+411.	knwnows            1
+412.	know               1
+413.	knew               1
+414.	kind               1
+415.	kids               1
+416.	journey            1
+417.	job                1
+418.	is                 1
+419.	involuntarily      1
+420.	into               1
+421.	interested         1
+422.	instances          1
+423.	instance           1
+424.	insecure           1
+425.	infinite           1
+426.	inferior           1
+427.	increase           1
+428.	important          1
+429.	immediately        1
+430.	idea               1
+431.	hundred            1
+432.	however            1
+433.	how                1
+434.	house              1
+435.	hope               1
+436.	honor              1
+437.	honestly           1
+438.	hold               1
+439.	history            1
+440.	his                1
+441.	him                1
+442.	higher             1
+443.	helps              1
+444.	help               1
+445.	heights            1
+446.	heaven             1
+447.	heath              1
+448.	hearts             1
+449.	heart              1
+450.	heal               1
+451.	he's               1
+452.	he'd               1
+453.	having             1
+454.	haunted            1
+455.	hasn't             1
+456.	hard               1
+457.	happening          1
+458.	hangs              1
+459.	hang               1
+460.	hands              1
+461.	hand-written       1
+462.	guys               1
+463.	grows              1
+464.	grammarians        1
+465.	good               1
+466.	gonna              1
+467.	gnawing            1
+468.	gives              1
+469.	given              1
+470.	give               1
+471.	girl               1
+472.	giant              1
+473.	gets               1
+474.	genius             1
+475.	gained             1
+476.	future             1
+477.	friends            1
+478.	friendly           1
+479.	friend             1
+480.	four               1
+481.	forest             1
+482.	fool               1
+483.	foo                1
+484.	follow             1
+485.	focusing           1
+486.	flame              1
+487.	finger             1
+488.	find               1
+489.	fiery              1
+490.	feet               1
+491.	feeling            1
+492.	feast              1
+493.	fears              1
+494.	favor              1
+495.	father's           1
+496.	farm               1
+497.	famine             1
+498.	fact               1
+499.	faces              1
+500.	face               1
+501.	experiment         1
+502.	exit               1
+503.	existed            1
+504.	exception          1
+505.	everything         1
+506.	even               1
+507.	energy             1
+508.	ended              1
+509.	endeavors          1
+510.	efficiently        1
+511.	eat                1
+512.	dumb               1
+513.	drowning           1
+514.	drive              1
+515.	dreams             1
+516.	dreaming           1
+517.	drawing            1
+518.	discretion         1
+519.	dirctions          1
+520.	dinner             1
+521.	different          1
+522.	difference         1
+523.	desire             1
+524.	designed           1
+525.	defenses           1
+526.	deep               1
+527.	deemed             1
+528.	decision           1
+529.	days               1
+530.	day                1
+531.	dad                1
+532.	cvonditonsonditons 1
+533.	crying             1
+534.	crusade            1
+535.	creep              1
+536.	created            1
+537.	could              1
+538.	coral              1
+539.	convinced          1
+540.	conversation       1
+541.	control,           1
+542.	continent          1
+543.	contentment        1
+544.	conscious          1
+545.	conquered          1
+546.	conflict           1
+547.	confirm            1
+548.	confidently        1
+549.	company            1
+550.	common             1
+551.	clue               1
+552.	close              1
+553.	climbed            1
+554.	classic            1
+555.	civilizations      1
+556.	children           1
+557.	cheeseburger       1
+558.	chase              1
+559.	changed            1
+560.	change             1
+561.	championship       1
+562.	certain            1
+563.	caves              1
+564.	causing            1
+565.	cause              1
+566.	castle             1
+567.	care               1
+568.	can                1
+569.	called             1
+570.	cakes              1
+571.	buying             1
+572.	buyers             1
+573.	burning            1
+574.	built              1
+575.	buildings          1
+576.	brother            1
+577.	broken             1
+578.	brief              1
+579.	brew               1
+580.	box                1
+581.	borke              1
+582.	books              1
+583.	book               1
+584.	board              1
+585.	blows              1
+586.	biology            1
+587.	beyong             1
+588.	beyond             1
+589.	better             1
+590.	belong             1
+591.	behind             1
+592.	before             1
+593.	beeping            1
+594.	beep               1
+595.	been               1
+596.	becomes            1
+597.	beautiful          1
+598.	barrier            1
+599.	barrel             1
+600.	bandwidth          1
+601.	back               1
+602.	away               1
+603.	asked              1
+604.	ashamed            1
+605.	aren't             1
+606.	applied            1
+607.	any                1
+608.	answer             1
+609.	another            1
+610.	angels             1
+611.	an                 1
+612.	ambiguity          1
+613.	also               1
+614.	alone              1
+615.	almost             1
+616.	agreed             1
+617.	age                1
+618.	again              1
+619.	adventure          1
+620.	advances           1
+621.	acutally           1
+622.	across             1
+623.	acknowledgments    1
+624.	accomplished       1
+625.	above              1
+626.	abosrbed           1
+627.	abasement          1
+628.	When               1
+629.	Well               1
+630.	We're              1
+631.	Typing             1
+632.	There's            1
+633.	Then               1
+634.	That               1
+635.	Rights             1
+636.	One                1
+637.	On                 1
+638.	Now                1
+639.	No,                1
+640.	New                1
+641.	My                 1
+642.	May                1
+643.	Learn              1
+644.	Just               1
+645.	In                 1
+646.	I've               1
+647.	I'm                1
+648.	I'll               1
+649.	Hear               1
+650.	He                 1
+651.	Having             1
+652.	For                1
+653.	Every              1
+654.	Doesn't            1
+655.	Do                 1
+656.	Atlanta            1
+657.	Any                1
+658.	And                1
+659.	:                  1
+660.	1888               1
+661.	13                 1
+662.	126                1
+663.	!                  1
+664.	                   1
