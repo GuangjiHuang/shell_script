@@ -14,12 +14,14 @@ if __name__ == "__main__":
 # the global variables
     # change workspace to the current dir
     print("current dir is the: ", os.getcwd())
-    cmd_ls = ["add", "sub", "show", "exit", "help", "clear", "save", "backen", "swtich"]
+    cmd_ls = ["add", "sub", "show", "exit", "help", "clear", "save", "backen", "swtich", "sudo"]
     json_file_path = r"./words.json"
     txt_file_path = r"./words.txt"
     sep_line = "--------------------------------------"
     show_number = 20
     mode = "type" # or the "English"
+    num_sort_sign = 1
+    word_sort_sign = 1
     #
     print("------ words type practice! ------")
     while True:
@@ -102,7 +104,7 @@ if __name__ == "__main__":
             show_num = min(total_num, show_number)
             print(f"---------------words show ({show_num}/{total_num})--------------\n")
             # sort first
-            word_dict = sorted(word_dict.items(), key=lambda x:(x[1],x[0]), reverse=True)
+            word_dict = sorted(word_dict.items(), key=lambda x:(num_sort_sign * x[1],word_sort_sign * x[0]), reverse=True)
             # print
             for i, (word, number) in enumerate(word_dict, 1):
                 if i > show_number:
@@ -139,6 +141,16 @@ if __name__ == "__main__":
         elif command == "switch":
             mode = "English"
         #
+        elif command == "sudo":
+            print(f"now: w={word_sort_sign}; n={num_sort_sign}")
+            command_get = input("(python statement:)")
+            try:
+                exec(command_get)
+                word_sort_sign = w
+                num_sort_sign = n
+            except:
+                print(f"python statement: {command_get} is wrong, fail to modify!")
+        #
         elif command == "help":
             help_information = f"---------------help information--------------{newline(2)}" \
                                f"->add: add the words, separate with the space.{newline(2)}" \
@@ -148,7 +160,8 @@ if __name__ == "__main__":
                                f"->help: show the help information.{newline(2)}" \
                                f"->exit: exit the program.{newline(2)}" \
                                f"->save: save the json file to the txt file!{newline(2)}" \
-                               f"->backen: backend the json file.\n"
+                               f"->backen: backend the json file{newline(2)}" \
+                               f"->sudo: change the show sort of the word.\n"
             cls()
             print(help_information)
             print(sep_line)

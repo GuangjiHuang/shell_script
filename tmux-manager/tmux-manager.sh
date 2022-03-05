@@ -174,7 +174,7 @@ tmux_English()
 {
     # rewrite the layout
     #tmux_template_2panes "type"
-    python_main_dir=/home/hgj/mygithub/shell-script/tmux-manager/English-code
+    python_main_dir=${HOME}/mygithub/shell-script/tmux-manager/English-code
     tmux new-session -s "English" \; \
     split-window -h \; \
     send-keys -t 1 'wr temp' C-m\; \
@@ -187,7 +187,7 @@ tmux_type()
 {
     # rewrite the layout
     #tmux_template_2panes "type"
-    python_main_dir=/home/hgj/mygithub/shell-script/tmux-manager/type-code
+    python_main_dir=${HOME}/mygithub/shell-script/tmux-manager/type-code
     tmux new-session -s "type" \; \
     split-window -h \; \
     send-keys -t 1 'wr type' C-m\; \

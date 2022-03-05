@@ -150,27 +150,41 @@ if __name__ == "__main__":
     word_chapter = loadTxtFile(chapter_temp_path)
     # the show list 
     show_ls = getshowWordsList(en_word_dict, word_chapter, show_number, show_label)
+    # the flag of the continue to show
+    is_continue_show_flag = False
     # check
     if word_chapter not in cpt_list:
         word_chapter = "No set"
     while True:
-        command = input(f"{newline(1)}[{word_chapter}] Please input the command: ")
-        command_ls = commandDeal(command)
+        if is_continue_show_flag:
+            is_continue_show_flag = False # important to turn off the contunie showing!
+            command_ls = ["show"]
+        else:
+            command = input(f"{newline(1)}[{word_chapter}] Please input the command: ")
+            command_ls = commandDeal(command)
         command_len = len(command_ls)
         if command_len == 0:
             cls()
             continue
         command_first = command_ls[0]
         #
-        if command_first in ["chapter", "cpt"]:
+        if command_first in ["chapter", "cpt"] or command_first.isdecimal():
+            # if the command_first is the demical, renew the command_ls
+            if command_first.isdecimal():
+                command_ls = ["cpt", "cpt_"+command_first]
+            # if the command_ls is the number, add the prefix: cpt_
+            if command_ls[1].isdecimal():
+                command_ls[1] = "cpt_" + command_ls[1]
             # check the $1
             if command_ls[1] not in cpt_list:
-                cpt_list.sort()
+                #cpt_list.sort()
                 print(f"[WW] chapter must be less equal to the {cpt_list[-2]}. cpt 1-9 must be written as the format cpt_01,...cpt_09")
                 continue
             # the right chapter, renew the chapter
             word_chapter = command_ls[1]
             cls()
+            # set the flag to continue to show, and don't need to input the show command
+            is_continue_show_flag = True
         # show
         elif command_first in ["show", "s"]:
             # clear
@@ -310,7 +324,7 @@ if __name__ == "__main__":
             # clean the screen first
             cls()
             print(f"{hyphen(20)} help information {hyphen(20)}\n")
-            print(f"-> {'chapter':8}: change the chapter, for example: chapter cpt_01\n")
+            print(f"-> {'chapter':8}: change the chapter, for example: chapter cpt_01; cpt 01; 78;\n")
             print(f"-> {'show':8}: show the word; example: show -l ^, show -n h, show -n 20. -l: label, -n: number\n")
             print(f"-> {'label':8}: change words label; example: label x, and the next line: xxx(your word)\n")
             print(f"-> {'trans':8}: translate the English word to Chindes; example: trans, and the next line xxx(your word)\n")
@@ -364,4 +378,3 @@ if __name__ == "__main__":
                 
         else:
             print(f"[W] '{command_first}' is not the command! Try again!")
-            continue
