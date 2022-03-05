@@ -168,7 +168,16 @@ if __name__ == "__main__":
             continue
         command_first = command_ls[0]
         #
-        if command_first in ["chapter", "cpt"] or command_first.isdecimal():
+        if command_first in ["chapter", "cpt", "bp", "bn"] or command_first.isdecimal():
+            # bp: back to previous, bn: back to next
+            if command_first in ["bp", "bn"]:
+                word_chapter_num = int(word_chapter.split("_")[-1])
+                if command_first == "bp":
+                    word_chapter_num -= 1
+                else:
+                    word_chapter_num += 1
+                # renew the command_ls
+                command_ls = ["cpt", "cpt_"+f"{word_chapter_num:02}"]
             # if the command_first is the demical, renew the command_ls
             if command_first.isdecimal():
                 command_ls = ["cpt", "cpt_"+command_first]
@@ -181,6 +190,9 @@ if __name__ == "__main__":
                 print(f"[WW] chapter must be less equal to the {cpt_list[-2]}. cpt 1-9 must be written as the format cpt_01,...cpt_09")
                 continue
             # the right chapter, renew the chapter
+            if len(command_ls) == 0:
+                printf(f"[WW] lack the chapter number! Fail!")
+                continue
             word_chapter = command_ls[1]
             cls()
             # set the flag to continue to show, and don't need to input the show command
