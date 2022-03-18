@@ -76,7 +76,7 @@ tmux_template_3panes()
     
     # the parameters
     # $1 ->: the session's name <note: the follow lines cannot be split with the comment line>
-    tmux new-session -s "$1" \; \
+    tmux new-session -s "$1" -n "$1" \; \
     split-window -h \; \
     split-window -h \; \
     resize-pane -t 1 -x95% \; \
@@ -115,7 +115,7 @@ tmux_template_2panes()
     else
         part_percent=50%
     fi
-    tmux new-session -s "$1" \; \
+    tmux new-session -s "$1" -n "$1" \; \
     split-window -h \; \
     resize-pane -t 0 -x$part_percent \; \
     send-keys -t 1 'love go-goal;clear' C-m\; \
@@ -138,7 +138,6 @@ tmux_python()
 
 tmux_vim()
 {
-    #tmux_template_3panes "vim"
     tmux_template_2panes "vim"
 }
 
@@ -149,7 +148,7 @@ tmux_shell()
 
 tmux_markdown()
 {
-    tmux_template_3panes "markdown"
+    tmux_template_2panes "markdown"
     echo "this is the markdown's tmux"
 }
 
@@ -167,7 +166,7 @@ tmux_paper()
 
 tmux_entertainment()
 {
-    tmux_template_3panes "entertainment"
+    tmux_template_2panes "entertainment"
     echo "this is the entertainment's tmux"
 }
 
@@ -177,7 +176,7 @@ tmux_English()
     #tmux_template_2panes "type"
     python_main_dir=${HOME}/mygithub/shell-script/tmux-manager/English-code
     English_data_dir="~/mygithub/data-shared/English"
-    tmux new-session -s "English" \; \
+    tmux new-session -s "English" -n "English" \; \
     split-window -h \; \
     send-keys -t 1 'wr temp' C-m\; \
     send-keys -t 0 "python ${python_main_dir}/main.py -workspace $English_data_dir" C-m\; \
@@ -191,7 +190,7 @@ tmux_work()
     work_data_dir=~/mygithub/data-shared/work_management/data
     tmux_work_command="cd $source_dir/work_management/; ./main.exe $work_data_dir"
     # rewrite the layout
-    tmux new-session -s "work" \; \
+    tmux new-session -s "work" -n "work" \; \
     split-window -h \; \
     send-keys -t 0 "$tmux_work_command" C-m\; \
     select-pane -t 0
@@ -204,7 +203,7 @@ tmux_type()
     #tmux_template_2panes "type"
     python_main_dir=${HOME}/mygithub/shell-script/tmux-manager/type-code
     type_data_dir="~/mygithub/data-shared/type"
-    tmux new-session -s "type" \; \
+    tmux new-session -s "type" -n "type" \; \
     split-window -h \; \
     send-keys -t 1 'wr type' C-m\; \
     send-keys -t 0 "python ${python_main_dir}/main.py -workspace $type_data_dir" C-m\; \
@@ -788,7 +787,7 @@ case "$1" in
             # create the tmux layout
             tmux_type
             # check the file if exists, if not touch the files
-            create_mode_dir $1
+            create_mode_dir $1 
         fi
         ;;
     #}}}
