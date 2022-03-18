@@ -1,0 +1,14 @@
+1.(x) CMAKE's task。测试一下if语句，在CMAKE_BUILD_TYPE为Release和Debug情况下；测试define，strequal，match等语法；cmak的宏定义的，写个脚本测试一下。
+
+2.(x) c++'s task. Read the book C++ primer, to see the regular expression! See all the content of this chapter. Must be finished!
+
+3.(x) The work management program: 1) add the review file type; 2)continue to finishing the operation of the delete and the order and so on! 3) add the timer, show in the progress bar and the (time use, time left and total time); 4) if the command is too long, ask the user if enter the in or the add mode.
+
+4.(x) The tmux shell script program: 将type和English以及work managment部分的数据分离出来，重新搞个目录进行存储，便于共享数据！
+
+5.(x) Linux Shell: continue learning the grep, try to test the comand, That is very important! What is more, the xargs, and the argument, -Z -0 and so on!
+
+6.(y) Review the Gdb. Some simple command, just a bit time to go through!
+
+7.(x) Review the vimscript note. And continue to reading the vim script in my spare time!
+

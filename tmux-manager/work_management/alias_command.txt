@@ -1,0 +1,63 @@
+# about the add
+>> = add # add: the new items
+> = add
+》= add
+
+# about the alias
+as = alias show 
+ad = alias add
+ar = alias reload
+
+# about the date
+ds = date show # show the date
+du = date update # update the date
+b* = date today # back to the today
+bp = date previous # back to the previous day
+bn = date next # back to the next day
+gd = date go_day # for example, gd 8, go to the current year, current month, 8
+gm = date go_month_day # for example, gm 8-8, go the current year 8 8
+
+# about the file
+fr = file record # change the file to record
+fq = file question
+ft = file task
+fl = file learn
+
+# about show
+s = show number #  
+sn = show number # shwo number of the items; for example: show number 10
+sr = show reverse # shwo number reverse, toggle the reverse switch
+ss = show state # show the state of the itme. for expmle: show state x
+ssa = show state a
+ssx = show state x
+ssy = show state y
+ss- = show state -
+
+# lable
+lx = label x # label the state again, after this command, key the items id
+ly = label y
+l- = label -
+
+# about shell command
+vim = openInVim # vim xxx.txt
+! = shell # ! xxx equal to system(xxx)
+cl = clear # equal to system("clear")
+
+# file save
+:x = exit # save and exit the program
+:w = save # flush the buffer to the disk
+:e! = reload # disk -> buffer, the buffer will be covered
+
+# list the information
+ld = list date # list the date's file
+lf = list file 
+lc = list calendar
+
+# others
+pt = prompt_toggle # toggle to prompt
+h = help # help imformation
+
+# for record, in and out
+in = record_in # in the record mode, write to the buffer, you can use the ctrl+d rewrite, or enter to quit
+out = record_out # the work finish, the end time will write to the record
+abort = record_abort # don't record!

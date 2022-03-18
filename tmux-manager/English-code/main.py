@@ -165,6 +165,8 @@ if __name__ == "__main__":
         command_len = len(command_ls)
         if command_len == 0:
             cls()
+            # print the title
+            print(f"[ {hyphen(22)} English Larning System {hyphen(22)} ]")
             continue
         command_first = command_ls[0]
         #
@@ -191,7 +193,7 @@ if __name__ == "__main__":
                 continue
             # the right chapter, renew the chapter
             if len(command_ls) == 0:
-                printf(f"[WW] lack the chapter number! Fail!")
+                print(f"[WW] lack the chapter number! Fail!")
                 continue
             word_chapter = command_ls[1]
             cls()

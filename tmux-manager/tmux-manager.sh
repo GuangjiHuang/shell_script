@@ -36,6 +36,7 @@ sessions_list=("c++" \
     "type" \
     "tmux" \
     "cmake" \
+    "work" \
     "clock")
 tmux_action="create"
 source_dir=~/mygithub/shell-script/tmux-manager
@@ -175,11 +176,25 @@ tmux_English()
     # rewrite the layout
     #tmux_template_2panes "type"
     python_main_dir=${HOME}/mygithub/shell-script/tmux-manager/English-code
+    English_data_dir="~/mygithub/data-shared/English"
     tmux new-session -s "English" \; \
     split-window -h \; \
     send-keys -t 1 'wr temp' C-m\; \
-    send-keys -t 0 "python ${python_main_dir}/main.py -workspace $python_main_dir" C-m\; \
+    send-keys -t 0 "python ${python_main_dir}/main.py -workspace $English_data_dir" C-m\; \
     select-pane -t 1
+    #echo "this is the type's tmux"
+}
+
+tmux_work()
+{
+    source_dir=~/mygithub/shell-script/tmux-manager
+    work_data_dir=~/mygithub/data-shared/work_management/data
+    tmux_work_command="cd $source_dir/work_management/; ./main.exe $work_data_dir"
+    # rewrite the layout
+    tmux new-session -s "work" \; \
+    split-window -h \; \
+    send-keys -t 0 "$tmux_work_command" C-m\; \
+    select-pane -t 0
     #echo "this is the type's tmux"
 }
 
@@ -188,10 +203,11 @@ tmux_type()
     # rewrite the layout
     #tmux_template_2panes "type"
     python_main_dir=${HOME}/mygithub/shell-script/tmux-manager/type-code
+    type_data_dir="~/mygithub/data-shared/type"
     tmux new-session -s "type" \; \
     split-window -h \; \
     send-keys -t 1 'wr type' C-m\; \
-    send-keys -t 0 "python ${python_main_dir}/main.py -workspace $python_main_dir" C-m\; \
+    send-keys -t 0 "python ${python_main_dir}/main.py -workspace $type_data_dir" C-m\; \
     select-pane -t 1
     #echo "this is the type's tmux"
 }
@@ -741,6 +757,21 @@ case "$1" in
         else
             # create the tmux layout
             tmux_English
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
+        fi
+        ;;
+    #}}}
+
+    "work")
+    #{{{
+        # set the environment variable
+        echo "export mode=$1" > $mode_control_path
+        if [ "$tmux_action" == "into" ]; then
+            tmux attach -t $1
+        else
+            # create the tmux layout
+            tmux_work
             # check the file if exists, if not touch the files
             create_mode_dir $1
         fi

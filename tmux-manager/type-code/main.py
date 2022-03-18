@@ -1,4 +1,5 @@
 import json
+import os
 import argparse
 from utils import *
 
@@ -9,6 +10,11 @@ args = parser.parse_args()
 if args.workspace:
     os.chdir(args.workspace)
 
+def cls():
+    os.system("clear")
+
+def hyphen(num):
+    return "-" * num
 
 if __name__ == "__main__":
 # the global variables
@@ -25,11 +31,13 @@ if __name__ == "__main__":
     #
     print("------ words type practice! ------")
     while True:
-        if mode == "English":
-            json_file_path = r"./English.json"
-            txt_file_path = r"./English.txt"
         command = input(f"{newline(1)}[#] Please input the command: ")
         command = command.strip(" ")
+        # check the command if len == 0
+        if len(command)==0:
+            cls()
+            print(f"[ {hyphen(22)} Type Pratice System {hyphen(22)} ]")
+            continue
         # check if the command is right
         if command not in cmd_ls and "show" not in command:
             print(f"[W] {command} is not the command! Try again!")
