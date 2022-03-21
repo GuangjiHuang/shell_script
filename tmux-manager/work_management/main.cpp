@@ -85,6 +85,12 @@ int main(int argc, char** argv) {
         else if (command == "alias") {
             cmd_alias(parser, alias_parser);
         }
+        else if (command == "operation") {
+            cmd_operation(file, parser);
+        }
+        else if (command == "timer") {
+            cmd_timer(parser);
+        }
         else if (command == "openInVim") {
             cmd_openInVim(file, path_man);
         }

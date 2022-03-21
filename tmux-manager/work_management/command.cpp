@@ -1,4 +1,6 @@
 #include "command.h"
+#include "regex_utils.h"
+#include <unordered_set>
 
 /* command: add */
 void cmd_add(File_t& file, Path_man& path_man) {
@@ -20,6 +22,10 @@ void cmd_date(File_t& file, const Parser& parser,  Path_man& path_man, Show_arg&
     // change and show
     if (arg_1 == "show") {
         cout << "[Tip]: date: " << path_man.getDate() << endl;
+        // will not change the argument, just show the items
+        cls();
+        printHeader(file, path_man, show_arg);
+        printContent(file, show_arg);
         return;
     }
     // change the date
@@ -96,6 +102,7 @@ void cmd_date(File_t& file, const Parser& parser,  Path_man& path_man, Show_arg&
         printContent(file, show_arg);
     }
 }
+
 /* command: file */
 void cmd_file(File_t& file, const Parser& parser, Path_man& path_man, Show_arg& show_arg) {
     const int arg_num = parser.arg_num;
@@ -175,6 +182,7 @@ void cmd_show(File_t& file, Path_man& path_man, Parser& parser, Show_arg& show_a
 void cmd_save(File_t& file) {
     file.flushBuffer();
 }
+
 /* command: openInVim */
 void cmd_openInVim(File_t& file, Path_man& path_man) {
     // 1. save the buffer to the file; 2. use the vim to open it
@@ -187,6 +195,7 @@ void cmd_openInVim(File_t& file, Path_man& path_man) {
         cout << "There are something wrong! Can not open in vim!" << endl;
     }
 }
+
 /*command: alias */
 void cmd_alias(Parser& parser, AliasParser& alias_parser) {
     const int arg_num = parser.arg_num;
@@ -284,7 +293,7 @@ void cmd_label(File_t& file, Parser& parser, AliasParser& alias_parser, const Pa
         string line;
         vector<string> vec_id_str;
         vector<int> vec_id_int;
-        cout << "->To " << state << ": ";
+        cout << "(label index)To " << state << CCOLOR(LIGHT_GREEN, "->: ");
         getline(cin, line);
         Parser::split(line, vec_id_str, " ");
         for (auto it=vec_id_str.begin(); it!=vec_id_str.end(); ++it) {
@@ -370,12 +379,12 @@ void cmd_recordOperation(File_t& file, Path_man& path_man, Parser& parser, stack
         last_item.insert(str_it+1, cur_time.begin(), cur_time.end());
         // clear the time record stk, then write renew the buffer's item
         record_time.pop();
-
     }
     else if (arg_0 == "record_abort") {
         // empty the stack and erase the vector's last item
         file.refItems().pop_back(); // pop the item
         file.refStates().pop_back(); //  pop the state
+        --file.refItemsNum(); // the items num must sub 1
         --file.refStateNum()[NOTDO]; // sub the NOTDO
         --file.refStateNum()['a']; // all sib 1
         record_time.pop(); // pop the time
@@ -384,3 +393,125 @@ void cmd_recordOperation(File_t& file, Path_man& path_man, Parser& parser, stack
         cout << "[Warning]: no such record command!" << endl;
     }
 }
+
+void cmd_operation(File_t& file, Parser& parser) {
+    const int arg_num = parser.arg_num;
+    if (arg_num == 0) {
+        return;
+    }
+    string arg_1 = parser.arg_ls[1];
+    if (arg_1 == "delete") {
+        // get the line
+    AGAIN:
+        string line;
+        cout << "(del index)->: ";
+        getline(cin, line);
+        if (cin.eof()) {
+            cin.clear();
+            cout << endl << "[rewrite]->: ";
+            goto AGAIN;
+        }
+        if (line.empty()) {
+            return; // end
+        }
+        // the var
+        vector<int> del_index;
+        getLineNumber(line, del_index); // use the regular expression to extract the number
+        vector<string>& items_vec = file.refItems();
+        vector<char>& states_vec = file.refStates();
+        unordered_map<char, int> states_num = file.refStateNum();
+        int items_num = file.getItemsNum();
+        //
+        remove_if(del_index.begin(), del_index.end(), [&items_num](int i) { // filter
+            return i<0 || i>items_num;
+        });
+        unordered_set<int> del_index_set(del_index.begin(), del_index.end());
+        //
+        vector<string> items_temp;
+        vector<char> states_temp;
+        for (int i=0; i<items_vec.size(); ++i) {
+            if (del_index_set.find(i)==del_index_set.end()) {
+                // not found
+                items_temp.push_back(items_vec[i]);
+                states_temp.push_back(states_vec[i]);
+            }
+            else { // found, the state number sub 1
+                --states_num[states_vec[i]];
+                --states_num['a']; // all sub 1
+            }
+        }
+        // renew the items_vec, states_vec
+        items_vec.clear();
+        states_vec.clear();
+        items_vec = move(items_temp);
+        states_vec = move(states_temp);
+        // renew the number and the items state and number
+        dealItemsPrefix(file); // reorder the item of file
+        // then renew the states, and the states_num
+    }
+    else if (arg_1 == "recover") {
+        dealItemsPrefix(file);
+    }
+    else {
+        cout << "[Warning]: no such operation command!" << endl;
+    }
+}
+
+void cmd_timer(Parser& parser) {
+    const int arg_num = parser.arg_num;
+    // the sleep_min;
+    int sleep_min;
+    if (arg_num == 0) {
+        sleep_min = 30;
+    }
+    else {
+        string arg_1 = parser.arg_ls[1];
+        if (isNum(arg_1)) {
+            sleep_min = stoi(arg_1);
+        }
+        else {
+            sleep_min = 30;
+        }
+    }
+    // call the function
+    progressBar(sleep_min);
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

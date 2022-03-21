@@ -1,1 +1,0 @@
-/usr/bin/c++.exe -Wl,--enable-auto-import CMakeFiles/main.dir/utils.cpp.o CMakeFiles/main.dir/hgj_t.cpp.o CMakeFiles/main.dir/command.cpp.o CMakeFiles/main.dir/main.cpp.o -o ../main.exe -Wl,--out-implib,../libmain.dll.a -Wl,--major-image-version,0,--minor-image-version,0  /usr/lib/libpython3.8.dll.a 

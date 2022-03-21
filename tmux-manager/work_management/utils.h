@@ -29,11 +29,13 @@
 // python.h
 #include <Python.h>
 
+// others
+#include "color.h"
+
 // the macro
 #define NOTDO 'x'
 #define NOTFINISH '-'
 #define FINISH 'y'
-
 using namespace std;
 typedef unsigned int u_int;
 typedef long long ll_int;
@@ -93,5 +95,6 @@ void cls();
 void getDirFiles(const string& dir_path, vector<string>& files_path);
 void printMonthDay(const string& dir_path, int year, int month, const string& file_type, bool is_calendar);
 void printFileList(const string& dir_path, const vector<string>& file_type_list={}, const vector<char>& states_ls={});
+void progressBar(int mins);
 string timeDurationFromNow(const string& history_time);
 #endif

@@ -1,26 +1,26 @@
-(x)today is 2022-03-11
+ 1.(x)day is 2022-03-11
 
-(x)what is your name?
+ 2.(x)what is your name?
 
-(x)That is a good job!
+ 3.(x)That is a good job!
 
-(x) no
+ 4.(x) no
 
-(-)xxxx
+ 5.(-) xxxx
 
-new add
+ 6.(x) new add
 
-new add 2
+ 7.(x) new add 2
 
-new add 3
+ 8.(x)new add 3
 
-9.(-) new add 4
+ 9.(x) new add 4
 
-10.(-) new add 5
+10.(-).(-) new add 5
 
-11.(-) this is the 11th content
+11.(y) this is the 11th content
 
-12.(-) this is the 12th content
+12.(x) this is the 12th content
 
 13.(-) add the 3th conent
 

@@ -3,6 +3,28 @@ import os
 import argparse
 from utils import *
 
+# the color
+no_color = "\033[0m"
+dark = "\033[0;30m"
+light_dark = "\033[1;30m"
+red = "\033[0;31m"
+light_red = "\033[1;31m"
+green = "\033[0;32m"
+light_green = "\033[1;32m"
+orange = "\033[0;33m"
+yellow = "\033[1;33m"
+blue = "\033[0;34m"
+light_blue = "\033[1;34m"
+purple = "\033[0;35m"
+light_purple = "\033[1;35m"
+cayon = "\033[0;36m"
+light_cayon = "\033[1;36m"
+light_gray = "\033[0;37m"
+white = "\033[1;37m"
+
+def color(color_, content):
+    return color_ + content + no_color
+
 # change the workspace to the responding dir
 parser = argparse.ArgumentParser(description="for the type!")
 parser.add_argument("-workspace", help="the workspace for the program")
@@ -31,12 +53,12 @@ if __name__ == "__main__":
     #
     print("------ words type practice! ------")
     while True:
-        command = input(f"{newline(1)}[#] Please input the command: ")
+        command = input(f"{newline(1)}[{color(yellow, 'Type')}] {color(light_blue, 'Please input the command')}: ")
         command = command.strip(" ")
         # check the command if len == 0
         if len(command)==0:
             cls()
-            print(f"[ {hyphen(22)} Type Pratice System {hyphen(22)} ]")
+            print(f"[ {hyphen(22)} {color(light_cayon, 'Type Pratice System')} {hyphen(22)} ]")
             continue
         # check if the command is right
         if command not in cmd_ls and "show" not in command:
@@ -110,7 +132,7 @@ if __name__ == "__main__":
             word_dict = loadFile(json_file_path)
             total_num = len(word_dict)
             show_num = min(total_num, show_number)
-            print(f"---------------words show ({show_num}/{total_num})--------------\n")
+            print(f"---------------{color(light_cayon, 'Words Show')} ({show_num}/{total_num})--------------\n")
             # sort first
             word_dict = sorted(word_dict.items(), key=lambda x:(num_sort_sign * x[1],word_sort_sign * x[0]), reverse=True)
             # print

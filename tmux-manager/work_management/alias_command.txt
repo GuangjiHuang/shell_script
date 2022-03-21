@@ -24,7 +24,7 @@ ft = file task
 fl = file learn
 
 # about show
-s = show number #  
+s = show # just repeat the show command!
 sn = show number # shwo number of the items; for example: show number 10
 sr = show reverse # shwo number reverse, toggle the reverse switch
 ss = show state # show the state of the itme. for expmle: show state x
@@ -41,10 +41,11 @@ l- = label -
 # about shell command
 vim = openInVim # vim xxx.txt
 ! = shell # ! xxx equal to system(xxx)
+-> = shell # same as the shell
 cl = clear # equal to system("clear")
 
 # file save
-:x = exit # save and exit the program
+:x = exit # save and exit the progra
 :w = save # flush the buffer to the disk
 :e! = reload # disk -> buffer, the buffer will be covered
 
@@ -53,8 +54,13 @@ ld = list date # list the date's file
 lf = list file 
 lc = list calendar
 
+# items operation
+id = operation delete # delete the items by the index
+ir = operation recover # make it clean, has the order
+
 # others
 pt = prompt_toggle # toggle to prompt
+t = timer
 h = help # help imformation
 
 # for record, in and out

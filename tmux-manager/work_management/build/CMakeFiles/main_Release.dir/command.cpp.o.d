@@ -1,5 +1,6 @@
-CMakeFiles/main.dir/main.cpp.o: \
- /home/gjsq/mygithub/shell-script/tmux-manager/work_management/main.cpp \
+CMakeFiles/main_Release.dir/command.cpp.o: \
+ /home/gjsq/mygithub/shell-script/tmux-manager/work_management/command.cpp \
+ /home/gjsq/mygithub/shell-script/tmux-manager/work_management/command.h \
  /home/gjsq/mygithub/shell-script/tmux-manager/work_management/utils.h \
  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/cstdio \
  /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/x86_64-pc-cygwin/bits/c++config.h \
@@ -306,5 +307,8 @@ CMakeFiles/main.dir/main.cpp.o: \
  /usr/include/python3.8/pystrcmp.h /usr/include/python3.8/dtoa.h \
  /usr/include/python3.8/fileutils.h /usr/include/python3.8/pyfpe.h \
  /usr/include/python3.8/tracemalloc.h \
+ /home/gjsq/mygithub/shell-script/tmux-manager/work_management/color.h \
  /home/gjsq/mygithub/shell-script/tmux-manager/work_management/hgj_t.h \
- /home/gjsq/mygithub/shell-script/tmux-manager/work_management/command.h
+ /home/gjsq/mygithub/shell-script/tmux-manager/work_management/regex_utils.h \
+ /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/unordered_set \
+ /usr/lib/gcc/x86_64-pc-cygwin/11/include/c++/bits/unordered_set.h

@@ -5,6 +5,29 @@ import sys
 import platform
 import argparse
 
+# about the color   
+# the color
+no_color = "\033[0m"
+dark = "\033[0;30m"
+light_dark = "\033[1;30m"
+red = "\033[0;31m"
+light_red = "\033[1;31m"
+green = "\033[0;32m"
+light_green = "\033[1;32m"
+orange = "\033[0;33m"
+yellow = "\033[1;33m"
+blue = "\033[0;34m"
+light_blue = "\033[1;34m"
+purple = "\033[0;35m"
+light_purple = "\033[1;35m"
+cayon = "\033[0;36m"
+light_cayon = "\033[1;36m"
+light_gray = "\033[0;37m"
+white = "\033[1;37m"
+
+def color(color_, content):
+    return color_ + content + no_color
+
 
 # the global var
 show_label_ls = ["-", "x", "y", "^", "a"]
@@ -80,7 +103,7 @@ def showWords(word_dict, show_ls, label_str, is_show_newline, is_show_newline_th
     # get the label number information
     # show the header
     #header_format = f">>> SHOWING:  ({label}: {label_verbose})  ({show_label_number}/{total_label_number}) <<<"
-    header_format = f">>> SHOWING:  ({getLabelFromStr(label_str)})  ({show_label_number}/{total_label_number}) <<<"
+    header_format = f"[ {color(light_green, 'SHOWING')}:  ({getLabelFromStr(label_str)})  ({show_label_number}/{total_label_number}) "
     print(header_format)
     print(hyphen(55))
     # show the main part
@@ -93,7 +116,7 @@ def showWords(word_dict, show_ls, label_str, is_show_newline, is_show_newline_th
 
 def showHeader(chapter, word_dict):
     #header_format = f"--->>> {chapter}\t"
-    header_format = f"[ Count Info:  "
+    header_format = f"[ {color(light_green, 'Count Info')}:  "
     if chapter == "No set":
         header_format += f"x:None\t^:None\ty:None\t-:None\ta:None ]"
     else:
@@ -160,13 +183,13 @@ if __name__ == "__main__":
             is_continue_show_flag = False # important to turn off the contunie showing!
             command_ls = ["show"]
         else:
-            command = input(f"{newline(1)}[{word_chapter}] Please input the command: ")
+            command = input(f"{newline(1)}[{color(yellow, word_chapter)}] {color(light_blue, 'Please input the command: ')}")
             command_ls = commandDeal(command)
         command_len = len(command_ls)
         if command_len == 0:
             cls()
             # print the title
-            print(f"[ {hyphen(22)} English Larning System {hyphen(22)} ]")
+            print(f"[ {hyphen(22)} {color(light_cayon, 'English Learning System')} {hyphen(22)} ]")
             continue
         command_first = command_ls[0]
         #

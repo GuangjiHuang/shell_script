@@ -124,7 +124,7 @@ string getWeekday(int year, int month, int day) {
     const vector<string> weekday_vec {"Sun", "Mon", "Tue", "Wed", "Thur", "Fri", "Sat"};
     int days = dateToDays(year, month, day);
     int weekday = days % 7 + refer_week_day;
-    return weekday_vec[weekday];
+    return weekday_vec[weekday%7];
 }
 
 bool is_leap(int year) {
@@ -165,11 +165,12 @@ void printHeader(const File_t& file, const Path_man& path_man, const Show_arg& s
         const int space_num = 4;
         const int hyphen_num = 55;
         stringstream ss;
-        ss << "[ Count Info:" << spaceStr(space_num);
+        ss << "[ " << CCOLOR(YELLOW, "Count Info:") << spaceStr(space_num);
         ss << NOTDO << ": " << num_not_do << spaceStr(space_num);
         ss << NOTFINISH << ": " << num_not_finish << spaceStr(space_num);
         ss << FINISH << ": " << num_finish << spaceStr(space_num);
         ss << "total" << ": " << num_total << spaceStr(space_num);
+        ss << "\n";
         ss << endl;
         // assign the value to the line_1
         line_1 = ss.str();
@@ -222,7 +223,7 @@ void printHeader(const File_t& file, const Path_man& path_man, const Show_arg& s
         const int space_num = 2;
         // use the ss
         stringstream ss;
-        ss << "[ Showing:" << spaceStr(space_num);
+        ss << "[ " << CCOLOR(YELLOW, "Showing:") << spaceStr(space_num);
         ss << "(" << state << ":" << state_verbose << ")" << spaceStr(space_num);
         ss <<  "(" << state_show_num << "/" << state_total_num << ") " << spaceStr(space_num);
         ss << path_man.getDate() << spaceStr(1) << weekday << " ("  << day_mark << ")" << endl;
@@ -233,7 +234,7 @@ void printHeader(const File_t& file, const Path_man& path_man, const Show_arg& s
     const int hyphen_num = 55;
     cout << hyphen(hyphen_num) << endl;
     cout << line_1 << line_2;   // has included new line inside the string
-    cout << hyphen(hyphen_num) << endl;
+    cout << hyphen(hyphen_num) << "\n" << endl; // output two endl
 }
 
 void printTitle() {
@@ -241,7 +242,7 @@ void printTitle() {
     stringstream ss;
     ss << "[ ";
     ss << hyphen(hyphen_num);
-    ss << " Work Management System ";
+    ss << CCOLOR(LIGHT_CYAN, " Work Management System ");
     ss << hyphen(hyphen_num);
     ss << " ]";
     ss << endl;
@@ -286,9 +287,10 @@ void printPromptFileType(Path_man& path_man, const stack<string>& record_time) {
         ch += 'A'-'a'; /* to uppercase */
     });
     string prompt = "[" + upper_file_type + "] "; // the command part
+    prompt = SCOLOR(LIGHT_GREEN, prompt);
     if (file_type!="record" || (file_type=="record" && record_time.empty())) {
         // if not the record, or record && not in the record time
-        prompt += "Please input the command: ";
+        prompt += CCOLOR(LIGHT_BLUE, "Please input the command: ");
         cout << endl;
         cout << prompt;
         return;
@@ -296,6 +298,7 @@ void printPromptFileType(Path_man& path_man, const stack<string>& record_time) {
     // the case: record and in the record time
     string start_time(record_time.top());
     string duration = timeDurationFromNow(start_time);
+    duration = SCOLOR(LIGHT_RED, duration);
     prompt +=  start_time + " -> ... (U: " + duration + ") >>: ";
     cout << endl;
     cout << prompt;
@@ -311,10 +314,11 @@ void printPromptTime(Path_man& path_man, const stack<string>& record_time) {
     strftime(time_str, buffer_size, "%H:%M", localtime(&now));
     // time string
     string prompt("[" + string(time_str) + "] ");
+    prompt = SCOLOR(LIGHT_GREEN, prompt);
     //
     if (file_type!="record" || (file_type=="record" && record_time.empty())) {
         // if not the record, or record && not in the record time
-        prompt += "Please input the command: ";
+        prompt += CCOLOR(LIGHT_BLUE, "Please input the command: ");
         cout << endl;
         cout << prompt;
         return;
@@ -406,6 +410,18 @@ string timeDurationFromNow(const string& history_time) {
     Py_Finalize();
     //
     return duration;
+}
+
+void progressBar(int mins) {
+    const char* py_command = "import sys;"
+                             "sys.path.append('./py-script');"
+                             "sys.path.append('../')";
+    Py_Initialize();
+    PyRun_SimpleString(py_command);
+    PyObject* p_module = PyImport_ImportModule("hgj_py");
+    PyObject* p_func = PyObject_GetAttrString(p_module, "progressBar");
+    PyObject_CallFunction(p_func, "i", mins);
+    Py_Finalize();
 }
 
 void printFileList(const string& dir_path, const vector<string>& file_type_list, const vector<char>& states_ls) {

@@ -24,4 +24,8 @@ void cmd_label(File_t& file, Parser& parser, AliasParser& alias_parser, const Pa
 void cmd_list(File_t& file, Path_man& path_man, Parser& parser);
 /* command: record_in, record_out */
 void cmd_recordOperation(File_t& file, Path_man& path_man, Parser& parser, stack<string>& record_time);
+/* command: operation */
+void cmd_operation(File_t& file, Parser& parser);
+/* command: timer */
+void cmd_timer(Parser& parser);
 #endif

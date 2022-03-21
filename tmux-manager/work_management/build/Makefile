@@ -117,24 +117,24 @@ depend:
 .PHONY : depend
 
 #=============================================================================
-# Target rules for targets named main
+# Target rules for targets named main_Release
 
 # Build rule for target.
-main: cmake_check_build_system
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main
-.PHONY : main
+main_Release: cmake_check_build_system
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/Makefile2 main_Release
+.PHONY : main_Release
 
 # fast build rule for target.
-main/fast:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/build
-.PHONY : main/fast
+main_Release/fast:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_Release.dir/build.make CMakeFiles/main_Release.dir/build
+.PHONY : main_Release/fast
 
 command.o: command.cpp.o
 .PHONY : command.o
 
 # target to build an object file
 command.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/command.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_Release.dir/build.make CMakeFiles/main_Release.dir/command.cpp.o
 .PHONY : command.cpp.o
 
 command.i: command.cpp.i
@@ -142,7 +142,7 @@ command.i: command.cpp.i
 
 # target to preprocess a source file
 command.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/command.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_Release.dir/build.make CMakeFiles/main_Release.dir/command.cpp.i
 .PHONY : command.cpp.i
 
 command.s: command.cpp.s
@@ -150,7 +150,7 @@ command.s: command.cpp.s
 
 # target to generate assembly for a file
 command.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/command.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_Release.dir/build.make CMakeFiles/main_Release.dir/command.cpp.s
 .PHONY : command.cpp.s
 
 hgj_t.o: hgj_t.cpp.o
@@ -158,7 +158,7 @@ hgj_t.o: hgj_t.cpp.o
 
 # target to build an object file
 hgj_t.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/hgj_t.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_Release.dir/build.make CMakeFiles/main_Release.dir/hgj_t.cpp.o
 .PHONY : hgj_t.cpp.o
 
 hgj_t.i: hgj_t.cpp.i
@@ -166,7 +166,7 @@ hgj_t.i: hgj_t.cpp.i
 
 # target to preprocess a source file
 hgj_t.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/hgj_t.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_Release.dir/build.make CMakeFiles/main_Release.dir/hgj_t.cpp.i
 .PHONY : hgj_t.cpp.i
 
 hgj_t.s: hgj_t.cpp.s
@@ -174,7 +174,7 @@ hgj_t.s: hgj_t.cpp.s
 
 # target to generate assembly for a file
 hgj_t.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/hgj_t.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_Release.dir/build.make CMakeFiles/main_Release.dir/hgj_t.cpp.s
 .PHONY : hgj_t.cpp.s
 
 main.o: main.cpp.o
@@ -182,7 +182,7 @@ main.o: main.cpp.o
 
 # target to build an object file
 main.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_Release.dir/build.make CMakeFiles/main_Release.dir/main.cpp.o
 .PHONY : main.cpp.o
 
 main.i: main.cpp.i
@@ -190,7 +190,7 @@ main.i: main.cpp.i
 
 # target to preprocess a source file
 main.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_Release.dir/build.make CMakeFiles/main_Release.dir/main.cpp.i
 .PHONY : main.cpp.i
 
 main.s: main.cpp.s
@@ -198,15 +198,39 @@ main.s: main.cpp.s
 
 # target to generate assembly for a file
 main.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/main.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_Release.dir/build.make CMakeFiles/main_Release.dir/main.cpp.s
 .PHONY : main.cpp.s
+
+regex_utils.o: regex_utils.cpp.o
+.PHONY : regex_utils.o
+
+# target to build an object file
+regex_utils.cpp.o:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_Release.dir/build.make CMakeFiles/main_Release.dir/regex_utils.cpp.o
+.PHONY : regex_utils.cpp.o
+
+regex_utils.i: regex_utils.cpp.i
+.PHONY : regex_utils.i
+
+# target to preprocess a source file
+regex_utils.cpp.i:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_Release.dir/build.make CMakeFiles/main_Release.dir/regex_utils.cpp.i
+.PHONY : regex_utils.cpp.i
+
+regex_utils.s: regex_utils.cpp.s
+.PHONY : regex_utils.s
+
+# target to generate assembly for a file
+regex_utils.cpp.s:
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_Release.dir/build.make CMakeFiles/main_Release.dir/regex_utils.cpp.s
+.PHONY : regex_utils.cpp.s
 
 utils.o: utils.cpp.o
 .PHONY : utils.o
 
 # target to build an object file
 utils.cpp.o:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/utils.cpp.o
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_Release.dir/build.make CMakeFiles/main_Release.dir/utils.cpp.o
 .PHONY : utils.cpp.o
 
 utils.i: utils.cpp.i
@@ -214,7 +238,7 @@ utils.i: utils.cpp.i
 
 # target to preprocess a source file
 utils.cpp.i:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/utils.cpp.i
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_Release.dir/build.make CMakeFiles/main_Release.dir/utils.cpp.i
 .PHONY : utils.cpp.i
 
 utils.s: utils.cpp.s
@@ -222,7 +246,7 @@ utils.s: utils.cpp.s
 
 # target to generate assembly for a file
 utils.cpp.s:
-	$(MAKE) $(MAKESILENT) -f CMakeFiles/main.dir/build.make CMakeFiles/main.dir/utils.cpp.s
+	$(MAKE) $(MAKESILENT) -f CMakeFiles/main_Release.dir/build.make CMakeFiles/main_Release.dir/utils.cpp.s
 .PHONY : utils.cpp.s
 
 # Help Target
@@ -233,7 +257,7 @@ help:
 	@echo "... depend"
 	@echo "... edit_cache"
 	@echo "... rebuild_cache"
-	@echo "... main"
+	@echo "... main_Release"
 	@echo "... command.o"
 	@echo "... command.i"
 	@echo "... command.s"
@@ -243,6 +267,9 @@ help:
 	@echo "... main.o"
 	@echo "... main.i"
 	@echo "... main.s"
+	@echo "... regex_utils.o"
+	@echo "... regex_utils.i"
+	@echo "... regex_utils.s"
 	@echo "... utils.o"
 	@echo "... utils.i"
 	@echo "... utils.s"

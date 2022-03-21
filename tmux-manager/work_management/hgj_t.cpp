@@ -28,7 +28,7 @@ void File_t::flushBuffer() {
 bool File_t::writeToBuffer(bool is_record, const string& cur_time) {
 GET_LINE:
     string item;
-    cout << "->: ";
+    cout << CCOLOR(LIGHT_GREEN, "->: ");
     getline(cin, item);
     // if key the ctrl+d, that is eof mark, means that you don't want to key this content
     if (cin.eof()) {

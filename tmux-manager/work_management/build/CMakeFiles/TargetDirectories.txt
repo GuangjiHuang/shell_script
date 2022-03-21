@@ -1,3 +1,3 @@
 /home/gjsq/mygithub/shell-script/tmux-manager/work_management/build/CMakeFiles/rebuild_cache.dir
 /home/gjsq/mygithub/shell-script/tmux-manager/work_management/build/CMakeFiles/edit_cache.dir
-/home/gjsq/mygithub/shell-script/tmux-manager/work_management/build/CMakeFiles/main.dir
+/home/gjsq/mygithub/shell-script/tmux-manager/work_management/build/CMakeFiles/main_Release.dir

@@ -2,7 +2,30 @@ import os
 import time
 import re
 
+# the color
+no_color = "\033[0m"
+dark = "\033[0;30m"
+light_dark = "\033[1;30m"
+red = "\033[0;31m"
+light_red = "\033[1;31m"
+green = "\033[0;32m"
+light_green = "\033[1;32m"
+orange = "\033[0;33m"
+yellow = "\033[1;6;33m"
+blue = "\033[0;34m"
+light_blue = "\033[1;34m"
+purple = "\033[0;35m"
+light_purple = "\033[1;35m"
+cayon = "\033[0;36m"
+light_cayon = "\033[1;36m"
+light_gray = "\033[0;37m"
+white = "\033[1;37m"
+
 all_file_type = ["task", "record", "learn", "question"]
+
+def color(color_, content):
+    return color_ + content + no_color
+
 def getDaysFromDir(dir_path, file_type=None):
     # ret var
     days = list()
@@ -204,6 +227,36 @@ def timeDurationFromNow(history_time):
         duration_time = f"{sub_min/60:.1f} hour"
     return duration_time
 
+def progressBar(n_min):
+    n_seconds = 60 * n_min
+    hyphen_num = 75
+    bar_str =  hyphen(hyphen_num)  # same as the: "-" * hyphen_num
+    mark = "|>"
+    # the sleep gap
+    gap = n_seconds // hyphen_num
+    if gap < 1:
+        gap = 1
+    title = " TIMER "
+    left_num_hyphen = int((hyphen_num - len(title)) * 0.5)
+    os.system("clear")
+    print("\n")
+    print(f"<{hyphen(left_num_hyphen)}{color(light_cayon, title)}{hyphen(left_num_hyphen)}>")
+    print("\n")
+    i = 0
+    while i<n_seconds:
+        mark_pos = int(i / n_seconds * hyphen_num)
+        str_print = f"[{color(light_green, bar_str[:mark_pos])}" \
+                    f"{color(yellow, mark)}" \
+                    f"{color(light_red, bar_str[mark_pos+2:])}]" \
+                    f"{space(5)}{(i+1)//60}min / {n_min}min"
+                    #color(green, f"{space(5)}{(i+1)//60}min") + " / " + color(light_blue, f"{n_min}min")
+        #str_print = "\033[?25I" + str_print
+        hide_cursor = "\033[1A"
+        print(str_print, end="\r")
+        time.sleep(gap)
+        i += gap
+    # at the end
+    print()
 
 if __name__ == "__main__":
     #days = [1, 3, 2, 9, 4, 2, 3, 1, 22, 31, 11, 14]
@@ -211,25 +264,6 @@ if __name__ == "__main__":
     #printMonthDay("../data", 2022, 3, "question")
     #dir_path = "../data/2022/03/03-11"
     #printFileList(dir_path)
-    history_time = "22:11"
-    print(timeDurationFromNow(history_time))
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    #history_time = "22:11"
+    #print(timeDurationFromNow(history_time))
+    pass
