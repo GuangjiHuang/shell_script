@@ -649,5 +649,4 @@ case "$1" in
         echo -e "-> ${RED}ERROR:${NOCOLOR} Wrong input! You can just input the following option:\n-> ${GREEN}OPTION:${NOCOLOR} love, plan, learn, question, temp, help, pointer %Y-%m-%d, pointer-check, go-e, go-wr, review, all, rest, todo, todo-cfg, todo-exe, type x... and so on "
         echo -e "${GREEN}You can use the wr help for more information!${NOCOLOR}"
         ;;
-
 esac

@@ -136,6 +136,10 @@ string hyphen(int hyphen_num) {
     return string(hyphen_num, '-');
 }
 
+string asterisk(int asterisk_num) {
+    return string(asterisk_num, '*');
+}
+
 string spaceStr(int space_num) {
     return string(space_num, ' ');
 }
@@ -234,7 +238,14 @@ void printHeader(const File_t& file, const Path_man& path_man, const Show_arg& s
     const int hyphen_num = 55;
     cout << hyphen(hyphen_num) << endl;
     cout << line_1 << line_2;   // has included new line inside the string
-    cout << hyphen(hyphen_num) << "\n" << endl; // output two endl
+    cout << hyphen(hyphen_num) << endl;
+    // print the file type
+    int space_num;
+    string middle_title = "[ - " + path_man.getFileType() + " - ]";
+    space_num = (hyphen_num - middle_title.size() - 2) / 2;
+    cout << spaceStr(space_num) << " "\
+         <<  SCOLOR(LIGHT_CYAN, middle_title) \
+         << " " << spaceStr(space_num) << endl << endl;
 }
 
 void printTitle() {
@@ -249,7 +260,7 @@ void printTitle() {
     cout << ss.str();
 }
 
-void printContent(const File_t& file, const Show_arg& show_arg) {
+void printContent(const File_t& file, const Show_arg& show_arg, bool is_just_show_title) {
     vector<string> str_to_be_print;
     // the argument about the show
     char show_state = show_arg.getState();
@@ -272,11 +283,22 @@ void printContent(const File_t& file, const Show_arg& show_arg) {
         }
     }
     if (is_reverse) reverse(str_to_be_print.begin(), str_to_be_print.end());
+    // if just show title is true, extract the title
+    if (is_just_show_title) {
+        for (auto& item : str_to_be_print) {
+            auto item_it = item.begin();
+            while (item_it!=item.end() && *item_it!='\n') ++item_it;
+            if (item_it!=item.end()) ++item_it;
+            // renew the item
+            item.assign(item.begin(), item_it);
+        }
+    }
+    // print the content
+    const int hyphen_num = 55;
     items_it = str_to_be_print.begin();
     while (--state_show_num>=0 && items_it!=str_to_be_print.end()) {
         cout << *items_it++ << endl;
     }
-    const int hyphen_num = 55;
     cout << hyphen(hyphen_num) << endl;
 }
 
@@ -412,7 +434,7 @@ string timeDurationFromNow(const string& history_time) {
     return duration;
 }
 
-void progressBar(int mins) {
+void progressBar(int mins, bool is_hyphen_num_short) {
     const char* py_command = "import sys;"
                              "sys.path.append('./py-script');"
                              "sys.path.append('../')";
@@ -420,7 +442,7 @@ void progressBar(int mins) {
     PyRun_SimpleString(py_command);
     PyObject* p_module = PyImport_ImportModule("hgj_py");
     PyObject* p_func = PyObject_GetAttrString(p_module, "progressBar");
-    PyObject_CallFunction(p_func, "i", mins);
+    PyObject_CallFunction(p_func, "ii", mins, static_cast<int>(is_hyphen_num_short));
     Py_Finalize();
 }
 

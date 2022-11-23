@@ -67,6 +67,9 @@ int main(int argc, char** argv) {
             // enter the input state, what you input will store in the file._items
             cmd_add(file, path_man);
         }
+        else if (command == "append") {
+            cmd_append(file, path_man, parser);
+        }
         else if (command == "file") {
             // change the path_man's file
             // show date and change date
@@ -122,6 +125,8 @@ int main(int argc, char** argv) {
         else if (command == "prompt_toggle" || command == "pt") {
             prompt_toggle = !prompt_toggle;
             cls();
+            printHeader(file, path_man, show_arg);
+            printContent(file, show_arg);
         }
         else if (command == "exit") {
             cmd_save(file);

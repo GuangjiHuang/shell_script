@@ -66,10 +66,11 @@ bool is_leap(int );
 
 /* print the message */
 string hyphen(int);
+string asterisk(int asterisk_num);
 void printError(const string& );
 void printHeader(const File_t& file, const Path_man& path_man, const Show_arg& show_arg);
 void printTitle();
-void printContent(const File_t& file, const Show_arg& show_arg);
+void printContent(const File_t& file, const Show_arg& show_arg, bool is_just_show_title=false);
 void printPromptTime(Path_man& path_man, const stack<string>& record_time);
 void printPromptFileType(Path_man& path_man, const stack<string>& record_time);
 void getStateVerbose(const char state, string& state_verbose);
@@ -95,6 +96,6 @@ void cls();
 void getDirFiles(const string& dir_path, vector<string>& files_path);
 void printMonthDay(const string& dir_path, int year, int month, const string& file_type, bool is_calendar);
 void printFileList(const string& dir_path, const vector<string>& file_type_list={}, const vector<char>& states_ls={});
-void progressBar(int mins);
+void progressBar(int mins, bool is_hypen_num_short=false);
 string timeDurationFromNow(const string& history_time);
 #endif

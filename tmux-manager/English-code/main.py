@@ -32,7 +32,31 @@ def color(color_, content):
 # the global var
 show_label_ls = ["-", "x", "y", "^", "a"]
 show_label_ls_verbose = ["Not learn", "Not remember", "Has remembered", "Need enhance", "All"]
-#
+
+# get the alias comand
+            
+def readAlias(path=None):
+    if path == None:
+        path = "./alias.txt"
+    with open(path, "r") as f:
+        line_ls = f.readlines()
+    # filter the line
+    line_ls = [line.strip(" \n\t") for line in line_ls]
+    line_ls = [line for line in line_ls if line != ""]
+    line_ls = [line for line in line_ls if not line.isspace() and line[0]!="#"]
+    # to dict
+    alias_dict = dict()
+    for line in line_ls:
+        alias_ls = line.split("=")
+        if len(alias_ls) != 2:
+            continue
+        left_cmd = alias_ls[0].strip(" ")
+        right_cmd = alias_ls[1].split("#")[0]
+        right_cmd = right_cmd.strip(" ")
+        alias_dict[left_cmd] = right_cmd
+    return alias_dict
+
+    
 def commandDeal(command):
     # get rid of the space
     command_ls = command.split(" ")
@@ -156,10 +180,14 @@ if __name__ == "__main__":
     if args.workspace:
         json_file_path = f"{args.workspace}/all_English_word.json"
         chapter_temp_path = f"{args.workspace}/chapter_temp.txt"
+        alias_path = f"{args.workspace}/alias.txt"
         os.chdir(args.workspace)
     else:
         json_file_path = r"./all_English_word.json"
         chapter_temp_path = r"./chapter_temp.txt"
+        alias_path = f"./alias.txt"
+    # get the alias command
+    alias_cmd = readAlias(alias_path)
     # sudo var
     #cmd_first_ls = ["chapter", "show", "label", "trans", "help", "clear", "exit", "save", "execute"]
     show_number = 15
@@ -184,6 +212,8 @@ if __name__ == "__main__":
             command_ls = ["show"]
         else:
             command = input(f"{newline(1)}[{color(yellow, word_chapter)}] {color(light_blue, 'Please input the command: ')}")
+# add the command aliases
+            command = alias_cmd.get(command, command)
             command_ls = commandDeal(command)
         command_len = len(command_ls)
         if command_len == 0:
@@ -393,6 +423,19 @@ if __name__ == "__main__":
                 continue
         elif command_first in ["->", "vim"]:
             os.system("vim temp.txt")
+
+        elif command_first == "alias":
+            if command_len == 1:
+                print("[WW] You need to add the option, for example -s")
+            else:
+                if command_ls[1] == "-s":
+                    # show 
+                    cls()
+                    print(f"{hyphen(20)} ALIASES {hyphen(20)}")
+                    for key in alias_cmd:
+                        print(f"{key} = {alias_cmd[key]}")
+                else:
+                    print("[WW] alias command not right!")
 
         elif command_first == "sudo":
             # show the current information

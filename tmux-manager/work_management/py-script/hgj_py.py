@@ -227,9 +227,12 @@ def timeDurationFromNow(history_time):
         duration_time = f"{sub_min/60:.1f} hour"
     return duration_time
 
-def progressBar(n_min):
+def progressBar(n_min, is_hyphen_num_short):
+    if is_hyphen_num_short:
+        hyphen_num = 66
+    else:
+        hyphen_num = 75
     n_seconds = 60 * n_min
-    hyphen_num = 75
     bar_str =  hyphen(hyphen_num)  # same as the: "-" * hyphen_num
     mark = "|>"
     # the sleep gap
@@ -238,7 +241,7 @@ def progressBar(n_min):
         gap = 1
     title = " TIMER "
     left_num_hyphen = int((hyphen_num - len(title)) * 0.5)
-    os.system("clear")
+    #os.system("clear")
     print("\n")
     print(f"<{hyphen(left_num_hyphen)}{color(light_cayon, title)}{hyphen(left_num_hyphen)}>")
     print("\n")

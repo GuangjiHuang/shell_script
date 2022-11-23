@@ -1,0 +1,21 @@
+# about the show number
+s = show # show 
+sn = show -n # show number
+
+# about the show label
+ssx = show -l x
+ssy = show -l y
+ss- = show -l -
+ss^ = show -l ^
+ssa = show -l a
+
+# about the label state
+lx = l x
+ly = l y
+l- = l -
+l^ = l ^
+
+# others
+cl = clear
+as = alias -s
+:x = exit # exit the program

@@ -11,6 +11,42 @@ void cmd_add(File_t& file, Path_man& path_man) {
     file.writeToBuffer(); // write item to buffer
 }
 
+/* command: append */
+void cmd_append(File_t& file, Path_man& path_man, Parser& parser) {
+    const int arg_num = parser.arg_num;
+    if (arg_num < 2) {
+        cout << "[Warning]: append command except 2 arguments!" << endl;
+    }
+    if (!isNum(parser.arg_ls[2])) {
+            cout << "[Warning]: " << parser.arg_ls[2] << " is not a num!" <<endl;
+            return;
+    }
+    int item_id = stoi(parser.arg_ls[2]);
+    if (item_id<0 || item_id>file.getItemsNum()) {
+        cout << "[Warning]: itms id out of range! " << endl;
+        return;
+    }
+    if (parser.arg_ls[1]!="newline" && parser.arg_ls[1]!="space") {
+        cout << "[Warning]: append type except the newline or the space!" << endl;
+        return;
+    }
+    string arg_append_type = parser.arg_ls[1];
+    // get the item and then append
+    string& deal_item = file.refItems()[item_id-1]; // the reference type
+    // prompt the input
+    string content;
+    string delimiter;
+    cout << "(append)" << CCOLOR(LIGHT_GREEN, "->: ");
+    getline(cin, content, '&');
+    // combine the new item
+    if (arg_append_type == "newline") {
+        deal_item += content + "\n";
+    }
+    else {
+        deal_item = deal_item.substr(0, deal_item.size()-1) + " " + content + "\n";
+    }
+}
+
 /* command: date */
 void cmd_date(File_t& file, const Parser& parser,  Path_man& path_man, Show_arg& show_arg) {
     const int arg_num = parser.arg_num;
@@ -126,6 +162,8 @@ void cmd_file(File_t& file, const Parser& parser, Path_man& path_man, Show_arg& 
 
 /* command: show */
 void cmd_show(File_t& file, Path_man& path_man, Parser& parser, Show_arg& show_arg) {
+    // the var
+    bool is_just_show_title = false;
     /* get the arg to the show_arg */
     const int arg_num = parser.arg_num;
     if (arg_num == 0) {
@@ -166,16 +204,43 @@ void cmd_show(File_t& file, Path_man& path_man, Parser& parser, Show_arg& show_a
         }
         show_arg.setState(state); // show all
     }
+    else if (arg_1 == "title") {
+        is_just_show_title = true;
+    }
     else if (arg_1 == "reverse") {
         // toggle the reverse
         show_arg.is_reverse = !show_arg.is_reverse;
+    }
+    else if (arg_1 == "id") {
+        // just show the id specified
+        if (arg_num == 1) {
+            cout << "[Warning]: not specify the items id! " << endl;
+            return;
+        }
+        if (! isNum(parser.arg_ls[2])) {
+            cout << "[Warning]: " << parser.arg_ls[2] << " is not the number!" << endl;
+            return;
+        }
+        int specified_item_id = stoi(parser.arg_ls[2]);
+        if (specified_item_id<0 || specified_item_id>file.getItemsNum()) {
+            cout << "[Warning]: id out of range!" << endl;
+            return;
+        }
+        // print the header and the content
+        show_arg.setState('a');
+        show_arg.setStateShowNum(1, file);
+        printHeader(file, path_man, show_arg);
+        string item_to_be_print = file.getItems()[specified_item_id-1];
+        cout << item_to_be_print << endl;
+        cout << hyphen(55) << endl;
+        return; // here end the function
     }
     else {
         cout << "[warning]: no such show command!" << endl;
     }
     /* here to print, print header and the file content */
     printHeader(file, path_man, show_arg);
-    printContent(file, show_arg);
+    printContent(file, show_arg, is_just_show_title);
 }
 
 /* command: save */
@@ -459,6 +524,7 @@ void cmd_operation(File_t& file, Parser& parser) {
 
 void cmd_timer(Parser& parser) {
     const int arg_num = parser.arg_num;
+    bool is_hyphen_num_short = false;
     // the sleep_min;
     int sleep_min;
     if (arg_num == 0) {
@@ -472,46 +538,11 @@ void cmd_timer(Parser& parser) {
         else {
             sleep_min = 30;
         }
+        // if has the arg_2, set the is_hyphen_num_short true
+        if (arg_num == 2) {
+            is_hyphen_num_short = true;
+        }
     }
     // call the function
-    progressBar(sleep_min);
+    progressBar(sleep_min, is_hyphen_num_short);
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

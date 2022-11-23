@@ -4,3 +4,6 @@ scp -r $dear_pc:/home/ysq/code/c++/work_management/{*.cpp,*.h,[!r]*.sh,*.txt,py-
 if [ $? -eq 0 ]; then
     clear
 fi
+
+# re compile the source files
+./run.sh

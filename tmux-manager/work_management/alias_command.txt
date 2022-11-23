@@ -1,7 +1,11 @@
 # about the add
->> = add # add: the new items
-> = add
+> = add # add: the new items
 》= add
+
+# about the append
+>> = append newline
+>>> = append space
+
 
 # about the alias
 as = alias show 
@@ -26,6 +30,8 @@ fl = file learn
 # about show
 s = show # just repeat the show command!
 sn = show number # shwo number of the items; for example: show number 10
+st = show title # just show the title
+si = show id # show the id's item
 sr = show reverse # shwo number reverse, toggle the reverse switch
 ss = show state # show the state of the itme. for expmle: show state x
 ssa = show state a
