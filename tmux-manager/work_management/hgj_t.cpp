@@ -1,5 +1,6 @@
 #include "utils.h"
 #include "hgj_t.h"
+#define USE_READLINE
 
 // class: File_t
 File_t::File_t(const string& path, const char* open_mode) : _path(path), _p_file(nullptr) {
@@ -18,6 +19,10 @@ void File_t::readToBuffer(const char* open_mode="r+") {
 // flushBuffer
 void File_t::flushBuffer() {
     _openFile("w");  // open file again
+    if (!_p_file) {
+        cerr << "faile to open the file: " << _path << endl;
+        return;
+    }
     for (const auto& item : _items) {
         fputs((item+"\n").c_str(), _p_file); // add the \n to the end
     }
@@ -28,14 +33,30 @@ void File_t::flushBuffer() {
 bool File_t::writeToBuffer(bool is_record, const string& cur_time) {
 GET_LINE:
     string item;
+    string prompt_str("(add)");
+    prompt_str += CCOLOR(LIGHT_GREEN, " ->: ");
+#ifdef USE_READLINE
+    char* read_line = nullptr;
+    read_line = readline(prompt_str.c_str());
+    if (read_line) {
+        item = string(read_line);
+        free(read_line);
+    }
+    else {
+        cout << endl << "[ warnning ]: NULL readline";
+        goto GET_LINE;
+    }
+#else
     cout << "(add)" <<  CCOLOR(LIGHT_GREEN, " ->: ");
-    getline(cin, item, '&');
+    getline(cin, item, '&'); // end with the mark: & 
     // if key the ctrl+d, that is eof mark, means that you don't want to key this content
     if (cin.eof()) {
         cin.clear();
         cout << endl << "[rewrite]";
         goto GET_LINE;
     }
+#endif
+
     // if item is empty, return
     if (_strIsSpace(item)) { // I think that is import!
         return false;
@@ -85,9 +106,19 @@ vector<string>& File_t::refItems() {
     return _items;
 }
 
+// getStates
+const vector<char>& File_t::getStates() const {
+    return _states;
+}
+
 // refStates
 vector<char>& File_t::refStates() {
     return _states;
+}
+
+// getItemsNum
+const int& File_t::getItemsNum() const {
+    return _items_num;
 }
 
 // refItemsNum
@@ -100,16 +131,6 @@ unordered_map<char, int>& File_t::refStateNum() {
     return _states_num;
 }
 
-// getItemsNum
-const int& File_t::getItemsNum() const {
-    return _items_num;
-}
-
-
-// getStates
-const vector<char>& File_t::getStates() const {
-    return _states;
-}
 // getStateFromItem
 char File_t::getStateFromItem(const string& item) const {
     char ret_state {'x'}; // that default is the x
@@ -119,7 +140,7 @@ char File_t::getStateFromItem(const string& item) const {
         ret_state = *it; // has been increment
     }
     // check
-    if (ret_state!=NOTDO && ret_state!=NOTFINISH && ret_state!=FINISH) {
+    if (ret_state!=NOTFINISH && ret_state!=FINISH) {
         ret_state = 'x'; // rectify
     }
     return ret_state;
@@ -142,7 +163,7 @@ void File_t::subStateInItem(string& item, char state) {
 // getStateNum
 const int File_t::getStateNum(const char state) const {
     // check
-    if (_states_num.find(state) != _states_num.end()) {
+    if (_states_num.count(state)) {
         return _states_num.at(state);
     }
     else {
@@ -205,7 +226,7 @@ void File_t::_readItems() {
     }
 }
 
-// _readStates
+// _readStates, from the my buffer
 void File_t::_readStates() {
     // clear the vector first
     _states.clear();
@@ -276,10 +297,6 @@ void Parser::_updateData(const vector<string>& arg_ls) {
         arg_num = 0;
         command.clear();
     }
-    else if (arg_ls_size==1) {
-        arg_num = 0;
-        command = arg_ls[0];
-    }
     else {
         arg_num = arg_ls_size - 1;
         command = arg_ls[0];
@@ -325,7 +342,6 @@ Path_man::Path_man(string parent_dir) : parent_dir(parent_dir), file_type("task"
     ::getDate(0, date_str); // init to today, using the global function
     // construct the current path
     _mkDateVec(date_str); // [year, month, day], today be bound to the valid date
-
     _mkCurDir();
     _mkCurPath(); // parent_dir/2022/03/03-12/record.txt
 }
@@ -347,12 +363,15 @@ bool Path_man::updateDate(string date_str) {
 }
 void Path_man::updateFileType(string file_type) {
     // check if the file_type is valid
-    if (find(defined_file_type.begin(), defined_file_type.end(), file_type)!=defined_file_type.end()) {
+    if (defined_file_type.count(file_type)) {
         // try to make current path
         string file_type_bd = this->file_type; // backen, once fail, recover
         this->file_type = file_type;
         if (!_mkCurPath()) { // here try to make, if not successfully, recover
             this->file_type = file_type_bd;
+        }
+        else { // cur date has not such file.
+            cout << "Current date has not such file: " << file_type << endl;
         }
     }
     else {
@@ -444,12 +463,20 @@ bool Path_man::_mkCurPath() {
     return is_mk;
 }
 void Path_man::_mkdir() {
-    string shell_command = "mkdir -p " + cur_dir;
-    system(shell_command.c_str());
+    // use the system 
+    //string shell_command = "mkdir -p " + cur_dir;
+    //system(shell_command.c_str());
+
+    // use the filesystem
+    fs::create_directories(fs::path(cur_dir));
 }
 void Path_man::_touch() {
-    string shell_command = "touch " + cur_path;
-    system(shell_command.c_str());
+    // use the system command
+    //string shell_command = "touch " + cur_path;
+    //system(shell_command.c_str());
+
+    // use the ofstream
+    ofstream output(cur_path);
 }
 bool Path_man::_isToday() {
     string date_today;
@@ -458,8 +485,8 @@ bool Path_man::_isToday() {
 }
 bool Path_man::_isValidDate(const vector<string>& date_vec) {
     // check the size first
-    const size_t year_month_day = 3;
-    if (date_vec.size() != year_month_day) {
+    const size_t YEAR_MONTH_DAY = 3;
+    if (date_vec.size() != YEAR_MONTH_DAY) {
         cout << "[Warning]: not the valid date!" << endl;
         return false;
     }

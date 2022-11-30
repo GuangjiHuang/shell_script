@@ -1,12 +1,13 @@
+#define USE_READLINE
 #include "utils.h"
 #include "hgj_t.h"
 #include "command.h"
-
+#include <stack>
+#include <locale>
 
 using namespace std;
-
 // the static vector file type
-vector<string> Path_man::defined_file_type {RECORD, QUESTION, TASK, LEARN};
+unordered_set<string> Path_man::defined_file_type {RECORD, QUESTION, TASK, LEARN};
 // class declaration
 class parser;
 int main(int argc, char** argv) {
@@ -33,19 +34,31 @@ int main(int argc, char** argv) {
     // the var
     bool prompt_toggle {true};
     stack<string> record_time; // use to put the time begin inside the stack
+    // for the prompt
+    string prompt_str;
+    char* prompt_char_p = nullptr;
     while (true) {
         if (prompt_toggle) {
-            printPromptFileType(path_man, record_time);
+            prompt_str = printPromptFileType(path_man, record_time);
         }
         else {
-            printPromptTime(path_man, record_time);
+            prompt_str = printPromptTime(path_man, record_time);
         }
+#ifdef USE_READLINE
+        prompt_char_p = readline(prompt_str.c_str());
+        input_command = string(prompt_char_p);
+        free(prompt_char_p);
+#else
+        // ouput the prompt
+        cout << prompt_str << endl;
+        cout << 
         // parse the command
         getline(cin, input_command);
         if (cin.eof()) {
             cin.clear();
             continue;
         }
+#endif
         alias_parser.parseAliasCommand(input_command);
         parser.update(input_command);
         string command(parser.command);

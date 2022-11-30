@@ -11,7 +11,7 @@ void getFiles(const string& dir_path, vector<string>&files_path) {
     const path _dir_path(dir_path);
     for (const auto& entry : directory_iterator(_dir_path)) {
         if (entry.is_regular_file()) {
-            files_path.push_back(entry.path());
+            files_path.push_back(entry.path().string());
         }
     }
 }
@@ -21,7 +21,7 @@ void getDirs(const string& dir_path, vector<string>& dirs_path) {
     const path _dir_path(dir_path);
     for (const auto& entry : directory_iterator(_dir_path)) {
         if (entry.is_directory()) {
-            dirs_path.push_back(entry.path());
+            dirs_path.push_back(entry.path().string());
         }
     }
 }
@@ -39,7 +39,7 @@ void getDate(const int& offset, string& date) {
     // count offset
     time(&t_s_now);
     t_s_offset = t_s_now + offset * DAY;
-    assert(t_s_offset >= 0); // the t_s_offset must be le 0
+    assert(t_s_offset >= 0); // the t_s_offset must be ge 0
     // get the c_str and to string
     const int DATE_SIZE{20};
     char c_date[DATE_SIZE];
@@ -302,7 +302,7 @@ void printContent(const File_t& file, const Show_arg& show_arg, bool is_just_sho
     cout << hyphen(hyphen_num) << endl;
 }
 
-void printPromptFileType(Path_man& path_man, const stack<string>& record_time) {
+string printPromptFileType(Path_man& path_man, const stack<string>& record_time) {
     string file_type(path_man.getFileType());
     string upper_file_type(file_type);
     for_each(upper_file_type.begin(), upper_file_type.end(), [](char &ch) {
@@ -314,8 +314,8 @@ void printPromptFileType(Path_man& path_man, const stack<string>& record_time) {
         // if not the record, or record && not in the record time
         prompt += CCOLOR(LIGHT_BLUE, "Please input the command: ");
         cout << endl;
-        cout << prompt;
-        return;
+        //cout << prompt;
+        return prompt;
     }
     // the case: record and in the record time
     string start_time(record_time.top());
@@ -323,10 +323,11 @@ void printPromptFileType(Path_man& path_man, const stack<string>& record_time) {
     duration = SCOLOR(LIGHT_RED, duration);
     prompt +=  start_time + " -> ... (U: " + duration + ") >>: ";
     cout << endl;
-    cout << prompt;
+    //cout << prompt;
+    return prompt;
 }
 
-void printPromptTime(Path_man& path_man, const stack<string>& record_time) {
+string printPromptTime(Path_man& path_man, const stack<string>& record_time) {
     // the var
     string file_type(path_man.getFileType());
     // time c_str
@@ -342,15 +343,16 @@ void printPromptTime(Path_man& path_man, const stack<string>& record_time) {
         // if not the record, or record && not in the record time
         prompt += CCOLOR(LIGHT_BLUE, "Please input the command: ");
         cout << endl;
-        cout << prompt;
-        return;
+        //cout << prompt;
+        return prompt;
     }
     // the case: record and in the record time
     string start_time(record_time.top());
     string duration = timeDurationFromNow(start_time);
     prompt +=  start_time + " -> ... (U: " + duration + ") >>: ";
     cout << endl;
-    cout << prompt;
+    //cout << prompt;
+    return prompt;
 }
 
 void getStateVerbose(const char state, string& state_verbose) {
@@ -446,18 +448,15 @@ void progressBar(int mins, bool is_hyphen_num_short) {
     Py_Finalize();
 }
 
-void printFileList(const string& dir_path, const vector<string>& file_type_list, const vector<char>& states_ls) {
+void printFileList(const string& dir_path, const unordered_set<string>& file_type_list, const vector<char>& states_ls) {
     // vector -> string, easy to share the data by the python
     string file_types_str;
     string states_str;
     for (auto it=file_type_list.begin(); it!=file_type_list.end(); ++it) {
-        if (it != file_type_list.end()-1) {
             file_types_str += *it + ",";
-        }
-        else {
-            file_types_str += *it;
-        }
     }
+    // remove the "," at the end of the string line
+    file_types_str.pop_back();
     for (auto it=states_ls.begin(); it!=states_ls.end(); ++it) {
         if (it != states_ls.end()-1) {
             states_str += string(1, *it) + ",";

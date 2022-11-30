@@ -1,0 +1,27 @@
+[
+{
+  "directory": "d:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management/cygwin_build",
+  "command": "D:/cygwin64/bin/g++.exe -DUSE_COLOR -Id:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management -I/usr/include/python3.8 -g -std=gnu++17 -o CMakeFiles/main_Debug.dir/utils.cpp.o -c d:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management/utils.cpp",
+  "file": "d:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management/utils.cpp"
+},
+{
+  "directory": "d:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management/cygwin_build",
+  "command": "D:/cygwin64/bin/g++.exe -DUSE_COLOR -Id:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management -I/usr/include/python3.8 -g -std=gnu++17 -o CMakeFiles/main_Debug.dir/hgj_t.cpp.o -c d:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management/hgj_t.cpp",
+  "file": "d:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management/hgj_t.cpp"
+},
+{
+  "directory": "d:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management/cygwin_build",
+  "command": "D:/cygwin64/bin/g++.exe -DUSE_COLOR -Id:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management -I/usr/include/python3.8 -g -std=gnu++17 -o CMakeFiles/main_Debug.dir/command.cpp.o -c d:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management/command.cpp",
+  "file": "d:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management/command.cpp"
+},
+{
+  "directory": "d:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management/cygwin_build",
+  "command": "D:/cygwin64/bin/g++.exe -DUSE_COLOR -Id:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management -I/usr/include/python3.8 -g -std=gnu++17 -o CMakeFiles/main_Debug.dir/regex_utils.cpp.o -c d:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management/regex_utils.cpp",
+  "file": "d:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management/regex_utils.cpp"
+},
+{
+  "directory": "d:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management/cygwin_build",
+  "command": "D:/cygwin64/bin/g++.exe -DUSE_COLOR -Id:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management -I/usr/include/python3.8 -g -std=gnu++17 -o CMakeFiles/main_Debug.dir/main.cpp.o -c d:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management/main.cpp",
+  "file": "d:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management/main.cpp"
+}
+]

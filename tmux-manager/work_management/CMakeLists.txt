@@ -1,4 +1,5 @@
 cmake_minimum_required(VERSION 3.16)
+set(CMAKE_EXPORT_COMPILE_COMMANDS on)
 project(WORK_MANAGMETN)
 set(CMAKE_CXX_STANDARD 17)
 
@@ -36,6 +37,6 @@ else()
     set(target_name main)
 endif()
 add_executable(${target_name} ${src_code})
-target_link_libraries(${target_name} ${Python3_LIBRARIES})
+target_link_libraries(${target_name} ${Python3_LIBRARIES} readline)
 
 set(EXECUTABLE_OUTPUT_PATH ${PROJECT_SOURCE_DIR})

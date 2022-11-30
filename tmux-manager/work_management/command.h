@@ -8,9 +8,9 @@
 void cmd_add(File_t& file, Path_man& path_man);
 /* command: append */
 void cmd_append(File_t& file, Path_man& path_man, Parser& parser);
-/* command: file */
-void cmd_date(File_t& file, const Parser& parser,  Path_man& path_man, Show_arg& show_arg);
 /* command: date */
+void cmd_date(File_t& file, const Parser& parser,  Path_man& path_man, Show_arg& show_arg);
+/* command: file */
 void cmd_file(File_t& file, const Parser& parser, Path_man& path_man, Show_arg& show_arg);
 /* command: show */
 void cmd_show(File_t& file, Path_man& path_man, Parser& parser, Show_arg& show_arg);

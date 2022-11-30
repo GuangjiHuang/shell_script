@@ -75,7 +75,7 @@ private:
     friend ostream& operator<<(ostream& out, Parser& parser);
 };
 
-/* class: Path_num */
+/* class: Path_man */
 class Path_man {
 private:
     // the attributes
@@ -86,7 +86,7 @@ private:
     string cur_path;
 public:
     string parent_dir;
-    static vector<string> defined_file_type;
+    static unordered_set<string> defined_file_type;
 public:
     // constructor
     explicit Path_man(string parent_dir);

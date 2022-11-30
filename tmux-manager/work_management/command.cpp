@@ -57,9 +57,9 @@ void cmd_date(File_t& file, const Parser& parser,  Path_man& path_man, Show_arg&
     string arg_1 = parser.arg_ls[1];
     // change and show
     if (arg_1 == "show") {
+        cls();
         cout << "[Tip]: date: " << path_man.getDate() << endl;
         // will not change the argument, just show the items
-        cls();
         printHeader(file, path_man, show_arg);
         printContent(file, show_arg);
         return;
@@ -97,7 +97,8 @@ void cmd_date(File_t& file, const Parser& parser,  Path_man& path_man, Show_arg&
     }
     else if (arg_1 == "update") {
         if (arg_num == 1) {
-            cout << "[Warning]: expected \"date update xxx\", lack xxx arguments!" << endl;
+            cls();
+            cout << "[Warning]: expected \"date update year-month-day\", lack date args!" << endl;
             return;
         }
         new_date_str = parser.arg_ls[2];
@@ -202,7 +203,7 @@ void cmd_show(File_t& file, Path_man& path_man, Parser& parser, Show_arg& show_a
                 state = 'a'; // once occur exception, set state to 'a'
             }
         }
-        show_arg.setState(state); // show all
+        show_arg.setState(state); 
     }
     else if (arg_1 == "title") {
         is_just_show_title = true;

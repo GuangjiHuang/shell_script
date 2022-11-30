@@ -1,0 +1,3 @@
+d:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management/cygwin_build/CMakeFiles/rebuild_cache.dir
+d:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management/cygwin_build/CMakeFiles/edit_cache.dir
+d:/cygwin64/home/gjsq/mygithub/shell-script/tmux-manager/work_management/cygwin_build/CMakeFiles/main_Debug.dir
