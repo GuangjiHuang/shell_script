@@ -1,0 +1,8 @@
+#! /bin/bash
+
+clear
+echo -e "------------------------------"
+echo 
+cd .. ; g++ src/test.cpp -o bin/test.out && ./bin/test.out
+echo 
+echo -e "------------------------------"

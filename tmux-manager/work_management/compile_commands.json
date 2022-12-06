@@ -1,0 +1,32 @@
+[
+{
+  "directory": "/home/gjsq/mygithub/shell-script/tmux-manager/work_management/build",
+  "command": "/usr/bin/c++.exe -DUSE_COLOR -I/usr/include/python3.8 -I/home/gjsq/mygithub/shell-script/tmux-manager/work_management -I/home/gjsq/mygithub/shell-script/tmux-manager/work_management/include -O3 -O3 -DNDEBUG -std=gnu++17 -o CMakeFiles/test.dir/src/test.cpp.o -c /home/gjsq/mygithub/shell-script/tmux-manager/work_management/src/test.cpp",
+  "file": "/home/gjsq/mygithub/shell-script/tmux-manager/work_management/src/test.cpp"
+},
+{
+  "directory": "/home/gjsq/mygithub/shell-script/tmux-manager/work_management/build",
+  "command": "/usr/bin/c++.exe -DUSE_COLOR -I/usr/include/python3.8 -I/home/gjsq/mygithub/shell-script/tmux-manager/work_management -I/home/gjsq/mygithub/shell-script/tmux-manager/work_management/include -O3 -O3 -DNDEBUG -std=gnu++17 -o CMakeFiles/main_Release.dir/src/command.cpp.o -c /home/gjsq/mygithub/shell-script/tmux-manager/work_management/src/command.cpp",
+  "file": "/home/gjsq/mygithub/shell-script/tmux-manager/work_management/src/command.cpp"
+},
+{
+  "directory": "/home/gjsq/mygithub/shell-script/tmux-manager/work_management/build",
+  "command": "/usr/bin/c++.exe -DUSE_COLOR -I/usr/include/python3.8 -I/home/gjsq/mygithub/shell-script/tmux-manager/work_management -I/home/gjsq/mygithub/shell-script/tmux-manager/work_management/include -O3 -O3 -DNDEBUG -std=gnu++17 -o CMakeFiles/main_Release.dir/src/hgj_t.cpp.o -c /home/gjsq/mygithub/shell-script/tmux-manager/work_management/src/hgj_t.cpp",
+  "file": "/home/gjsq/mygithub/shell-script/tmux-manager/work_management/src/hgj_t.cpp"
+},
+{
+  "directory": "/home/gjsq/mygithub/shell-script/tmux-manager/work_management/build",
+  "command": "/usr/bin/c++.exe -DUSE_COLOR -I/usr/include/python3.8 -I/home/gjsq/mygithub/shell-script/tmux-manager/work_management -I/home/gjsq/mygithub/shell-script/tmux-manager/work_management/include -O3 -O3 -DNDEBUG -std=gnu++17 -o CMakeFiles/main_Release.dir/src/main.cpp.o -c /home/gjsq/mygithub/shell-script/tmux-manager/work_management/src/main.cpp",
+  "file": "/home/gjsq/mygithub/shell-script/tmux-manager/work_management/src/main.cpp"
+},
+{
+  "directory": "/home/gjsq/mygithub/shell-script/tmux-manager/work_management/build",
+  "command": "/usr/bin/c++.exe -DUSE_COLOR -I/usr/include/python3.8 -I/home/gjsq/mygithub/shell-script/tmux-manager/work_management -I/home/gjsq/mygithub/shell-script/tmux-manager/work_management/include -O3 -O3 -DNDEBUG -std=gnu++17 -o CMakeFiles/main_Release.dir/src/study_deal.cpp.o -c /home/gjsq/mygithub/shell-script/tmux-manager/work_management/src/study_deal.cpp",
+  "file": "/home/gjsq/mygithub/shell-script/tmux-manager/work_management/src/study_deal.cpp"
+},
+{
+  "directory": "/home/gjsq/mygithub/shell-script/tmux-manager/work_management/build",
+  "command": "/usr/bin/c++.exe -DUSE_COLOR -I/usr/include/python3.8 -I/home/gjsq/mygithub/shell-script/tmux-manager/work_management -I/home/gjsq/mygithub/shell-script/tmux-manager/work_management/include -O3 -O3 -DNDEBUG -std=gnu++17 -o CMakeFiles/main_Release.dir/src/utils.cpp.o -c /home/gjsq/mygithub/shell-script/tmux-manager/work_management/src/utils.cpp",
+  "file": "/home/gjsq/mygithub/shell-script/tmux-manager/work_management/src/utils.cpp"
+}
+]

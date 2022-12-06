@@ -2,6 +2,7 @@ import json
 import os
 import argparse
 from utils import *
+import readline
 
 # the color
 no_color = "\033[0m"

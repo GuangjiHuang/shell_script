@@ -1,0 +1,6 @@
+1.(x) cmake中的elseif是怎样的，和c中的else if有什么区别，为什么要这样写，对比一下shell，vimscript，python等脚本语言。
+
+2.(x) GDB: how to step out the function stack? Just like the step out in the ide debugger!
+
+3.(x) GDB: how gdb to observe the variables, like the string, the vector, or your own data structure?
+

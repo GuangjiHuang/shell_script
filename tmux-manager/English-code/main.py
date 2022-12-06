@@ -4,6 +4,7 @@ import shutil
 import sys
 import platform
 import argparse
+import readline
 
 # about the color   
 # the color

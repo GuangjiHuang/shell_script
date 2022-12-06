@@ -188,7 +188,7 @@ tmux_work()
 {
     source_dir=~/mygithub/shell-script/tmux-manager
     work_data_dir=~/mygithub/data-shared/work_management/data
-    tmux_work_command="cd $source_dir/work_management/; ./main.exe $work_data_dir"
+    tmux_work_command="cd $source_dir/work_management/; ./bin/main*"
     # rewrite the layout
     tmux new-session -s "work" -n "work" \; \
     split-window -h \; \

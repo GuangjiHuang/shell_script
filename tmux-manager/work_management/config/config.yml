@@ -1,0 +1,16 @@
+# path and dir
+
+data_dir: "./data"
+answer_path: "./data/answers"
+question_path: "./src/questions.json"
+alias_path: "./config/alias_command.txt"
+study_help_path: "./config/study-help.txt"
+timer_gui_pipeline_path: "/cygdrive/c/Users/gjsq/Desktop/study-app/py-script/pipeline.txt"
+
+# init file type
+file_type: "task"
+
+# init study data
+topic1: "tool"
+topic2: "linux"
+question_id: 9

@@ -1,0 +1,41 @@
+#! /bin/bash
+
+# usage, for example: ./run [build | rebuild | run | ""(nothing)]  [release | debug | ""(nothing)]
+if [[ $1 == 'help' ]];then
+    echo 'for example: ./run [build | rebuild | run | ""(nothing)]  [release | debug | ""(nothing)]'
+    exit
+fi
+
+
+run_type=$1 # build, rebuild, run(no need to specify)
+build_type=$2 # release, debug, nothing
+build_type=release
+
+# the executable name
+if [[ "$build_type" =~ [Dd]ebug ]]; then
+    exe_name="main_Debug"
+elif  [[ "$build_type" =~ [Rr]elease ]]; then
+    exe_name="main_Release"
+else
+    exe_name='main'
+fi
+
+# the run type
+if [[ "$run_type" == "build" ]]; then
+    cd build
+    make -j && cd ..
+elif [[ "$run_type" == "rebuild" ]]; then
+    if [ ! -e build ]; then
+        mkdir build
+    fi
+    cd build && rm -rf *
+    cmake -DUSE_COLOR=ON -DCMAKE_BUILD_TYPE=$build_type ../ && mv compile_commands.json ../ && flag=1
+    if [ $flag -eq 1 ] && [[ "$2" == "only" ]] ; then
+        exit
+    else
+        make -j && cd ..
+    fi
+fi
+#./bin/test
+./bin/${exe_name}*
+#

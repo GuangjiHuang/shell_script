@@ -1,0 +1,28 @@
+{
+    "PLang": {
+        "c++": {},
+        "python": {}
+    },
+    "tool": {
+        "cmake": {
+            "linux_question1": {
+                "link": "this is the link",
+                "score": "this is the score"
+            },
+            "linux_question2": {
+                "link": "this is the link",
+                "score": "this is the score"
+            }
+        },
+        "linux": {
+            "linux_question1": {
+                "link": "this is the link",
+                "score": "this is the score"
+            },
+            "linux_question2": {
+                "link": "this is the link",
+                "score": "this is the score"
+            }
+        }
+    }
+}
