@@ -85,11 +85,13 @@ string printPromptFileType(Path_man& path_man, const stack<string>& record_time)
 void getStateVerbose(const char state, string& state_verbose);
 void printWarning(const string& your_type);
 void printExe(const string& );
+void lessFile(const string&path, bool show_line_number=true);
+void lessVecString(vector<string>& vec, bool show_line_number=true);
 
 /* parse the input command */
 void parseInput(string&, vector<string>&); // to
 bool  isNum(const string& );
-void printVecString(vector<string>& vec);
+void printVecString(vector<string>& vec, bool with_number=true);
 bool parseRange(string&, vector<int>&);
 void strip(string& str);
 

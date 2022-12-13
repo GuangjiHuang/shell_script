@@ -5,7 +5,10 @@ set(CMAKE_CXX_STANDARD 17)
 
 
 #
-set(CMAKE_CXX_FLAGS "-O3")
+#set(CMAKE_CXX_FLAGS "-O0" "-Wno-unused-result")
+#add_compile_options(O0 -Wall -Wno-unused-result)
+#add_compile_options("-O0" "-Wall" "-Wno-unused-result")
+add_compile_options("-O0" "-Wno-all")
 
 # test the plateform, must be the unix or the unix-like  
 

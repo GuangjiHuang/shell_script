@@ -564,6 +564,16 @@ void AliasParser::saveAlias(const string& path="") {
     // how to solve the problem that the comment to write ?
     cout << "I am thinking how to implement now!" << endl;
 }
+void AliasParser::vimAlias() {
+    string command = "vim " + _path;
+    system(command.c_str());
+}
+
+void AliasParser::lessAlias() {
+    string command = "cat -n " + _path + "| less";
+    system(command.c_str());
+}
+
 
 void AliasParser::reloadAlias(const string& path="") {
     string load_path(path);

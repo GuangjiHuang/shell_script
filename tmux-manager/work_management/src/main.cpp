@@ -26,6 +26,9 @@ int main(int argc, char** argv) {
     string alias_path = config["alias_path"].as<string>();
     string study_help_path = config["study_help_path"].as<string>();
     string pipeline_path = config["timer_gui_pipeline_path"].as<string>();
+    string record_help_path = config["record_help_path"].as<string>();
+    string gui_help_path = config["gui_help_path"].as<string>();
+    string gui_plan_dir = config["gui_plan_dir"].as<string>();
     // file type
     string file_type = config["file_type"].as<string>();
     FILE_IS_STUDY = file_type=="study" ? true : false;
@@ -120,8 +123,8 @@ int main(int argc, char** argv) {
                 //cout << prompt_str << endl;
             }
             else if (command == "questions") {
-                cls();
-                printTitle();
+                //cls();
+                //printTitle();
                 cmd_study_questions(parser, study);
                 // show(id), set(question/score,occur), open
                 ;
@@ -137,13 +140,19 @@ int main(int argc, char** argv) {
                 cmd_study_reload(parser, study);
             }
             else if (command == "edit") {
-                cls();
-                printTitle();
-                string file_path = study.answer_dir + "/" + study.topic1 + "/" + study.topic2 + "/" + study.link;
-                cout << "open the file!" << endl; 
+                string file_dir = study.answer_dir + "/" + study.topic1 + "/" + study.topic2;
+                string file_path = file_dir + + "/" + study.link;
                 cout << file_path << endl;
-                string x_x = "vim " + file_path;
-                system(x_x.c_str());
+                // check if the path is exists 
+                int _;
+                if (!fs::exists(fs::path(file_dir))) {
+                    _ = system(("mkdir -p '"+file_dir + "'").c_str());
+                }
+                if (!fs::exists(fs::path(file_path))) {
+                    _ = system(("touch '"+file_path + "'").c_str());
+                }
+                string x_x = "vim '" + file_path + "'";
+                _ = system(x_x.c_str());
             }
             else if (command == "help") {
                 cls();
@@ -193,9 +202,6 @@ int main(int argc, char** argv) {
             else if (command == "operation") {
                 cmd_operation(file, parser);
             }
-            else if (command == "openInVim") {
-                cmd_openInVim(file, path_man);
-            }
             else if (command == "record_in" || command == "record_out" || command == "record_abort") {
                 cmd_recordOperation(file, path_man, parser, record_time);
             }
@@ -208,7 +214,16 @@ int main(int argc, char** argv) {
                 cout << "[Tip]: reload successfully!" << endl;
             }
             else if (command == "help") {
-                cout << "Help information for learn, study, record, and others!" << endl;
+                cls();
+                printTitle();
+                //ifstream ifs(record_help_path);
+                //if (! ifs.is_open()) {
+                //    cout << "Can not open the file: " << record_help_path << endl;
+                //}
+                //cout << ifs.rdbuf() << endl;
+                /* using the less to show */
+                string print_command = "cat " + record_help_path + " | less";
+                system(print_command.c_str());
             }
             else {
                 is_execute_common = true;
@@ -231,7 +246,12 @@ int main(int argc, char** argv) {
             printTitle();
             cmd_timer_gui(parser, pipeline_path);
         }
-        else if (command == "shell") {
+        else if (command == "sh") {
+            // if no argument, just open the interactive bash
+            if (parser.arg_num == 0) {
+                system("bash -i");
+                continue;
+            }
             // if is the shell command, combine rest of the command as one
             // add the bash login shell and interactive bash
             stringstream ss;
@@ -263,13 +283,16 @@ int main(int argc, char** argv) {
         }
         else if (command == "gui_control") {
             // control the GUI 
-            cmd_control_gui(parser, pipeline_path);
+            cmd_control_gui(parser, pipeline_path, gui_help_path);
             ;
         }
         else if (command == "exit") {
             cmd_save(file);
             cout << "exit!" << endl;
             break;
+        }
+        else if (command == "openInVim") {
+            cmd_openInVim(file, path_man, parser, gui_plan_dir);
         }
         else {
             string warning_info = string("unknown command: <") + SCOLOR(CYAN, parser.input_str) + ">!";

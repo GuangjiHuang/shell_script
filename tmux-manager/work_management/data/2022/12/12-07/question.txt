@@ -1,0 +1,2 @@
+1.(x) how to use the copy to output all the file's content?
+

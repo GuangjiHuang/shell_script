@@ -350,7 +350,7 @@ string printPromptFileType(Path_man& path_man, const stack<string>& record_time)
 
 string printPromptStudy(const StudyT& study, bool is_toggle) {
     string prompt;
-    if (is_toggle) {
+    if (!is_toggle) {
         // time c_str
         const int buffer_size {10};
         char time_str[buffer_size];
@@ -568,11 +568,21 @@ void natureSort(json& questions_key_val, vector<string>& questions_vec) {
     sort(questions_vec.begin(), questions_vec.end(), sort_reg);
 }
 
-void printVecString(vector<string>& vec) {
+void printVecString(vector<string>& vec, bool with_number) {
     //cout << "----------------------------------------------------------------------";
     cout << "\n";
-    for (auto& ele : vec) {
-        cout << ele << "\n";
+    if (with_number) {
+        int sz = vec.size();
+        for (int i=0; i<sz; ++i) {
+            cout.width(3);
+            cout << std::left << i;
+            cout << vec[i] << endl;
+        }
+    }
+    else {
+        for (auto ele : vec) {
+            cout << ele << endl;
+        }
     }
     cout << "----------------------------------------------------------------------";
     cout << endl;
@@ -620,6 +630,38 @@ void strip(string& str) {
     for (; l<sz && isspace(str[l]); ++l) ;
     for (; r>=0 && isspace(str[r]); --r);
     str = str.substr(l, r+1);
+}
+
+void lessFile(const string&path, bool show_line_number) {
+    ifstream ifs(path);
+    if (!ifs.is_open()) {
+        string warning_info("Can not open the file!");
+        printWarning(warning_info);
+        return;
+    }
+    string command_exe = show_line_number ? "cat -n " : "cat "; 
+    command_exe += path + " | less";
+    // execute 
+    int _ = system(command_exe.c_str());
+    if (_) {
+        printWarning("Fail to execute the commmand: " + command_exe);
+        ;
+    }
+}
+
+void lessVecString(vector<string>& vec, bool show_line_number) {
+    string total;
+    for (auto& ele : vec) {
+        total += ele + "\n";
+    }
+    // 
+    string command_exe = "echo \"" + total + "\" | less";
+    //cout << "--------------------------------------------------------------------------------" << endl;
+    //cout << command_exe << endl;
+    if (show_line_number) {
+        command_exe += " -n";
+    }
+    int _ = system(command_exe.c_str());
 }
 
 void cls() {

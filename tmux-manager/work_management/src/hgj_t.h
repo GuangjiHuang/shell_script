@@ -82,11 +82,11 @@ class Path_man {
 private:
     // the attributes
     string date_str;
-    vector<string> date_vec;
     string file_type;
     string cur_dir;
     string cur_path;
 public:
+    vector<string> date_vec;
     string parent_dir;
     static unordered_set<string> defined_file_type;
 public:
@@ -189,7 +189,7 @@ public:
 class AliasParser {
 private:
     string _path;
-     unordered_map<string, string> _command_alias_tb;
+    unordered_map<string, string> _command_alias_tb;
 
 public:
     AliasParser(const string& path); 
@@ -198,6 +198,8 @@ public:
     void showAlias();
     void saveAlias(const string& path);
     void reloadAlias(const string& path);
+    void vimAlias();
+    void lessAlias();
 
 private:
     void _readComandFromFile(const string& path);
@@ -235,45 +237,81 @@ public:
         string topic1(c_topic1);
         string topic2(c_topic2);
         int question_id = c_question_id;
-        // topic1
-        if (this->topic1 == topic1 && !this->topic1.empty()) goto LINE2;
-        topic1_vec.clear();
-        for (auto it=js_data.begin(); it!=js_data.end(); ++it) {
-            topic1_vec.emplace_back(it.key());
-            if (topic1.empty()) {
-                topic1 = it.key();
+        bool is_topic1_change = true;
+        bool is_topic2_change = true;
+        // check the topic1
+        if (this->topic1 == topic1 && !this->topic1.empty()) {
+            is_topic1_change = false;
+        }
+        else {
+            // renew the topic1_vec, and try to find out the topic1
+            topic1_vec.clear();
+            for (auto it=js_data.begin(); it!=js_data.end(); ++it) {
+                topic1_vec.emplace_back(it.key());
+                if (topic1.empty()) {
+                    topic1 = it.key();
+                }
+            }
+            // find the topic1
+            if (find(topic1_vec.begin(), topic1_vec.end(), topic1)==topic1_vec.end()) {
+                // all the thing not change
+                return;
+            }
+            else {
+                this->topic1 = topic1;
             }
         }
-        if (find(topic1_vec.begin(), topic1_vec.end(), topic1)==topic1_vec.end()) return;
-        this->topic1 = topic1;
-    LINE2:
-        if (this->topic2 == topic2 && !this->topic2.empty()) goto LINE3;
-        topic2_vec.clear();
-        // select the first topic2
-        for (auto it=js_data[topic1].begin(); it!=js_data[topic1].end(); ++it) {
-            topic2_vec.emplace_back(it.key());
-            if (topic2.empty()) {
-                topic2 = it.key();
+        // check the topic2
+        if (this->topic2 == topic2 && !this->topic2.empty() && !is_topic1_change) {
+            is_topic2_change = false;
+            ; // do nothing;
+        }
+        else {
+            // renew the topic2_vec
+            topic2_vec.clear();
+            for (auto it=js_data[topic1].begin(); it!=js_data[topic1].end(); ++it) {
+                topic2_vec.emplace_back(it.key());
+                if (topic2.empty()) {
+                    topic2 = it.key();
+                }
+            }
+            if (find(topic2_vec.begin(), topic2_vec.end(), topic2)==topic2_vec.end()) {
+                if (is_topic1_change) {
+                    // empty the topic2 and the question
+                    this->topic2 = this->question = "";
+                    this->question_id = -1;
+                    this->topic2_vec.clear();
+                    this->questions_vec.clear();
+                    this->link = "";
+                    this->score = 0.0;
+                    this->occur = 0;
+                }
+                return;
+            }
+            else {
+                this->topic2 = topic2;
             }
         }
-        // topic2
-        if (find(topic2_vec.begin(), topic2_vec.end(), topic2)==topic2_vec.end()) return;
-        this->topic2 =topic2;
-    LINE3:
-        // get the nature order string vec
+        if (this->question_id == question_id  && !is_topic2_change) {
+            return; // do nothing
+        }
+        // check the question
         json tmp = js_data[topic1][topic2];
-        questions_vec.clear();
         natureSort(tmp, questions_vec);
         int len = js_data[topic1][topic2].size();
-        if (question_id < len && question_id >= 0) {
+        if (len == 0) {
+            this->question_id = -1;
+            this->question = "";
+            this->link = "";
+            this->score = 0.0;
+            this->occur = 0;
+        }
+        else if (question_id < len && question_id >= 0) {
             this->question_id = question_id;
             this->question = questions_vec[this->question_id];
             this->link = tmp[question]["link"];       
             this->score = tmp[question]["score"];
             this->occur = tmp[question]["occur"];
-        }
-        if (len == 0) {
-            this->question_id = -1;
         }
         else if (question_id<0 || question_id>=len) {
             this->question_id = question_id<0 ? 0 : len - 1;

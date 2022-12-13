@@ -1,0 +1,25 @@
+1. i or I: -> i open the study app. I open the study app configuration file first and then open the app.
+2. t: -> switch: video show <-> time show;
+3. x: -> switch: video live <-> video source;
+4. s: -> begin to save video;
+5. p: -> update python json. [May not use!];
+6. q: -> quit the video;
+7. e: -> ending saving video;
+8. c: -> cancle saving video;
+9. ":": -> gvim open the setting file;
+10. n: -> change the video id, but not work;
+11. h: -> help, show the help information;
+12. l: -> move main window to left;
+13. m: -> move main window to middle;
+14. r: -> move main window to right;
+15. H: -> move main window out of the screen display, to hide it;
+16. <nubmer>: -> enter the time count, minutes;
+    #Inside time count:
+    q: quit the time count;
+    s: stop time count;
+        c: continue
+    x: time count gui cover the weixin, concentrate mode;
+    l: move the time count gui to the left;
+    m: move the time count gui to the middle;
+    r: move the time count gui to the right;
+    H: move the time count gui out of the screen display, in order to hide it;

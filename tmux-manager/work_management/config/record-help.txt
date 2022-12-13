@@ -1,0 +1,82 @@
+-------------------------------------- RECORD HELP INFORMATOIN ------------------------------------
+1. show
+    <number>: number of items to show;
+    state + [a, x, -, y]: to show the state's items;
+    title: just show the title;
+    reverse: reverse the items that show;
+    id + <number>: show coresponding id's item;
+
+2. add : write items to buffer, not support for record type!   
+
+3. append
+    newline: append the content to the nextline;
+    space: append the content to the origainal content following the space;
+
+4. file:
+    study,record,learn,task,question: switch the file type;
+
+5. date:
+    show: show the current date you are in, may not the today. 
+    previous: go to previous day;
+    next: go to the next day;
+    today: go to the today;
+    update + <year-month-day>: go to the year-month-day;
+    go_month_day + <month-day>: go to the this year's month and day;
+    go_day + <day>: go to the this year and month's day, 1-31
+
+6. label:
+    y,-,x: lable to the state that you select, you have to select the items in the next line;
+
+7. operation:
+    delete: delete the index you select;
+    recover: give the order again if the items order is not in order;
+
+8. openInVim:
+    no arg: -> open the corresponding file in vim;
+    gui: -> open plan.txt of the gui;
+
+9. record_in, record_out, record_abort: just for record;
+    record_in: into the record state;
+    record_out: finish recording;
+    record_abort: don't record again, about the record state;
+
+10. save: -> buffer to disk
+
+11. reload: -> reload from the disk and cover the buffer
+
+12. help: -> help information
+
+13. list
+    file: print file list in current day you are in;
+    date + <no arg, month, year-month> : calendar with the filetype information, you provide the month;
+    calendar + <no arg, month, year-month> : print the calendar, you provide the month;
+
+14. alias
+    show: show all the alias in the config aliases.txt;
+    add: add the new alias you set now; xxx = xxxx;
+    reload: reload from the file;
+    save: save buffer to the file, if you add the alias it will save to the disk file;
+    vim: vim open the alias path;
+    less: less to show the alias path;
+
+15. timer
+    <number minutes>: print the timer in the screen;
+        <any word>: set the timer's length to short to fit the screen if you just half screen;
+
+16. timerStop: default is the 30 minutes, using the gui time count;
+    <number minutes>: time count minutes;
+
+17. sh: means shell;
+    no arg: into the interactive bash, equal to: "bash -i"
+    <command>: equal to: "bash -l -c <command>"
+
+18. clear: -> clear the screen
+
+19. prompt_toggle, pt : -> switch the prompt, time <-> filetype
+
+20. gui_control: 
+    help: show the help information;
+    <character>: just as you type key inside the gui, call the opencv's waitKey();
+
+21. exit: -> exit the program
+

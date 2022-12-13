@@ -181,6 +181,8 @@ void cmd_file(File_t& file, const Parser& parser, Path_man& path_man, Show_arg& 
     string arg_1 = parser.arg_ls[1];
     // here add the stuy file type, very special
     if (arg_1 == "study") { // just set the mark
+        cls();
+        printTitle();
         FILE_IS_STUDY = true;
     }
     else { // record, question, ....
@@ -190,7 +192,8 @@ void cmd_file(File_t& file, const Parser& parser, Path_man& path_man, Show_arg& 
         file.update(path_man.getCurPath());
         show_arg.update(file);
         // show the new file type's content
-        if (original_file_type != path_man.getFileType()) { // if the file type change
+        // or solve the debug that study switch to other file type.
+        if (original_file_type != path_man.getFileType() || FILE_IS_STUDY) { // if the file type change
             cls();
             printHeader(file, path_man, show_arg);
             printContent(file, show_arg);
@@ -289,16 +292,44 @@ void cmd_save(File_t& file) {
 }
 
 /* command: openInVim */
-void cmd_openInVim(File_t& file, Path_man& path_man) {
+void cmd_openInVim(File_t& file, Path_man& path_man, Parser& parser, string& gui_plan_dir) {
+    const int arg_num = parser.arg_num;
+    string open_vim_path;
+    //
+    if (arg_num>0 && parser.arg_ls[1] == "gui") {
+        stringstream ss;
+        // /2022/03/03-12/
+        string year(path_man.date_vec[0]);
+        string month(path_man.date_vec[1]);
+        string day(path_man.date_vec[2]);
+        ss << year << "/" << year << "-" << month << "/" << (month + "-" + day);
+        //
+        open_vim_path = gui_plan_dir + ss.str() + "/plan.txt";
+#ifdef __linux__
+        cout << "Remote machine file!" << endl;
+        if (!fs::exists(fs::path(open_vim_path))) {
+            string scp_command = "scp gjsq@202.38.214.68:" + open_vim_path + " ./tmp >/dev/null";
+            int _ = system(scp_command.c_str());
+            //
+            if (!_) open_vim_path = "./tmp/plan.txt";
+        }
+#endif
+
+    }
+    else if (FILE_IS_STUDY) return; // stuy not execute
+    else {
+        open_vim_path = path_man.getCurPath();
+    }
     // 1. save the buffer to the file; 2. use the vim to open it
     file.flushBuffer();
     try {
-        string shell_command("vim " + path_man.getCurPath());
+        string shell_command("vim " + open_vim_path);
         system(shell_command.c_str());
     }
     catch (...) {
         cout << "There are something wrong! Can not open in vim!" << endl;
     }
+    return;
 }
 
 /*command: alias */
@@ -322,6 +353,14 @@ void cmd_alias(Parser& parser, AliasParser& alias_parser) {
     }
     else if (arg_1 == "save") {
         alias_parser.saveAlias("");
+    }
+    else if (arg_1 == "vim") {
+        alias_parser.vimAlias();
+        // after saving, and then reload
+        alias_parser.reloadAlias("");
+    }
+    else if (arg_1 == "less") {
+        alias_parser.lessAlias();
     }
     else {
         cout << "[Warning]: no such alias command!" << endl;
@@ -624,7 +663,6 @@ void cmd_just_for_study(string& questions_js_path, string& answers_path) {
     f_is.close();
     cout << "Has loaded the json file!" << endl;
 }
-void cmd_just_for_study(string& questions_js_path, string& answers_path);
 
 void cmd_study_topic1(Parser& parser, StudyT& study) { 
     /* get the arg to the show_arg */
@@ -636,19 +674,27 @@ void cmd_study_topic1(Parser& parser, StudyT& study) {
     //
     string arg_1 = parser.arg_ls[1];
     if (arg_1 == "list") {
-        printVecString(study.topic1_vec);
+        cout << endl;
+        cout << hyphen(31) << CCOLOR(LIGHT_RED, " Topic1 ") << hyphen(31);
+        printVecString(study.topic1_vec, true);
     }
     else if (arg_1 == "add") {
-        ;
-    }
-    else if (arg_1 == "delete") {
-        ;
-    }
-    else if (arg_1 == "rename") {
-        ;
+        if (arg_num == 1) {
+            printWarning("Need add the arg: <topic1> following!");
+            return;
+        }
+        string arg_2 = parser.arg_ls[2];
+        if (find(study.topic1_vec.begin(), study.topic1_vec.end(), arg_2)!=study.topic1_vec.end()) {
+            printWarning("Cannot add, has been includding the topic1!" + arg_2);
+            return;
+        }
+        study.topic1_vec.push_back(arg_2);
+        json tmp;
+        tmp[arg_2] = {};
+        study.js_data.update(tmp);
     }
     else {
-        ;
+        printWarning("No such command: <" +  parser.input_str + ">");
     }
 }
 
@@ -662,19 +708,23 @@ void cmd_study_topic2(Parser& parser, StudyT& study) {
     //
     string arg_1 = parser.arg_ls[1];
     if (arg_1 == "list") {
+        cout << endl;
+        cout << hyphen(31) << CCOLOR(LIGHT_RED, " Topic2 ") << hyphen(31);
         printVecString(study.topic2_vec);
     }
     else if (arg_1 == "add") {
-        if (arg_num==1) return;
+        if (arg_num==1) {
+            printWarning("Need add the arg: <topic2> following!");
+            return;
+        }
         string arg_2 = parser.arg_ls[2];
         if (find(study.topic2_vec.begin(), study.topic2_vec.end(), arg_2)!=study.topic2_vec.end()) {
-            stringstream ss;
-            ss << "[Warning]: Cannot add, has been including the topic2_vec " << arg_2;
-            printExe(ss.str());
+            printWarning("Cannot add, has been including the topic2_vec " + arg_2);
             return;
         }
         study.topic2_vec.push_back(arg_2);
         json tmp;
+        tmp[arg_2] = {};
         study.js_data[study.topic1].update(tmp);
     }
     else if (arg_1 == "delete") {
@@ -682,22 +732,25 @@ void cmd_study_topic2(Parser& parser, StudyT& study) {
         string arg_2 = parser.arg_ls[2];
         auto f_it=find(study.topic2_vec.begin(), study.topic2_vec.end(), arg_2);
         if (f_it == study.topic2_vec.end()) { //not found
-            stringstream ss;
-            ss << "[Warning]: No Such topic2 " << arg_2;
-            printExe(ss.str());
+            printWarning("No Such topic2 " + arg_2);
             return;
         }
-        study.topic2_vec.erase(f_it);
-        study.js_data[study.topic1].erase(arg_2);
+        cout << "[ ! ]: Do you want to delete the topic2: " << arg_2 << "? [y/n]: ";
+        char ch;
+        cin >> ch;
+        if (ch == 'y' || ch == 'Y') {
+            study.topic2_vec.erase(f_it);
+            study.js_data[study.topic1].erase(arg_2);
+            cout << "Has been delete the topic2: " << arg_2 << endl;
+            study.initInfo(study.topic1, "", 0);
+        }
     }
     else if (arg_1 == "rename") {
         if (arg_num==1) return;
         string arg_2 = parser.arg_ls[2];
         auto f_it=find(study.topic2_vec.begin(), study.topic2_vec.end(), arg_2);
         if (f_it != study.topic2_vec.end()) { //not found
-            stringstream ss;
-            ss << "Has including topic2 " << arg_2;
-            printExe(ss.str());
+            printWarning("Has including topic2 " + arg_2);
             return;
         }
         study.topic2_vec.erase(find(study.topic2_vec.begin(), study.topic2_vec.end(), study.topic2));
@@ -705,6 +758,9 @@ void cmd_study_topic2(Parser& parser, StudyT& study) {
         study.js_data[study.topic1].erase(arg_2);
         json old_topic2 = study.js_data[study.topic1][study.topic2];
         study.js_data[study.topic1].update(old_topic2);
+    }
+    else {
+        printWarning("No such command: <" +  parser.input_str + ">");
     }
 }
 
@@ -742,11 +798,55 @@ void cmd_study_questions(Parser& parser, StudyT& study) {
             cout << question_show << endl;
         }
         else if (arg_2 == "all") {
-            printVecString(study.questions_vec);
+            const int len_threshold = 15;
+            int print_len = study.questions_vec.size(); 
+            if (print_len < len_threshold) {
+                printVecString(study.questions_vec);
+            }
+            else {
+                // use the less to show 
+                lessVecString(study.questions_vec, true);
+            }
         }
         else {
             printExe("show the questions range!");
         }
+    }
+    else if (arg_1 == "edit") {
+        string command_edit = "vim " + study.question_path;
+        int _ = system(command_edit.c_str());
+        if (_) {
+            printWarning("Fail to execute the command: " + command_edit);
+        }
+    }
+    else if (arg_1 == "add") {
+        string question_content;
+        // get the question
+        string prompt_add = "(add question)-> : ";
+        char* rl = readline(prompt_add.c_str());
+        if (!rl) return;
+        question_content = string(rl);
+        strip(question_content);
+        free(rl);
+        //cout << question_content;
+        // append the question to the js_data
+        if (!study.topic1.empty() && !study.topic2.empty()) {
+            study.questions_vec.push_back(question_content);
+            string link_path(question_content + ".md");
+            json tmp;
+            tmp["link"] = link_path;
+            tmp["score"] = 0;
+            tmp["occur"] = 0;
+            study.js_data[study.topic1][study.topic2][question_content] = tmp;
+            // not save!
+        }
+        else {
+            cout << "topic1 or topic2 is empty! Can not add the new question!" << endl;
+        }
+    }
+    else if (arg_1 == "delete") {
+        cout << "Has not implementation!" << endl;
+        ;
     }
     else if (arg_1 == "score") {
         stringstream ss;
@@ -769,7 +869,7 @@ void cmd_study_questions(Parser& parser, StudyT& study) {
 void cmd_study_save(Parser& parser, StudyT& study) { 
     /* get the arg to the show_arg */
     const int arg_num = parser.arg_num;
-    int dump_level = -1;
+    int dump_level = 4;
     if (arg_num >= 1) {
         dump_level = stoi(parser.arg_ls[1]);
     }
@@ -825,7 +925,7 @@ void cmd_study_bookmarks(Parser& parser, StudyT& study) {
     string arg_1 = parser.arg_ls[1];
 }
 
-void cmd_control_gui(Parser& parser, const string& pipeline_path) {
+void cmd_control_gui(Parser& parser, const string& pipeline_path, string& gui_help_path) {
     const int arg_num = parser.arg_num;
     if (arg_num == 0) {
         stringstream ss;
@@ -834,10 +934,31 @@ void cmd_control_gui(Parser& parser, const string& pipeline_path) {
         return;
     }
     string arg_1 = parser.arg_ls[1];
-
+    if (arg_1 == "help") {
+        // print the help information
+        ifstream ifs(gui_help_path);
+        if (! ifs.is_open()) {
+            cout << "Could not open the help file: " << gui_help_path << endl;
+            return;
+        }
+        cout << ifs.rdbuf() << endl;
+    }
     // open the piple line path and the write the time to the file
     ofstream ofs(pipeline_path);
     if (!ofs.is_open()) {
+#ifdef __linux__
+        cout << "remote writing!" << endl;
+        // ssh $temp_path $gjsq:$pipeline_path
+        string tmp_path("./data/tmp.txt");
+        ofstream ofs_tmp(tmp_path);
+        ofs_tmp << arg_1 << std::flush;
+        ofs_tmp.close();
+        //
+        string scp_command = "scp " + tmp_path + " gjsq@202.38.214.68:" + pipeline_path + \
+                              " >/dev/null";
+        //cout << scp_command << endl;
+        if (!system(scp_command.c_str())) return;
+#endif
         string warning_info("file " + pipeline_path + " no exists! Or try again!");
         printWarning(warning_info);
     }

@@ -11,6 +11,8 @@
 as = alias show 
 ad = alias add
 ar = alias reload
+av = alias vim
+al = alias less
 
 # about the date
 ds = date show # show the date
@@ -45,15 +47,16 @@ lx = label x # label the state again, after this command, key the items id
 ly = label y
 l- = label -
 
-# about shell command
+# about sh command
 v = openInVim # vim xxx.txt
-! = shell # ! xxx equal to system(xxx)
--> = shell # same as the shell
+! = sh # ! xxx equal to system(xxx)
+-> = sh # same as the shell
 cl = clear # equal to system("clear")
 
 # file save
 :x = exit # save and exit the progra
 :w = save # flush the buffer to the disk
+w: = save # flush the buffer to the disk
 :e! = reload # disk -> buffer, the buffer will be covered
 
 # list the information
@@ -78,6 +81,22 @@ out = record_out # the work finish, the end time will write to the record
 abort = record_abort # don't record!
 
 # for study questions
-qs = questions show
+## question
+qs = questions
+qss = questions show 
+q* = questions show all
+q% = questions show
+qsa = questions add
+q> = questions add
+qse = questions edit
+qe = questions edit
+
+# topic1 and topic2
 t1 = topic1
+t1l = topic1 list
+t1* = topic1 list
+t1a = topic1 add
 t2 = topic2
+t2l = topic2 list
+t2* = topic2 list
+t2a = topic2 add

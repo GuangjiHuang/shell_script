@@ -1,0 +1,10 @@
+1.(y) 完成help文档，主要是learn、record和task的help文档，区分出来的共同的文档。
+
+2.(y) gui startup部分的代码注释掉。
+
+3.(x) 完成topic1、topic2以及question增删部分的的代码。测试好，特别是增加部分的代码。
+
+4.(y) 完成gui部分的help文档。
+
+5.(y) 增加help部分的代码。 包括gui help和record help部分。 record 部分的help改成less来查看。
+

@@ -17,7 +17,7 @@ void cmd_show(File_t& file, Path_man& path_man, Parser& parser, Show_arg& show_a
 /* command: save */
 void cmd_save(File_t& file);
 /* command: openInVim */
-void cmd_openInVim(File_t& file, Path_man& path_man);
+void cmd_openInVim(File_t& file, Path_man& path_man, Parser& parser, string& gui_plan_dir);
 /* command: alias */
 void cmd_alias(Parser& parser, AliasParser& alias_parser);
 /* command: label */
@@ -40,7 +40,7 @@ void cmd_study_reload(Parser& parser, StudyT& study);
 void cmd_study_bookmarks(Parser& parser, StudyT& study);
 bool cmd_study_change_topic_question(Parser& parser, StudyT& study);
 void cmd_timer_gui(Parser& parser, const string& pipeline_path);
-void cmd_control_gui(Parser& parser, const string& pipeline_path);
+void cmd_control_gui(Parser& parser, const string& pipeline_path, string& gui_help_path);
 
 //void cmd_
 #endif

@@ -7,7 +7,9 @@
 3. topic2 + list, set, delete, rename
 
 4. questions
-   1) show + <number> / <range> / all
+   1) show + <number> / <range> / all;
+   2) add: add the question;
+   3) delte: delete the question;
    2) score
    3) occur
    4) link
@@ -24,5 +26,12 @@
 8. <any number>
 -> question change to the relative number id.
 
-9. <topic1 or topic2>
--> topic1 or topic2 change to the relative topic, check the topic1 first.
+9. topic1:
+    list: list all the topic1;
+    add: add the new topic1;
+
+10. topic2:
+    list: list all the topic1's topic2;
+    add: add the new topic2;
+    delete: delete the topcic2;
+    rename: rename the topic2;
