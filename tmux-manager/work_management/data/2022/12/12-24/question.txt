@@ -1,0 +1,2 @@
+1.(x) vim\:ctrl-s stoping the process and using the ctrl-p to solve the problem.
+

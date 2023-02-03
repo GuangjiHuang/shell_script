@@ -1,0 +1,4 @@
+1.(x) vim\: how to understand the ctrl+R, R means the register.
+
+2.(x) vim\: use the \ or ? to search the whole word? How to do that? <>?
+

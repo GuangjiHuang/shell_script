@@ -1,0 +1,10 @@
+1.(x) <16:08-16:13> unpack the phone's baidu app right now.
+
+2.(x) <16:13-16:26> see the information of the OA explore.
+
+3.(x) <16:26-17:00> change the configuration of the tmux config to add the shortcut of hidding the status bar.
+
+4.(x) <17:00-17:06> fix the bug, that if you not in the record in mode, press the out, if will fail.
+
+5.(x) <18:36-19:10> check out the lab's server usage.
+

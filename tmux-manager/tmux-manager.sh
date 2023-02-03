@@ -32,6 +32,7 @@ sessions_list=("c++" \
     "project" \
     "entertainment" \
     "chore" \
+    "question" \
     "English" \
     "type" \
     "tmux" \
@@ -85,6 +86,27 @@ tmux_template_3panes()
     send-keys -t 1 'love you' C-m\; \
     select-pane -t 1
 
+}
+
+tmux_tempalte_3panes_for_chore()
+{
+    tmux new-session -s "$1" -n "$1" \; \
+    split-window -h \; \
+    select-pane -t 1 \; \
+    split-window -v \; \
+    send-keys -t 0 'wr record' C-m\; \
+    send-keys -t 1 'wr arragement' C-m\; \
+    send-keys -t 2 'wr plan' C-m\; \
+    select-pane -t 1
+}
+
+tmux_tempalte_3panes_for_question()
+{
+    tmux new-session -s "$1" -n "$1" \; \
+    split-window -h \; \
+    send-keys -t 0 'wr question' C-m\; \
+    send-keys -t 1 'wr learn' C-m\; \
+    select-pane -t 0
 }
 
 # 2 panes
@@ -213,7 +235,314 @@ tmux_type()
 
 tmux_chore()
 {
-    tmux_template_2panes "chore"
+    #tmux_template_2panes "chore"
+    tmux_tempalte_3panes_for_chore "chore"
+    echo "this is the chore's tmux"
+}
+tmux_question()
+{
+    #tmux_template_2panes "chore"
+    tmux_tempalte_3panes_for_question "question"
+    echo "this is the chore's tmux"
+}
+tmux_tmux()
+{
+    tmux_template_2panes "tmux"
+    echo "this is the tmux's tmux"
+}
+tmux_cmake()
+{
+    tmux_template_2panes "cmake"
+    echo "this is the cmake's tmux"
+}
+tmux_clock()
+{
+    shell_script_path=$install_dir/love-clock-switch-rain-clock.sh
+    shell_script_command=". $shell_script_path"
+    #echo "the command is the: $shell_script_command"
+    tmux new-session -s "clock" \; \
+    setw status off \; \
+    select-pane -t 1
+}
+
+# 2 panes
+tmux_template_2panes()
+{
+    
+    # new the session;
+    # split the window;
+    # resize the pane's size
+    # send-keys to execute the commamd
+    #|-----------------------------------------
+    #|        0                      |   1    |
+    #|                               |        |
+    #|       edit                    |        |
+    #|                               |  rain  |
+    #|                               |        |
+    #|       70%                     |        |
+    #|                               |        |
+    #|                               |  30%   |
+    #|                               |        |
+    #|-----------------------------------------
+
+    # the parameters
+    # $1: sessioin name
+    # $2: left part big or the right part big
+    if [ "$2" == "left_big" ];then
+        part_percent=40%
+    else
+        part_percent=50%
+    fi
+    tmux new-session -s "$1" -n "$1" \; \
+    split-window -h \; \
+    resize-pane -t 0 -x$part_percent \; \
+    send-keys -t 1 'love go-goal;clear' C-m\; \
+    send-keys -t 0 'love go-goal;clear' C-m\; \
+    send-keys -t 0 'love you' C-m\; \
+    select-pane -t 0
+
+}
+
+tmux_cpp()
+{
+    tmux_template_2panes "c++"
+}
+
+tmux_python()
+{
+    #tmux_template_2panes "python" "left_big"
+    tmux_template_2panes "python"
+}
+
+tmux_vim()
+{
+    tmux_template_2panes "vim"
+}
+
+tmux_shell()
+{
+    tmux_template_2panes "shell"
+}
+
+tmux_markdown()
+{
+    tmux_template_2panes "markdown"
+    echo "this is the markdown's tmux"
+}
+
+tmux_project()
+{
+    tmux_template_2panes "project"
+    echo "this is the project's tmux"
+}
+
+tmux_paper()
+{
+    tmux_template_2panes "paper"
+    echo "this is the paper's tmux"
+}
+
+tmux_entertainment()
+{
+    tmux_template_2panes "entertainment"
+    echo "this is the entertainment's tmux"
+}
+
+tmux_English()
+{
+    # rewrite the layout
+    #tmux_template_2panes "type"
+    python_main_dir=${HOME}/mygithub/shell-script/tmux-manager/English-code
+    English_data_dir="~/mygithub/data-shared/English"
+    tmux new-session -s "English" -n "English" \; \
+    split-window -h \; \
+    send-keys -t 1 'wr temp' C-m\; \
+    send-keys -t 0 "python ${python_main_dir}/main.py -workspace $English_data_dir" C-m\; \
+    select-pane -t 1
+    #echo "this is the type's tmux"
+}
+
+tmux_work()
+{
+    source_dir=~/mygithub/shell-script/tmux-manager
+    work_data_dir=~/mygithub/data-shared/work_management/data
+    tmux_work_command="cd $source_dir/work_management/; ./bin/main*"
+    # rewrite the layout
+    tmux new-session -s "work" -n "work" \; \
+    split-window -h \; \
+    send-keys -t 0 "$tmux_work_command" C-m\; \
+    select-pane -t 0
+    #echo "this is the type's tmux"
+}
+
+tmux_type()
+{
+    # rewrite the layout
+    #tmux_template_2panes "type"
+    python_main_dir=${HOME}/mygithub/shell-script/tmux-manager/type-code
+    type_data_dir="~/mygithub/data-shared/type"
+    tmux new-session -s "type" -n "type" \; \
+    split-window -h \; \
+    send-keys -t 1 'wr type' C-m\; \
+    send-keys -t 0 "python ${python_main_dir}/main.py -workspace $type_data_dir" C-m\; \
+    select-pane -t 1
+    #echo "this is the type's tmux"
+}
+
+tmux_chore()
+{
+    #tmux_template_2panes "chore"
+    tmux_tempalte_3panes_for_chore "chore"
+    echo "this is the question's tmux"
+}
+tmux_tmux()
+{
+    tmux_template_2panes "tmux"
+    echo "this is the tmux's tmux"
+}
+tmux_cmake()
+{
+    tmux_template_2panes "cmake"
+    echo "this is the cmake's tmux"
+}
+tmux_clock()
+{
+    shell_script_path=$install_dir/love-clock-switch-rain-clock.sh
+    shell_script_command=". $shell_script_path"
+    #echo "the command is the: $shell_script_command"
+    tmux new-session -s "clock" \; \
+    setw status off \; \
+    select-pane -t 1
+}
+
+# 2 panes
+tmux_template_2panes()
+{
+    
+    # new the session;
+    # split the window;
+    # resize the pane's size
+    # send-keys to execute the commamd
+    #|-----------------------------------------
+    #|        0                      |   1    |
+    #|                               |        |
+    #|       edit                    |        |
+    #|                               |  rain  |
+    #|                               |        |
+    #|       70%                     |        |
+    #|                               |        |
+    #|                               |  30%   |
+    #|                               |        |
+    #|-----------------------------------------
+
+    # the parameters
+    # $1: sessioin name
+    # $2: left part big or the right part big
+    if [ "$2" == "left_big" ];then
+        part_percent=40%
+    else
+        part_percent=50%
+    fi
+    tmux new-session -s "$1" -n "$1" \; \
+    split-window -h \; \
+    resize-pane -t 0 -x$part_percent \; \
+    send-keys -t 1 'love go-goal;clear' C-m\; \
+    send-keys -t 0 'love go-goal;clear' C-m\; \
+    send-keys -t 0 'love you' C-m\; \
+    select-pane -t 0
+
+}
+
+tmux_cpp()
+{
+    tmux_template_2panes "c++"
+}
+
+tmux_python()
+{
+    #tmux_template_2panes "python" "left_big"
+    tmux_template_2panes "python"
+}
+
+tmux_vim()
+{
+    tmux_template_2panes "vim"
+}
+
+tmux_shell()
+{
+    tmux_template_2panes "shell"
+}
+
+tmux_markdown()
+{
+    tmux_template_2panes "markdown"
+    echo "this is the markdown's tmux"
+}
+
+tmux_project()
+{
+    tmux_template_2panes "project"
+    echo "this is the project's tmux"
+}
+
+tmux_paper()
+{
+    tmux_template_2panes "paper"
+    echo "this is the paper's tmux"
+}
+
+tmux_entertainment()
+{
+    tmux_template_2panes "entertainment"
+    echo "this is the entertainment's tmux"
+}
+
+tmux_English()
+{
+    # rewrite the layout
+    #tmux_template_2panes "type"
+    python_main_dir=${HOME}/mygithub/shell-script/tmux-manager/English-code
+    English_data_dir="~/mygithub/data-shared/English"
+    tmux new-session -s "English" -n "English" \; \
+    split-window -h \; \
+    send-keys -t 1 'wr temp' C-m\; \
+    send-keys -t 0 "python ${python_main_dir}/main.py -workspace $English_data_dir" C-m\; \
+    select-pane -t 1
+    #echo "this is the type's tmux"
+}
+
+tmux_work()
+{
+    source_dir=~/mygithub/shell-script/tmux-manager
+    work_data_dir=~/mygithub/data-shared/work_management/data
+    tmux_work_command="cd $source_dir/work_management/; ./bin/main*"
+    # rewrite the layout
+    tmux new-session -s "work" -n "work" \; \
+    split-window -h \; \
+    send-keys -t 0 "$tmux_work_command" C-m\; \
+    select-pane -t 0
+    #echo "this is the type's tmux"
+}
+
+tmux_type()
+{
+    # rewrite the layout
+    #tmux_template_2panes "type"
+    python_main_dir=${HOME}/mygithub/shell-script/tmux-manager/type-code
+    type_data_dir="~/mygithub/data-shared/type"
+    tmux new-session -s "type" -n "type" \; \
+    split-window -h \; \
+    send-keys -t 1 'wr type' C-m\; \
+    send-keys -t 0 "python ${python_main_dir}/main.py -workspace $type_data_dir" C-m\; \
+    select-pane -t 1
+    #echo "this is the type's tmux"
+}
+
+tmux_chore()
+{
+    #tmux_template_2panes "chore"
+    tmux_tempalte_3panes_for_chore "chore"
     echo "this is the chore's tmux"
 }
 tmux_tmux()
@@ -807,6 +1136,20 @@ case "$1" in
         ;;
     #}}}
 
+    "question")
+    #{{{
+        # set the environment variable
+        echo "export mode=$1" > $mode_control_path
+        if [ "$tmux_action" == "into" ]; then
+            tmux attach -t $1
+        else
+            # create the tmux layout
+            tmux_question
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
+        fi
+        ;;
+    #}}}
     "tmux")
     #{{{
         # set the environment variable

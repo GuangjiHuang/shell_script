@@ -245,11 +245,11 @@ if [ ! -d "${today_path}" ]; then
         touch ${today_path}/review-a.txt
     else
         separate_sign="=================================="
-        touch ${today_path}/plan.txt && echo -e  "${separate_sign}\n$(datef)\n${separate_sign}\n" > ${today_path}/plan.txt
-        touch ${today_path}/learn.txt && echo -e "${separate_sign}\n$(datef)\n${separate_sign}\n" > ${today_path}/learn.txt
-        touch ${today_path}/question.txt && echo -e "${separate_sign}\n$(datef)\n${separate_sign}\n" > ${today_path}/question.txt
-        touch ${today_path}/temp.txt && echo -e "${separate_sign}\n$(datef)\n${separate_sign}\n" > ${today_path}/temp.txt
-        touch ${today_path}/type.pratice && echo -e "${separate_sign}\n$(datef)\n${separate_sign}\n" > ${today_path}/type.pratice
+        touch ${today_path}/plan.txt && echo -e  "${separate_sign}\n$(datef)  PLAN\n${separate_sign}\n" > ${today_path}/plan.txt
+        touch ${today_path}/learn.txt && echo -e "${separate_sign}\n$(datef)  LEARN\n${separate_sign}\n" > ${today_path}/learn.txt
+        touch ${today_path}/question.txt && echo -e "${separate_sign}\n$(datef)  QUESTION\n${separate_sign}\n" > ${today_path}/question.txt
+        touch ${today_path}/temp.txt && echo -e "${separate_sign}\n$(datef)  TEMP\n${separate_sign}\n" > ${today_path}/temp.txt
+        touch ${today_path}/type.pratice && echo -e "${separate_sign}\n$(datef)  PRATICE\n${separate_sign}\n" > ${today_path}/type.pratice
         # add the todolist.txt (copy the template to it );
         separate_sign_2="--------------------------------------"
         touch ${today_path}/todolist.txt && echo -e "${separate_sign_2}\n------ $(datef) -------\n${separate_sign_2}" > ${today_path}/todolist.txt
@@ -270,6 +270,15 @@ case "$1" in
 
     "plan")
         vim ${today_path}/plan.txt
+        ;;
+    "record")
+        record_path=/cygdrive/c/Users/hgj/Desktop/study-app/data/everyday/$(date "+%Y")/$(date "+%Y-%m")/$(date "+%m-%d")/record.txt
+        vim ${record_path}
+        ;;
+
+    "arragement")
+        arragement_path=/cygdrive/c/Users/hgj/Desktop/study-app/data/everyday/$(date "+%Y")/$(date "+%Y-%m")/$(date "+%m-%d")/plan.txt
+        vim ${arragement_path}
         ;;
 
     "learn")
@@ -349,9 +358,11 @@ case "$1" in
         ;;
 
     "merge")
-        cat ${today_path}/question.txt >> ~/mygithub/everyday-record/compress/question-a.txt
-        cat ${today_path}/learn.txt >> ~/mygithub/everyday-record/compress/learn-a.txt
-        echo "Good job! Has been merging xxx.txt to xxx-a.txt! Successfully!"
+        #cat ${today_path}/question.txt >> ~/mygithub/everyday-record/compress/question-a.txt
+        #cat ${today_path}/learn.txt >> ~/mygithub/everyday-record/compress/learn-a.txt
+        # use the python script
+        python /opt/myscript/wr-script/py/merge.py
+        #echo "Good job! Has been merging xxx.txt to xxx-a.txt! Successfully!"
         ;;
 
     "all")
@@ -360,6 +371,10 @@ case "$1" in
 
     "rest")
         . /opt/myscript/wr-script/my-sq/rest.sh
+        ;;
+
+    "year")
+        . /opt/myscript/wr-script/my-sq/year.sh
         ;;
 
     "moyu")
@@ -373,7 +388,15 @@ case "$1" in
         ;;
 
     "todo")
+        # first execute the rewrite program
+        python /opt/myscript/wr-script/py/todo_score.py
         vim ${today_path}/todolist.txt
+        ;;
+
+    "score")
+        # first execute the rewrite program
+        python /opt/myscript/wr-script/py/count_score.py
+        #vim ${today_path}/todolist.txt
         ;;
 
     "todo-cfg")
@@ -382,10 +405,14 @@ case "$1" in
         ;;
 
     "todo-exe")
-        cd /opt/myscript/wr-script/todolist/
-        ./r_c_w.exe && echo ">>>>>> Execute the program successfully! <<<<<<"
-        cd -
-        wr todo
+        echo "deprecated by hgj, just use the wr todo is ok!"
+        #cd /opt/myscript/wr-script/todolist/src/
+        #if [ ! -f r_c_w.exe ]; then
+        #    g++ main.cpp util.cpp -o r_c_w.exe
+        #fi
+        #./r_c_w.exe && echo ">>>>>> Execute the program successfully! <<<<<<"
+        #cd -
+        #wr todo
         ;;
 
     "wr")
@@ -619,6 +646,8 @@ case "$1" in
         echo -e "${GREEN}: reinstall->${NOCOLOR}: reinstall the file, to cover the original file"
         echo 
         echo -e "${GREEN}: rest->${NOCOLOR}: show the rest as the screen"
+        echo 
+        echo -e "${GREEN}: score->${NOCOLOR}: get the score of the today, including the arragement, todolist, and so on!"
         echo 
         echo -e "${GREEN}: temp->${NOCOLOR}: go the temp.txt"
         echo 

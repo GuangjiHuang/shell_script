@@ -1,0 +1,4 @@
+1.(x) vim: youcompleteme, how to jump to the class.
+
+2.(x) vim: ,f -> maping to the :file or the :f;
+

@@ -3,8 +3,8 @@
 》= add
 
 # about the append
->> = append newline
->>> = append space
+>n = append newline
+>s = append space
 
 
 # about the alias
@@ -78,6 +78,8 @@ gui = gui_control
 # for record, in and out
 in = record_in # in the record mode, write to the buffer, you can use the ctrl+d rewrite, or enter to quit
 out = record_out # the work finish, the end time will write to the record
+>> = record_in
+<< = record_out
 abort = record_abort # don't record!
 
 # for study questions

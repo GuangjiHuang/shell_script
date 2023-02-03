@@ -1,0 +1,29 @@
+1.(x) vim youcompleteme: how to jump to the warning or the error when you type?
+
+2.(x) vim: the usage of the [ and the ] key in the vim.
+
+3.(x) sublime: vim mode, blind the key to the command that exit the insert mode and into the normal mode.
+
+4.(x) vim: scrolling the page? Whole page and the half page in the vim? Down and up?
+
+5.(x) vim: about remote's vim's clipboard, the reg *? What happen?
+
+6.(x) vim: %的妙用，可以作用于#ifdef,#elseif,#endif
+
+7.(x) vim: c/c++ or the python, auto complete the ( or the { and the [.
+
+8.(x) vim: location-list and the quickfix, difference?
+
+9.(x) vim: the usage of the alt+(h,j,k,l), insert mode -> normal mode.
+And the alt+(o,O).
+
+10.(x) linux: how to convert's file encoding? For example, gbk->utf-8, or others?
+
+11.(x) linux: how to see the file's encoding? Using the file -i command.
+
+12.(x) others: what's the difference between the file encoding and the characterset?
+
+13.(x) linux: echo > xxx.txt, this can directly cover the content of the xxx.txt, not using the echo "" > xxx.txt
+
+14.(x) -vim how to change the buffer's encoding? Using the :e ++enc=utf-8.
+

@@ -1,0 +1,10 @@
+1.(x) gdb: show the memory's data, for example, the matrix
+
+2.(x) gdb: how to call the function that you write.
+
+3.(x) cmake:怎样存在多个cmakelist来进行编译控制？
+
+4.(x) cmake: enable_language有什么用呢？
+
+5.(x) cmake: CMAKE_COMPILER_IS_GNUCC 有这个宏定义的变量？
+

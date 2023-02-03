@@ -7,11 +7,11 @@ alias_path: "./config/alias_command.txt"
 study_help_path: "./config/study-help.txt"
 gui_help_path: "./config/gui-help.txt"
 record_help_path: "./config/record-help.txt"
-gui_plan_dir: "/cygdrive/c/Users/gjsq/Desktop/study-app/data/everyday/"
-timer_gui_pipeline_path: "/cygdrive/c/Users/gjsq/Desktop/study-app/py-script/pipeline.txt"
+gui_plan_dir: "/cygdrive/c/Users/hgj/Desktop/study-app/data/everyday/"
+timer_gui_pipeline_path: "/cygdrive/c/Users/hgj/Desktop/study-app/py-script/pipeline.txt"
 
 # init file type
-file_type: "study"
+file_type: "question"
 
 # init study data
 topic1: "tool"

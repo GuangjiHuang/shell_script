@@ -1,0 +1,6 @@
+1.(x) gdb how to see where the file and the line I am now?
+
+2.(x) gdb how to jump to the specified line that you want using the next?
+
+3.(x) linux: cp how to strip the existing file that has been copied?
+

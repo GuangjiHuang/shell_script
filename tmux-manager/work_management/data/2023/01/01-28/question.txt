@@ -1,0 +1,6 @@
+1.(x) MPII dataset and the coco dataset's format. Difference?
+
+2.(x) what's the cmu-pose, about the format?
+
+3.(x) MPII 中的pelv和Thrx代表什么？
+
