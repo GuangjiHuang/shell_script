@@ -15,7 +15,7 @@
 # markdown;
 # project;
 # paper;
-# entertainment( to show the rest, moyu, fish picture ).
+# fun( to show the rest, moyu, fish picture ).
 # 2) touch the task list for every task sessions. this task file is for record the task, or your 
 # ideas or your thinking that you want to do something!
 # 3) try to use more simple command to achieve that!
@@ -23,22 +23,25 @@
 
 # >>>>>>>>>>>>>>>> the global variables <<<<<<<<<<<<<<<<<<<<<
 #{{{
-sessions_list=("c++" \
+sessions_list=(
+    "ssh" \
+    "code" \
+    "c++" \
     "python" \
-    "vim" \
-    "markdown" \
     "shell" \
-    "paper" \
+    "vim" \
+    "cmake" \
+    "markdown" \
     "project" \
-    "entertainment" \
+    "fun" \
     "chore" \
+    "paper" \
+    "work" \
     "question" \
     "English" \
     "type" \
-    "tmux" \
-    "cmake" \
-    "work" \
-    "clock")
+    "clock"
+)
 tmux_action="create"
 source_dir=~/mygithub/shell-script/tmux-manager
 source_name="${source_dir}/tmux-manager.sh"
@@ -90,14 +93,99 @@ tmux_template_3panes()
 
 tmux_tempalte_3panes_for_chore()
 {
+    # add the work to the tmux_chore
+    source_dir=~/mygithub/shell-script/tmux-manager
+    work_data_dir=~/mygithub/data-shared/work_management/data
+    tmux_work_command="cd $source_dir/work_management/; ./bin/main*"
+    # the tmux command
     tmux new-session -s "$1" -n "$1" \; \
+    new-window -n "ql" \; \
+    new-window -n "program" \; \
+    new-window -n "work" \; \
+    new-window -n "paper" \; \
+    select-window -t 0 \; \
     split-window -h \; \
-    select-pane -t 1 \; \
+    select-pane -t 0 \; \
+    split-window -v \; \
+    select-pane -t 2 \; \
     split-window -v \; \
     send-keys -t 0 'wr record' C-m\; \
-    send-keys -t 1 'wr arragement' C-m\; \
-    send-keys -t 2 'wr plan' C-m\; \
+    send-keys -t 1 'wr todo' C-m\; \
+    send-keys -t 2 'wr arragement' C-m\; \
+    send-keys -t 3 'wr plan' C-m\; \
+    select-window -t 1 \; \
+    split-window -h \; \
+    send-keys -t 0 'wr learn' C-m\; \
+    send-keys -t 1 'wr question' C-m\; \
+    select-window -t 2 \; \
+    split-window -h \; \
+    select-window -t 3 \; \
+    split-window -h \; \
+    send-keys -t 0 "$tmux_work_command" C-m\; \
+    select-window -t 4 \; \
+    split-window -h \; \
+    select-window -t 0 \; \
     select-pane -t 1
+}
+
+tmux_tempalte_3panes_for_ssh()
+{
+    # the tmux command
+    tmux new-session -s "$1" -n "dear" \; \
+    new-window -n "1080" \; \
+    new-window -n "2080" \; \
+    new-window -n "3080" \; \
+    new-window -n "M5000" \; \
+    select-window -t 0 \; \
+    split-window -h \; \
+    select-pane -t 0 \; \
+    send-keys -t 0 'c-dear_' C-m\; \
+    select-window -t 1 \; \
+    select-pane -t 0 \; \
+    split-window -h \; \
+    send-keys -t 0 'c-s1' C-m\; \
+    select-pane -t 0 \; \
+    select-window -t 2 \; \
+    split-window -h \; \
+    send-keys -t 0 'c-s2' C-m\; \
+    select-pane -t 0 \; \
+    select-window -t 3 \; \
+    split-window -h \; \
+    send-keys -t 0 'c-s3' C-m\; \
+    select-pane -t 0 \; \
+    select-window -t 4 \; \
+    split-window -h \; \
+    send-keys -t 0 'ssh ${scut_M5000}' C-m\; \
+    select-pane -t 0 \; \
+    select-window -t 0 \; \
+    select-pane -t 0
+}
+
+tmux_tempalte_3panes_for_code()
+{
+    # the tmux command
+    tmux new-session -s "$1" -n "c++" \; \
+    new-window -n "python" \; \
+    new-window -n "shell" \; \
+    new-window -n "vim" \; \
+    new-window -n "cmake" \; \
+    select-window -t 0 \; \
+    split-window -h \; \
+    select-pane -t 0 \; \
+    select-window -t 1 \; \
+    split-window -h \; \
+    select-pane -t 0 \; \
+    select-window -t 2 \; \
+    split-window -h \; \
+    select-pane -t 0 \; \
+    select-window -t 3 \; \
+    split-window -h \; \
+    select-pane -t 0 \; \
+    select-window -t 4 \; \
+    split-window -h \; \
+    select-pane -t 0 \; \
+    select-window -t 0 \; \
+    select-pane -t 0
 }
 
 tmux_tempalte_3panes_for_question()
@@ -152,12 +240,6 @@ tmux_cpp()
     tmux_template_2panes "c++"
 }
 
-tmux_python()
-{
-    #tmux_template_2panes "python" "left_big"
-    tmux_template_2panes "python"
-}
-
 tmux_vim()
 {
     tmux_template_2panes "vim"
@@ -174,49 +256,10 @@ tmux_markdown()
     echo "this is the markdown's tmux"
 }
 
-tmux_project()
-{
-    tmux_template_2panes "project"
-    echo "this is the project's tmux"
-}
-
-tmux_paper()
-{
-    tmux_template_2panes "paper"
-    echo "this is the paper's tmux"
-}
-
 tmux_entertainment()
 {
-    tmux_template_2panes "entertainment"
-    echo "this is the entertainment's tmux"
-}
-
-tmux_English()
-{
-    # rewrite the layout
-    #tmux_template_2panes "type"
-    python_main_dir=${HOME}/mygithub/shell-script/tmux-manager/English-code
-    English_data_dir="~/mygithub/data-shared/English"
-    tmux new-session -s "English" -n "English" \; \
-    split-window -h \; \
-    send-keys -t 1 'wr temp' C-m\; \
-    send-keys -t 0 "python ${python_main_dir}/main.py -workspace $English_data_dir" C-m\; \
-    select-pane -t 1
-    #echo "this is the type's tmux"
-}
-
-tmux_work()
-{
-    source_dir=~/mygithub/shell-script/tmux-manager
-    work_data_dir=~/mygithub/data-shared/work_management/data
-    tmux_work_command="cd $source_dir/work_management/; ./bin/main*"
-    # rewrite the layout
-    tmux new-session -s "work" -n "work" \; \
-    split-window -h \; \
-    send-keys -t 0 "$tmux_work_command" C-m\; \
-    select-pane -t 0
-    #echo "this is the type's tmux"
+    tmux_template_2panes "fun"
+    echo "this is the fun's tmux"
 }
 
 tmux_type()
@@ -233,36 +276,16 @@ tmux_type()
     #echo "this is the type's tmux"
 }
 
-tmux_chore()
-{
-    #tmux_template_2panes "chore"
-    tmux_tempalte_3panes_for_chore "chore"
-    echo "this is the chore's tmux"
-}
 tmux_question()
 {
-    #tmux_template_2panes "chore"
     tmux_tempalte_3panes_for_question "question"
-    echo "this is the chore's tmux"
+    echo "this is the question's tmux"
 }
-tmux_tmux()
-{
-    tmux_template_2panes "tmux"
-    echo "this is the tmux's tmux"
-}
+
 tmux_cmake()
 {
     tmux_template_2panes "cmake"
     echo "this is the cmake's tmux"
-}
-tmux_clock()
-{
-    shell_script_path=$install_dir/love-clock-switch-rain-clock.sh
-    shell_script_command=". $shell_script_path"
-    #echo "the command is the: $shell_script_command"
-    tmux new-session -s "clock" \; \
-    setw status off \; \
-    select-pane -t 1
 }
 
 # 2 panes
@@ -303,31 +326,10 @@ tmux_template_2panes()
 
 }
 
-tmux_cpp()
-{
-    tmux_template_2panes "c++"
-}
-
 tmux_python()
 {
     #tmux_template_2panes "python" "left_big"
     tmux_template_2panes "python"
-}
-
-tmux_vim()
-{
-    tmux_template_2panes "vim"
-}
-
-tmux_shell()
-{
-    tmux_template_2panes "shell"
-}
-
-tmux_markdown()
-{
-    tmux_template_2panes "markdown"
-    echo "this is the markdown's tmux"
 }
 
 tmux_project()
@@ -342,77 +344,47 @@ tmux_paper()
     echo "this is the paper's tmux"
 }
 
-tmux_entertainment()
-{
-    tmux_template_2panes "entertainment"
-    echo "this is the entertainment's tmux"
-}
-
 tmux_English()
 {
     # rewrite the layout
-    #tmux_template_2panes "type"
-    python_main_dir=${HOME}/mygithub/shell-script/tmux-manager/English-code
+    python_English_dir=${HOME}/mygithub/shell-script/tmux-manager/English-code
     English_data_dir="~/mygithub/data-shared/English"
-    tmux new-session -s "English" -n "English" \; \
-    split-window -h \; \
-    send-keys -t 1 'wr temp' C-m\; \
-    send-keys -t 0 "python ${python_main_dir}/main.py -workspace $English_data_dir" C-m\; \
-    select-pane -t 1
-    #echo "this is the type's tmux"
-}
-
-tmux_work()
-{
-    source_dir=~/mygithub/shell-script/tmux-manager
-    work_data_dir=~/mygithub/data-shared/work_management/data
-    tmux_work_command="cd $source_dir/work_management/; ./bin/main*"
-    # rewrite the layout
-    tmux new-session -s "work" -n "work" \; \
-    split-window -h \; \
-    send-keys -t 0 "$tmux_work_command" C-m\; \
-    select-pane -t 0
-    #echo "this is the type's tmux"
-}
-
-tmux_type()
-{
-    # rewrite the layout
-    #tmux_template_2panes "type"
-    python_main_dir=${HOME}/mygithub/shell-script/tmux-manager/type-code
+    # add the type as the window
+    python_type_dir=${HOME}/mygithub/shell-script/tmux-manager/type-code
     type_data_dir="~/mygithub/data-shared/type"
-    tmux new-session -s "type" -n "type" \; \
+    #
+    tmux new-session -s "English" -n "English" \; \
+    new-window -n "type" \; \
+    select-window -t 0 \; \
+    split-window -h \; \
+    send-keys -t 1 'wr English' C-m\; \
+    send-keys -t 0 "python ${python_English_dir}/main.py -workspace $English_data_dir" C-m\; \
+    select-window -t 1 \; \
     split-window -h \; \
     send-keys -t 1 'wr type' C-m\; \
-    send-keys -t 0 "python ${python_main_dir}/main.py -workspace $type_data_dir" C-m\; \
-    select-pane -t 1
+    send-keys -t 0 "python ${python_type_dir}/main.py -workspace $type_data_dir" C-m\; \
+    select-pane -t 0 \; \
+    select-window -t 0 \; \
+    select-pane -t 0
     #echo "this is the type's tmux"
 }
 
 tmux_chore()
 {
-    #tmux_template_2panes "chore"
     tmux_tempalte_3panes_for_chore "chore"
     echo "this is the question's tmux"
 }
-tmux_tmux()
+
+tmux_ssh()
 {
-    tmux_template_2panes "tmux"
-    echo "this is the tmux's tmux"
+    tmux_tempalte_3panes_for_ssh "ssh"
+    echo "this is the question's tmux"
 }
-tmux_cmake()
+
+tmux_code()
 {
-    tmux_template_2panes "cmake"
-    echo "this is the cmake's tmux"
-}
-tmux_clock()
-{
-    shell_script_path=$install_dir/love-clock-switch-rain-clock.sh
-    shell_script_command=". $shell_script_path"
-    #echo "the command is the: $shell_script_command"
-    tmux new-session -s "clock" \; \
-    setw status off \; \
-    select-pane -t 1
+    tmux_tempalte_3panes_for_code "code"
+    echo "this is the question's tmux"
 }
 
 # 2 panes
@@ -453,39 +425,6 @@ tmux_template_2panes()
 
 }
 
-tmux_cpp()
-{
-    tmux_template_2panes "c++"
-}
-
-tmux_python()
-{
-    #tmux_template_2panes "python" "left_big"
-    tmux_template_2panes "python"
-}
-
-tmux_vim()
-{
-    tmux_template_2panes "vim"
-}
-
-tmux_shell()
-{
-    tmux_template_2panes "shell"
-}
-
-tmux_markdown()
-{
-    tmux_template_2panes "markdown"
-    echo "this is the markdown's tmux"
-}
-
-tmux_project()
-{
-    tmux_template_2panes "project"
-    echo "this is the project's tmux"
-}
-
 tmux_paper()
 {
     tmux_template_2panes "paper"
@@ -494,23 +433,10 @@ tmux_paper()
 
 tmux_entertainment()
 {
-    tmux_template_2panes "entertainment"
-    echo "this is the entertainment's tmux"
+    tmux_template_2panes "fun"
+    echo "this is the fun's tmux"
 }
 
-tmux_English()
-{
-    # rewrite the layout
-    #tmux_template_2panes "type"
-    python_main_dir=${HOME}/mygithub/shell-script/tmux-manager/English-code
-    English_data_dir="~/mygithub/data-shared/English"
-    tmux new-session -s "English" -n "English" \; \
-    split-window -h \; \
-    send-keys -t 1 'wr temp' C-m\; \
-    send-keys -t 0 "python ${python_main_dir}/main.py -workspace $English_data_dir" C-m\; \
-    select-pane -t 1
-    #echo "this is the type's tmux"
-}
 
 tmux_work()
 {
@@ -525,36 +451,6 @@ tmux_work()
     #echo "this is the type's tmux"
 }
 
-tmux_type()
-{
-    # rewrite the layout
-    #tmux_template_2panes "type"
-    python_main_dir=${HOME}/mygithub/shell-script/tmux-manager/type-code
-    type_data_dir="~/mygithub/data-shared/type"
-    tmux new-session -s "type" -n "type" \; \
-    split-window -h \; \
-    send-keys -t 1 'wr type' C-m\; \
-    send-keys -t 0 "python ${python_main_dir}/main.py -workspace $type_data_dir" C-m\; \
-    select-pane -t 1
-    #echo "this is the type's tmux"
-}
-
-tmux_chore()
-{
-    #tmux_template_2panes "chore"
-    tmux_tempalte_3panes_for_chore "chore"
-    echo "this is the chore's tmux"
-}
-tmux_tmux()
-{
-    tmux_template_2panes "tmux"
-    echo "this is the tmux's tmux"
-}
-tmux_cmake()
-{
-    tmux_template_2panes "cmake"
-    echo "this is the cmake's tmux"
-}
 tmux_clock()
 {
     shell_script_path=$install_dir/love-clock-switch-rain-clock.sh
@@ -907,7 +803,7 @@ action()
         "project")
             ;;
             
-        "entertainment")
+        "fun")
             ;;
 
         "chore")
@@ -1061,7 +957,7 @@ case "$1" in
         ;;
     #}}}
 
-    "entertainment")
+    "fun")
     #{{{
         # set the environment variable
         echo "export mode=$1" > $mode_control_path
@@ -1136,6 +1032,36 @@ case "$1" in
         ;;
     #}}}
 
+    "ssh")
+    #{{{
+        # set the environment variable
+        echo "export mode=$1" > $mode_control_path
+        if [ "$tmux_action" == "into" ]; then
+            tmux attach -t $1
+        else
+            # create the tmux layout
+            tmux_ssh
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
+        fi
+        ;;
+    #}}}
+
+    "code")
+    #{{{
+        # set the environment variable
+        echo "export mode=$1" > $mode_control_path
+        if [ "$tmux_action" == "into" ]; then
+            tmux attach -t $1
+        else
+            # create the tmux layout
+            tmux_code
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
+        fi
+        ;;
+    #}}}
+
     "question")
     #{{{
         # set the environment variable
@@ -1145,20 +1071,6 @@ case "$1" in
         else
             # create the tmux layout
             tmux_question
-            # check the file if exists, if not touch the files
-            create_mode_dir $1
-        fi
-        ;;
-    #}}}
-    "tmux")
-    #{{{
-        # set the environment variable
-        echo "export mode=$1" > $mode_control_path
-        if [ "$tmux_action" == "into" ]; then
-            tmux attach -t $1
-        else
-            # create the tmux layout
-            tmux_tmux
             # check the file if exists, if not touch the files
             create_mode_dir $1
         fi
@@ -1200,6 +1112,17 @@ case "$1" in
             echo "Successfully to kill all the sessions!"
         else
             echo "No tmux sessions to kill!"
+        fi
+        ;;
+    #}}}
+
+    "kill")
+    #{{{
+        tmux kill-session -t $2 >/dev/null 2>&1
+        if [ "$?" == 0 ];then
+            echo "Successfully to kill: $2"
+        else
+            echo "No tmux sessions to kill: $2!"
         fi
         ;;
     #}}}
@@ -1443,13 +1366,15 @@ case "$1" in
         echo
         echo -e "${GREEN}: shell->:${NOCOLOR} create or into the shell tmux session"
         echo
-        echo -e "${GREEN}: entertainment->:${NOCOLOR} create or into the entertainment tmux session"
+        echo -e "${GREEN}: fun->:${NOCOLOR} create or into the fun tmux session"
         echo
         echo -e "${GREEN}: project->:${NOCOLOR} create or into the project tmux session"
         echo
         echo -e "${GREEN}: paper->:${NOCOLOR} create or into the paper tmux session"
         echo
         echo -e "${GREEN}: kill-all->:${NOCOLOR} the same as the <tmux kill-server>, to kill all the sessions"
+        echo
+        echo -e "${GREEN}: kill->:${NOCOLOR} for example: love kill chore, just like the tmux kill-session -t chore."
         echo
         echo -e "${GREEN}: go-love->:${NOCOLOR} go to the source dir: ~/mygithub/shell-script/..."
         echo

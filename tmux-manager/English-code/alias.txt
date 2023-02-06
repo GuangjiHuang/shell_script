@@ -3,11 +3,11 @@ s = show # show
 sn = show -n # show number
 
 # about the show label
-ssx = show -l x
-ssy = show -l y
-ss- = show -l -
-ss^ = show -l ^
-ssa = show -l a
+sx = show -l x
+sy = show -l y
+s- = show -l -
+s^ = show -l ^
+sa = show -l a
 
 # about the label state
 lx = l x
@@ -19,3 +19,4 @@ l^ = l ^
 cl = clear
 as = alias -s
 :x = exit # exit the program
+:w = save # save the English workspace

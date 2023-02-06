@@ -250,6 +250,7 @@ if [ ! -d "${today_path}" ]; then
         touch ${today_path}/question.txt && echo -e "${separate_sign}\n$(datef)  QUESTION\n${separate_sign}\n" > ${today_path}/question.txt
         touch ${today_path}/temp.txt && echo -e "${separate_sign}\n$(datef)  TEMP\n${separate_sign}\n" > ${today_path}/temp.txt
         touch ${today_path}/type.pratice && echo -e "${separate_sign}\n$(datef)  PRATICE\n${separate_sign}\n" > ${today_path}/type.pratice
+        touch ${today_path}/English.pratice && echo -e "${separate_sign}\n$(datef)  PRATICE\n${separate_sign}\n" > ${today_path}/English.pratice
         # add the todolist.txt (copy the template to it );
         separate_sign_2="--------------------------------------"
         touch ${today_path}/todolist.txt && echo -e "${separate_sign_2}\n------ $(datef) -------\n${separate_sign_2}" > ${today_path}/todolist.txt
@@ -394,8 +395,9 @@ case "$1" in
         ;;
 
     "score")
+        clear
         # first execute the rewrite program
-        python /opt/myscript/wr-script/py/count_score.py
+        python /opt/myscript/wr-script/py/count_score.py $2
         #vim ${today_path}/todolist.txt
         ;;
 
@@ -421,6 +423,10 @@ case "$1" in
 
     "goal")
         func_goal $1 $2 $3
+        ;;
+
+    "English")
+        vim ${today_path}/English.pratice
         ;;
 
     "type")

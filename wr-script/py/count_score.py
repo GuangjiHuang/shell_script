@@ -1,10 +1,11 @@
 import time
 import re
 import os
+import sys
 
 # about the color   
 # the color
-no_color = "\033[0m"
+no_color = "\033[0m"# {{{
 dark = "\033[0;30m"
 light_dark = "\033[1;30m"
 red = "\033[0;31m"
@@ -20,16 +21,18 @@ light_purple = "\033[1;35m"
 cayon = "\033[0;36m"
 light_cayon = "\033[1;36m"
 light_gray = "\033[0;37m"
-white = "\033[1;37m"
+white = "\033[1;37m"# }}}
 
 def color(color_, content):
     return color_ + content + no_color
 
-def get_record_score(record_path):
+def get_record_score(record_path, full_record_all_time=45*9):
     #{{{
     effective_time = 0
     all_time = 0
     #
+    if not os.path.exists(record_path):
+        return 0
     with open(record_path, "r", encoding="utf-8") as f:
         lines = f.readlines()
     # append the block to the list
@@ -49,7 +52,7 @@ def get_record_score(record_path):
     for block in blocks_ls:
         # get duration time
         time_duration_ls = [line for line in block.split("\n") if line.strip()]
-        if len(time_duration_ls) == 3:
+        if len(time_duration_ls) <= 3 and "min" in time_duration_ls[0]:
             time_duration_line = time_duration_ls[0]
         else:
             time_duration_line = time_duration_ls[1]
@@ -69,7 +72,9 @@ def get_record_score(record_path):
         # renew the all_time and the effective time
         all_time += time_duration
         effective_time += int(percent * time_duration / 100)
-    
+    # 
+    if all_time < full_record_all_time:
+        all_time = full_record_all_time
     # get the score
     scores = int(effective_time / all_time * 100)
     #print(f"-> record: {scores} points")
@@ -80,6 +85,8 @@ def get_arragement_score(arragement_path, full_score_all_time=45*9): # 9 tasks e
     work_time = 0
     all_time = 0
     #
+    if not os.path.exists(arragement_path):
+        return 0
     with open(arragement_path, "r", encoding="utf-8") as f:
         lines = f.readlines()
     for line in lines:
@@ -112,7 +119,7 @@ def get_arragement_score(arragement_path, full_score_all_time=45*9): # 9 tasks e
     return scores# }}}
 
 def get_line_number(line):
-    for i in range(len(line)):
+    for i in range(len(line)):# {{{
         if line[i].isdigit():
             break
     # now i is the digit or the end of the line
@@ -120,10 +127,12 @@ def get_line_number(line):
     while line[i].isdigit() and i<len(line):
         l_num = l_num * 10  + int(line[i])
         i += 1
-    return str(l_num)
+    return str(l_num)# }}}
 
 def get_todolist_score(todolist_path):
-    with open(todolist_path, "r", encoding="utf-8") as f:
+    if not os.path.exists(todolist_path):
+        return 0
+    with open(todolist_path, "r", encoding="utf-8") as f:# {{{
         lines = f.readlines()
     # get the x, and the y, and the score
     x_ls = list()
@@ -159,7 +168,7 @@ def get_todolist_score(todolist_path):
     lines[score_line_number] = f"{'Scores':6}:  {scores} points\n"
     with open(todolist_path, "w", encoding="utf-8") as f:
         f.write("".join(lines))
-    return scores
+    return scores# }}}
 
 def get_question_and_learn_score(question_and_learn_dir, full_score_number=10):
     # {{{
@@ -169,6 +178,8 @@ def get_question_and_learn_score(question_and_learn_dir, full_score_number=10):
     pattern = "\d{1,2} *\."
     for file in fl_ty:
         file_path = os.path.join(question_and_learn_dir, file + ".txt")
+        if not os.path.exists(file_path):
+            continue
         with open(file_path, "r", encoding="utf-8") as f:
             content = f.read()
         match = re.findall(pattern, content)
@@ -187,16 +198,38 @@ def get_question_and_learn_score(question_and_learn_dir, full_score_number=10):
     #print(f"-> questions & learn: {scores} points")
     return scores# }}}
 
+def write_to_file(score_path, content):
+    # check if exists the file dir
+    dir_name = os.path.dirname(score_path)
+    if not os.path.exists(dir_name): # no such dir, not write
+        print("Faile to write, no such dir: ", dir_name)
+        return
+    with open(score_path, "w", encoding="utf-8") as f:
+        f.write(content)
 
 if __name__ == "__main__":
-    # deal with the path
-    today_date = time.strftime("%Y-%m/%m-%d")
+    # deal with the path{{{
+    date_str = time.strftime("%Y-%m/%m-%d") # the default value
+    ymd_date = time.strftime("%Y-%m-%d")
+    if len(sys.argv) > 1:
+        # try to get the date_str
+        try:
+            o_date_str = sys.argv[1]
+            o_date_str_ls = o_date_str.split("-")
+            o_date_int_ls = [int(i) for i in o_date_str_ls]
+            year, month, day = o_date_int_ls
+            date_str = f"{year:04}-{month:02}/{month:02}-{day:02}"
+            ymd_date = f"{year:04}-{month:02}-{day:02}"
+        except:
+            print(f"error: you input date {sys.argv[1]} no meet the need of format such as 2023-01-01")
+    #print(date_str)
     everyday_record_dir = r"/home/hgj/mygithub/everyday-record/"
-    question_and_learn_dir = os.path.join(everyday_record_dir, today_date)
+    question_and_learn_dir = os.path.join(everyday_record_dir, date_str)
     study_app_dir = r"/cygdrive/c/Users/hgj/Desktop/study-app/data/everyday/"
-    arragement_path = os.path.join(study_app_dir, time.strftime("%Y"), today_date, "plan.txt")
-    record_path = os.path.join(study_app_dir, time.strftime("%Y"), today_date, "record.txt")
-    todolist_path = os.path.join(everyday_record_dir, today_date, "todolist.txt")
+    arragement_path = os.path.join(study_app_dir, time.strftime("%Y"), date_str, "plan.txt")
+    record_path = os.path.join(study_app_dir, time.strftime("%Y"), date_str, "record.txt")
+    todolist_path = os.path.join(everyday_record_dir, date_str, "todolist.txt")
+    score_path = os.path.join(everyday_record_dir, date_str, "score.txt")
     # the question and learn
     q_l_score = get_question_and_learn_score(question_and_learn_dir)
     # the arragement score
@@ -234,12 +267,19 @@ if __name__ == "__main__":
         return " "*num
     # show the result
     total_score_str = "\033[46;31mTOTAL SCORE\033[0m"
-    first_line = f"-------------------------Today Performance-------------------------\n\n"
-    show_content = first_line
-    show_content += f"{total_score_str}{space(22-len('total score'))}:{space(4)}{total_score}  {Rank(total_score)}\n\n" \
-                f"{'arragement score':<22}:{space(4)}{arragement_score}  {Rank(arragement_score)}\n\n" \
-                f"{'record score':<22}:{space(4)}{record_score}  {Rank(record_score)}\n\n" \
-                f"{'todolist score':<22}:{space(4)}{todolist_score}  {Rank(todolist_score)}\n\n" \
-                f"{'question&learn score':<22}:{space(4)}{q_l_score}  {Rank(q_l_score)}\n\n" \
-                f"{'-'*len(first_line)}\n"
-    print(show_content)
+    first_line = f"-------------------------{color(light_cayon, ' Performance ')} ({ymd_date})-------------------------\n\n"
+    f_l_n_col = f"------------------------- Performance ({ymd_date})-------------------------\n"
+    show_date = ymd_date + "\n"
+    show_date = ""
+    rank_prompt = "BAD (0~59), NICE (60~79), GOOD (80~89), EXCELLENT (90~100)\n\n"
+    show_content = first_line + show_date + space((len(f_l_n_col)-len(rank_prompt))//2) + rank_prompt
+    show_content += f"{total_score_str}{space(22-len('total score'))}:{space(4)}{total_score:3}  {Rank(total_score)}\n\n" \
+            f"{'arragement score':<22}:{space(4)}{arragement_score:3}  {Rank(arragement_score)}\n\n" \
+            f"{'record score':<22}:{space(4)}{record_score:3}  {Rank(record_score)}\n\n" \
+            f"{'todolist score':<22}:{space(4)}{todolist_score:3}  {Rank(todolist_score)}\n\n" \
+            f"{'question&learn score':<22}:{space(4)}{q_l_score:3}  {Rank(q_l_score)}\n\n" \
+                f"{'-'*len(f_l_n_col)}\n"
+    print(show_content)# }}}
+
+    # at last write the file
+    write_to_file(score_path, show_content)
