@@ -23,6 +23,9 @@
 ### gpu-detector
 -> to detect the gpu, once the gpu in the free state, let it do something!
 
+### arithmetic-generator
+-> to generate the math arithmetic practices.
+
 ## usage
 -> Has prepared all for you, just type the command ./install-all.sh to install all the script!
 

@@ -1,0 +1,133 @@
+import random
+import os
+import time
+import re
+import argparse
+
+def concealAnswer(content):
+    conceal_content = ""
+    flag = False
+    for i in range(len(content)):
+        ch = content[i]
+        if ch == "=":
+            flag = True
+            conceal_content += ch
+        else:
+            if flag and ch.isdigit():
+                conceal_content += " "
+                # cancle the flag
+                if i+1<len(content) and not content[i+1].isdigit():
+                    flag = False
+            else:
+                conceal_content += ch
+    return conceal_content
+
+def genEqual(is_mul=True, show_answer=False):
+    is_write = True
+    cal_type_ls = ["+", "-", "x", "÷"];
+    # setting 
+    mul_min, mul_max = 2, 99
+    gen_num = 100
+    if is_mul:
+        # the min and the max
+        add_min, add_max = 100, 1000
+    else:
+        add_min, add_max = 1, 100
+
+    equal_list = []
+    i = 0
+    while i < gen_num:
+        equal_str = ""
+        # deal with the add num and the mul num
+        add_num1 = random.randint(add_min, add_max)
+        add_num2 = random.randint(add_min, add_max)
+        if add_num2 > add_num1:
+            add_num1, add_num2 = add_num2, add_num1
+        mul_num1 = random.randint(mul_min, mul_max)
+        mul_num2 = random.randint(mul_min, mul_max)
+        #
+        cal_type_id = random.randint(0,len(cal_type_ls)-1)
+        cal_type_str = cal_type_ls[cal_type_id]
+        cal_type = cal_type_str
+        #
+        if cal_type_str == "x":
+            #continue
+            if not is_mul:
+                continue
+            cal_type = "*"
+            num1, num2 = mul_num1, mul_num2
+        elif cal_type_str == "÷":
+            if not is_mul:
+                continue
+            cal_type = "/"
+            num1, num2 = mul_num1, mul_num2
+            if num1 % num2 != 0:
+                continue
+        else:
+            num1, num2 = add_num1, add_num2
+        #
+        result = int(eval(f"{num1} {cal_type} {num2}"))
+        equal_str = f"{num1:^6} {cal_type_str} {num2:^6} = {result}"
+        equal_list.append(equal_str)
+        # renew the i
+        i += 1
+    file_name = time.strftime("%Y-%m-%d")
+    # the content 
+    student_name = "周诗雅" if is_mul else "周佳燕"
+    content = f"\n日期: {file_name}{' '*20}姓名:{student_name}{' '*15}分数:\n"
+    content += "-" * 90
+    for k, ele in enumerate(equal_list):
+        if k % 2 == 0:
+            content += f"\n({k+1:^4}) "
+        else:
+            space_str = " " * 15
+            content += f"{space_str}({k+1:^4})"
+        content += f"{ele:40}"
+    content += "\n" + "-" * 90
+    # show the result
+    file_path = os.path.join("data", time.strftime(f"%Y-%m-%d_{student_name}")+".txt")
+    if is_write:
+        with open(file_path, "w") as f:
+            f.write(content)
+    os.system("clear")
+    if show_answer:
+        print(content)
+    else:
+        print(concealAnswer(content))
+
+def printFile(file_path, is_show_answer):
+    with open(file_path, "r") as f:
+        content = f.read()
+    if is_show_answer:
+        print(content)
+    else:
+        print(concealAnswer(content))
+
+# the main
+if __name__ == "__main__":
+    # deal with the arguments
+    # name, answer or not
+    parser = argparse.ArgumentParser()
+    parser.add_argument("name_type", type=str)
+    parser.add_argument("show_answer", type=int)
+    args = parser.parse_args()
+    #
+    name_type = args.name_type
+    show_answer = args.show_answer
+    #
+    file_path_1 = os.path.join("data", time.strftime(f"%Y-%m-%d_周诗雅")+".txt")
+    file_path_2 = os.path.join("data", time.strftime(f"%Y-%m-%d_周佳燕")+".txt")
+    # generate the file 
+    if not os.path.exists(file_path_1):
+        genEqual(is_mul=True, show_answer=True)
+    if not os.path.exists(file_path_2):
+        genEqual(is_mul=False, show_answer=True)
+    # show the file
+    if name_type == "g":
+        os.system("clear")
+        printFile(file_path_1, show_answer)
+    elif name_type == "l":
+        os.system("clear")
+        printFile(file_path_2, show_answer)
+    else:
+        print("[Error]: nametype must be the: g or l! For example: python xxx.py 'g' 1")
