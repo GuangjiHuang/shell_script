@@ -50,7 +50,8 @@ objOperation(){
                 continue
             fi
             if [ -d $common_install_path/$file_or_dir ];then # solve the bug, cp the .bash-config-add
-                rm -r $common_install_path
+                # rm -r $common_install_path # here make the big mistake 
+                rm -r $common_install_path/$file_or_dir
             fi
             cp -r $1/$file_or_dir $common_install_path/$file_or_dir
             echo "$1/$file_or_dir -> $common_install_path/$file_or_dir"
