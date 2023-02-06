@@ -1,4 +1,0 @@
-1.(x) Reivew the usage of the cmake's if control caluse. Recall the keyword and the syntax. For example, the DEFINE, EXISTS, COMMAND; the AND OR NOT, the STRxxx, MATCHES; $ENV{}, $CACHE{} and so on!
-
-2.(x) review: 1) list the file's code, list the function, set the list size; 2) about the breakpoint, condition, delete all the breakpoint, ignore the breakpoint; 3) about the frame,   l command!
-

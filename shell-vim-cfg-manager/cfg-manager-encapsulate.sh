@@ -49,6 +49,9 @@ objOperation(){
                 echo "$1/$file_or_dir -> $vim_install_path/$file_or_dir"
                 continue
             fi
+            if [ -d $common_install_path/$file_or_dir ];then # solve the bug, cp the .bash-config-add
+                rm -r $common_install_path
+            fi
             cp -r $1/$file_or_dir $common_install_path/$file_or_dir
             echo "$1/$file_or_dir -> $common_install_path/$file_or_dir"
             ;;
@@ -78,15 +81,22 @@ objOperation(){
             ;;
         "backup")
             echo "------ Backup"
+            # backup to the dir = cfg-backup/$1/year-month-day-Hour-minute
+            date_str=$(date "+%Y-%m-%d-%H-%M")
+            backup_dir=$backup_path/$1/$date_str
+            # check if exists the backup dir
+            if [ ! -d $backup_dir ]; then
+                mkdir -p $backup_dir
+            fi
             # for the ~/.vim/hgj-vim-config
             if [ "$1" == "vim" ] && [ -d $vim_install_path/$file_or_dir ];then
-                cp -r $vim_install_path/$file_or_dir $backup_path/$1/
-                echo "$vim_install_path/$file_or_dir -> $backup_path/$1"
+                cp -r $vim_install_path/$file_or_dir $backup_dir
+                echo "$vim_install_path/$file_or_dir -> $backup_dir"
                 continue
             fi
-            if [ -e $common_install_path ];then
-                cp -r $common_install_path/$file_or_dir $backup_path/$1/
-                echo "$common_install_path/$file_or_dir -> $backup_path/$1" 
+            if [ -e $common_install_path/$file_or_dir ];then
+                cp -r $common_install_path/$file_or_dir $backup_dir
+                echo "$common_install_path/$file_or_dir -> $backup_dir"
             fi
             ;;
         "restore")

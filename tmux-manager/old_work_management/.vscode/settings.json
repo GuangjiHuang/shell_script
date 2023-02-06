@@ -1,4 +1,0 @@
-{
-    "cmake.cmakePath": "D://cygwin64/bin/cmake.exe",
-    "cmake.buildDirectory": "${workspaceFolder}/cygwin_build",
-}

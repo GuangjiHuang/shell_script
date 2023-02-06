@@ -1,8 +1,0 @@
-1.(x) <08:24-08:54> Read the documentation of the cmake. Clear the if control and the strequal and the matches usage!
-
-2.(x) <09:05-09:26> make a simple plan for this morning!
-
-4.(x) <09:33-09:56> review the gbd's simple command!
-
-4.(x) <10:12^> tmux shell modify, to separate the data from the program! Type, English and work_management!
-

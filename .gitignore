@@ -2,3 +2,5 @@ __pycache__/
 *.exe
 build
 *.zip
+.cache
+.idea
