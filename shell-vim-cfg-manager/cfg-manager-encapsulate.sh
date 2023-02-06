@@ -52,7 +52,6 @@ objOperation(){
             cp -r $1/$file_or_dir $common_install_path/$file_or_dir
             echo "$1/$file_or_dir -> $common_install_path/$file_or_dir"
             ;;
-
         "uninstall")
             echo "----- Uninstall: "
             # for the ~/.vim/hgj-vim-config
@@ -64,7 +63,6 @@ objOperation(){
             rm -r $common_install_path/$file_or_dir 
             echo "remove: $common_install_path/$file_or_dir"
             ;;
-
         "update")
             echo "----- Update: "
             # for the ~/.vim/hgj-vim-config
@@ -78,7 +76,6 @@ objOperation(){
                 echo "$common_install_path/$file_or_dir -> $(pwd)/$1"
             fi
             ;;
-
         "backup")
             echo "------ Backup"
             # for the ~/.vim/hgj-vim-config
@@ -92,12 +89,10 @@ objOperation(){
                 echo "$common_install_path/$file_or_dir -> $backup_path/$1" 
             fi
             ;;
-
         "restore")
             echo "------ Restore"
             echo "To restore the files, Pass!"
             ;;
-
         *)
             echo "$2 is not the valid argument. Use the install/uninstall/update/backup/restore please!"
             ;;
@@ -130,6 +125,11 @@ case $1 in
         fi
         ;;
 
+    "go-manager")
+        cd $script_source_path
+        echo "-> $script_source_path"
+        ;;
+
     "cfg")
         vim $script_source_path/cfg-manager-encapsulate.sh
         ;;
@@ -146,6 +146,7 @@ case $1 in
         echo "this is the help information!"
         echo "-> vim/bash/tmux/input/all install/uninstall/backup/update/restore"
         echo "-> go-cfg: go to the cfg dir"
+        echo "-> go-manager: go the shell-vim-cfg-manager!"
         echo "-> cfg: vim xxx.sh"
         echo "-> help"
         ;;
