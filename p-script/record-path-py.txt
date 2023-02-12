@@ -1,0 +1,4 @@
+3
+1. /home/hgj/temp
+2. /root
+3. /opt/MyScript
