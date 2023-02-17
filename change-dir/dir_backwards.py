@@ -27,6 +27,9 @@ else:
     if arg == "/":
         print("/")
         exit(0)
+    elif arg == "-":
+        print("-")
+        exit(0)
     is_found = False
     for i, dir in enumerate(dir_ls):
         try:
