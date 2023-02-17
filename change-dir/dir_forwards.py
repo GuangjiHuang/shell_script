@@ -4,6 +4,18 @@ import re
 import sys
 import time
 
+def getDirPath(base_path, dir_path_ls, depth, depth_max):
+    try:
+        for item in os.listdir(base_path):
+            path = os.path.join(base_path, item)
+            if os.path.isdir(path) and depth <= depth_max:
+                # append the path to list
+                dir_path_ls.append(path)
+                getDirPath(path, dir_path_ls, depth+1, depth_max)
+    except:
+        pass
+    return dir_path_ls
+
 t_s = time.time()
 args = sys.argv[1: ]
 if not args:
