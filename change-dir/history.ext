@@ -1,0 +1,1004 @@
+ 1369  clear
+ 1370  wr todo
+ 1371  wr score
+ 1372  clear
+ 1373  kkkkk
+ 1374  cleawr
+ 1375  clear
+ 1376  wr score
+ 1377  wr arragement
+ 1378  wr plan -w
+ 1379  wr plan -m
+ 1380  wr idea
+ 1381  clear
+ 1382  wr wr
+ 1383  wr reinstasll
+ 1384  wr reinstall
+ 1385  wr merge
+ 1386  clear
+ 1387  wr idea
+ 1388  wr go-e
+ 1389  cd ..
+ 1390  ll
+ 1391  rm -rf *15
+ 1392  clear
+ 1393  wr all
+ 1394  wr merge
+ 1395  wr review -z
+ 1396  wr merge
+ 1397  wr plan
+ 1398  c-s1
+ 1399  c-s2
+ 1400  c-s3
+ 1401  ssh ${scut_M5000}
+ 1402  c-dear_
+ 1403  in
+ 1404  love kill all
+ 1405  love kill-all
+ 1406  wr idea
+ 1407  love love
+ 1408  love reinstall
+ 1409  love plan
+ 1410  wr merge
+ 1411  wr all
+ 1412  clear
+ 1413  in
+ 1414  clearcl
+ 1415  clear
+ 1416  lear
+ 1417  clear
+ 1418  lear
+ 1419  clear
+ 1420  ll
+ 1421  clear
+ 1422  in
+ 1423  clear
+ 1424  ll
+ 1425  clear
+ 1426  in
+ 1427  clear
+ 1428  exit
+ 1429  c-s3
+ 1430  clear
+ 1431  ll
+ 1432  cd temp
+ 1433  clear
+ 1434  ll
+ 1435  clear
+ 1436  in
+ 1437  clear
+ 1438  into
+ 1439  in
+ 1440  cd pa
+ 1441  cd paper
+ 1442  p 3
+ 1443  ll
+ 1444  vim attention.txt 
+ 1445  vim frame.txt 
+ 1446  vim gcn.txt 
+ 1447  wr learn
+ 1448  clear
+ 1449  cleawr
+ 1450  clear
+ 1451  wr question
+ 1452  wr merge
+ 1453  clear
+ 1454  ll
+ 1455  wr all
+ 1456  wr merge
+ 1457  wr all
+ 1458  wr question
+ 1459  clear
+ 1460  wr learn -z
+ 1461  python
+ 1462  clear
+ 1463  ll
+ 1464  wr learn -z
+ 1465  wr temp
+ 1466  clear
+ 1467  wr learn -z
+ 1468  wr idea -z
+ 1469  clear
+ 1470  wr idea
+ 1471  clear
+ 1472  wr score
+ 1473  clear
+ 1474  ll
+ 1475  clear
+ 1476  ll
+ 1477  clear
+ 1478  wr wr
+ 1479  wr reinstall
+ 1480  wr tod
+ 1481  wr todo
+ 1482  wr merge
+ 1483  wr all
+ 1484  wr go-wr
+ 1485  cd py/
+ 1486  ll
+ 1487  vi merge.py 
+ 1488  wr wr
+ 1489  vi merge.py 
+ 1490  wr reinstall
+ 1491  wr go-e
+ 1492  cd ../*14
+ 1493  clear
+ 1494  ll
+ 1495  vim plan.txt 
+ 1496  clear
+ 1497  wr score
+ 1498  clear
+ 1499  lll
+ 1500  clear
+ 1501  ll
+ 1502  clear
+ 1503  wr score
+ 1504  wr merge
+ 1505  wr question -z
+ 1506  wr go-e
+ 1507  cd ..
+ 1508  ll
+ 1509  cd compress
+ 1510  ll
+ 1511  vim merge.record 
+ 1512  clear
+ 1513  wr merge
+ 1514  wr all
+ 1515  clear
+ 1516  wr question -z
+ 1517  ll
+ 1518  python
+ 1519  wr question -z
+ 1520  clear
+ 1521  wr all
+ 1522  wr merge
+ 1523  wr all
+ 1524  vim
+ 1525  wr all
+ 1526  wr go-e
+ 1527  cd ../*14
+ 1528  ll
+ 1529  touch idea.txt
+ 1530  vim idea.txt 
+ 1531  clear
+ 1532  cd /home/gjsq/mygithub/shell-script/tmux-manager/work_management/; ./bin/main*
+ 1533  cd paper
+ 1534  p 1
+ 1535  cd paper
+ 1536  clear
+ 1537  ll
+ 1538  p l
+ 1539  p w
+ 1540  clear
+ 1541  ll
+ 1542  vim attention.txt 
+ 1543  lear
+ 1544  clea
+ 1545  clear
+ 1546  wr temp
+ 1547  clear
+ 1548  ll
+ 1549  vim gcn.txt
+ 1550  clear
+ 1551  ll
+ 1552  vim frame.txt
+ 1553  wr temp
+ 1554  clear
+ 1555  wr review
+ 1556  wr diary
+ 1557  clear
+ 1558  wr go-e
+ 1559  cd ../*14
+ 1560  ll
+ 1561  vim review.txt 
+ 1562  clear
+ 1563  wr record
+ 1564  clear
+ 1565  wr todo
+ 1566  wr score
+ 1567  wr todo
+ 1568  clear
+ 1569  wr arragement
+ 1570  clear
+ 1571  wr plan
+ 1572  clear
+ 1573  into
+ 1574  in
+ 1575  love ssh
+ 1576  clear
+ 1577  in
+ 1578  clea
+ 1579  into chore
+ 1580  vim
+ 1581  in
+ 1582  python
+ 1583  in
+ 1584  love ssh
+ 1585  clear
+ 1586  into
+ 1587  in
+ 1588  love plan
+ 1589  love kill plan
+ 1590  clear
+ 1591  in
+ 1592  love plan
+ 1593  love kill plan
+ 1594  vim
+ 1595  love love
+ 1596  in
+ 1597  love reinstall
+ 1598  clear
+ 1599  ll
+ 1600  clear
+ 1601  ll
+ 1602  love plan
+ 1603  love kill plan
+ 1604  love love
+ 1605  love reinstall
+ 1606  love plan
+ 1607  love kill plan
+ 1608  clear
+ 1609  into chore
+ 1610  clear
+ 1611  n
+ 1612  in
+ 1613  love plan
+ 1614  love kill plan
+ 1615  love plan
+ 1616  wr go-wr
+ 1617  vim py/plan-w-m-y.py 
+ 1618  wr reinstall
+ 1619  clear
+ 1620  ll
+ 1621  into plan
+ 1622  love ls all
+ 1623  love diary
+ 1624  love love
+ 1625  into chore
+ 1626  clear
+ 1627  love plan
+ 1628  clear
+ 1629  vim
+ 1630  in
+ 1631  vim --version
+ 1632  vim --version | grep clip
+ 1633  tern
+ 1634  term
+ 1635  echo $TERM
+ 1636  vim
+ 1637  in
+ 1638  tmux
+ 1639  cleawr
+ 1640  in
+ 1641  clear
+ 1642  in
+ 1643  clea
+ 1644  in
+ 1645  love chore
+ 1646  love ssh
+ 1647  wr paper
+ 1648  cd
+ 1649  p 3
+ 1650  vim attention.txt 
+ 1651  in
+ 1652  cd temp
+ 1653  clear
+ 1654  cd
+ 1655  cd temp
+ 1656  ll
+ 1657  vim gcn-numpy.py
+ 1658  scp gcn-numpy.py $scut_3080:/media/scut/dataD/HGJ/py/py*/hgj/
+ 1659  scp gcn-numpy.py $scut_3080:/media/scut/dataD/HGJ
+ 1660  in
+ 1661  wr learn
+ 1662  in
+ 1663  vim
+ 1664  clear
+ 1665  wr plan
+ 1666  love plan
+ 1667  love kill chore
+ 1668  love chore
+ 1669  love ssh
+ 1670  into chore
+ 1671  gcn pytorch implementation
+ 1672  clear
+ 1673  gcn pytorch implementation
+ 1674  clear
+ 1675  in
+ 1676  gcn pytorch implementationclear
+ 1677  clear
+ 1678  into chore
+ 1679  clear
+ 1680  in
+ 1681  exit
+ 1682  wr learn -z
+ 1683  python
+ 1684  clear
+ 1685  ) ) ) ) ) ) 
+ 1686  clear
+ 1687  wr score
+ 1688  clear
+ 1689  wr temp
+ 1690  clear
+ 1691  ll /usr/bin
+ 1692  ll /usr/bin | grep b
+ 1693  clear
+ 1694  vim temp/
+ 1695  wr temp
+ 1696  clear
+ 1697  p 2
+ 1698  c-s3 
+ 1699  wr learn
+ 1700  wr question
+ 1701  wr question -z
+ 1702  b
+ 1703  wr go-wr
+ 1704  cd ..
+ 1705  clear
+ 1706  ll
+ 1707  cp p-script/ back-dir
+ 1708  cp -r p-script/ back-dir
+ 1709  cd back-dir/
+ 1710  clear
+ 1711  ll
+ 1712  vim install.sh 
+ 1713  vim uninstall.sh 
+ 1714  vim install.sh 
+ 1715  clear
+ 1716  ll
+ 1717  rm path.sh *.txt
+ 1718  clear
+ 1719  ll
+ 1720  rm path-py.py 
+ 1721  vim dir_backwards.py
+ 1722  clear
+ 1723  ll
+ 1724  ./install.sh 
+ 1725  b
+ 1726  clear
+ 1727  sub
+ 1728  b
+ 1729  clear
+ 1730  ll
+ 1731  ./install.sh 
+ 1732  /usr/bin/b
+ 1733  ll /usr/bin/b
+ 1734  clear
+ 1735  ll
+ 1736  ./dir_backwards.py 
+ 1737  chmod a+x *.py
+ 1738  ./dir_backwards.py 
+ 1739  vim dir_backwards.py 
+ 1740  ./dir_backwards.py 
+ 1741  vim install.sh 
+ 1742  ./install.sh 
+ 1743  b
+ 1744  ll /usr/bin/b
+ 1745  rm /usr/bin/b
+ 1746  ./install.sh 
+ 1747  ll /usr/bin/b
+ 1748  b
+ 1749  . dir_backwards.py 
+ 1750  clear
+ 1751  ll
+ 1752  cd ..
+ 1753  ./back-dir/dir_backwards.py 
+ 1754  clear
+ 1755  cd -
+ 1756  clear
+ 1757  ll
+ 1758  vim dir_backwards.py 
+ 1759  clear
+ 1760  ll
+ 1761  ./dir_backwards.py 
+ 1762  ./dir_backwards.py 1
+ 1763  ./dir_backwards.py 2
+ 1764  ./dir_backwards.py my*
+ 1765  vim
+ 1766  ./dir_backwards.py 1
+ 1767  ./dir_backwards.py 2
+ 1768  python dir_backwards.py 1
+ 1769  vim
+ 1770  python dir_backwards.py 1
+ 1771  python dir_backwards.py 2
+ 1772  python dir_backwards.py 3
+ 1773  python dir_backwards.py 4
+ 1774  vim
+ 1775  python dir_backwards.py *git*
+ 1776  python dir_backwards.py she*
+ 1777  python dir_backwards.py my*
+ 1778  python dir_backwards.py *me*
+ 1779  python dir_backwards.py "*me*"
+ 1780  python dir_backwards.py "me"
+ 1781  python dir_backwards.py me
+ 1782  python dir_backwards.py my*
+ 1783  python dir_backwards.py ho*
+ 1784  vim 
+ 1785  clear
+ 1786  ll
+ 1787  b
+ 1788  sub
+ 1789  b
+ 1790  clear
+ 1791  ll
+ 1792  . dir_backwards.py 
+ 1793  ./dir_backwards.py 
+ 1794  python dir_backwards.py 
+ 1795  python dir_backwards.py sh*
+ 1796  vim
+ 1797  python dir_backwards.py sh*
+ 1798  vim
+ 1799  python dir_backwards.py sh*
+ 1800  vim
+ 1801  python dir_backwards.py sh*
+ 1802  vim
+ 1803  python dir_backwards.py 
+ 1804  python dir_backwards.py 2
+ 1805  clear
+ 1806  ll
+ 1807  vim dir_backwards.sh
+ 1808  vim *.sh
+ 1809  ./install.sh 
+ 1810  rm /usr/bin/b
+ 1811  ./install.sh 
+ 1812  b
+ 1813  cd ..
+ 1814  ll
+ 1815  cd p-script/
+ 1816  vim install.sh 
+ 1817  clear
+ 1818  ll
+ 1819  cd -
+ 1820  cd back-dir/
+ 1821  clear
+ 1822  ll
+ 1823  vim install.sh 
+ 1824  rm /usr/bin/b
+ 1825  ./install.sh 
+ 1826  ll /usr/bin/p
+ 1827  ll /usr/bin/b
+ 1828  vim dir_backwards.py
+ 1829  vim install.sh 
+ 1830  vim
+ 1831  ./install.sh 
+ 1832  rm /usr/bin/b
+ 1833  ./install.sh 
+ 1834  ll /usr/bin/b
+ 1835  clea
+ 1836  rclear
+ 1837  clear
+ 1838  b
+ 1839  ll
+ 1840  chmod a+x *
+ 1841  ./install.sh 
+ 1842  clear
+ 1843  ll
+ 1844  b
+ 1845  b 
+ 1846  . b
+ 1847  clear
+ 1848  ll
+ 1849  cd
+ 1850  clear
+ 1851  ll
+ 1852  vim .bash_aliases 
+ 1853  clear
+ 1854  ll
+ 1855  cd -
+ 1856  clear
+ 1857  ll
+ 1858  cd shell-script/
+ 1859  clelar
+ 1860  clear
+ 1861  ll
+ 1862  cd back-dir/
+ 1863  clear
+ 1864  ll
+ 1865  clear
+ 1866  ll
+ 1867  sub
+ 1868  b
+ 1869  cd -
+ 1870  clear
+ 1871  ll
+ 1872  b 2
+ 1873  b 3
+ 1874  b 4
+ 1875  b 5
+ 1876  b 6
+ 1877  b 4
+ 1878  clear
+ 1879  b
+ 1880  cd -
+ 1881  clear
+ 1882  ll
+ 1883  p l
+ 1884  p 2
+ 1885  clear
+ 1886  ll
+ 1887  b cy*
+ 1888  python
+ 1889  b cyg*
+ 1890  p l
+ 1891  p 3
+ 1892  clear
+ 1893  ll
+ 1894  b gjs*
+ 1895  b c
+ 1896  p l
+ 1897  p 2
+ 1898  b Users
+ 1899  clear
+ 1900  wr score
+ 1901  cd /home/gjsq/mygithub/shell-script/tmux-manager/work_management/; ./bin/main*
+ 1902  wr scroe
+ 1903  wr score
+ 1904  p 3
+ 1905  clear
+ 1906  ll
+ 1907  wr record
+ 1908  wr todo
+ 1909  wr arragement
+ 1910  wr go-e
+ 1911  cd ../*15
+ 1912  ll
+ 1913  clear
+ 1914  wr arragement
+ 1915  wr plan
+ 1916  wr plan -m
+ 1917  wr idea
+ 1918  clear
+ 1919  wr idea
+ 1920  wr merge
+ 1921  wr idea
+ 1922  wr idea -z
+ 1923  wr plan
+ 1924  clear
+ 1925  wr plan 
+ 1926  c-s1
+ 1927  c-s2
+ 1928  p 3
+ 1929  c-s3
+ 1930  clear
+ 1931  wr temp
+ 1932  c-s3
+ 1933  c-s3
+ 1934  ssh ${scut_M5000}
+ 1935  c-dear_
+ 1936  clear
+ 1937  in
+ 1938  love kill-all
+ 1939  clear
+ 1940  echo $IFS
+ 1941  export IFS="\"
+ 1942  export IFS="/"
+ 1943  for i in "a/b/c"; do echo $i; done
+ 1944  echo godd dfasf
+ 1945  ls -al 
+ 1946  clear
+ 1947  ll
+ 1948  for i in "/a//b////c/"; do echo $i; done
+ 1949  for i in $(pwd); doe
+ 1950  for i in $(pwd); do echo $i; done
+ 1951  for i in $(pwd); do echo #$i#; done;  for i in $(pwd); do echo "#$i#"; done; 
+ 1952  for i in $(pwd); do echo "a${i}a"; done
+ 1953  p
+ 1954  p l
+ 1955  cd mygithub/
+ 1956  cd shell-script/
+ 1957  ll
+ 1958  cd p-script/
+ 1959  xlw
+ 1960  clearx
+ 1961  clear
+ 1962  ll
+ 1963  ./install.sh 
+ 1964  p l
+ 1965  ll /opt/myscript/p-script/
+ 1966  p l
+ 1967  cclea
+ 1968  clear
+ 1969  ll
+ 1970  cd /opt/myscript/
+ 1971  ll
+ 1972  cd p-script/
+ 1973  clear
+ 1974  ll
+ 1975  vim path
+ 1976  vim path.sh
+ 1977  ll /usr/bin/p
+ 1978  p l
+ 1979  ./path.sh l
+ 1980  alias p
+ 1981  p l
+ 1982  rm /usr/bin/p
+ 1983  clear
+ 1984  ll
+ 1985  ./install.sh 
+ 1986  cd ..
+ 1987  ll
+ 1988  p go-p
+ 1989  wr go-wr
+ 1990  wr temp
+ 1991  wr go-wr
+ 1992  p l
+ 1993  cd ..
+ 1994  cd p-script/
+ 1995  ./install.sh 
+ 1996  p l
+ 1997  c-s3
+ 1998  clear
+ 1999  c-s3
+ 2000  wr go-e
+ 2001  cd ../*16
+ 2002  ll
+ 2003  p l
+ 2004  vim idea.txt 
+ 2005  clear
+ 2006  ll
+ 2007  vim question.txt 
+ 2008  vim learn.txt 
+ 2009  wr tmep
+ 2010  wr temp
+ 2011  wr score
+ 2012  clear
+ 2013  ll
+ 2014  clear
+ 2015  p 4
+ 2016  clear
+ 2017  ll
+ 2018  b hom*
+ 2019  vim dir*.sh
+ 2020  cd -
+ 2021  vim dir*.sh
+ 2022  ./install.sh 
+ 2023  clear
+ 2024  ll
+ 2025  b home
+ 2026  cd -
+ 2027  b ".*git*"
+ 2028  cd -
+ 2029  b *git*
+ 2030  cd -
+ 2031  ./install.sh 
+ 2032  b *git*
+ 2033  ./install.sh
+ 2034  cd -
+ 2035  ./install.sh
+ 2036  clear
+ 2037  cclear
+ 2038  clear
+ 2039  ll
+ 2040  clear
+ 2041  ll
+ 2042  b *git
+ 2043  b "*git"
+ 2044  "
+
+
+
+
+ 2045  ./install.sh 
+ 2046  b *git
+ 2047  b 2
+ 2048  b 1
+ 2049  pwd
+ 2050  b 2
+ 2051  pwd
+ 2052  b
+ 2053  clear
+ 2054  ll
+ 2055  clear
+ 2056  ll
+ 2057  python mygithub/shell-script/back-dir/dir_backwards.py 1
+ 2058  python mygithub/shell-script/back-dir/dir_backwards.py
+ 2059  python mygithub/shell-script/back-dir/dir_backwards.py "home"
+ 2060  python mygithub/shell-script/back-dir/dir_backwards.py 1
+ 2061  python mygithub/shell-script/back-dir/dir_backwards.py 10
+ 2062  clear
+ 2063  cd mygithub/shell-script/back-dir/
+ 2064  clear
+ 2065  ll
+ 2066  ./install.sh 
+ 2067  clear
+ 2068  ll
+ 2069  clear
+ 2070  ll
+ 2071  clear
+ 2072  ll
+ 2073  clear
+ 2074  ll
+ 2075  clear
+ 2076  ll
+ 2077  p 9
+ 2078  cd -
+ 2079  clear
+ 2080  ll
+ 2081  b 3
+ 2082  b
+ 2083  bb
+ 2084  b
+ 2085  p l
+ 2086  p 4
+ 2087  clear
+ 2088  ./install.sh 
+ 2089  clear
+ 2090  ll
+ 2091  b 3
+ 2092  b
+ 2093  pwed
+ 2094  pwd
+ 2095  b
+ 2096  p l
+ 2097  python $(p 4)/dir*.py
+ 2098  python $(p 4 q)/dir*.py
+ 2099  python
+ 2100  cd /
+ 2101  clear
+ 2102  ll
+ 2103  clear
+ 2104  p 4
+ 2105  clear
+ 2106  ./install.sh 
+ 2107  b /
+ 2108  cd -
+ 2109  b gj*
+ 2110  b h
+ 2111  p4
+ 2112  b 4
+ 2113  p 4
+ 2114  b sq
+ 2115  p 4
+ 2116  b git
+ 2117  cd -
+ 2118  b hub
+ 2119  cd -
+ 2120  python dir_backwards.py hub
+ 2121  python dir_backwards.py git
+ 2122  python dir_backwards.py my
+ 2123  python dir_backwards.py ho
+ 2124  python dir_backwards.py hos
+ 2125  python dir_backwards.py *hos
+ 2126  ./install.sh 
+ 2127  clear
+ 2128  b good
+ 2129  b git
+ 2130  cd -
+ 2131  clear
+ 2132  ll
+ 2133  cp dir_{backwards,forward}.sh 
+ 2134  cp dir_{backwards,forward}.py
+ 2135  clear
+ 2136  ll
+ 2137  vim dir_backwards.py
+ 2138  b
+ 2139  clear
+ 2140  ll
+ 2141  mv back-dir/ change-dir
+ 2142  p m
+ 2143  p 4
+ 2144  clear
+ 2145  ll
+ 2146  vim dir_f*.py
+ 2147  vim dir_forward.
+ 2148  vim dir_forward.sh
+ 2149  vim
+ 2150  ./dir_forward.sh hello the world
+ 2151  wr wr
+ 2152  vim dir_fo*.sh
+ 2153  ./dir_forward.sh hello the world
+ 2154  vim
+ 2155  vim dir*b*.sh
+ 2156  vim install.sh 
+ 2157  clear
+ 2158  ll
+ 2159  cd ..
+ 2160  python change-dir/dir_forward.py  askfd asfda
+ 2161  python change-dir/dir_forward.py work src
+ 2162  vim
+ 2163  vim change-dir/dir_forward.py
+ 2164  python change-dir/dir_forward.py work src
+ 2165  python change-dir/dir_forward.py work
+ 2166* python change-dir/dir_forward.py 
+ 2167  clear
+ 2168  cd change-dir/
+ 2169  ll
+ 2170  ./install.sh 
+ 2171  ll /usr/bin/f
+ 2172  rm /usr/bin/f
+ 2173  vim *.sh
+ 2174  ./install.sh 
+ 2175  ll /usr/f
+ 2176  ll /usr/bin/f
+ 2177  ll /usr/bin/b
+ 2178  clear
+ 2179  ll
+ 2180  mv dir_forward{,s}.sh
+ 2181  mv dir_forward{,s}.py
+ 2182  clear
+ 2183  ./install.sh 
+ 2184  rm /usr/bin/{b,f}
+ 2185  ./install.sh 
+ 2186  clear
+ 2187  ll
+ 2188  sub
+ 2189  clear
+ 2190  ll
+ 2191  vim *for*sh
+ 2192  vim
+ 2193  ./sin
+ 2194  ./install.sh 
+ 2195  clear
+ 2196  ll
+ 2197  f aksdjf
+ 2198  f asklfjalsdf als;dfjsal askljfd;a
+ 2199  cd
+ 2200  clear
+ 2201  f change-dir
+ 2202  p l
+ 2203  p 1
+ 2204  f paper
+ 2205  cd
+ 2206  clear
+ 2207  f forward
+ 2208  f forwards
+ 2209  f git
+ 2210  f dir
+ 2211  clear
+ 2212  ll
+ 2213  clear
+ 2214  ll
+ 2215  b 1
+ 2216  clear
+ 2217  ll
+ 2218  vim README.md 
+ 2219  clear
+ 2220  ll
+ 2221  git_push
+ 2222  clear
+ 2223  b /
+ 2224  clear
+ 2225  ll
+ 2226  f mygit
+ 2227  ll
+ 2228  cd ..
+ 2229  rm -rf mygithub/
+ 2230  lear
+ 2231  clear
+ 2232  f mygit
+ 2233  f ppt
+ 2234  cd /cygdrive/
+ 2235  f ppt
+ 2236  cd 
+ 2237  cd /cygdrive/
+ 2238  f Users
+ 2239  cd
+ 2240  ll
+ 2241  cd /
+ 2242  ll
+ 2243  clear
+ 2244  cd /cygdrive/
+ 2245  f patent
+ 2246  cd -
+ 2247  f desk patent
+ 2248  clear
+ 2249  ll
+ 2250  clear
+ 2251  vim
+ 2252  clear
+ 2253  cd
+ 2254  f change
+ 2255  clear
+ 2256  ll
+ 2257  cd
+ 2258  f change dir
+ 2259  clear
+ 2260  ll
+ 2261  clear
+ 2262  ll
+ 2263  vim dir_forwards.py
+ 2264  ./install.sh 
+ 2265  clear
+ 2266  cd
+ 2267  cd cy
+ 2268  cd /cygdrive/
+ 2269  f desk patent
+ 2270  cd ..
+ 2271  cd patent #1.23s
+ 2272  cd patent 1.23s
+ 2273  vim
+ 2274  cd
+ 2275  f change-dir
+ 2276  vim
+ 2277  ./install.sh 
+ 2278  clear
+ 2279  ll
+ 2280  cd 
+ 2281  f change-dir
+ 2282  vim
+ 2283  p l
+ 2284  p 4
+ 2285  ./install.sh 
+ 2286  cd
+ 2287  f change dir
+ 2288  vim
+ 2289  p 4
+ 2290  clear
+ 2291  ll
+ 2292  vim *for*.sh
+ 2293  a="sadfaslkdf #1.2s"
+ 2294  echo ${a#\#*}
+ 2295  echo ${a#\#.*}
+ 2296  echo ${a##.*}
+ 2297  echo ${a%#.*}
+ 2298  echo ${a% *}
+ 2299  echo ${a%#*}
+ 2300  echo ${a##*}
+ 2301  echo ${a#*#}
+ 2302  vim
+ 2303  ./install.sh 
+ 2304  lear
+ 2305  clear
+ 2306  ll
+ 2307  cd
+ 2308  f -dir
+ 2309* 
+ 2310  p 4
+ 2311  -dir
+ 2312  f -dir
+ 2313  cd 
+ 2314  f -dir
+ 2315  b -
+ 2316  f change-dir
+ 2317  vim
+ 2318  clear
+ 2319  ll
+ 2320  vim dir_forwards.sh
+ 2321  clear
+ 2322  ./install.sh 
+ 2323  clear
+ 2324  cd
+ 2325  f e-dir
+ 2326  b -
+ 2327  f change-dir
+ 2328  vim
+ 2329  ./install.sh 
+ 2330  cd
+ 2331  f change-
+ 2332  cd /cygdrive/
+ 2333  f papter
+ 2334  f 
+ 2335  clear
+ 2336  ll
+ 2337  f paper
+ 2338  cd
+ 2339  f change-
+ 2340  clear
+ 2341  ll
+ 2342  vim *for*.sh
+ 2343  cd /cygdrive/
+ 2344  f paper
+ 2345  p 4
+ 2346  ./install.sh 
+ 2347  b -
+ 2348  f paper
+ 2349  f desk paper
+ 2350  p4
+ 2351  p 4
+ 2352  vim *for*.py
+ 2353  ./install.sh 
+ 2354  clear
+ 2355  ll
+ 2356  cd /cygdrive/
+ 2357  f desk paper
+ 2358  clear
+ 2359  ll
+ 2360  clear
+ 2361  cd
+ 2362  f change-dir
+ 2363  ll
+ 2364  clear
+ 2365  ll
+ 2366  history
+ 2367  history -h
+ 2368  history  >> history.ext
