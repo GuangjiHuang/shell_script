@@ -238,29 +238,27 @@ today_path=~/mygithub/everyday-record/${dir_name}
 if [ ! -d "${today_path}" ]; then
     mkdir -p ${today_path}
     echo "creat the ${today_path} successfully!"
+    separate_sign="=================================="
+    touch ${today_path}/plan.txt && echo -e  "${separate_sign}\n$(datef)  PLAN\n${separate_sign}\n" > ${today_path}/plan.txt
+    touch ${today_path}/learn.txt && echo -e "${separate_sign}\n$(datef)  LEARN\n${separate_sign}\n" > ${today_path}/learn.txt
+    touch ${today_path}/question.txt && echo -e "${separate_sign}\n$(datef)  QUESTION\n${separate_sign}\n" > ${today_path}/question.txt
+    touch ${today_path}/review.txt && echo -e "${separate_sign}\n$(datef)  REVIEW\n${separate_sign}\n" > ${today_path}/review.txt
+    touch ${today_path}/idea.txt && echo -e "${separate_sign}\n$(datef)  IDEA\n${separate_sign}\n" > ${today_path}/idea.txt
+    touch ${today_path}/temp.txt && echo -e "${separate_sign}\n$(datef)  TEMP\n${separate_sign}\n" > ${today_path}/temp.txt
+    touch ${today_path}/diary.txt && echo -e "${separate_sign}\n$(datef)  DIARY\n${separate_sign}\n" > ${today_path}/diary.txt
+    touch ${today_path}/type.pratice && echo -e "${separate_sign}\n$(datef)  PRATICE\n${separate_sign}\n" > ${today_path}/type.pratice
+    touch ${today_path}/English.pratice && echo -e "${separate_sign}\n$(datef)  PRATICE\n${separate_sign}\n" > ${today_path}/English.pratice
+    # add the todolist.txt (copy the template to it );
+    separate_sign_2="--------------------------------------"
+    touch ${today_path}/todolist.txt && echo -e "${separate_sign_2}\n$(datef) TODOLIST\n${separate_sign_2}" > ${today_path}/todolist.txt
+    cat /opt/myscript/wr-script/todolist/todolist.template >> ${today_path}/todolist.txt
+    echo "${today_path}/todolist.txt" > /opt/myscript/wr-script/todolist/date-path.txt
+    # copy the type.template to the type.pratice
+    cat /opt/myscript/wr-script/type.template >> ${today_path}/type.pratice
+    echo $separate_sign_2 >> ${today_path}/type.pratice
 
-    if [ "$2" == "-z" ]; then
-        touch ${today_path}/learn-a.txt 
-        touch ${today_path}/question-a.txt
-        touch ${today_path}/review-a.txt
-    else
-        separate_sign="=================================="
-        touch ${today_path}/plan.txt && echo -e  "${separate_sign}\n$(datef)  PLAN\n${separate_sign}\n" > ${today_path}/plan.txt
-        touch ${today_path}/learn.txt && echo -e "${separate_sign}\n$(datef)  LEARN\n${separate_sign}\n" > ${today_path}/learn.txt
-        touch ${today_path}/question.txt && echo -e "${separate_sign}\n$(datef)  QUESTION\n${separate_sign}\n" > ${today_path}/question.txt
-        touch ${today_path}/temp.txt && echo -e "${separate_sign}\n$(datef)  TEMP\n${separate_sign}\n" > ${today_path}/temp.txt
-        touch ${today_path}/type.pratice && echo -e "${separate_sign}\n$(datef)  PRATICE\n${separate_sign}\n" > ${today_path}/type.pratice
-        touch ${today_path}/English.pratice && echo -e "${separate_sign}\n$(datef)  PRATICE\n${separate_sign}\n" > ${today_path}/English.pratice
-        # add the todolist.txt (copy the template to it );
-        separate_sign_2="--------------------------------------"
-        touch ${today_path}/todolist.txt && echo -e "${separate_sign_2}\n------ $(datef) -------\n${separate_sign_2}" > ${today_path}/todolist.txt
-        cat /opt/myscript/wr-script/todolist/todolist.template >> ${today_path}/todolist.txt
-        echo "${today_path}/todolist.txt" > /opt/myscript/wr-script/todolist/date-path.txt
-        # copy the type.template to the type.pratice
-        cat /opt/myscript/wr-script/type.template >> ${today_path}/type.pratice
-        echo $separate_sign_2 >> ${today_path}/type.pratice
-    fi
-
+    # if today is the  first day of the week, month, and year, and then creat the plan-w.txt, plan-m.txt and the plan-y.txt
+    python "/opt/myscript/wr-script/py/plan-w-m-y.py"
 fi
 
 # check the argumet and then open the corresponding file
@@ -270,15 +268,25 @@ case "$1" in
         ;;
 
     "plan")
-        vim ${today_path}/plan.txt
+        # -w: week plan, -m: month plan, -y: year plan
+        if [ "$2" == "-w" ]; then
+            python "/opt/myscript/wr-script/py/plan-w-m-y.py" "-w"
+        elif [ "$2" == "-m" ]; then
+            python "/opt/myscript/wr-script/py/plan-w-m-y.py" "-m"
+        elif [ "$2" == "-y" ]; then
+            python "/opt/myscript/wr-script/py/plan-w-m-y.py" "-y"
+        else
+            vim ${today_path}/plan.txt
+        fi
         ;;
+
     "record")
-        record_path=/cygdrive/c/Users/hgj/Desktop/study-app/data/everyday/$(date "+%Y")/$(date "+%Y-%m")/$(date "+%m-%d")/record.txt
+        record_path=/cygdrive/c/Users/${USER}/Desktop/study-app/data/everyday/$(date "+%Y")/$(date "+%Y-%m")/$(date "+%m-%d")/record.txt
         vim ${record_path}
         ;;
 
     "arragement")
-        arragement_path=/cygdrive/c/Users/hgj/Desktop/study-app/data/everyday/$(date "+%Y")/$(date "+%Y-%m")/$(date "+%m-%d")/plan.txt
+        arragement_path=/cygdrive/c/Users/${USER}/Desktop/study-app/data/everyday/$(date "+%Y")/$(date "+%Y-%m")/$(date "+%m-%d")/plan.txt
         vim ${arragement_path}
         ;;
 
@@ -302,9 +310,23 @@ case "$1" in
         vim ${today_path}/temp.txt
         ;;
 
+    "diary")
+        vim ${today_path}/diary.txt
+        ;;
+
     "review")
         if [ "$2" == "-z" ]; then
             vim ${today_path}/review-a.txt
+        else
+            vim ${today_path}/review.txt
+        fi
+        ;;
+
+    "idea")
+        if [ "$2" == "-z" ]; then
+            vim ${today_path}/idea-a.txt
+        else
+            vim ${today_path}/idea.txt
         fi
         ;;
 
@@ -656,6 +678,10 @@ case "$1" in
         echo -e "${GREEN}: score->${NOCOLOR}: get the score of the today, including the arragement, todolist, and so on!"
         echo 
         echo -e "${GREEN}: temp->${NOCOLOR}: go the temp.txt"
+        echo 
+        echo -e "${GREEN}: diary->${NOCOLOR}: go the diary.txt"
+        echo 
+        echo -e "${GREEN}: review [-z]->${NOCOLOR}: go the review.txt, if with -z, go to the merge file."
         echo 
         echo -e "${GREEN}: todo->${NOCOLOR}: edit the todolist.txt"
         echo 

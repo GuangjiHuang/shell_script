@@ -35,6 +35,7 @@ sessions_list=(
     "project" \
     "fun" \
     "chore" \
+    "plan" \
     "paper" \
     "work" \
     "question" \
@@ -103,6 +104,7 @@ tmux_tempalte_3panes_for_chore()
     new-window -n "program" \; \
     new-window -n "work" \; \
     new-window -n "paper" \; \
+    new-window -n "review" \; \
     select-window -t 0 \; \
     split-window -h \; \
     select-pane -t 0 \; \
@@ -124,8 +126,52 @@ tmux_tempalte_3panes_for_chore()
     send-keys -t 0 "$tmux_work_command" C-m\; \
     select-window -t 4 \; \
     split-window -h \; \
+    select-window -t 5 \; \
+    split-window -h \; \
+    send-keys -t 0 'wr review' C-m\; \
+    send-keys -t 1 'wr diary' C-m\; \
     select-window -t 0 \; \
     select-pane -t 1
+}
+
+tmux_tempalte_3panes_for_plan()
+{
+    # add the work to the tmux_plan
+    source_dir=~/mygithub/shell-script/tmux-manager
+    work_data_dir=~/mygithub/data-shared/work_management/data
+    tmux_work_command="cd $source_dir/work_management/; ./bin/main*"
+    # the tmux command
+    tmux new-session -s "$1" -n "day" \; \
+    new-window -n "week" \; \
+    new-window -n "month" \; \
+    new-window -n "year" \; \
+    new-window -n "idea" \; \
+    new-window -n "program" \; \
+    select-window -t 0 \; \
+    split-window -h \; \
+    select-pane -t 0 \; \
+    send-keys -t 0 'wr plan' C-m\; \
+    select-window -t 1 \; \
+    split-window -h \; \
+    send-keys -t 0 'wr plan -w' C-m\; \
+    select-pane -t 0 \; \
+    select-window -t 2 \; \
+    split-window -h \; \
+    send-keys -t 0 'wr plan -m' C-m\; \
+    select-pane -t 0 \; \
+    select-window -t 3 \; \
+    split-window -h \; \
+    send-keys -t 0 'wr plan -y' C-m\; \
+    select-pane -t 0 \; \
+    select-window -t 4 \; \
+    split-window -h \; \
+    send-keys -t 0 'wr idea' C-m\; \
+    select-pane -t 0 \; \
+    select-window -t 5 \; \
+    split-window -h \; \
+    select-pane -t 0 \; \
+    select-window -t 0 \; \
+    select-pane -t 0
 }
 
 tmux_tempalte_3panes_for_ssh()
@@ -372,7 +418,13 @@ tmux_English()
 tmux_chore()
 {
     tmux_tempalte_3panes_for_chore "chore"
-    echo "this is the question's tmux"
+    echo "this is the chore's tmux"
+}
+
+tmux_plan()
+{
+    tmux_tempalte_3panes_for_plan "plan"
+    echo "this is the plan's tmux"
 }
 
 tmux_ssh()
@@ -1026,6 +1078,21 @@ case "$1" in
         else
             # create the tmux layout
             tmux_chore
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
+        fi
+        ;;
+    #}}}
+
+    "plan")
+    #{{{
+        # set the environment variable
+        echo "export mode=$1" > $mode_control_path
+        if [ "$tmux_action" == "into" ]; then
+            tmux attach -t $1
+        else
+            # create the tmux layout
+            tmux_plan
             # check the file if exists, if not touch the files
             create_mode_dir $1
         fi

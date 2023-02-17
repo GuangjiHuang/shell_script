@@ -12,7 +12,7 @@ install_dir=/opt/myscript/tmux-manager
 
 # check if the install path, and then delete
 if [ -d ${install_dir} ]; then
-    rm -r ${install_dir}
+    rm -rf ${install_dir}
 fi
 cp -r $(pwd) /opt/myscript/ && echo "Has been copied the directory to the: /opt/myscript"
 

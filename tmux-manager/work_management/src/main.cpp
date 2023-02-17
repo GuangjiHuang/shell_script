@@ -29,6 +29,17 @@ int main(int argc, char** argv) {
     string record_help_path = config["record_help_path"].as<string>();
     string gui_help_path = config["gui_help_path"].as<string>();
     string gui_plan_dir = config["gui_plan_dir"].as<string>();
+    /* occure the bug, try to fix the bug, next time
+    // replace the gui_plan_dir and the pipeline_path' hgj with the $USER
+    char* user_name = getenv("USER");
+    if (user_name){
+        string string_user_name = string(user_name);
+        size_t start_pos_1 = pipeline_path.find("hgj");
+        size_t start_pos_2 = gui_plan_dir.find("hgj");
+        pipeline_path.replace(start_pos_1, start_pos_1+3, string_user_name);
+        gui_plan_dir.replace(start_pos_2, start_pos_2+3, string_user_name);
+    }
+    */
     // file type
     string file_type = config["file_type"].as<string>();
     FILE_IS_STUDY = file_type=="study" ? true : false;

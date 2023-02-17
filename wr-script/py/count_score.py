@@ -223,9 +223,10 @@ if __name__ == "__main__":
         except:
             print(f"error: you input date {sys.argv[1]} no meet the need of format such as 2023-01-01")
     #print(date_str)
-    everyday_record_dir = r"/home/hgj/mygithub/everyday-record/"
+    user_name = os.getenv("USER", "hgj")
+    everyday_record_dir = f"/home/{user_name}/mygithub/everyday-record/"
     question_and_learn_dir = os.path.join(everyday_record_dir, date_str)
-    study_app_dir = r"/cygdrive/c/Users/hgj/Desktop/study-app/data/everyday/"
+    study_app_dir = f"/cygdrive/c/Users/{user_name}/Desktop/study-app/data/everyday/"
     arragement_path = os.path.join(study_app_dir, time.strftime("%Y"), date_str, "plan.txt")
     record_path = os.path.join(study_app_dir, time.strftime("%Y"), date_str, "record.txt")
     todolist_path = os.path.join(everyday_record_dir, date_str, "todolist.txt")

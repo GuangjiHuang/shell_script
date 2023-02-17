@@ -52,7 +52,8 @@ def get_todolist_score(todolist_path):
     return scores
 if __name__ == "__main__":
     today_date = time.strftime("%Y-%m/%m-%d")
-    everyday_record_dir = r"/home/hgj/mygithub/everyday-record/"
+    user_name = os.getenv("USER", "hgj")
+    everyday_record_dir = f"/home/{user_name}/mygithub/everyday-record/"
     todolist_path = os.path.join(everyday_record_dir, today_date, "todolist.txt")
     # the todolist
     todolist_score = get_todolist_score(todolist_path)

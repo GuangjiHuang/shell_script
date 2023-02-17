@@ -32,7 +32,7 @@ def merge_by_date(date_dir):
     # re pattern 
     pattern = r"\d{4}-\d{2}-\d{2}"
     # read the merge file, check and then merge
-    file_ty_ls = ["learn", "question"]
+    file_ty_ls = ["learn", "question", "review", "idea"]
     for fl in file_ty_ls:
         # read the file
         fl_path = os.path.join(date_dir, fl+".txt")
@@ -76,8 +76,9 @@ def merge_by_date(date_dir):
 
 if __name__ == "__main__":
     # about the dir and the file type 
-    up_dir = r"/home/hgj/mygithub/everyday-record"
-    merge_dir = r"/home/hgj/mygithub/everyday-record/compress"
+    user_name = os.getenv("USER", "hgj")
+    up_dir = f"/home/{user_name}/mygithub/everyday-record"
+    merge_dir = f"/home/{user_name}/mygithub/everyday-record/compress"
     merge_record_path = os.path.join(merge_dir, "merge.record")
     today_dir = os.path.join(up_dir, time.strftime("%Y-%m/%m-%d"))
     # merge today's dir
