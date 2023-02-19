@@ -30,14 +30,16 @@ if not os.path.exists(file_path):
         pickle.dump({"^&#%": 0}, f)
 #
 first_arg = args[0]
+is_sorted = False
 if first_arg.isdigit():
     t_s = time.time()
     search_depth = int(first_arg)
     # save the current path or the sub path to the file
     base_root = os.getcwd()
     dir_path_ls = [base_root]
+    print(f"Get all the sub dir path of the {base_root} ... waiting... ")
     getDirPath(base_root, dir_path_ls, 1, search_depth)
-    #print("save the dir path to the pickle")
+    print("Save the dir path to the pickle ... ", end=" ")
     with open(file_path, "rb") as f:
         l_path_dict = pickle.load(f)
     for dir_path in dir_path_ls:
@@ -45,14 +47,15 @@ if first_arg.isdigit():
             l_path_dict[dir_path] += 1
         else:
             l_path_dict.update({dir_path: 1})
-    l_path_dict_ls = sorted(l_path_dict.items(), key=lambda x: x[1], reverse=True)
-    l_path_dict.clear()
-    l_path_dict.update(l_path_dict_ls)
+    if is_sorted:
+        l_path_dict_ls = sorted(l_path_dict.items(), key=lambda x: x[1], reverse=True)
+        l_path_dict.clear()
+        l_path_dict.update(l_path_dict_ls)
     #
     with open(file_path, "wb") as f:
         pickle.dump(l_path_dict, f)
     # 
-    #print(f"pickle length: {len(dir_path_ls)}, time usage: {time.time()-t_s:0.2f}")
+    print(f"Save! Pickle length: {len(dir_path_ls)}, time usage: {time.time()-t_s:0.2f}")
 else:
     t_s = time.time()
     # load
