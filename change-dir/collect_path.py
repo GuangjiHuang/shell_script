@@ -51,11 +51,11 @@ if first_arg.isdigit():
         l_path_dict_ls = sorted(l_path_dict.items(), key=lambda x: x[1], reverse=True)
         l_path_dict.clear()
         l_path_dict.update(l_path_dict_ls)
-    #
+    
     with open(file_path, "wb") as f:
         pickle.dump(l_path_dict, f)
     # 
-    print(f"Save! Pickle length: {len(dir_path_ls)}, time usage: {time.time()-t_s:0.2f}")
+    print(f"Save number:{len(dir_path_ls)}, total: {len(l_path_dict)}, time usage: {time.time()-t_s:0.2f}")
 else:
     t_s = time.time()
     # load
