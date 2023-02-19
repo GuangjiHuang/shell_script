@@ -17,7 +17,7 @@ def getDirPath(base_path, dir_path_ls, depth, depth_max):
 
 # get the args
 if len(sys.argv) == 1:
-    args = ["0"]
+    args = ["1"]
 else:
     args = sys.argv[1:]
 
@@ -52,7 +52,7 @@ if first_arg.isdigit():
     with open(file_path, "wb") as f:
         pickle.dump(l_path_dict, f)
     # 
-    print(f"pickle length: {len(dir_path_ls)}, time usage: {time.time()-t_s:0.2f}")
+    #print(f"pickle length: {len(dir_path_ls)}, time usage: {time.time()-t_s:0.2f}")
 else:
     t_s = time.time()
     # load

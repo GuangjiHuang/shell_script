@@ -12,6 +12,7 @@ cp -r $(pwd) /opt/myscript/ && echo "--Has been copied the directory to the: /op
 # use the ln command to creat the link
 ln -s "/opt/myscript/change-dir/dir_backwards.sh" ${install_path}/b
 ln -s "/opt/myscript/change-dir/dir_forwards.sh" ${install_path}/f
+ln -s "/opt/myscript/change-dir/collect_path.sh" ${install_path}/c
 
 # check if link successfully
 if [ -n "$(which b)" ]; then
@@ -20,4 +21,8 @@ fi
 
 if [ -n "$(which f)" ]; then
     echo "--Successfully! The executable file is: $(which f)"
+fi
+
+if [ -n "$(which c)" ]; then
+    echo "--Successfully! The executable file is: $(which c)"
 fi
