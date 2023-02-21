@@ -4,7 +4,7 @@
 # modules
 modules=("vim" "bash" "tmux" "input")
 # source path
-script_source_path=~/mygithub/shell-script/shell-vim-cfg-manager
+script_source_path=~/mygithub/shell-script/shellvim-cfg-manager
 cfg_source_path=~/mygithub/shell-vim-cfg
 # install path
 common_install_path=~

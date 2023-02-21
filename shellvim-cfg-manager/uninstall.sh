@@ -3,7 +3,7 @@
 # set the command name you want
 command_name=cfg
 install_path=/usr/bin
-source_dir=shell-vim-cfg-manager
+source_dir=shellvim-cfg-manager
 install_dir_path=/opt/myscript
 
 # remove the link in the install_path
