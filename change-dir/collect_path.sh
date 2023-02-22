@@ -8,6 +8,8 @@ if [[ "$1" =~ ^[0-9]*$ ]]; then
 elif [ "$1" == "clear" ]; then
     rm $pickle_file_path
     echo "rm the pikle path: $pickle_file_path"
+elif [ "$1" == "view" ]; then
+    vim $(python $python_script_path "view")
 else
     get_string=$(python $python_script_path $@)
     time_usage=${get_string#*#}
