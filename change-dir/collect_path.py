@@ -12,14 +12,18 @@ def compare(s1, s2, compare_level=3):
         2: dir name full match, ignore case
         3: case sensitive and dir name full match
     """
-    if compare_level == 0:
-        return s1.lower() in s2.lower()
-    elif compare_level == 1:
-        return s1 in s2
-    elif compare_level == 2:
-        return ("/"+s1+"/").lower() in s2.lower()
+    if "*" in s1:
+        idx_star = s1.find("*")
+        return "/"+s1[:idx_star] in s2 and s1[idx_star+1:] in s2
     else:
-        return "/"+s1+"/" in s2
+        if compare_level == 0:
+            return s1.lower() in s2.lower()
+        elif compare_level == 1:
+            return s1 in s2
+        elif compare_level == 2:
+            return ("/"+s1+"/").lower() in s2.lower()
+        else:
+            return "/"+s1+"/" in s2
 
 def viewPath(pkl_path, save_path):
     with open(pkl_path, "rb") as f:

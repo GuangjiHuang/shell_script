@@ -263,9 +263,6 @@ fi
 
 # check the argumet and then open the corresponding file
 case "$1" in
-    "love")
-        . /opt/myscript/wr-script/my-sq/my-sq.sh
-        ;;
 
     "plan")
         # -w: week plan, -m: month plan, -y: year plan
@@ -393,15 +390,15 @@ case "$1" in
         ;;
 
     "rest")
-        . /opt/myscript/wr-script/my-sq/rest.sh
+        . /opt/myscript/wr-script/font/rest.sh
         ;;
 
     "year")
-        . /opt/myscript/wr-script/my-sq/year.sh
+        . /opt/myscript/wr-script/font/year.sh
         ;;
 
     "moyu")
-        . /opt/myscript/wr-script/my-sq/moyu.sh
+        . /opt/myscript/wr-script/font/moyu.sh
         ;;
 
     "xiaban")
@@ -651,8 +648,6 @@ case "$1" in
         echo 
         echo -e "${GREEN}: learn->${NOCOLOR}: go to the learn.txt"
         echo 
-        echo -e "${GREEN}: love->${NOCOLOR}: my dear sq"
-        echo 
         echo -e "${GREEN}: merge->${NOCOLOR}: merge the today's question, plan to the compress's directory"
         echo 
         echo -e "${GREEN}: moyu->${NOCOLOR}: show the moyu as the screen"
@@ -707,7 +702,7 @@ case "$1" in
         ;;
 
     *)
-        echo -e "-> ${RED}ERROR:${NOCOLOR} Wrong input! You can just input the following option:\n-> ${GREEN}OPTION:${NOCOLOR} love, plan, learn, question, temp, help, pointer %Y-%m-%d, pointer-check, go-e, go-wr, review, all, rest, todo, todo-cfg, todo-exe, type x... and so on "
+        echo -e "-> ${RED}ERROR:${NOCOLOR} Wrong input! You can just input the following option:\n-> ${GREEN}OPTION:${NOCOLOR} plan, learn, question, temp, help, pointer %Y-%m-%d, pointer-check, go-e, go-wr, review, all, rest, todo, todo-cfg, todo-exe, type x... and so on "
         echo -e "${GREEN}You can use the wr help for more information!${NOCOLOR}"
         ;;
 esac

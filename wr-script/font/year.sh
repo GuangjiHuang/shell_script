@@ -1,5 +1,5 @@
 #! /bin/bash
-file="/opt/myscript/wr-script/my-sq/*"
+file="/opt/myscript/wr-script/font/*"
 while [ 1 ]
 do
 

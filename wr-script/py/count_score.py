@@ -202,9 +202,12 @@ def write_to_file(score_path, content):
     # check if exists the file dir
     dir_name = os.path.dirname(score_path)
     if not os.path.exists(dir_name): # no such dir, not write
-        print("Faile to write, no such dir: ", dir_name)
-        return
+        #print("Faile to write, no such dir: ", dir_name)
+        #return
+        os.makedirs(dir_name, exist_ok=True)
     with open(score_path, "w", encoding="utf-8") as f:
+        print("write the score to the file!")
+        print(content)
         f.write(content)
 
 if __name__ == "__main__":
@@ -247,6 +250,9 @@ if __name__ == "__main__":
     for i in range(len(score_ls)):
         total_score += score_ls[i] * score_weight_ls[i]
     total_score = int(total_score)
+    # write the score to the file
+    write_to_file(score_path, str(total_score))
+    print(score_path)
     def Rank(s):
         # the rank
         if s < 60:
@@ -282,5 +288,3 @@ if __name__ == "__main__":
                 f"{'-'*len(f_l_n_col)}\n"
     print(show_content)# }}}
 
-    # at last write the file
-    write_to_file(score_path, show_content)
