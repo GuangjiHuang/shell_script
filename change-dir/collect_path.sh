@@ -1,5 +1,5 @@
-#! /bin/bash
-python_script_path=/opt/myscript/change-dir/collect_path.py
+
+python_script_path=~/opt/myscript/change-dir/collect_path.py
 pickle_file_path=~/mygithub/shell-script/change-dir/most-often-used-path.pkl
 # judge the first argument is the digit
 current_dir=$(pwd)

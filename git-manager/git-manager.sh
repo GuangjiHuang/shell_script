@@ -13,7 +13,7 @@ reposities=("linux_basic_cfg"\
 # the path
 source_dir="${HOME}/mygithub/shell-script/git-manager/"
 source_path="${HOME}/mygithub/shell-script/git-manager/git_manager.sh"
-install_dir="/opt/myscript/git-manager/"
+install_dir="~/opt/myscript/git-manager/"
 
 # checkout the path
 flag_source_exist=0

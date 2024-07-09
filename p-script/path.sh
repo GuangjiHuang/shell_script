@@ -1,5 +1,5 @@
 #!/bin/bash
-record_path=/opt/myscript/p-script/record-path.txt
+record_path=~/opt/myscript/p-script/record-path.txt
 num_lines=$(sed -n '1p' $record_path)
 #echo "the numlines is : ${num_lines}"
 if [ $# -lt 1 ]
@@ -78,7 +78,7 @@ help)
 "go-p")
     # check if the file is existed?
     dst_path_1="/home/hgj/mygithub/shell-script/p-script/"
-    dst_path_2="/opt/myscript/p-script/"
+    dst_path_2="~/opt/myscript/p-script/"
     if [ -d ${dst_path_1} ]; then
         cd ${dst_path_1}
         echo "-> ${dst_path_1}"

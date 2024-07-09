@@ -26,7 +26,7 @@ else:
     op = sys.argv[1]
 
 # get the file path
-record_path = r"/opt/myscript/p-script/record-path.txt"
+record_path = r"~/opt/myscript/p-script/record-path.txt"
 
 if op == "l":
     lines = getLines(record_path)
@@ -109,7 +109,7 @@ elif op == "py":
 
 elif op == "go-p":
     dst_path_1 = r"/home/hgj/mygithub/shell-script/p-script/"
-    dst_path_2 = r"/opt/myscript/p-script/"
+    dst_path_2 = r"~/opt/myscript/p-script/"
     if os.path.exists(dst_path_1):
         os.chdir(dst_path_1)
     elif os.path.exists(dst_path_2):

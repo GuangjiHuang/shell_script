@@ -1,6 +1,9 @@
 #! /bin/bash
 #! /usr/bin/python
 
+# add the alias
+alias datef='date "+%Y-%m-%d %a %X"'
+
 # define the functi{{2}
 func_goal()
 {
@@ -10,7 +13,7 @@ func_goal()
     # deal with the directories
     # check if exists the ~/mygithub/goal/
     goal_dir=~/mygithub/goal/
-    goal-info_path=/opt/myscript/wr-script/goal-info
+    goal-info_path=~/opt/myscript/wr-script/goal-info
     if [ ! -d "${goal_dir}" ]; then
         mkdir -p ${goal_dir}
         # copy the goal.list to the directory
@@ -80,13 +83,13 @@ func_goal()
 copy_sth()
 {
     # the var
-    file_dir=/opt/myscript/wr-script/register-clipboard
+    file_dir=~/opt/myscript/wr-script/register-clipboard
     file_dir_source=$HOME/mygithub/shell-script/wr-script/register-clipboard
-    # cygwin -> /dev/clipboard; others -> /opt/myscript/wr-script/middle_station.clipboard
+    # cygwin -> /dev/clipboard; others -> ~/opt/myscript/wr-script/middle_station.clipboard
     if [ "$(uname -o)" == "Cygwin" ];then
         middle_station=/dev/clipboard
     else
-        middle_station=/opt/myscript/wr-script/middle_station.clipboard
+        middle_station=~/opt/myscript/wr-script/middle_station.clipboard
     fi
 
     if [ -z "$2" ];then
@@ -146,12 +149,12 @@ copy_sth()
 past_sth()
 {
     # the var
-    file_dir=/opt/myscript/wr-script/register-clipboard
-    # cygwin -> /dev/clipboard; others -> /opt/myscript/wr-script/middle_station.clipboard
+    file_dir=~/opt/myscript/wr-script/register-clipboard
+    # cygwin -> /dev/clipboard; others -> ~/opt/myscript/wr-script/middle_station.clipboard
     if [ "$(uname -o)" == "Cygwin" ];then
         middle_station=/dev/clipboard
     else
-        middle_station=/opt/myscript/wr-script/middle_station.clipboard
+        middle_station=~/opt/myscript/wr-script/middle_station.clipboard
     fi
 
     if [ -z "$2" ]; then
@@ -225,7 +228,7 @@ dir_name=$(date "+%Y-%m")/$(date "+%m-%d")
 export p_today=~/mygithub/everyday-record/${dir_name}/
 #if you want to use the date-pointer's path, you have to specify the -p as the $2
 if [ "$2" == "-p" ]; then
-    dir_name=$(cat /opt/myscript/wr-script/date-pointer.txt)
+    dir_name=$(cat ~/opt/myscript/wr-script/date-pointer.txt)
     # check if $dir_name is empty
     if [ -z ${dir_name} ]; then
         echo -e "->${RDD}ERROR:${NOCOLOR}the dir_name is empty! Please key ctrl+c to stop!"
@@ -251,14 +254,14 @@ if [ ! -d "${today_path}" ]; then
     # add the todolist.txt (copy the template to it );
     separate_sign_2="--------------------------------------"
     touch ${today_path}/todolist.txt && echo -e "${separate_sign_2}\n$(datef) TODOLIST\n${separate_sign_2}" > ${today_path}/todolist.txt
-    cat /opt/myscript/wr-script/todolist/todolist.template >> ${today_path}/todolist.txt
-    echo "${today_path}/todolist.txt" > /opt/myscript/wr-script/todolist/date-path.txt
+    cat ~/opt/myscript/wr-script/todolist/todolist.template >> ${today_path}/todolist.txt
+    echo "${today_path}/todolist.txt" > ~/opt/myscript/wr-script/todolist/date-path.txt
     # copy the type.template to the type.pratice
-    cat /opt/myscript/wr-script/type.template >> ${today_path}/type.pratice
+    cat ~/opt/myscript/wr-script/type.template >> ${today_path}/type.pratice
     echo $separate_sign_2 >> ${today_path}/type.pratice
 
     # if today is the  first day of the week, month, and year, and then creat the plan-w.txt, plan-m.txt and the plan-y.txt
-    python "/opt/myscript/wr-script/py/plan-w-m-y.py"
+    python "~/opt/myscript/wr-script/py/plan-w-m-y.py"
 fi
 
 # check the argumet and then open the corresponding file
@@ -267,11 +270,11 @@ case "$1" in
     "plan")
         # -w: week plan, -m: month plan, -y: year plan
         if [ "$2" == "-w" ]; then
-            python "/opt/myscript/wr-script/py/plan-w-m-y.py" "-w"
+            python "~/opt/myscript/wr-script/py/plan-w-m-y.py" "-w"
         elif [ "$2" == "-m" ]; then
-            python "/opt/myscript/wr-script/py/plan-w-m-y.py" "-m"
+            python "~/opt/myscript/wr-script/py/plan-w-m-y.py" "-m"
         elif [ "$2" == "-y" ]; then
-            python "/opt/myscript/wr-script/py/plan-w-m-y.py" "-y"
+            python "~/opt/myscript/wr-script/py/plan-w-m-y.py" "-y"
         else
             vim ${today_path}/plan.txt
         fi
@@ -328,7 +331,7 @@ case "$1" in
         ;;
 
     "pointer-check")
-        echo -e "Point to -> $(cat /opt/myscript/wr-script/date-pointer.txt)"
+        echo -e "Point to -> $(cat ~/opt/myscript/wr-script/date-pointer.txt)"
         ;;
 
     "pointer")
@@ -336,7 +339,7 @@ case "$1" in
         pointer_path=~/mygithub/everyday-record/${dir_name}
         # check if the path exists?
         if [ -d "${pointer_path}" ]; then
-            echo ${dir_name} > /opt/myscript/wr-script/date-pointer.txt
+            echo ${dir_name} > ~/opt/myscript/wr-script/date-pointer.txt
             echo -e "->Successfully points to the ${dir_name}"
         else
             echo -e "->${RED}ERROR${NOCOLOR}: ${dir_name} not exist! Fail!"
@@ -359,8 +362,8 @@ case "$1" in
         ;;
 
     "go-install")
-        # go to the /opt/myscript/wr-script/
-        install_dest=/opt/myscript/wr-script/
+        # go to the ~/opt/myscript/wr-script/
+        install_dest=~/opt/myscript/wr-script/
         cd $install_dest
         echo "->: $install_dest"
         ;;
@@ -381,7 +384,7 @@ case "$1" in
         #cat ${today_path}/question.txt >> ~/mygithub/everyday-record/compress/question-a.txt
         #cat ${today_path}/learn.txt >> ~/mygithub/everyday-record/compress/learn-a.txt
         # use the python script
-        python /opt/myscript/wr-script/py/merge.py
+        python ~/opt/myscript/wr-script/py/merge.py
         #echo "Good job! Has been merging xxx.txt to xxx-a.txt! Successfully!"
         ;;
 
@@ -390,15 +393,15 @@ case "$1" in
         ;;
 
     "rest")
-        . /opt/myscript/wr-script/font/rest.sh
+        . ~/opt/myscript/wr-script/font/rest.sh
         ;;
 
     "year")
-        . /opt/myscript/wr-script/font/year.sh
+        . ~/opt/myscript/wr-script/font/year.sh
         ;;
 
     "moyu")
-        . /opt/myscript/wr-script/font/moyu.sh
+        . ~/opt/myscript/wr-script/font/moyu.sh
         ;;
 
     "xiaban")
@@ -409,25 +412,25 @@ case "$1" in
 
     "todo")
         # first execute the rewrite program
-        python /opt/myscript/wr-script/py/todo_score.py
+        python ~/opt/myscript/wr-script/py/todo_score.py
         vim ${today_path}/todolist.txt
         ;;
 
     "score")
         clear
         # first execute the rewrite program
-        python /opt/myscript/wr-script/py/count_score.py $2
+        python ~/opt/myscript/wr-script/py/count_score.py $2
         #vim ${today_path}/todolist.txt
         ;;
 
     "todo-cfg")
-        cd /opt/myscript/wr-script/todolist/
+        cd ~/opt/myscript/wr-script/todolist/
         vim .
         ;;
 
     "todo-exe")
         echo "deprecated by hgj, just use the wr todo is ok!"
-        #cd /opt/myscript/wr-script/todolist/src/
+        #cd ~/opt/myscript/wr-script/todolist/src/
         #if [ ! -f r_c_w.exe ]; then
         #    g++ main.cpp util.cpp -o r_c_w.exe
         #fi
@@ -454,15 +457,15 @@ case "$1" in
              vim ${today_path}/type.pratice
         elif [ "$2" == "m" ]; then
              #open the type.template
-             vim /opt/myscript/wr-script/type.template
+             vim ~/opt/myscript/wr-script/type.template
         elif [ "$2" == "c" ]; then
-             # copy the /opt/myscirpt/wr-script/type.template to the ~/mygithub/shell-script/wr-script/type.tempate
-             cp /opt/myscript/wr-script/type.template ~/mygithub/shell-script/wr-script/type.template
+             # copy the ~/opt/myscirpt/wr-script/type.template to the ~/mygithub/shell-script/wr-script/type.tempate
+             cp ~/opt/myscript/wr-script/type.template ~/mygithub/shell-script/wr-script/type.template
              echo ":->Successfully renew the type.template!"
          elif [ "$2" == "renew" ]; then
              # copy the type.template to the type.pratice, because the type.tempate has been renew
              echo -e "${separate_sign}\n$(datef)\n${separate_sign}\n" > ${today_path}/type.pratice
-             cat /opt/myscript/wr-script/type.template >> ${today_path}/type.pratice
+             cat ~/opt/myscript/wr-script/type.template >> ${today_path}/type.pratice
              echo $separate_sign_2 >> ${today_path}/type.pratice
              echo ":->Has been renew the ${today_path}/type.pratice"
              # if you want to open it, add the $3
@@ -476,7 +479,7 @@ case "$1" in
 
     "pretend")
         # execute the program
-        /opt/myscript/wr-script/c++-interesting-program/pretend-to-do-something.exe $2 $3 $4
+        ~/opt/myscript/wr-script/c++-interesting-program/pretend-to-do-something.exe $2 $3 $4
         ;;
 
     "reinstall")
@@ -585,7 +588,7 @@ case "$1" in
         do
             clear
             # show the weather and the date and the time
-            exe_path=/opt/myscript/wr-script/weather/show-weather.sh
+            exe_path=~/opt/myscript/wr-script/weather/show-weather.sh
             bash ${exe_path}
             sleep $duration
         done
@@ -685,7 +688,7 @@ case "$1" in
         echo -e "${GREEN}: todo-exe->${NOCOLOR}: execute the prgrom to read, count, and then write"
         echo 
         echo -e -e "${GREEN}: type x y->${NOCOLOR}: 1) no x: open the type.pratice; 2) x=m: change the type.template manually;\n"\
-        "             3) x=c: copy the /opt/.../type.template to the ~/mygithub/.../type.template;\n"\
+        "             3) x=c: copy the ~/opt/.../type.template to the ~/mygithub/.../type.template;\n"\
         "             4)x=renew: renew the today's type.pratice, if the y=o, it will open the type.pratice"
         echo 
         echo -e "${GREEN}: xiaban->${NOCOLOR}: Upload the file to the github reposity, and then off duty"

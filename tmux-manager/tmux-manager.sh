@@ -46,8 +46,8 @@ sessions_list=(
 tmux_action="create"
 source_dir=~/mygithub/shell-script/tmux-manager
 source_name="${source_dir}/tmux-manager.sh"
-install_dir=/opt/myscript/tmux-manager
-mode_control_path=/opt/myscript/tmux-manager/mode-control.sh
+install_dir=~/opt/myscript/tmux-manager
+mode_control_path=~/opt/myscript/tmux-manager/mode-control.sh
 # the path of the goals inside the mode
 # the file directories
 goal_list_dir=~/mygithub/tmux_treasure/${mode}/goal-list
@@ -1445,7 +1445,7 @@ case "$1" in
         echo
         echo -e "${GREEN}: go-love->:${NOCOLOR} go to the source dir: ~/mygithub/shell-script/..."
         echo
-        echo -e "${GREEN}: go-install->:${NOCOLOR} go to the install dir: /opt/.../..."
+        echo -e "${GREEN}: go-install->:${NOCOLOR} go to the install dir: ~/opt/.../..."
         echo
         echo -e "${GREEN}: go-goal->:${NOCOLOR} go to the goal dir: ~/mygithub/tmux_treasure/..."
         echo
