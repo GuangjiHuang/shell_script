@@ -2,7 +2,6 @@
 #! /usr/bin/python
 
 # add the alias
-alias datef='date "+%Y-%m-%d %a %X"'
 
 # define the functi{{2}
 func_goal()
@@ -242,18 +241,18 @@ if [ ! -d "${today_path}" ]; then
     mkdir -p ${today_path}
     echo "creat the ${today_path} successfully!"
     separate_sign="=================================="
-    touch ${today_path}/plan.txt && echo -e  "${separate_sign}\n$(datef)  PLAN\n${separate_sign}\n" > ${today_path}/plan.txt
-    touch ${today_path}/learn.txt && echo -e "${separate_sign}\n$(datef)  LEARN\n${separate_sign}\n" > ${today_path}/learn.txt
-    touch ${today_path}/question.txt && echo -e "${separate_sign}\n$(datef)  QUESTION\n${separate_sign}\n" > ${today_path}/question.txt
-    touch ${today_path}/review.txt && echo -e "${separate_sign}\n$(datef)  REVIEW\n${separate_sign}\n" > ${today_path}/review.txt
-    touch ${today_path}/idea.txt && echo -e "${separate_sign}\n$(datef)  IDEA\n${separate_sign}\n" > ${today_path}/idea.txt
-    touch ${today_path}/temp.txt && echo -e "${separate_sign}\n$(datef)  TEMP\n${separate_sign}\n" > ${today_path}/temp.txt
-    touch ${today_path}/diary.txt && echo -e "${separate_sign}\n$(datef)  DIARY\n${separate_sign}\n" > ${today_path}/diary.txt
-    touch ${today_path}/type.pratice && echo -e "${separate_sign}\n$(datef)  PRATICE\n${separate_sign}\n" > ${today_path}/type.pratice
-    touch ${today_path}/English.pratice && echo -e "${separate_sign}\n$(datef)  PRATICE\n${separate_sign}\n" > ${today_path}/English.pratice
+    touch ${today_path}/plan.txt && echo -e  "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  PLAN\n${separate_sign}\n" > ${today_path}/plan.txt
+    touch ${today_path}/learn.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  LEARN\n${separate_sign}\n" > ${today_path}/learn.txt
+    touch ${today_path}/question.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  QUESTION\n${separate_sign}\n" > ${today_path}/question.txt
+    touch ${today_path}/review.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  REVIEW\n${separate_sign}\n" > ${today_path}/review.txt
+    touch ${today_path}/idea.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  IDEA\n${separate_sign}\n" > ${today_path}/idea.txt
+    touch ${today_path}/temp.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  TEMP\n${separate_sign}\n" > ${today_path}/temp.txt
+    touch ${today_path}/diary.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  DIARY\n${separate_sign}\n" > ${today_path}/diary.txt
+    touch ${today_path}/type.pratice && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  PRATICE\n${separate_sign}\n" > ${today_path}/type.pratice
+    touch ${today_path}/English.pratice && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  PRATICE\n${separate_sign}\n" > ${today_path}/English.pratice
     # add the todolist.txt (copy the template to it );
     separate_sign_2="--------------------------------------"
-    touch ${today_path}/todolist.txt && echo -e "${separate_sign_2}\n$(datef) TODOLIST\n${separate_sign_2}" > ${today_path}/todolist.txt
+    touch ${today_path}/todolist.txt && echo -e "${separate_sign_2}\n$(date "+%Y-%m-%d %a %X") TODOLIST\n${separate_sign_2}" > ${today_path}/todolist.txt
     cat ~/opt/myscript/wr-script/todolist/todolist.template >> ${today_path}/todolist.txt
     echo "${today_path}/todolist.txt" > ~/opt/myscript/wr-script/todolist/date-path.txt
     # copy the type.template to the type.pratice
@@ -261,7 +260,7 @@ if [ ! -d "${today_path}" ]; then
     echo $separate_sign_2 >> ${today_path}/type.pratice
 
     # if today is the  first day of the week, month, and year, and then creat the plan-w.txt, plan-m.txt and the plan-y.txt
-    python "~/opt/myscript/wr-script/py/plan-w-m-y.py"
+    python "$HOME/opt/myscript/wr-script/py/plan-w-m-y.py"
 fi
 
 # check the argumet and then open the corresponding file
@@ -464,7 +463,7 @@ case "$1" in
              echo ":->Successfully renew the type.template!"
          elif [ "$2" == "renew" ]; then
              # copy the type.template to the type.pratice, because the type.tempate has been renew
-             echo -e "${separate_sign}\n$(datef)\n${separate_sign}\n" > ${today_path}/type.pratice
+             echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")\n${separate_sign}\n" > ${today_path}/type.pratice
              cat ~/opt/myscript/wr-script/type.template >> ${today_path}/type.pratice
              echo $separate_sign_2 >> ${today_path}/type.pratice
              echo ":->Has been renew the ${today_path}/type.pratice"
