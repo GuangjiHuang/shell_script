@@ -13,6 +13,7 @@
 # vim;
 # shell;
 # markdown;
+# isp;
 # project;
 # paper;
 # fun( to show the rest, moyu, fish picture ).
@@ -32,6 +33,7 @@ sessions_list=(
     "vim" \
     "cmake" \
     "markdown" \
+    "isp" \
     "project" \
     "fun" \
     "chore" \
@@ -281,6 +283,32 @@ tmux_template_2panes()
 
 }
 
+# for 40.3 server
+tmux_template_for_isp()
+{
+	tmux new-session -s "$1" -n "ISP" \; \
+		split-window -h \; \
+		new-window -n "device" \; \
+		split-window -h \; \
+		new-window -n "edge" \; \
+		split-window -h \; \
+		new-window -n "pqtool" \; \
+		split-window -h \; \
+		new-window -n "chore" \; \
+		split-window -h \; \
+		select-window -t 1 \; \
+		send-keys -t 0 'cd ~/a2/middleware/v2/modules/isp/cv186x;clear' C-m\; \
+		send-keys -t 1 'cd ~/a2/middleware/v2/modules/isp/cv186x;clear' C-m\; \
+		select-window -t 2 \; \
+		send-keys -t 0 'cd ~/edge/middleware/v2/modules/isp/cv186x;clear' C-m\; \
+		send-keys -t 1 'cd ~/edge/middleware/v2/modules/isp/cv186x;clear' C-m\; \
+		select-window -t 3 \; \
+		send-keys -t 0 'cd ~/pqtool/isp-tool;clear' C-m\; \
+		send-keys -t 1 'cd ~/pqtool/isp-tool;clear' C-m\; \
+		select-window -t 0 \; \
+		send-keys -t 0 'date' C-m
+}
+
 tmux_cpp()
 {
     tmux_template_2panes "c++"
@@ -300,6 +328,12 @@ tmux_markdown()
 {
     tmux_template_2panes "markdown"
     echo "this is the markdown's tmux"
+}
+
+tmux_isp()
+{
+    tmux_template_for_isp "isp"
+    echo "this is the isp's tmux"
 }
 
 tmux_entertainment()
@@ -846,6 +880,9 @@ action()
         "markdown")
             ;;
 
+        "isp")
+            ;;
+
         "shell")
             ;;
 
@@ -973,6 +1010,21 @@ case "$1" in
         else
             # create the tmux layout
             tmux_markdown
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
+        fi
+        ;;
+    #}}}
+
+    "isp")
+    #{{{
+        # set the environment variable
+        echo "export mode=$1" > $mode_control_path
+        if [ "$tmux_action" == "into" ]; then
+            tmux attach -t $1
+        else
+            # create the tmux layout
+            tmux_isp
             # check the file if exists, if not touch the files
             create_mode_dir $1
         fi
@@ -1430,6 +1482,8 @@ case "$1" in
         echo -e "${GREEN}: python->:${NOCOLOR} create or into the python tmux session"
         echo
         echo -e "${GREEN}: markdown->:${NOCOLOR} create or into the markdown tmux session"
+		echo
+        echo -e "${GREEN}: isp->:${NOCOLOR} create or into the isp tmux session"
         echo
         echo -e "${GREEN}: shell->:${NOCOLOR} create or into the shell tmux session"
         echo
