@@ -296,6 +296,8 @@ tmux_template_for_isp()
 		split-window -h \; \
 		new-window -n "chore" \; \
 		split-window -h \; \
+		new-window -n "mars3" \; \
+		split-window -h \; \
 		select-window -t 1 \; \
 		send-keys -t 0 'cd ~/a2/middleware/v2/modules/isp/cv186x;clear' C-m\; \
 		send-keys -t 1 'cd ~/a2/middleware/v2/modules/isp/cv186x;clear' C-m\; \
@@ -305,6 +307,9 @@ tmux_template_for_isp()
 		select-window -t 3 \; \
 		send-keys -t 0 'cd ~/pqtool/isp-tool;clear' C-m\; \
 		send-keys -t 1 'cd ~/pqtool/isp-tool;clear' C-m\; \
+		select-window -t 5 \; \
+		send-keys -t 0 'cd ~/isp/mars3' C-m\; \
+		send-keys -t 1 'cd ~/isp/mars3' C-m\; \
 		select-window -t 0 \; \
 		send-keys -t 0 'date' C-m
 }
