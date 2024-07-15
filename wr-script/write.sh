@@ -222,9 +222,11 @@ past_sth()
 
 #check if there are the directory
 dir_name=$(date "+%Y-%m")/$(date "+%m-%d")
+dir_name_ex=$(date "+%Y")/$dir_name
 # when you use the command: wr, it will creat the environment varialbe that records the path 
 # of the today_record path, so you can easily to open it inside the vim using the :e $p_today
 export p_today=~/mygithub/everyday-record/${dir_name}/
+export p_today_ex=~/mygithub/everyday-record/${dir_name_ex}/
 #if you want to use the date-pointer's path, you have to specify the -p as the $2
 if [ "$2" == "-p" ]; then
     dir_name=$(cat ~/opt/myscript/wr-script/date-pointer.txt)
@@ -237,18 +239,24 @@ elif [ "$2" == "-z" ]; then
     dir_name="compress"
 fi
 today_path=~/mygithub/everyday-record/${dir_name}
+# bug for the ex
+today_path_ex=~/mygithub/everyday-record/${dir_name_ex}
 if [ ! -d "${today_path}" ]; then
     mkdir -p ${today_path}
+	mkdir -p ${today_path_ex}
     echo "creat the ${today_path} successfully!"
+    echo "creat the ${today_path_ex} successfully!"
     separate_sign="=================================="
     touch ${today_path}/plan.txt && echo -e  "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  PLAN\n${separate_sign}\n" > ${today_path}/plan.txt
     touch ${today_path}/learn.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  LEARN\n${separate_sign}\n" > ${today_path}/learn.txt
-    touch ${today_path}/code.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  code\n${separate_sign}\n" > ${today_path}/code.txt
+    touch ${today_path}/code.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  CODE\n${separate_sign}\n" > ${today_path}/code.txt
     touch ${today_path}/question.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  QUESTION\n${separate_sign}\n" > ${today_path}/question.txt
     touch ${today_path}/review.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  REVIEW\n${separate_sign}\n" > ${today_path}/review.txt
     touch ${today_path}/idea.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  IDEA\n${separate_sign}\n" > ${today_path}/idea.txt
     touch ${today_path}/temp.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  TEMP\n${separate_sign}\n" > ${today_path}/temp.txt
     touch ${today_path}/diary.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  DIARY\n${separate_sign}\n" > ${today_path}/diary.txt
+    touch ${today_path_ex}/arragement.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  ARRAGEMENT\n${separate_sign}\n" > ${today_path_ex}/arragement.txt
+    touch ${today_path_ex}/record.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  RECORD\n${separate_sign}\n" > ${today_path_ex}/record.txt
     touch ${today_path}/type.pratice && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  PRATICE\n${separate_sign}\n" > ${today_path}/type.pratice
     touch ${today_path}/English.pratice && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  PRATICE\n${separate_sign}\n" > ${today_path}/English.pratice
     # add the todolist.txt (copy the template to it );
@@ -281,13 +289,15 @@ case "$1" in
         ;;
 
     "record")
-        record_path=/cygdrive/c/Users/${USER}/Desktop/study-app/data/everyday/$(date "+%Y")/$(date "+%Y-%m")/$(date "+%m-%d")/record.txt
-        vim ${record_path}
+        #record_path=/cygdrive/c/Users/${USER}/Desktop/study-app/data/everyday/$(date "+%Y")/$(date "+%Y-%m")/$(date "+%m-%d")/record.txt
+        #vim ${record_path}
+		vim ${today_path_ex}/record.txt
         ;;
 
     "arragement")
-        arragement_path=/cygdrive/c/Users/${USER}/Desktop/study-app/data/everyday/$(date "+%Y")/$(date "+%Y-%m")/$(date "+%m-%d")/plan.txt
-        vim ${arragement_path}
+        #arragement_path=/cygdrive/c/Users/${USER}/Desktop/study-app/data/everyday/$(date "+%Y")/$(date "+%Y-%m")/$(date "+%m-%d")/plan.txt
+        #vim ${arragement_path}
+		vim ${today_path_ex}/arragement.txt
         ;;
 
     "learn")
@@ -689,6 +699,10 @@ case "$1" in
         echo -e "${GREEN}: temp->${NOCOLOR}: go the temp.txt"
         echo 
         echo -e "${GREEN}: diary->${NOCOLOR}: go the diary.txt"
+        echo 
+        echo -e "${GREEN}: record->${NOCOLOR}: go the record.txt"
+        echo 
+        echo -e "${GREEN}: arragement->${NOCOLOR}: go the arragement.txt"
         echo 
         echo -e "${GREEN}: review [-z]->${NOCOLOR}: go the review.txt, if with -z, go to the merge file."
         echo 

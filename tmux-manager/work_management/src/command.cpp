@@ -304,16 +304,16 @@ void cmd_openInVim(File_t& file, Path_man& path_man, Parser& parser, string& gui
         string day(path_man.date_vec[2]);
         ss << year << "/" << year << "-" << month << "/" << (month + "-" + day);
         //
-        open_vim_path = gui_plan_dir + ss.str() + "/plan.txt";
-#ifdef __linux__
-        cout << "Remote machine file!" << endl;
-        if (!fs::exists(fs::path(open_vim_path))) {
-            string scp_command = "scp gjsq@202.38.214.68:" + open_vim_path + " ./tmp >/dev/null";
-            int _ = system(scp_command.c_str());
-            //
-            if (!_) open_vim_path = "./tmp/plan.txt";
-        }
-#endif
+        open_vim_path = gui_plan_dir + ss.str() + "/arragement.txt";
+//#ifdef __linux__
+//        cout << "Remote machine file!" << endl;
+//        if (!fs::exists(fs::path(open_vim_path))) {
+//            string scp_command = "scp gjsq@202.38.214.68:" + open_vim_path + " ./tmp >/dev/null";
+//            int _ = system(scp_command.c_str());
+//            //
+//            if (!_) open_vim_path = "./tmp/arragement.txt";
+//        }
+//#endif
 
     }
     else if (FILE_IS_STUDY) return; // stuy not execute
