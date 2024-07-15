@@ -243,6 +243,7 @@ if [ ! -d "${today_path}" ]; then
     separate_sign="=================================="
     touch ${today_path}/plan.txt && echo -e  "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  PLAN\n${separate_sign}\n" > ${today_path}/plan.txt
     touch ${today_path}/learn.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  LEARN\n${separate_sign}\n" > ${today_path}/learn.txt
+    touch ${today_path}/code.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  code\n${separate_sign}\n" > ${today_path}/code.txt
     touch ${today_path}/question.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  QUESTION\n${separate_sign}\n" > ${today_path}/question.txt
     touch ${today_path}/review.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  REVIEW\n${separate_sign}\n" > ${today_path}/review.txt
     touch ${today_path}/idea.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  IDEA\n${separate_sign}\n" > ${today_path}/idea.txt
@@ -294,6 +295,14 @@ case "$1" in
             vim ${today_path}/learn-a.txt
         else
             vim ${today_path}/learn.txt
+        fi
+        ;;
+
+    "code")
+        if [ "$2" == "-z" ]; then
+            vim ${today_path}/code-a.txt
+        else
+            vim ${today_path}/code.txt
         fi
         ;;
 
@@ -382,6 +391,7 @@ case "$1" in
     "merge")
         #cat ${today_path}/question.txt >> ~/mygithub/everyday-record/compress/question-a.txt
         #cat ${today_path}/learn.txt >> ~/mygithub/everyday-record/compress/learn-a.txt
+        #cat ${today_path}/code.txt >> ~/mygithub/everyday-record/compress/code-a.txt
         # use the python script
         python ~/opt/myscript/wr-script/py/merge.py
         #echo "Good job! Has been merging xxx.txt to xxx-a.txt! Successfully!"
@@ -650,6 +660,8 @@ case "$1" in
         echo 
         echo -e "${GREEN}: learn->${NOCOLOR}: go to the learn.txt"
         echo 
+        echo -e "${GREEN}: code->${NOCOLOR}: go to the code.txt"
+        echo 
         echo -e "${GREEN}: merge->${NOCOLOR}: merge the today's question, plan to the compress's directory"
         echo 
         echo -e "${GREEN}: moyu->${NOCOLOR}: show the moyu as the screen"
@@ -704,7 +716,7 @@ case "$1" in
         ;;
 
     *)
-        echo -e "-> ${RED}ERROR:${NOCOLOR} Wrong input! You can just input the following option:\n-> ${GREEN}OPTION:${NOCOLOR} plan, learn, question, temp, help, pointer %Y-%m-%d, pointer-check, go-e, go-wr, review, all, rest, todo, todo-cfg, todo-exe, type x... and so on "
+        echo -e "-> ${RED}ERROR:${NOCOLOR} Wrong input! You can just input the following option:\n-> ${GREEN}OPTION:${NOCOLOR} plan, learn, code, question, temp, help, pointer %Y-%m-%d, pointer-check, go-e, go-wr, review, all, rest, todo, todo-cfg, todo-exe, type x... and so on "
         echo -e "${GREEN}You can use the wr help for more information!${NOCOLOR}"
         ;;
 esac
