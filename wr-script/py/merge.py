@@ -17,7 +17,7 @@ def get_merge_gap(merge_record_path):
     while delta_time > DAY_SECONDS:
         prev_time += DAY_SECONDS
         # convert seconds to the date
-        date_str = time.strftime("%Y-%m/%m-%d", time.localtime(prev_time))
+        date_str = time.strftime("%Y/%Y-%m/%m-%d", time.localtime(prev_time))
         #print(date_str)
         date_str_ls.append(date_str)
         # sub
@@ -27,8 +27,11 @@ def get_merge_gap(merge_record_path):
 
 def merge_by_date(date_dir):
     # get the date from the date_dir
-    date_str = date_dir.split("/")[-1]
-    print(f"-------- {date_str} --------")
+    date_str_ls = date_dir.split("/")
+    year, month, day = date_str_ls[-3], date_str_ls[-2], date_str_ls[-1]
+    month = month.split("-")[-1]
+    day = day.split("-")[-1]
+    print(f"-------- {year}-{month}-{day} --------")
     # re pattern 
     pattern = r"\d{4}-\d{2}-\d{2}"
     # read the merge file, check and then merge
@@ -36,6 +39,7 @@ def merge_by_date(date_dir):
     for fl in file_ty_ls:
         # read the file
         fl_path = os.path.join(date_dir, fl+".txt")
+        print(fl_path)
         # check the path first
         if not os.path.exists(fl_path):
             print(f"{fl}: not merge!")
@@ -77,8 +81,8 @@ def merge_by_date(date_dir):
 if __name__ == "__main__":
     # about the dir and the file type 
     user_name = os.getenv("USER", "hgj")
-    up_dir = f"/home/{user_name}/mygithub/everyday-record"
-    merge_dir = f"/home/{user_name}/mygithub/everyday-record/compress"
+    up_dir = os.path.join(os.path.expanduser("~"), "mygithub/everyday-record");
+    merge_dir = f"{os.getenv('HOME')}/mygithub/everyday-record/compress"
     merge_record_path = os.path.join(merge_dir, "merge.record")
     today_dir = os.path.join(up_dir, time.strftime("%Y-%m/%m-%d"))
     # merge today's dir

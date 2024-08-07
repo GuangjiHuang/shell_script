@@ -26,10 +26,10 @@ func_goal()
             fi
         done
     fi
-    # the $2 can be the 
+    # the $2 can be the
     # list -> list all the goal
     # the specification goal, such as the code, English, reading and so on. and then jump to it;
-    case ${arg2} in 
+    case ${arg2} in
         "list")
             # list all the goal
             echo -e "${YELLOW}------ GOALS ------${NOCOLOR}"
@@ -49,19 +49,19 @@ func_goal()
             mkdir -p ${goal_dir}${arg3}
             # and then add the goal to the goal.list
             echo "./${arg3}/" >> "${goal_dir}/goal.list"
-            echo "Create the goal: ${arg3} successfully!" 
+            echo "Create the goal: ${arg3} successfully!"
             ;;
 
         "help")
             clear
             echo -e "${GREEN}------ HELP INFORMATION ------${NOCOLOR}"
-            echo 
+            echo
             echo -e "${GREEN}: list->${NOCOLOR}: list the all goal"
-            echo 
+            echo
             echo -e "${GREEN}: create->${NOCOLOR}: create the new goal"
-            echo 
+            echo
             echo -e "${GREEN}: help->${NOCOLOR}: show the command information"
-            echo 
+            echo
             echo -e "${GREEN}: xxx(the goal)->${NOCOLOR}: show the specification goal"
             ;;
 
@@ -185,17 +185,17 @@ past_sth()
             "help")
                 clear
                 echo -e "${GREEN}------ wr -v help information ------${NOCOLOR}"
-                echo 
+                echo
                 echo -e "${GREEN}: (no argument)->${NOCOLOR}: show the middle_station's path."
-                echo 
+                echo
                 echo -e "${GREEN}: list->${NOCOLOR}: list all the regsiter content, reg<a-z>."
-                echo 
+                echo
                 echo -e "${GREEN}: go->${NOCOLOR}: cd to the middle_station, for example cd cat$(/dev/clipboard)."
-                echo 
+                echo
                 echo -e "${GREEN}: hlep->${NOCOLOR}: give the help information of the < wr -v xxx>."
-                echo 
+                echo
                 echo -e "${GREEN}: [a-z] ->${NOCOLOR}: show the [a-z] register's content."
-                echo 
+                echo
                 echo -e "${GREEN}: [a-z] go ->${NOCOLOR}: cd to the register [a-z] path."
                 ;;
 
@@ -206,7 +206,8 @@ past_sth()
                     # do something
                     if [ -z "$3" ]; then
                         # just show the path
-                        echo "${file_path##*/}: $(cat $file_path)"
+                        #echo "${file_path##*/}: $(cat $file_path)"
+                        echo "$(cat $file_path)"
                     elif [ "$3" == "go" ];then
                         cd $(cat $file_path)
                         echo "->$(pwd)"
@@ -222,7 +223,7 @@ past_sth()
 
 #check if there are the directory
 dir_name=$(date "+%Y")/$(date "+%Y-%m")/$(date "+%m-%d")
-# when you use the command: wr, it will creat the environment varialbe that records the path 
+# when you use the command: wr, it will creat the environment varialbe that records the path
 # of the today_record path, so you can easily to open it inside the vim using the :e $p_today
 export p_today=~/mygithub/everyday-record/${dir_name}/
 #if you want to use the date-pointer's path, you have to specify the -p as the $2
@@ -272,11 +273,11 @@ case "$1" in
     "plan")
         # -w: week plan, -m: month plan, -y: year plan
         if [ "$2" == "-w" ]; then
-            python "~/opt/myscript/wr-script/py/plan-w-m-y.py" "-w"
+            python "$HOME/opt/myscript/wr-script/py/plan-w-m-y.py" "-w"
         elif [ "$2" == "-m" ]; then
-            python "~/opt/myscript/wr-script/py/plan-w-m-y.py" "-m"
+            python "$HOME/opt/myscript/wr-script/py/plan-w-m-y.py" "-m"
         elif [ "$2" == "-y" ]; then
-            python "~/opt/myscript/wr-script/py/plan-w-m-y.py" "-y"
+            python "$HOME/opt/myscript/wr-script/py/plan-w-m-y.py" "-y"
         else
             vim ${today_path}/plan.txt
         fi
@@ -521,10 +522,10 @@ case "$1" in
         #    echo "->:$(pwd)"
         #else
         #    cat /dev/clipboard
-        #    echo  # output the new line 
+        #    echo  # output the new line
         #fi
         # >>>>>>>>>>>>>>>>>>>>> <<<<<<<<<<<<<<<<<<<<<<
-        # call the past_sth() 
+        # call the past_sth()
         past_sth $1 $2 $3
         ;;
 
@@ -535,9 +536,9 @@ case "$1" in
         when_changed_option=$3
         document_name=$2
         document_path=$(pwd)/$2
-        
+
         # check the $2 argument
-        echo "the document's name is the: ${document_name}" 
+        echo "the document's name is the: ${document_name}"
         if [ -n "${document_name}" ]; then
             # the command
             cd $typora_dir # to the directory first
@@ -550,10 +551,10 @@ case "$1" in
         ;;
 
     "preview_md")
-        # >>>>>>>>>> fail to execute: 
+        # >>>>>>>>>> fail to execute:
         # N) no matter what the when-changed is(the window or the unix), it will use the window's
         # python(python3.7 not the python3.8);
-        # <<<<<<<<< 
+        # <<<<<<<<<
 
         # >>>>>>> the cygwin's when-change <<<<<<<<
         # the variables and the arguments
@@ -563,15 +564,15 @@ case "$1" in
         # cygwin_path -> window path
         document_path_cygwin=$(pwd)/$2
         document_path_window=$(cygpath -w "$(pwd)/$2")
-        
+
         # check the $2 argument
-        echo "the document's name is the: ${document_path_cygwin}" 
+        echo "the document's name is the: ${document_path_cygwin}"
         if [ -n "${document_name}" ]; then
             # the command
             #cd $typora_dir # to the directory first
             # in the unix, just to use the full path is ok to execute the typora
             # the typora is the window's program, it just recognize the window's path
-            /usr/local/bin/when-changed ${when_changed_option} "${document_path_cygwin}" ${typora_path} "${document_path_window}" 
+            /usr/local/bin/when-changed ${when_changed_option} "${document_path_cygwin}" ${typora_path} "${document_path_window}"
             #/usr/local/bin/when-changed ${when_changed_option} "${document_path_cygwin}" echo "execute"
         else
             echo "Lack the document, fail to run!"
@@ -628,7 +629,7 @@ case "$1" in
         ;;
 
     "gpu")
-        # source the .bash_aliases file to get the aliases 
+        # source the .bash_aliases file to get the aliases
         . ~/.bashrc
         # show the gpu's usage
         #gpu_usage=$(ssh $2 nvidia-smi | grep -io [0-9][0-9]*%)
@@ -649,77 +650,77 @@ case "$1" in
         echo -e "${GREEN}: fish->:${NOCOLOR} execute the command < asciiquarium > in the linux system"
         echo
         echo -e "${GREEN}: go-e->${NOCOLOR}: cd to the everyday-record"
-        echo 
+        echo
         echo -e "${GREEN}: go-wr->${NOCOLOR}: cd to the write-scritp.sh"
-        echo 
+        echo
         echo -e "${GREEN}: go-goal->${NOCOLOR}: cd to the goal directroy"
-        echo 
+        echo
         echo -e "${GREEN}: go-linux_basic_cfg->${NOCOLOR}: cd to the linux_basic_cfg"
-        echo 
+        echo
         echo -e "${GREEN}: goal xxx.txt${NOCOLOR}: about the goal, you can use the command < wr goal help > for more information"
-        echo 
+        echo
         echo -e "${GREEN}: gpu computer_name${NOCOLOR}: show the computer's gpu's usage"
-        echo 
+        echo
         echo -e "${GREEN}: help->${NOCOLOR}: get the help"
-        echo 
+        echo
         echo -e "${GREEN}: learn->${NOCOLOR}: go to the learn.txt"
-        echo 
+        echo
         echo -e "${GREEN}: code->${NOCOLOR}: go to the code.txt"
-        echo 
+        echo
         echo -e "${GREEN}: merge->${NOCOLOR}: merge the today's question, plan to the compress's directory"
-        echo 
+        echo
         echo -e "${GREEN}: moyu->${NOCOLOR}: show the moyu as the screen"
-        echo 
+        echo
         echo -e "${GREEN}: pointer-check->${NOCOLOR}: to show the pointer"
-        echo 
+        echo
         echo -e "${GREEN}: pointer->${NOCOLOR}: year-month-day-> to set the pointer"
-        echo 
+        echo
         echo -e "${GREEN}: pretend->${NOCOLOR}: run the fake program in the terminal to pretend to do something!"
-        echo 
+        echo
         echo -e "${GREEN}: preview_md->${NOCOLOR}:(the cygwin mode)use the when-changed command, when you write the markdwon in the vim, save it, show in the typora immediately"
-        echo 
+        echo
         echo -e "${GREEN}: preview_md_exe->${NOCOLOR}:(the window mode)use the when-changed command, when you write the markdwon in the vim, save it, show in the typora immediately"
-        echo 
+        echo
         echo -e "${GREEN}: question->${NOCOLOR}: go the question.txt"
-        echo 
+        echo
         echo -e "${GREEN}: rain mode->${NOCOLOR}: emulate the rain in the screen"
-        echo 
+        echo
         echo -e "${GREEN}: reinstall->${NOCOLOR}: reinstall the file, to cover the original file"
-        echo 
+        echo
         echo -e "${GREEN}: rest->${NOCOLOR}: show the rest as the screen"
-        echo 
+        echo
         echo -e "${GREEN}: score->${NOCOLOR}: get the score of the today, including the arragement, todolist, and so on!"
-        echo 
+        echo
         echo -e "${GREEN}: temp->${NOCOLOR}: go the temp.txt"
-        echo 
+        echo
         echo -e "${GREEN}: diary->${NOCOLOR}: go the diary.txt"
-        echo 
+        echo
         echo -e "${GREEN}: record->${NOCOLOR}: go the record.txt"
-        echo 
+        echo
         echo -e "${GREEN}: arragement->${NOCOLOR}: go the arragement.txt"
-        echo 
+        echo
         echo -e "${GREEN}: review [-z]->${NOCOLOR}: go the review.txt, if with -z, go to the merge file."
-        echo 
+        echo
         echo -e "${GREEN}: todo->${NOCOLOR}: edit the todolist.txt"
-        echo 
+        echo
         echo -e "${GREEN}: todo-cfg->${NOCOLOR}: modify the todo configuration"
-        echo 
+        echo
         echo -e "${GREEN}: todo-exe->${NOCOLOR}: execute the prgrom to read, count, and then write"
-        echo 
+        echo
         echo -e -e "${GREEN}: type x y->${NOCOLOR}: 1) no x: open the type.pratice; 2) x=m: change the type.template manually;\n"\
         "             3) x=c: copy the ~/opt/.../type.template to the ~/mygithub/.../type.template;\n"\
         "             4)x=renew: renew the today's type.pratice, if the y=o, it will open the type.pratice"
-        echo 
+        echo
         echo -e "${GREEN}: xiaban->${NOCOLOR}: Upload the file to the github reposity, and then off duty"
-        echo 
+        echo
         echo -e "${GREEN}: weather->${NOCOLOR}: show the weather and the other information"
-        echo 
+        echo
         echo -e "${GREEN}: wr->${NOCOLOR}:modify the write.sh"
-        echo 
+        echo
         echo -e "${GREEN}: -c->${NOCOLOR}:copy something! Type <wr -c help> for more information!"
-        echo 
+        echo
         echo -e "${GREEN}: -v->${NOCOLOR}:past something! Type <wr -v help> for more information!"
-        echo 
+        echo
         echo -e "${YELLOW}--------------------------------------------------------------------------------${NOCOLOR}"
         ;;
 
