@@ -238,7 +238,7 @@ elif [ "$2" == "-z" ]; then
     dir_name="compress"
 fi
 today_path=~/mygithub/everyday-record/${dir_name}
-if [ ! -d "${today_path}" ]; then
+if [ ! -d "${today_path}" -o ! -f "${today_path}/plan.txt" ]; then
     mkdir -p ${today_path}
     echo "creat the ${today_path} successfully!"
     separate_sign="=================================="
