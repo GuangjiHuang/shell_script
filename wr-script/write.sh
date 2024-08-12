@@ -250,6 +250,7 @@ if [ ! -d "${today_path}" -o ! -f "${today_path}/plan.txt" ]; then
     touch ${today_path}/idea.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  IDEA\n${separate_sign}\n" > ${today_path}/idea.txt
     touch ${today_path}/temp.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  TEMP\n${separate_sign}\n" > ${today_path}/temp.txt
     touch ${today_path}/diary.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  DIARY\n${separate_sign}\n" > ${today_path}/diary.txt
+    touch ${today_path}/code_task.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  CODE-TASK\n${separate_sign}\n" > ${today_path}/code_task.txt
     touch ${today_path}/arragement.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  ARRAGEMENT\n${separate_sign}\n" > ${today_path}/arragement.txt
     touch ${today_path}/record.txt && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  RECORD\n${separate_sign}\n" > ${today_path}/record.txt
     touch ${today_path}/type.pratice && echo -e "${separate_sign}\n$(date "+%Y-%m-%d %a %X")  PRATICE\n${separate_sign}\n" > ${today_path}/type.pratice
@@ -325,6 +326,10 @@ case "$1" in
 
     "diary")
         vim ${today_path}/diary.txt
+        ;;
+
+    "code_task")
+        vim ${today_path}/code_task.txt
         ;;
 
     "review")
@@ -694,6 +699,8 @@ case "$1" in
         echo -e "${GREEN}: temp->${NOCOLOR}: go the temp.txt"
         echo
         echo -e "${GREEN}: diary->${NOCOLOR}: go the diary.txt"
+        echo
+        echo -e "${GREEN}: code_task->${NOCOLOR}: go the code_task.txt"
         echo
         echo -e "${GREEN}: record->${NOCOLOR}: go the record.txt"
         echo
