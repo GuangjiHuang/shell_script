@@ -2,13 +2,13 @@
 
 # set the command name you want
 command_name=mygit
-link_dir=~/usr/bin
+link_dir=$HOME/usr/bin
 
 # the path to deal with
 source_name="git-manager.sh"
 source_dir=$(pwd)
 source_path=$(pwd)/$source_name
-install_dir=~/opt/myscript/git-manager
+install_dir=$HOME/opt/myscript/git-manager
 
 
 ## check if there is the same name command, using the which command
@@ -21,7 +21,7 @@ install_dir=~/opt/myscript/git-manager
 if [ -d ${install_dir} ]; then
     rm -r ${install_dir}
 fi
-cp -r $(pwd) ~/opt/myscript/ && echo "Has been copied the directory to the: ~/opt/myscript"
+cp -r $(pwd) $HOME/opt/myscript/ && echo "Has been copied the directory to the: $HOME/opt/myscript"
 
 # use the ln command to creat the link
 ln -s ${install_dir}/${source_name} ${link_dir}/${command_name}

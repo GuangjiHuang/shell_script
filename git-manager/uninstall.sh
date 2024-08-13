@@ -2,13 +2,13 @@
 
 # set the command name you want
 command_name=mygit
-link_dir=~/usr/bin
+link_dir=$HOME/usr/bin
 
 # the path to deal with
 source_name="git-manage.sh"
 source_dir=$(pwd)
 source_path=$(pwd)/$source_name
-install_dir=~/opt/myscript/git-manager
+install_dir=$HOME/opt/myscript/git-manager
 
 # remove the link in the install_dir
 rm ${link_dir}/${command_name}

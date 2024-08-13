@@ -1,18 +1,18 @@
 #!/bin/bash
 
 # set the command name you want
-install_path=~/usr/bin
+install_path=$HOME/usr/bin
 
-#copy the directory to the ~/opt/myscritpt
-if [ -d "~/opt/myscript/change-dir" ]; then
-    rm -r ~/opt/myscript/change-dir
+#copy the directory to the $HOME/opt/myscritpt
+if [ -d "$HOME/opt/myscript/change-dir" ]; then
+    rm -r $HOME/opt/myscript/change-dir
 fi
-cp -r $(pwd) ~/opt/myscript/ && echo "--Has been copied the directory to the: ~/opt/myscript"
+cp -r $(pwd) $HOME/opt/myscript/ && echo "--Has been copied the directory to the: $HOME/opt/myscript"
 
 # use the ln command to creat the link
-ln -s "~/opt/myscript/change-dir/dir_backwards.sh" ${install_path}/b
-ln -s "~/opt/myscript/change-dir/dir_forwards.sh" ${install_path}/f
-ln -s "~/opt/myscript/change-dir/collect_path.sh" ${install_path}/c
+ln -s "$HOME/opt/myscript/change-dir/dir_backwards.sh" ${install_path}/b
+ln -s "$HOME/opt/myscript/change-dir/dir_forwards.sh" ${install_path}/f
+ln -s "$HOME/opt/myscript/change-dir/collect_path.sh" ${install_path}/c
 
 # check if link successfully
 if [ -n "$(which b)" ]; then

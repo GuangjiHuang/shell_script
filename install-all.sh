@@ -1,9 +1,14 @@
 #! /bin/bash
 
 # to fix the path.sh's install bug 
-if [ ! -d ~/opt/myscript ];then
-    mkdir ~/opt/myscript
+if [ ! -d $HOME/opt/myscript ];then
+    mkdir $HOME/opt/myscript
 fi
+
+if [ ! -d $HOME/usr/bin ]; then
+	mkdir -p $HOME/usr/bin
+fi
+
 # use the find to find the xxx/xxx/install.sh
 base_path=$(pwd)
 

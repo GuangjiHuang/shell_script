@@ -1,9 +1,9 @@
 #! /bin/bash
 
 # remove the link in the install_path
-rm ~/usr/bin/wr
+rm $HOME/usr/bin/wr
 
-# remove the ~/opt/myscript/p-script
-rm -r ~/opt/myscript/wr-script/
+# remove the $HOME/opt/myscript/p-script
+rm -r $HOME/opt/myscript/wr-script/
 
 echo "Successfully remove the wr-script!"
