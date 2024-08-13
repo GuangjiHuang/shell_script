@@ -2,7 +2,7 @@
 
 # to fix the path.sh's install bug 
 if [ ! -d $HOME/opt/myscript ];then
-    mkdir $HOME/opt/myscript
+    mkdir -p $HOME/opt/myscript
 fi
 
 if [ ! -d $HOME/usr/bin ]; then
