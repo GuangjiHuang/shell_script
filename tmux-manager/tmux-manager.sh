@@ -14,6 +14,7 @@
 # shell;
 # markdown;
 # isp;
+# mars;
 # project;
 # paper;
 # fun( to show the rest, moyu, fish picture ).
@@ -34,6 +35,7 @@ sessions_list=(
     "cmake" \
     "markdown" \
     "isp" \
+	"mars" \
     "project" \
     "fun" \
     "chore" \
@@ -314,6 +316,25 @@ tmux_template_for_isp()
 		send-keys -t 0 'date' C-m
 }
 
+tmux_template_for_mars()
+{
+	tmux new-session -s "$1" -n "MARS" \; \
+		split-window -h \; \
+		new-window -n "v4.1" \; \
+		split-window -h \; \
+		new-window -n "v4.2" \; \
+		split-window -h \; \
+		new-window -n "chore" \; \
+		split-window -h \; \
+		select-window -t 1 \; \
+		send-keys -t 0 'cd ~/mars_v4.1.0;clear' C-m\; \
+		send-keys -t 1 'cd ~/mars_v4.1.0;clear' C-m\; \
+		select-window -t 2 \; \
+		send-keys -t 0 'cd ~/mars_v4.2.0;clear' C-m\; \
+		send-keys -t 1 'cd ~/mars_v4.2.0;clear' C-m\; \
+		select-window -t 0 \;
+}
+
 tmux_cpp()
 {
     tmux_template_2panes "c++"
@@ -339,6 +360,12 @@ tmux_isp()
 {
     tmux_template_for_isp "isp"
     echo "this is the isp's tmux"
+}
+
+tmux_mars()
+{
+    tmux_template_for_mars "mars"
+    echo "this is the mars's tmux"
 }
 
 tmux_entertainment()
@@ -888,6 +915,9 @@ action()
         "isp")
             ;;
 
+        "mars")
+            ;;
+
         "shell")
             ;;
 
@@ -1030,6 +1060,21 @@ case "$1" in
         else
             # create the tmux layout
             tmux_isp
+            # check the file if exists, if not touch the files
+            create_mode_dir $1
+        fi
+        ;;
+    #}}}
+
+    "mars")
+    #{{{
+        # set the environment variable
+        echo "export mode=$1" > $mode_control_path
+        if [ "$tmux_action" == "into" ]; then
+            tmux attach -t $1
+        else
+            # create the tmux layout
+            tmux_mars
             # check the file if exists, if not touch the files
             create_mode_dir $1
         fi
@@ -1489,6 +1534,8 @@ case "$1" in
         echo -e "${GREEN}: markdown->:${NOCOLOR} create or into the markdown tmux session"
 		echo
         echo -e "${GREEN}: isp->:${NOCOLOR} create or into the isp tmux session"
+        echo
+        echo -e "${GREEN}: mars->:${NOCOLOR} create or into the mars tmux session"
         echo
         echo -e "${GREEN}: shell->:${NOCOLOR} create or into the shell tmux session"
         echo
