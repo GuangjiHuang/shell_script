@@ -3,18 +3,35 @@
 # set the command name you want
 install_path=$HOME/usr/bin
 
-#copy the directory to the $HOME/opt/myscritpt
-if [ -d "$HOME/opt/myscript/change-dir" ]; then
-    rm -r $HOME/opt/myscript/change-dir
+change_dir_dst_path=$HOME/opt/myscript/change-dir
+
+B_PATH=$HOME/opt/myscript/change-dir/dir_backwards.sh
+F_PATH=$HOME/opt/myscript/change-dir/dir_forwards.sh
+C_PATH=$HOME/opt/myscript/change-dir/collect_path.sh
+
+
+if [ -d $change_dir_dst_path ]; then
+    rm -r $change_dir_dst_path
 fi
-cp -r $(pwd) $HOME/opt/myscript/ && echo "--Has been copied the directory to the: $HOME/opt/myscript"
+cp -r $(pwd) $change_dir_dst_path &&\
+echo "cp $PWD -> $change_dir_dst_path"
 
-# use the ln command to creat the link
-ln -s "$HOME/opt/myscript/change-dir/dir_backwards.sh" ${install_path}/b
-ln -s "$HOME/opt/myscript/change-dir/dir_forwards.sh" ${install_path}/f
-ln -s "$HOME/opt/myscript/change-dir/collect_path.sh" ${install_path}/c
+if [ -f $install_path/b ]; then
+	rm $install_path/b
+fi
 
-# check if link successfully
+if [ -f $install_path/f ]; then
+	rm $install_path/f
+fi
+
+if [ -f $install_path/c ]; then
+	rm $install_path/c
+fi
+
+ln -s $B_PATH ${install_path}/b
+ln -s $F_PATH ${install_path}/f
+ln -s $C_PATH ${install_path}/c
+
 if [ -n "$(which b)" ]; then
     echo "--Successfully! The executable file is: $(which b)"
 fi

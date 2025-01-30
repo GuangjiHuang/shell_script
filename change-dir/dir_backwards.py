@@ -3,6 +3,9 @@ import os
 import re
 import sys
 
+def get_cwd():
+    return os.environ['PWD']
+
 if len(sys.argv) > 1:
     arg = sys.argv[1]
 else:
@@ -10,7 +13,7 @@ else:
     arg = "1"
 
 # get the current dir
-cwd = os.getcwd()
+cwd = get_cwd()
 dir_ls = cwd.split("/")
 # if the arg is the digit
 if arg.isdigit():
